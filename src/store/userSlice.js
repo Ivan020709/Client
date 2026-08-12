@@ -4,17 +4,21 @@ const cookies = new Cookies()
 
 const initialState={
     userid : '',
-    // id : '',
-    // pass : '',
-    // birth : '',
-    // name : '',
-    // phone : '',
-    // zip_num : '',
-    // add1 : '',
-    // add2 : '',
-    // add3 : '',
-    // provider : '',
-
+    pwd : '',
+    name : '',
+    email : '',
+    phone : '',
+    birth : '',
+    mbti : '',
+    savefilename : '',
+    zip_num : '',
+    address1 : '',
+    address2 : '',
+    address3 : '',
+    indate : '',
+    provider : '',
+    snsid : '',
+    editcom : '',
     // roleNames :[],
     // accessToken : '',
     // refreshToken : '',
@@ -23,17 +27,21 @@ const getLoginUser=()=>{
     const memberInfo = cookies.get('user');
     if( memberInfo  && memberInfo.id ){
         memberInfo.userid = decodeURIComponent( memberInfo.userid )
-        // memberInfo.id = decodeURIComponent( memberInfo.id )
-        // memberInfo.pass = decodeURIComponent( memberInfo.pass )
-        // memberInfo.birth = decodeURIComponent( memberInfo.birth )
-        // memberInfo.name = decodeURIComponent( memberInfo.name )
-        // memberInfo.phone = decodeURIComponent( memberInfo.phone )
-        // memberInfo.zip_num = decodeURIComponent( memberInfo.zip_num )
-        // memberInfo.add1 = decodeURIComponent( memberInfo.add1 )
-        // memberInfo.add2 = decodeURIComponent( memberInfo.add2 )
-        // memberInfo.add3 = decodeURIComponent( memberInfo.add3 )
-        // memberInfo.provider = decodeURIComponent( memberInfo.provider )
-
+        memberInfo.pwd = decodeURIComponent( memberInfo.pwd )
+        memberInfo.name = decodeURIComponent( memberInfo.name )
+        memberInfo.email = decodeURIComponent( memberInfo.email )
+        memberInfo.phone = decodeURIComponent( memberInfo.phone )
+        memberInfo.birth = decodeURIComponent( memberInfo.birth )
+        memberInfo.mbti = decodeURIComponent( memberInfo.mbti )
+        memberInfo.savefilename = decodeURIComponent( memberInfo.savefilename )
+        memberInfo.zip_num = decodeURIComponent( memberInfo.zip_num )
+        memberInfo.addres1 = decodeURIComponent( memberInfo.addres1 )
+        memberInfo.addres2 = decodeURIComponent( memberInfo.addres2 )
+        memberInfo.addres3 = decodeURIComponent( memberInfo.addres3 )
+        memberInfo.indate = decodeURIComponent( memberInfo.indate )
+        memberInfo.provider = decodeURIComponent( memberInfo.provider )
+        memberInfo.snsid = decodeURIComponent( memberInfo.snsid )
+        memberInfo.editcom = decodeURIComponent( memberInfo.editcom )
         // memberInfo.roleNames = decodeURIComponent( memberInfo.roleNames)
         // memberInfo.accessToken = decodeURIComponent( memberInfo.accessToken)
         // memberInfo.refreshToken = decodeURIComponent( memberInfo.refreshToken)
@@ -50,34 +58,42 @@ const userSlice = createSlice(
         reducers : {
             loginAction : ( state, action )=>{
                 state.userid = action.payload.userid
-                // state.id = action.payload.id
-                // state.pass = action.payload.pass
-                // state.birth = action.payload.birth
-                // state.name = action.payload.name
-                // state.phone = action.payload.phone
-                // state.zip_num = action.payload.zip_num
-                // state.add1 = action.payload.add1
-                // state.add2 = action.payload.add2
-                // state.add3 = action.payload.add3
-                // state.provider = action.payload.provider
-
+                state.pwd = action.payload.pwd
+                state.name = action.payload.name
+                state.email = action.payload.email
+                state.phone = action.payload.phone
+                state.birth = action.payload.birth
+                state.mbti = action.payload.mbti
+                state.savefilename = action.payload.savefilename
+                state.zip_num = action.payload.zip_num
+                state.addres1 = action.payload.addres1
+                state.addres2 = action.payload.addres2
+                state.addres3 = action.payload.addres3
+                state.indate = action.payload.indate
+                state.provider = action.payload.provider
+                state.snsid = action.payload.snsid
+                state.editcom = action.payload.editcom
                 // state.roleNames = action.payload.roleNames
                 // state.accessToken = action.payload.accessToken
                 // state.refreshToken = action.payload.refreshToken
             },
             logoutAction : (state)=>{
                 state.userid = ''
-                // state.id = ''
-                // state.pass = ''
-                // state.birth = ''
-                // state.name = ''
-                // state.phone = ''
-                // state.zip_num = ''
-                // state.add1 = ''
-                // state.add2 = ''
-                // state.add3 = ''
-                // state.provider = ''
-
+                state.pwd = ''
+                state.name = ''
+                state.email = ''
+                state.phone = ''
+                state.birth = ''
+                state.mbti = ''
+                state.savefilename = ''
+                state.zip_num = ''
+                state.addres1 = ''
+                state.addres2 = ''
+                state.addres3 = ''
+                state.indate = ''
+                state.provider = ''
+                state.snsid = ''
+                state.editcom = ''
                 // state.roleNames = []
                 // state.accessToken = ''
                 // state.refreshToken = ''
