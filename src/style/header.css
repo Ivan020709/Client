@@ -1,0 +1,51 @@
+.header {
+    width: 100%;
+    max-width: 1400px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 0 auto;
+
+    border-bottom: none;
+    box-sizing: border-box;
+}
+
+/* 왼쪽 로고 */
+.logo {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.logo > div {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 오른쪽 로그인 */
+.login {
+    display: flex;
+    align-items: center;
+}
+
+.login > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    font-size: 1rem;
+}
+
+.login > div > div {
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.login > div > div:hover {
+    color: #007bff;
+}
