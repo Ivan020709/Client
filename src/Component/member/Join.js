@@ -10,7 +10,7 @@ function Join() {
     const loginUser = useSelector(state => state.user);
     const navigate = useNavigate();
 
-    const [userid, setUserid] = useState('');
+    const [email, setEmail] = useState('');
     const [reid, setReid] = useState('');
     const [idCheckResult, setIdCheckResult] = useState('');
     const [msgStyle, setMsgStyle] = useState({ flex: '1' });
@@ -35,6 +35,7 @@ function Join() {
     const [address2, setAddress2] = useState('');
     const [address3, setAddress3] = useState('');
 
+    
     const [isOpen, setIsOpen] = useState(false);
 
     const modalStyle = {
@@ -47,7 +48,7 @@ function Join() {
     };
 
     useEffect(() => {
-        if (loginUser && loginUser.userid) navigate('/');
+        if (loginUser && loginUser.email) navigate('/');
     }, [loginUser, navigate]);
 
     const completeHandler = (data) => {
@@ -58,13 +59,13 @@ function Join() {
     };
 
     function idCheck() {
-        if (!userid) return alert('아이디를 입력하세요.');
-        axios.post('/api/member/idCheck', null, { params: { userid: userid } })
+        if (!email) return alert('아이디를 입력하세요.');
+        axios.post('/api/member/emailCheck', null, { params: { email: email } })
             .then((result) => {
                 if (result.data.msg === 'OK') {
                     setIdCheckResult('※ 사용 가능한 아이디입니다.');
                     setMsgStyle({ color: 'blue', flex: '1', fontWeight: 'bold' });
-                    setReid(userid);
+                    setReid(email);
                 } else {
                     setIdCheckResult('※ 중복되는 아이디입니다.');
                     setMsgStyle({ color: 'red', flex: '1', fontWeight: 'bold' });
@@ -104,7 +105,7 @@ function Join() {
         const formData = new FormData();
         formData.append('image', file);
 
-        axios.post('/api/admin/fileup', formData)
+        axios.post('/api/member/fileupload', formData)
             .then((result) => {
                 setSavefilename(result.data.savefilename);
                 setImgSrc(`http://localhost:8070/images/${result.data.savefilename}`);
@@ -116,8 +117,8 @@ function Join() {
     }
 
     function onSubmit() {
-        if (!userid) return alert('아이디를 입력하세요.');
-        if (reid !== userid) return alert('아이디 중복을 확인해주세요.');
+        if (!email) return alert('아이디를 입력하세요.');
+        if (reid !== email) return alert('아이디 중복을 확인해주세요.');
         if (!pwd) return alert('비밀번호를 입력하세요.');
         if (pwd !== pwdChk) return alert('비밀번호 체크가 일치하지 않습니다.');
         if (!name) return alert('이름을 입력하세요.');
@@ -142,7 +143,7 @@ function Join() {
         const birth = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
         axios.post('/api/member/insertMember', {
-            userid: userid,
+            email: email,
             pwd: pwd,
             name: name,
             nickname: nickname,
@@ -153,7 +154,7 @@ function Join() {
             address2: address2,
             address3: address3,
             savefilename: savefilename,
-            provider: 'LOCAL'
+            provider: 'Local'
         })
             .then(() => {
                 alert('회원 가입이 완료되었습니다.');
@@ -181,7 +182,7 @@ function Join() {
                 <div className="join-box">
                     <div className="join-row">
                         <label className="join-label">아이디</label>
-                        <input className="join-input-id" type="text" value={userid} onChange={(e) => { setUserid(e.currentTarget.value); setReid(''); setIdCheckResult(''); }} placeholder="이메일 형식(예: abc@abc.com)" />
+                        <input className="join-input-id" type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value); setReid(''); setIdCheckResult(''); }} placeholder="이메일 형식(예: abc@abc.com)" />
                         <button className="join-btn-zip_num" onClick={idCheck}>중복확인</button>
                     </div>
                     <div><label style={msgStyle}>{idCheckResult}</label></div>
