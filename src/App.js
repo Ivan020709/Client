@@ -6,9 +6,9 @@ import MemberLogin from './Component/member/MemberLogin';
 import Join from './Component/member/Join';
 import BoardList from './Component/board/BoardList'
 import BoardWrite from './Component/board/BoardWrite'
-import Find from "./Component/member/Find";
-import FindPwd from "./Component/member/FindPwd";
-import FindId from "./Component/member/FindId";
+// import Find from "./Component/member/Find";
+// import FindPwd from "./Component/member/FindPwd";
+// import FindId from "./Component/member/FindId";
 import BoardView from "./Component/board/BoardView";
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
                     <Route path='/Join' element={<Join />} />
                     <Route path='/boardList' element={<BoardList />} />
                     <Route path='/boardWrite' element={<BoardWrite />} />
-                    <Route path='/find' element={<Find />}/>
-                    <Route path='/findId' element={<FindId />}/>
-                    <Route path='/findPwd' element={<FindPwd />}/>
-                    <Route path='/boardView/:num' element={<BoardView />}/>
+                    {/* <Route path='/find' element={<Find />} /> */}
+                    {/* <Route path='/findId' element={<FindId />}/>
+                    <Route path='/findPwd' element={<FindPwd />}/> */}
+                    <Route path='/boardView/:num' element={<BoardView />} />
                 </Route>
             </Routes>
         </div>
