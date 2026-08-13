@@ -10,6 +10,7 @@
     box-sizing: border-box;
 }
 
+
 /* ================================
    페이지 헤더
 ================================ */
@@ -32,6 +33,7 @@
     color: #777;
 }
 
+
 /* ================================
    작성 컨테이너
 ================================ */
@@ -46,6 +48,138 @@
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
 }
 
+
+/* ================================
+   카테고리 + 비공개
+================================ */
+
+.board-write-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+/* 카테고리 */
+
+.board-category {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.board-category label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.board-category select {
+    width: 220px;
+    height: 42px;
+
+    padding: 0 12px;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+
+    background-color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+    color: #555;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.board-category select:focus {
+    border-color: #4f7cff;
+}
+
+
+/* ================================
+   비공개
+================================ */
+
+.private-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* 기본 체크박스 숨기기 */
+
+.private-option input {
+    display: none;
+}
+
+
+/* 토글 */
+
+.private-toggle {
+    position: relative;
+
+    width: 42px;
+    height: 24px;
+
+    border-radius: 20px;
+
+    background-color: #ddd;
+
+    transition: 0.2s;
+}
+
+
+/* 토글 안쪽 원 */
+
+.private-toggle::before {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    left: 2px;
+    top: 2px;
+
+    border-radius: 50%;
+
+    background-color: white;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    transition: 0.2s;
+}
+
+
+/* 체크되었을 때 */
+
+.private-option input:checked + .private-toggle {
+    background-color: #4f7cff;
+}
+
+.private-option input:checked + .private-toggle::before {
+    transform: translateX(18px);
+}
+
+.private-text {
+    white-space: nowrap;
+}
+
+
 /* ================================
    입력 영역
 ================================ */
@@ -57,22 +191,33 @@
 
 .board-write-field label {
     display: block;
+
     margin-bottom: 10px;
+
     font-size: 15px;
     font-weight: 600;
     color: #333;
 }
 
-/* 제목 */
+
+/* ================================
+   제목
+================================ */
+
 .board-write-field input {
     width: 100%;
     height: 48px;
+
     padding: 0 15px;
+
     border: 1px solid #ddd;
     border-radius: 6px;
+
     box-sizing: border-box;
+
     font-size: 15px;
     color: #333;
+
     outline: none;
 }
 
@@ -83,6 +228,7 @@
 .board-write-field input::placeholder {
     color: #aaa;
 }
+
 
 /* ================================
    내용
@@ -95,15 +241,22 @@
 .board-write-field textarea {
     width: 100%;
     height: 400px;
+
     padding: 15px;
+
     border: 1px solid #ddd;
     border-radius: 6px;
+
     box-sizing: border-box;
+
     resize: vertical;
+
     font-family: inherit;
     font-size: 15px;
     line-height: 1.7;
+
     color: #333;
+
     outline: none;
 }
 
@@ -115,16 +268,20 @@
     color: #aaa;
 }
 
+
 /* ================================
    글자 수
 ================================ */
 
 .board-write-count {
     margin-top: 7px;
+
     text-align: right;
+
     font-size: 12px;
     color: #999;
 }
+
 
 /* ================================
    버튼
@@ -134,19 +291,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     gap: 10px;
 }
 
+
 /* 취소 */
+
 .board-cancel-btn {
     width: 120px;
     height: 46px;
+
     border: 1px solid #ddd;
     border-radius: 6px;
+
     background-color: white;
     color: #555;
+
     font-size: 14px;
     font-weight: 500;
+
     cursor: pointer;
 }
 
@@ -154,16 +318,22 @@
     background-color: #f5f5f5;
 }
 
+
 /* 등록 */
+
 .board-submit-btn {
     width: 140px;
     height: 46px;
+
     border: none;
     border-radius: 6px;
+
     background-color: #4f7cff;
     color: white;
+
     font-size: 14px;
     font-weight: 600;
+
     cursor: pointer;
 }
 
@@ -171,20 +341,60 @@
     background-color: #3d68df;
 }
 
+
 /* ================================
    반응형
 ================================ */
 
 @media (max-width: 950px) {
+
     .board-write-header,
-    .board-write-container { width: calc(100% - 40px); }
+    .board-write-container {
+        width: calc(100% - 40px);
+    }
+
 }
 
+
 @media (max-width: 600px) {
-    .board-write-page { padding-top: 30px; }
-    .board-write-header h1 { font-size: 26px; }
-    .board-write-container { padding: 25px 20px; }
-    .board-write-field textarea { height: 300px; }
-    .board-cancel-btn { width: 100px; }
-    .board-submit-btn { width: 120px; }
+
+    .board-write-page {
+        padding-top: 30px;
+    }
+
+    .board-write-header h1 {
+        font-size: 26px;
+    }
+
+    .board-write-container {
+        padding: 25px 20px;
+    }
+
+    .board-write-option {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .board-category {
+        width: 100%;
+    }
+
+    .board-category select {
+        flex: 1;
+        width: auto;
+    }
+
+    .board-write-field textarea {
+        height: 300px;
+    }
+
+    .board-cancel-btn {
+        width: 100px;
+    }
+
+    .board-submit-btn {
+        width: 120px;
+    }
+
 }

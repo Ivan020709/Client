@@ -1,54 +1,45 @@
-/* ================================
-   전체 페이지
-================================ */
-
 .board-list-page {
     width: 100%;
     min-height: 100vh;
-    background-color: #f7f8fa;
-    padding: 60px 0 100px;
+    padding: 60px 0;
     box-sizing: border-box;
 }
 
-/* ================================
-   페이지 헤더
-================================ */
+
+/* =========================
+   Header
+========================= */
 
 .board-header {
     width: 1100px;
-    margin: 0 auto 35px;
+    margin: 0 auto 40px;
 }
 
 .board-header h1 {
     margin: 0 0 10px;
     font-size: 32px;
-    font-weight: 700;
-    color: #222;
 }
 
 .board-header p {
     margin: 0;
-    font-size: 15px;
     color: #777;
+    font-size: 15px;
 }
 
-/* ================================
-   게시판 컨테이너
-================================ */
+
+/* =========================
+   Container
+========================= */
 
 .board-container {
     width: 1100px;
     margin: 0 auto;
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 30px;
-    box-sizing: border-box;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* ================================
-   상단 영역
-================================ */
+
+/* =========================
+   Top
+========================= */
 
 .board-top {
     display: flex;
@@ -58,231 +49,236 @@
 }
 
 .board-top span {
-    font-size: 14px;
-    color: #666;
+    font-size: 15px;
+    color: #555;
 }
 
 .board-top strong {
-    color: #333;
-    margin-left: 3px;
+    color: #222;
 }
 
-/* ================================
-   글쓰기 버튼
-================================ */
+
+/* 글쓰기 버튼 */
 
 .board-write-btn {
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
-    background-color: #4f7cff;
+    border-radius: 5px;
+    background-color: #333;
     color: white;
-    padding: 11px 20px;
-    font-size: 14px;
-    font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    font-size: 14px;
 }
 
 .board-write-btn:hover {
-    background-color: #3d68df;
+    opacity: 0.8;
 }
 
-/* ================================
-   게시판 테이블
-================================ */
+
+/* =========================
+   Table
+========================= */
 
 .board-table {
     width: 100%;
     border-top: 2px solid #333;
 }
 
-/* 테이블 헤더 */
+
+/* 헤더 */
+
 .board-table-header {
-    display: grid;
-    grid-template-columns: 80px 1fr 120px 120px 70px;
+    display: flex;
     height: 50px;
     align-items: center;
-    background-color: #f8f9fb;
+
     border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
+    background-color: #fafafa;
+
+    font-weight: bold;
     text-align: center;
 }
 
-/* 게시글 한 줄 */
+
+/* 게시글 */
+
 .board-row {
-    display: grid;
-    grid-template-columns: 80px 1fr 120px 120px 70px;
-    min-height: 58px;
+    display: flex;
+    min-height: 55px;
     align-items: center;
+
     border-bottom: 1px solid #eee;
-    font-size: 14px;
-    color: #555;
+
     cursor: pointer;
-    transition: 0.15s;
+    transition: background-color 0.2s;
 }
 
 .board-row:hover {
-    background-color: #f8faff;
+    background-color: #fafafa;
 }
 
-/* 번호 */
+
+/* =========================
+   Column
+========================= */
+
 .board-number {
+    width: 80px;
     text-align: center;
-    color: #888;
+    flex-shrink: 0;
 }
 
-/* 제목 */
-.board-row .board-title {
-    text-align: left;
-    padding-left: 15px;
-    color: #333;
-    font-weight: 500;
+.board-title {
+    flex: 1;
+    padding: 0 20px;
+
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
-.board-row:hover .board-title {
-    color: #4f7cff;
-}
-
-/* 작성자 */
 .board-writer {
+    width: 130px;
     text-align: center;
-    color: #555;
+    flex-shrink: 0;
 }
 
-/* 날짜 */
 .board-date {
+    width: 130px;
     text-align: center;
-    color: #888;
-    font-size: 13px;
+    flex-shrink: 0;
+    color: #777;
+    font-size: 14px;
 }
 
-/* 조회수 */
 .board-view {
+    width: 80px;
     text-align: center;
-    color: #888;
-    font-size: 13px;
+    flex-shrink: 0;
+    color: #777;
+    font-size: 14px;
 }
 
-/* ================================
-   검색
-================================ */
+
+/* =========================
+   Empty
+========================= */
+
+.board-empty {
+    padding: 80px 0;
+    text-align: center;
+    color: #999;
+}
+
+
+/* =========================
+   Search
+========================= */
 
 .board-search {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 7px;
+
     margin-top: 35px;
+    gap: 5px;
 }
 
 .board-search select {
     width: 100px;
     height: 40px;
-    padding: 0 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: white;
-    color: #555;
-    font-size: 14px;
-    outline: none;
-}
 
-.board-search select:focus {
-    border-color: #4f7cff;
+    padding: 0 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    background-color: white;
 }
 
 .board-search input {
-    width: 330px;
+    width: 350px;
     height: 40px;
-    padding: 0 13px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+
+    padding: 0 12px;
+
     box-sizing: border-box;
-    font-size: 14px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
     outline: none;
 }
 
 .board-search input:focus {
-    border-color: #4f7cff;
-}
-
-.board-search input::placeholder {
-    color: #aaa;
+    border-color: #555;
 }
 
 .board-search button {
     width: 70px;
     height: 40px;
+
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+
     background-color: #333;
     color: white;
-    font-size: 14px;
+
     cursor: pointer;
 }
 
-.board-search button:hover {
-    background-color: #222;
-}
 
-/* ================================
-   페이지네이션
-================================ */
+/* =========================
+   Pagination
+========================= */
 
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+
     margin-top: 35px;
+    gap: 5px;
 }
 
-.pagination button {
-    width: 34px;
-    height: 34px;
+
+/* 페이지 버튼 */
+
+.pagination .page,
+.pagination .page-arrow {
+    width: 36px;
+    height: 36px;
+
     border: 1px solid #ddd;
     background-color: white;
-    border-radius: 4px;
-    font-size: 13px;
+
     cursor: pointer;
+
+    border-radius: 4px;
 }
 
-.pagination button:hover {
-    background-color: #f1f4ff;
-}
+
+/* 현재 페이지 */
 
 .pagination .page.active {
-    background-color: #4f7cff;
-    border-color: #4f7cff;
+    background-color: #333;
     color: white;
-    font-weight: 600;
+    border-color: #333;
 }
 
-.pagination .page-arrow {
-    color: #777;
+
+/* hover */
+
+.pagination .page:hover:not(.active),
+.pagination .page-arrow:hover:not(:disabled) {
+    background-color: #f5f5f5;
 }
 
-/* ================================
-   반응형
-================================ */
 
-@media (max-width: 1150px) {
-    .board-header,
-    .board-container { width: calc(100% - 40px); }
-}
+/* 비활성화 */
 
-@media (max-width: 768px) {
-    .board-list-page { padding-top: 30px; }
-    .board-header h1 { font-size: 26px; }
-    .board-container { padding: 20px 15px; }
-    .board-table-header,
-    .board-row { grid-template-columns: 50px 1fr 80px; }
-    .board-date,
-    .board-view { display: none; }
-    .board-search input { width: 200px; }
+.pagination button:disabled {
+    color: #ccc;
+    cursor: default;
+    background-color: #fafafa;
 }
