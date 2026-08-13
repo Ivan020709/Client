@@ -35,7 +35,7 @@ function Join() {
     const [address2, setAddress2] = useState('');
     const [address3, setAddress3] = useState('');
 
-    
+
     const [isOpen, setIsOpen] = useState(false);
 
     const modalStyle = {
