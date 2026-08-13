@@ -1,0 +1,106 @@
+/* ================================
+   AI 선택 페이지 전체 영역
+   - 화면에서 AI 카드 전체를 감싸는 영역
+================================ */
+.select-ai {
+    width: 1000px;
+    height: 400px;
+    margin: 30px auto;
+}
+
+
+/* ================================
+   AI 카드 3개를 가로로 배치하는 영역
+   - 1번 AI / 2번 AI / 3번 AI가 들어가는 곳
+================================ */
+.select-ai-container {
+    width: 1000px;
+    height: 400px;
+    display: flex;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   각각의 AI 카드
+   - 1번 AI 카드
+   - 2번 AI 카드
+   - 3번 AI 카드
+================================ */
+.ai-card {
+    flex: 1;
+    height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-sizing: border-box;
+    background: #fff;
+    overflow: hidden;
+}
+
+
+/* ================================
+   AI 이미지 영역
+   - AI 이미지가 들어가는 위쪽 영역
+================================ */
+.ai-image-box {
+    width: 100%;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ================================
+   AI 이미지
+   - ai1.png
+   - ai2.png
+   - ai3.png
+================================ */
+.ai-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* ================================
+   AI 설명 영역
+   - AI 이름과 설명이 들어가는 아래쪽 영역
+================================ */
+.ai-info {
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   AI 이름
+   - 1번 AI
+   - 2번 AI
+   - 3번 AI
+================================ */
+.ai-info h3 {
+    margin: 5px 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+
+/* ================================
+   AI 설명
+   - "편안하게 이야기를 들어주는..."
+   - "즐겁고 밝은 분위기로..."
+   - "차분하게 고민을 나누고..."
+================================ */
+.ai-info p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
