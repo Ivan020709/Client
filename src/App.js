@@ -11,6 +11,11 @@ import BoardWrite from './Component/board/BoardWrite'
 // import FindId from "./Component/member/FindId";
 import BoardView from "./Component/board/BoardView";
 
+import SelectAi from "./Component/ai/SelectAi";
+
+import Info from "./Component/info/Info";
+import Hellow from "./Component/info/Hellow";
+
 function App() {
     return (
         <div>
@@ -27,6 +32,11 @@ function App() {
                     {/* <Route path='/findId' element={<FindId />}/>
                     <Route path='/findPwd' element={<FindPwd />}/> */}
                     <Route path='/boardView/:num' element={<BoardView />} />
+                    {/*ai대화 */}
+                    <Route path='/selectAi' element={<SelectAi />} />
+                    {/*이용안내*/}
+                    <Route path='/info' element={<Info />} />
+                    <Route path='/hellow' element={<Hellow />} />
                 </Route>
             </Routes>
         </div>
