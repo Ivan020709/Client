@@ -11,6 +11,8 @@ import BoardWrite from './Component/board/BoardWrite'
 // import FindId from "./Component/member/FindId";
 import BoardView from "./Component/board/BoardView";
 
+
+
 function App() {
     return (
         <div>
@@ -23,6 +25,7 @@ function App() {
                     <Route path='/Join' element={<Join />} />
                     <Route path='/boardList' element={<BoardList />} />
                     <Route path='/boardWrite' element={<BoardWrite />} />
+                    
                     {/* <Route path='/find' element={<Find />} /> */}
                     {/* <Route path='/findId' element={<FindId />}/>
                     <Route path='/findPwd' element={<FindPwd />}/> */}

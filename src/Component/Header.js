@@ -35,6 +35,7 @@ function Header() {
                         <div>
                             <div onClick={() => navigate('/mypage/member')}>{loginUser.name}</div>
                             <div onClick={onLogout}>로그아웃</div>
+                            <div onClick={() => navigate('/myPage')}>마이페이지</div>
                         </div>
                     )
                 }
