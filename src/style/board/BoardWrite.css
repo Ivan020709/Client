@@ -1,0 +1,190 @@
+/* ================================
+   전체 페이지
+================================ */
+
+.board-write-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f7f8fa;
+    padding: 60px 0 100px;
+    box-sizing: border-box;
+}
+
+/* ================================
+   페이지 헤더
+================================ */
+
+.board-write-header {
+    width: 900px;
+    margin: 0 auto 35px;
+}
+
+.board-write-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+.board-write-header p {
+    margin: 0;
+    font-size: 15px;
+    color: #777;
+}
+
+/* ================================
+   작성 컨테이너
+================================ */
+
+.board-write-container {
+    width: 900px;
+    margin: 0 auto;
+    padding: 35px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================
+   입력 영역
+================================ */
+
+.board-write-field {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.board-write-field label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 제목 */
+.board-write-field input {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #333;
+    outline: none;
+}
+
+.board-write-field input:focus {
+    border-color: #4f7cff;
+}
+
+.board-write-field input::placeholder {
+    color: #aaa;
+}
+
+/* ================================
+   내용
+================================ */
+
+.content-field {
+    margin-bottom: 40px;
+}
+
+.board-write-field textarea {
+    width: 100%;
+    height: 400px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #333;
+    outline: none;
+}
+
+.board-write-field textarea:focus {
+    border-color: #4f7cff;
+}
+
+.board-write-field textarea::placeholder {
+    color: #aaa;
+}
+
+/* ================================
+   글자 수
+================================ */
+
+.board-write-count {
+    margin-top: 7px;
+    text-align: right;
+    font-size: 12px;
+    color: #999;
+}
+
+/* ================================
+   버튼
+================================ */
+
+.board-write-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 취소 */
+.board-cancel-btn {
+    width: 120px;
+    height: 46px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: white;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.board-cancel-btn:hover {
+    background-color: #f5f5f5;
+}
+
+/* 등록 */
+.board-submit-btn {
+    width: 140px;
+    height: 46px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4f7cff;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.board-submit-btn:hover {
+    background-color: #3d68df;
+}
+
+/* ================================
+   반응형
+================================ */
+
+@media (max-width: 950px) {
+    .board-write-header,
+    .board-write-container { width: calc(100% - 40px); }
+}
+
+@media (max-width: 600px) {
+    .board-write-page { padding-top: 30px; }
+    .board-write-header h1 { font-size: 26px; }
+    .board-write-container { padding: 25px 20px; }
+    .board-write-field textarea { height: 300px; }
+    .board-cancel-btn { width: 100px; }
+    .board-submit-btn { width: 120px; }
+}

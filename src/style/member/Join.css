@@ -1,0 +1,623 @@
+```css
+/* ========================================
+   회원가입 전체
+======================================== */
+
+.join-wrapper {
+    width: 580px;
+    margin: 60px auto;
+    padding: 0 0 40px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e5e8;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   제목
+======================================== */
+
+.join-title {
+    width: 100%;
+
+    margin: 0;
+    padding: 38px 0 30px;
+
+    text-align: center;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #343a40;
+
+    letter-spacing: -1px;
+}
+
+
+/* 제목 아래 작은 구분선 */
+
+.join-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 14px auto 0;
+
+    background: #adb5bd;
+
+    border-radius: 10px;
+}
+
+
+/* ========================================
+   회원가입 폼
+======================================== */
+
+.join-form {
+    width: 88%;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ========================================
+   입력 박스
+======================================== */
+
+.join-box {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e5e8;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+
+/* ========================================
+   입력 한 줄
+======================================== */
+
+.join-row {
+    min-height: 52px;
+
+    display: flex;
+    align-items: stretch;
+
+    border-bottom: 1px solid #edf0f2;
+
+    box-sizing: border-box;
+
+    transition: background 0.2s;
+}
+
+.join-row:last-child {
+    border-bottom: none;
+}
+
+
+/* ========================================
+   라벨
+======================================== */
+
+.join-label {
+    width: 120px;
+    min-width: 120px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f4f5f6;
+
+    color: #495057;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    letter-spacing: -0.3px;
+
+    border-right: 1px solid #e5e8eb;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   일반 입력창
+======================================== */
+
+.join-input-etc {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 16px;
+
+    border: none;
+    outline: none;
+
+    background: #ffffff;
+
+    color: #343a40;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s,
+        box-shadow 0.2s;
+
+    box-sizing: border-box;
+}
+
+.join-input-etc::placeholder {
+    color: #b6bcc2;
+}
+
+.join-input-etc:focus {
+    background: #fafbfc;
+
+    box-shadow: inset 3px 0 0 #adb5bd;
+}
+
+
+/* ========================================
+   아이디 입력
+======================================== */
+
+.join-input-id {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 15px;
+
+    border: none;
+    outline: none;
+
+    background: #ffffff;
+
+    color: #343a40;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+.join-input-id::placeholder {
+    color: #b6bcc2;
+}
+
+.join-input-id:focus {
+    background: #fafbfc;
+
+    box-shadow: inset 3px 0 0 #adb5bd;
+}
+
+
+/* ========================================
+   우편번호 입력
+======================================== */
+
+.join-input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 15px;
+
+    border: none;
+    outline: none;
+
+    background: #ffffff;
+
+    color: #343a40;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   중복확인 / 우편번호 버튼
+======================================== */
+
+.join-btn-zip_num {
+    width: 110px;
+    min-width: 110px;
+
+    border: none;
+    border-left: 1px solid #e1e5e8;
+
+    background: #868e96;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.1s;
+}
+
+.join-btn-zip_num:hover {
+    background: #6c757d;
+}
+
+.join-btn-zip_num:active {
+    transform: scale(0.98);
+}
+
+
+/* ========================================
+   아이디 중복확인 메시지
+======================================== */
+
+.join-box > div:nth-child(2) {
+    min-height: 32px;
+
+    padding-left: 120px;
+
+    display: flex;
+    align-items: center;
+
+    background: #fafbfc;
+
+    box-sizing: border-box;
+}
+
+.join-box > div:nth-child(2) label {
+    font-size: 12px;
+}
+
+
+/* ========================================
+   생년월일 영역
+======================================== */
+
+.join-input-four {
+    width: 80px;
+    min-width: 80px;
+
+    height: 34px;
+
+    margin: auto 6px auto 12px;
+    padding: 0 8px;
+
+    border: 1px solid #dfe3e6;
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #fafbfc;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #343a40;
+
+    transition: 0.2s;
+
+    box-sizing: border-box;
+}
+
+.join-input-two {
+    width: 55px;
+    min-width: 55px;
+
+    height: 34px;
+
+    margin: auto 5px;
+    padding: 0 5px;
+
+    border: 1px solid #dfe3e6;
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #fafbfc;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #343a40;
+
+    transition: 0.2s;
+
+    box-sizing: border-box;
+}
+
+
+.join-input-four::placeholder,
+.join-input-two::placeholder {
+    color: #adb5bd;
+}
+
+
+.join-input-four:focus,
+.join-input-two:focus {
+    border-color: #adb5bd;
+
+    background: #ffffff;
+
+    box-shadow: 0 0 0 3px rgba(173, 181, 189, 0.15);
+}
+
+
+/* 년 / 월 / 일 */
+
+.join-label-birth {
+    display: flex;
+    align-items: center;
+
+    color: #868e96;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+/* ========================================
+   주소
+======================================== */
+
+.join-field {
+    width: 100%;
+}
+
+
+/* ========================================
+   안내 문구
+======================================== */
+
+.join_msg {
+    width: 88%;
+
+    margin-top: 16px;
+
+    padding: 0 3px;
+
+    color: #868e96;
+
+    font-size: 12px;
+
+    text-align: left;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   회원가입 버튼
+======================================== */
+
+.join-btn-join {
+    width: 88%;
+    height: 52px;
+
+    margin-top: 18px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #adb5bd,
+        #868e96
+    );
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(108, 117, 125, 0.2);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+}
+
+.join-btn-join:hover {
+    background: linear-gradient(
+        135deg,
+        #868e96,
+        #6c757d
+    );
+
+    box-shadow:
+        0 6px 15px rgba(108, 117, 125, 0.25);
+
+    transform: translateY(-1px);
+}
+
+.join-btn-join:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 3px 8px rgba(108, 117, 125, 0.2);
+}
+
+
+/* ========================================
+   구분선
+======================================== */
+
+.join-wrapper hr {
+    width: 88%;
+
+    margin: 28px 0 0;
+
+    border: none;
+
+    border-top: 1px solid #edf0f2;
+}
+
+
+/* ========================================
+   주소 검색 모달
+======================================== */
+
+.ReactModal__Overlay {
+    z-index: 1000 !important;
+
+    background-color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.ReactModal__Content {
+    border: none !important;
+
+    border-radius: 14px !important;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+/* ========================================
+   모달 CLOSE 버튼
+======================================== */
+
+.ReactModal__Content button {
+    height: 38px;
+
+    padding: 0 18px;
+
+    margin: 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #868e96;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.ReactModal__Content button:hover {
+    background: #6c757d;
+}
+
+
+/* ========================================
+   모바일
+======================================== */
+
+@media (max-width: 600px) {
+
+    .join-wrapper {
+        width: 94%;
+
+        margin: 30px auto;
+
+        border-radius: 15px;
+    }
+
+
+    .join-title {
+        padding: 30px 0 25px;
+
+        font-size: 25px;
+    }
+
+
+    .join-form {
+        width: 92%;
+    }
+
+
+    .join-label {
+        width: 100px;
+        min-width: 100px;
+
+        font-size: 13px;
+    }
+
+
+    .join-box > div:nth-child(2) {
+        padding-left: 100px;
+    }
+
+
+    .join-input-id,
+    .join-input-etc,
+    .join-input {
+        font-size: 13px;
+    }
+
+
+    .join-btn-zip_num {
+        width: 90px;
+        min-width: 90px;
+
+        font-size: 12px;
+    }
+
+
+    .join-input-four {
+        width: 65px;
+        min-width: 65px;
+
+        margin-left: 8px;
+    }
+
+
+    .join-input-two {
+        width: 45px;
+        min-width: 45px;
+    }
+
+
+    .join-btn-join {
+        width: 92%;
+    }
+
+
+    .join_msg {
+        width: 92%;
+    }
+
+
+    .join-wrapper hr {
+        width: 92%;
+    }
+}
