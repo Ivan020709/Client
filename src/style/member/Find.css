@@ -1,0 +1,273 @@
+/* 전체 영역 */
+.join-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* 제목 */
+.join-title {
+    margin: 0 0 30px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* 입력 폼 */
+.join-form {
+    width: 100%;
+}
+
+.join-box {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.join-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.join-row:last-child {
+    margin-bottom: 0;
+}
+
+.join-label {
+    width: 90px;
+    flex-shrink: 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.join-input-etc {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    box-sizing: border-box;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 14px;
+    outline: none;
+}
+
+.join-input-etc:focus {
+    border-color: #888;
+}
+
+.join-input-etc::placeholder {
+    color: #aaa;
+}
+
+
+/* 버튼 영역 */
+.find-btn-area {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.join-btn-join,
+.join-btn-zip_num {
+    height: 42px;
+    padding: 0 28px;
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.join-btn-join {
+    background: #333;
+    color: #fff;
+}
+
+.join-btn-join:hover {
+    background: #222;
+}
+
+.join-btn-zip_num {
+    background: #eee;
+    color: #333;
+}
+
+.join-btn-zip_num:hover {
+    background: #ddd;
+}
+
+
+/* =========================================
+   비밀번호 변경 완료 화면
+   ========================================= */
+
+.password-success {
+    width: 100%;
+    min-height: 430px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    box-sizing: border-box;
+
+    background: #f7f7f7;
+    border-radius: 20px;
+}
+
+
+/* 점선 테두리 박스 */
+.success-inner {
+    width: 100%;
+    max-width: 480px;
+    min-height: 360px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 35px 25px;
+
+    border: 1px dashed #222;
+}
+
+
+/* ✓ 변경 완료 */
+.success-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    margin-top: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #222;
+}
+
+.success-check {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+/* 비밀번호가 변경되었습니다. */
+.success-main {
+    margin: 38px 0 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: #222;
+
+    text-align: center;
+}
+
+
+/* 새로운 비밀번호로 / 로그인해주세요. */
+.success-sub {
+    margin: 25px 0 0;
+
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+
+    text-align: center;
+}
+
+
+/* 로그인하기 버튼 */
+.success-login-btn {
+    width: 175px;
+    height: 42px;
+
+    margin-top: 30px;
+
+    background: transparent;
+    border: 1px dashed #222;
+
+    font-size: 14px;
+    color: #222;
+
+    cursor: pointer;
+}
+
+.success-login-btn:hover {
+    background: #fff;
+}
+
+
+/* 하단 hr */
+.join-wrapper hr {
+    margin-top: 35px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+
+/* =========================================
+   모바일
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .join-wrapper {
+        padding: 25px 15px;
+    }
+
+    .join-title {
+        font-size: 23px;
+    }
+
+    .join-box {
+        padding: 20px 15px;
+    }
+
+    .join-row {
+        display: block;
+    }
+
+    .join-label {
+        display: block;
+        width: 100%;
+        margin-bottom: 7px;
+    }
+
+    .find-btn-area {
+        flex-direction: column;
+    }
+
+    .join-btn-join,
+    .join-btn-zip_num {
+        width: 100%;
+    }
+
+    .password-success {
+        min-height: 380px;
+    }
+
+    .success-inner {
+        min-height: 330px;
+        padding: 30px 15px;
+    }
+
+    .success-main {
+        margin-top: 35px;
+    }
+
+    .success-login-btn {
+        width: 170px;
+    }
+}
