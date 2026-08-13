@@ -27,7 +27,7 @@ function MemberLogin() {
     function onSubmit(){
         if(!userid){return alert('아이디를 입력하세요.')}
         if(!pwd){return alert('비밀번호를 입력하세요.')}
-        axios.post('/api/member/login', {userid, pwd})
+        axios.post('/api/member/login', null, {params:{email:userid, pwd}})
         .then((result)=>{
             if(result.data.msg=='OK'){
                 dispatch(loginAction(result.data.loginUser))
@@ -63,7 +63,7 @@ function MemberLogin() {
                     <button className="btn-find" onClick={()=>navigate('/find')}>아이디/비밀번호 찾기</button>
                 </div>
                 <div className="login-footer">
-                    <button className="btn-join">KAKAO</button>
+                    <button className="btn-join" onClick={()=>window.location.href='http://localhost:8070/member/kakaostart'}>KAKAO</button>
                 </div>
             </div>
         </div>

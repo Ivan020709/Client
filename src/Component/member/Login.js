@@ -30,7 +30,7 @@ function Login() {
         if( !validateEmail(userid) ){ return alert('올바른 이메일 형식으로 입력 바랍니다.')}
         if( !pwd ){ return alert('패스워드를 입력하세요.')}
 
-        axios.post('/api/member/loginLocal', null, { params : { userid, pwd } } )
+        axios.post('/api/member/loginLocal',{ userid, pwd }  )
         .then((result)=>{
             console.log('result.data', result.data)
             if( result.data.msg === 'OK'){
