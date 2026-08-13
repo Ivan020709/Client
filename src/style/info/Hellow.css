@@ -1,0 +1,129 @@
+.hello-page {
+    width: 100%;
+    min-height: 600px;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    background: #f8f9fa;
+}
+
+.hello-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 50px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.hello-icon {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.hello-container h2 {
+    margin: 0 0 25px;
+    color: #343a40;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.hello-container p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 16px;
+    line-height: 2;
+}
+
+.hello-main {
+    color: #495057 !important;
+}
+
+.hello-divider {
+    width: 45px;
+    height: 3px;
+    margin: 30px auto;
+    background: #adb5bd;
+    border-radius: 10px;
+}
+
+.hello-growth {
+    width: 100%;
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.growth-item {
+    flex: 1;
+    min-height: 140px;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.growth-item span {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.growth-item strong {
+    margin-bottom: 7px;
+    color: #495057;
+    font-size: 16px;
+}
+
+.growth-item small {
+    color: #868e96;
+    font-size: 12px;
+}
+
+.hello-highlight {
+    margin-top: 35px !important;
+    color: #495057 !important;
+    font-size: 19px !important;
+}
+
+.hello-bottom {
+    margin-top: 20px !important;
+    color: #868e96 !important;
+    font-size: 14px !important;
+}
+
+@media (max-width: 650px) {
+    .hello-page {
+        padding: 30px 15px;
+    }
+
+    .hello-container {
+        width: 100%;
+        padding: 40px 20px;
+    }
+
+    .hello-container h2 {
+        font-size: 24px;
+    }
+
+    .hello-container p {
+        font-size: 14px;
+    }
+
+    .hello-growth {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .growth-item {
+        min-height: 100px;
+    }
+}
