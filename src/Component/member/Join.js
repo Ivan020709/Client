@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DaumPostcode from 'react-daum-postcode';
-//import Modal from 'react-modal';
+import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 import '../../style/member/Join.css';
 
@@ -225,10 +225,10 @@ function Join() {
                         />
                     </div>
                     {/* 주소 검색 모달 */}
-{/*                     <Modal style={modalStyle}isOpen={isOpen}onRequestClose={() => setIsOpen(false)}>
+                    <Modal style={modalStyle}isOpen={isOpen}onRequestClose={() => setIsOpen(false)}>
                         <DaumPostcode onComplete={completeHandler}/>
                         <button onClick={() => {setIsOpen(false);}}>CLOSE</button>
-                    </Modal> */}
+                    </Modal>
                     {/* 우편번호 */}
                     <div className="join-field">
                         <div className="join-row">
@@ -263,8 +263,9 @@ function Join() {
             {/* 안내 문구 */}
             <div className="join_msg"> ※ 가입 후 아이디 변경 불가 </div>
             {/* 가입 버튼 */}
-            <div>
-                <button className="join-btn-join"onClick={onSubmit}>확인</button>
+            <div className="join-btn-group">
+                <button className="join-btn-join" onClick={onSubmit}>확인</button>
+                <button className="join-btn-cancel" onClick={() => navigate('/')}>취소</button>
             </div>
             <hr />
         </div>
