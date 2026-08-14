@@ -7,6 +7,7 @@ import Join from './Component/member/Join';
 import BoardList from './Component/board/BoardList'
 import BoardWrite from './Component/board/BoardWrite'
 import BoardView from "./Component/board/BoardView";
+import UpdateBoard from './Component/board/UpdateBoard';
 
 import SelectAi from "./Component/ai/SelectAi";
 
@@ -30,7 +31,8 @@ function App() {
                     <Route path='/boardList' element={<BoardList />} />
                     <Route path='/boardWrite' element={<BoardWrite />} />
 
-                    <Route path='/boardView/:num' element={<BoardView />} />
+                    <Route path='/boardView/:boardnum' element={<BoardView />} />
+                    <Route path="/updateBoard/:boardnum" element={<UpdateBoard />}/>
                     {/*ai대화 */}
                     <Route path='/selectAi' element={<SelectAi />} />
                     {/*이용안내*/}

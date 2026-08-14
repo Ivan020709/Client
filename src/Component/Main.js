@@ -7,7 +7,7 @@ import banner1 from '../Img/banner.png';
 import banner2 from '../Img/banner2.png';
 import banner3 from '../Img/banner3.png';
 import banner4 from '../Img/banner4.png';
-import '../style/main.css';
+import '../style/Main.css';
 
 function Main() {
 

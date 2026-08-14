@@ -50,10 +50,18 @@ function BoardList() {
         .catch((err)=>{console.error(err)})
     };
 
+    const ROWS_PER_PAGE = 5;
+
+    const totalPages = Math.ceil(
+        (paging?.totalCount ?? 0) / ROWS_PER_PAGE
+    );
+
     // 페이지 이동
     const handlePage = (pageNumber) => {
-        if (pageNumber < 1) { return; }
-        if (paging && pageNumber > paging.endPage) { return; }
+        if (pageNumber < 1 || pageNumber > totalPages) {
+            return;
+        }
+
         setPage(pageNumber);
     };
 
@@ -90,7 +98,7 @@ function BoardList() {
                                 <div className="board-number">{post.boardnum}</div>
                                 <div className="board-title">{post.title}</div>
                                 <div className="board-writer">{post.userid}</div>
-                                <div className="board-date">{post.indate}</div>
+                                <div className="board-date">{post.indate?post.indate.substring(0, 10):''}</div>
                                 <div className="board-view">{post.viewcount}</div>
                             </div>
                         ))
@@ -109,20 +117,45 @@ function BoardList() {
                     <button type="submit">검색</button>
                 </form>
                 {/* 페이지네이션 */}
-                {paging && (
+                {totalPages > 1 && (
                     <div className="pagination">
+
                         {/* 이전 */}
-                        <button className="page-arrow" disabled={!paging.prev} onClick={() => handlePage(paging.beginPage - 1)}>&lt;</button>
+                        {page > 1 && (
+                            <button
+                                className="page-arrow"
+                                onClick={() => handlePage(page - 1)}
+                            >
+                                &lt;
+                            </button>
+                        )}
+
                         {/* 페이지 번호 */}
                         {Array.from(
-                            {length: paging.endPage - paging.beginPage + 1},
-                            (_, index) => paging.beginPage + index
+                            { length: totalPages },
+                            (_, index) => index + 1
                         ).map((pageNumber) => (
-                            <button key={pageNumber} className={`page ${page === pageNumber ? 'active' : ''
-                                }`} onClick={() => handlePage(pageNumber)}>{pageNumber}</button>
+                            <button
+                                key={pageNumber}
+                                className={`page ${
+                                    page === pageNumber ? 'active' : ''
+                                }`}
+                                onClick={() => handlePage(pageNumber)}
+                            >
+                                {pageNumber}
+                            </button>
                         ))}
+
                         {/* 다음 */}
-                        <button className="page-arrow" disabled={!paging.next} onClick={() => handlePage(paging.endPage + 1)}>&gt;</button>
+                        {page < totalPages && (
+                            <button
+                                className="page-arrow"
+                                onClick={() => handlePage(page + 1)}
+                            >
+                                &gt;
+                            </button>
+                        )}
+
                     </div>
                 )}
             </div>

@@ -249,12 +249,16 @@
     width: 36px;
     height: 36px;
 
+    padding: 0;
+
     border: 1px solid #ddd;
-    background-color: white;
-
-    cursor: pointer;
-
     border-radius: 4px;
+
+    background-color: white;
+    color: #555;
+
+    font-size: 14px;
+    cursor: pointer;
 }
 
 
@@ -267,18 +271,15 @@
 }
 
 
-/* hover */
+/* 페이지 버튼 Hover */
 
-.pagination .page:hover:not(.active),
-.pagination .page-arrow:hover:not(:disabled) {
+.pagination .page:hover:not(.active) {
     background-color: #f5f5f5;
 }
 
 
-/* 비활성화 */
+/* 이전 / 다음 버튼 Hover */
 
-.pagination button:disabled {
-    color: #ccc;
-    cursor: default;
-    background-color: #fafafa;
+.pagination .page-arrow:hover {
+    background-color: #f5f5f5;
 }
