@@ -7,8 +7,8 @@ function Footer() {
     return (
         <div className='footer' style={{color:'white', background:'gray'}}>
             <div className='row'>
-                <div className='col'>1</div>
-                <div className='col'>2</div>
+                <div className='col'>이용약관</div>
+                <div className='col'>개인정보취급방침</div>
             </div>
             <div className='row'>
                 <div className='col'>3</div>
