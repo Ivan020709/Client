@@ -4,8 +4,8 @@
 ================================ */
 .select-ai {
     width: 1000px;
-    height: 400px;
-    margin: 30px auto;
+    height: auto;
+    margin: 30px auto 60px;
 }
 
 
@@ -15,7 +15,7 @@
 ================================ */
 .select-ai-container {
     width: 1000px;
-    height: 400px;
+    height: auto;
     display: flex;
     gap: 15px;
     box-sizing: border-box;
@@ -30,7 +30,7 @@
 ================================ */
 .ai-card {
     flex: 1;
-    height: 400px;
+    min-height: 500px;
     border: 1px solid #ddd;
     border-radius: 15px;
     box-sizing: border-box;
@@ -72,7 +72,7 @@
 ================================ */
 .ai-info {
     width: 100%;
-    height: 150px;
+    min-height: 100px;
     text-align: center;
     padding: 10px 20px;
     box-sizing: border-box;
@@ -103,4 +103,459 @@
     color: #666;
     font-size: 14px;
     line-height: 1.6;
+}
+
+
+/* ================================
+   AI 대화 예시 영역
+   - 각 AI 카드 아래쪽에 표시
+   - 실제 AI와 대화하는 모습을 보여주는 영역
+================================ */
+.ai-example {
+    margin: 10px 15px 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   사용자 대화 예시
+================================ */
+.example-user {
+    width: fit-content;
+    max-width: 90%;
+    margin-left: auto;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #e8f3ff;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ================================
+   AI 답변 예시
+================================ */
+.example-ai {
+    width: fit-content;
+    max-width: 90%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ================================
+   카드 아래 추가 기능 영역
+   - 나중에 새로운 기능을 추가할 공간
+================================ */
+.ai-extra-area {
+    width: 1000px;
+    min-height: 180px;
+    margin-top: 30px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    background: #fff;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+/* ================================
+   상담 카테고리 메모지 영역
+   - PC 웹 전용
+================================ */
+
+.ai-extra-area {
+    width: 1000px;
+    min-height: 300px;
+    margin-top: 50px;
+    padding: 40px 30px 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+    justify-items: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   카테고리 메모지
+================================ */
+
+.ai-extra-area > div {
+    position: relative;
+    width: 200px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #fff7ad;
+    color: #665f3d;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+
+    /* 메모지 그림자 */
+    box-shadow:
+        4px 6px 12px rgba(60, 60, 40, 0.15);
+
+    /* 기본 기울기 */
+    transform: rotate(-2deg);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* ================================
+   메모지 핀
+================================ */
+
+.ai-extra-area > div::before {
+    content: '';
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    width: 19px;
+    height: 19px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: #d95c5c;
+    box-shadow:
+        1px 2px 4px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+
+/* ================================
+   핀 하이라이트
+================================ */
+
+.ai-extra-area > div::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: calc(50% - 5px);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+    z-index: 3;
+}
+
+
+/* ================================
+   메모지 색상
+================================ */
+
+.ai-extra-area > div:nth-child(1) {
+    background: #ffdede;
+    transform: rotate(-3deg);
+}
+
+
+.ai-extra-area > div:nth-child(2) {
+    background: #fff4b8;
+    transform: rotate(2deg);
+}
+
+
+.ai-extra-area > div:nth-child(3) {
+    background: #dff1ff;
+    transform: rotate(-1deg);
+}
+
+.ai-extra-area > div:nth-child(4) {
+    background: #e7ddff;
+    transform: rotate(3deg);
+}
+
+.ai-extra-area > div:nth-child(5) {
+    background: #dff5df;
+    transform: rotate(-2deg);
+}
+
+.ai-extra-area > div:nth-child(6) {
+    background: #ffe8c9;
+    transform: rotate(2deg);
+}
+
+
+.ai-extra-area > div:nth-child(7) {
+    background: #e8e8ff;
+    transform: rotate(-3deg);
+}
+
+
+.ai-extra-area > div:nth-child(8) {
+    background: #ffe0ef;
+    transform: rotate(2deg);
+}
+
+
+.ai-extra-area > div:nth-child(9) {
+    background: #e0f4ef;
+    transform: rotate(-2deg);
+}
+
+/* ================================
+   메모지 Hover
+================================ */
+
+.ai-extra-area > div:hover {
+    transform:
+        rotate(0deg)
+        translateY(-10px)
+        scale(1.04);
+    box-shadow:
+        6px 12px 22px rgba(60, 60, 40, 0.22);
+}
+
+/* ================================
+   대화 시작 버튼 영역
+================================ */
+
+.SelectAi_btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+}
+
+/* ================================
+   대화 시작 버튼
+================================ */
+
+.SelectAi_btn button {
+    width: 200px;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 12px;
+    background: #719d7d;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.SelectAi_btn button:hover {
+    background: #5e896a;
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 15px rgba(80, 120, 90, 0.2);
+}
+
+.SelectAi_btn button:active {
+    transform: translateY(0);
+}
+/* ================================
+   대화 시작 버튼 영역
+================================ */
+
+.SelectAi_btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    margin-bottom: 40px;
+}
+
+/* ================================
+   대화 시작 버튼
+================================ */
+
+.SelectAi_btn button {
+    position: relative;
+    width: 220px;
+    height: 58px;
+    border: none;
+    border-radius: 15px;
+    background: #719d7d;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow:
+        0 6px 0 #587d62,
+        0 10px 18px rgba(70, 100, 75, 0.18);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+/* ================================
+   버튼 위쪽 작은 장식
+================================ */
+
+.SelectAi_btn button::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 35px;
+    height: 3px;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    background: #d7b76a;
+}
+
+/* ================================
+   Hover
+================================ */
+
+.SelectAi_btn button:hover {
+    background: #638d6f;
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 0 #4e7058,
+        0 14px 22px rgba(70, 100, 75, 0.22);
+}
+
+/* ================================
+   클릭
+================================ */
+
+.SelectAi_btn button:active {
+    transform: translateY(3px);
+    box-shadow:
+        0 3px 0 #4e7058,
+        0 5px 10px rgba(70, 100, 75, 0.15);
+}
+
+/* ================================
+   카테고리 메모지
+================================ */
+
+.ai-extra-area .category {
+
+    position: relative;
+
+    width: 200px;
+    height: 130px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    padding: 20px;
+
+    border: 3px solid transparent;
+
+    color: #665f3d;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border 0.2s ease;
+}
+
+
+/* ================================
+   선택된 카테고리
+================================ */
+
+.ai-extra-area .category.selected {
+
+    transform:
+        rotate(0deg)
+        translateY(-8px)
+        scale(1.08);
+
+    border:
+        3px solid #719d7d;
+
+    box-shadow:
+        0 12px 25px rgba(80, 120, 90, 0.3);
+
+    z-index: 5;
+}
+
+
+/* ================================
+   선택된 메모지 핀
+================================ */
+
+.ai-extra-area .category.selected::before {
+
+    background: #719d7d;
+
+    box-shadow:
+        0 0 0 4px rgba(113, 157, 125, 0.2),
+        1px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ================================
+   Hover
+================================ */
+
+.ai-extra-area .category:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.03);
+
+    box-shadow:
+        5px 10px 20px rgba(70, 70, 50, 0.2);
+}
+
+
+/* ================================
+   선택된 카테고리 안내 영역
+================================ */
+
+.selected-category {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+.selected-category p {
+
+    margin: 0;
+}
+
+
+.selected-category strong {
+
+    color: #719d7d;
+
+    font-size: 16px;
 }
