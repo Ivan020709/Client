@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import '../../style/board/BoardView.css';
 
 function BoardView() {
 
     const navigate = useNavigate();
     const { boardnum } = useParams();
+    // 현재 로그인한 사용자
+    const loginUser = useSelector(state => state.user);
     // 임시 게시글 데이터
     // 나중에 axios로 /api/board/getBoard/{boardnum} 연결
     const [post] = useState({});
@@ -31,7 +34,7 @@ function BoardView() {
             alert('댓글을 입력해주세요.');
             return;
         }
-        const newComment = {id: comments.length + 1, nickname: '현재사용자', content: comment, created_at: '2026-08-13'};
+        const newComment = {id: comments.length + 1, user_id: '현재사용자', content: comment, created_at: '2026-08-13'};
         setComments([...comments, newComment]);
         setComment('');
         // 나중에 axios 연결
@@ -40,6 +43,9 @@ function BoardView() {
         //     content: comment
         // });
     };
+    // ★ 현재 로그인한 사용자가 게시글 작성자인지 확인
+    const isWriter = loginUser && loginUser.userid === post.userid;
+
     return (
         <div className="board-view-page">
             {/* 상단 */}
@@ -51,7 +57,7 @@ function BoardView() {
                 {/* 게시글 */}
                 <div className="board-view-post">
                     {/* 카테고리 */}
-                    <div className="board-view-category">{post.category}</div>
+                    {/* <div className="board-view-category">{post.category}</div> */}
                     {/* 제목 */}
                     <h2 className="board-view-title">{post.title}</h2>
                     {/* 작성자 정보 */}
@@ -65,10 +71,13 @@ function BoardView() {
                     {/* 게시글 버튼 */}
                     <div className="board-view-buttons">
                         <button className="board-list-btn" onClick={handleList}>목록</button>
-                        <div className="board-owner-buttons">
-                            <button className="board-update-btn" onClick={handleUpdate}>수정</button>
-                            <button className="board-delete-btn" onClick={handleDelete}>삭제</button>
-                        </div>
+                        {/* ★ 작성자 본인에게만 표시 */}
+                        {isWriter && (
+                            <div className="board-owner-buttons">
+                                <button className="board-update-btn" onClick={handleUpdate}>수정</button>
+                                <button className="board-delete-btn" onClick={handleDelete}>삭제</button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 {/* 댓글 */}
@@ -80,7 +89,7 @@ function BoardView() {
                             comments.map((item) => (
                                 <div className="board-comment" key={item.id}>
                                     <div className="board-comment-info">
-                                        <strong>{item.nickname}</strong>
+                                        <strong>{item.user_id}</strong>
                                         <span>{item.created_at}</span>
                                     </div>
                                     <div className="board-comment-content">{item.content}</div>
