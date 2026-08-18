@@ -16,58 +16,114 @@
     color: #222;
 }
 
-/* 입력 폼 */
+/* 입력 폼 전체 영역 고정 */
 .join-form {
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
+/* 입력 박스 컨테이너 (너비를 100%로 확실히 고정) */
 .join-box {
     width: 100%;
+    max-width: 480px;
     padding: 30px;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #fff;
+    margin: 0 auto;
 }
 
+/* 입력 행 (라벨과 인풋을 나란히 배치) */
 .join-row {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .join-row:last-child {
     margin-bottom: 0;
 }
 
+/* 라벨 너비를 '90px'로 완벽하게 고정 */
 .join-label {
     width: 90px;
-    flex-shrink: 0;
+    min-width: 90px;
+    max-width: 90px;
     font-size: 15px;
     color: #333;
+    font-weight: 500;
+    text-align: left;
+    flex-shrink: 0;
 }
 
+/* 입력창이 남은 공간을 정확히 균일하게 채우도록 설정 */
 .join-input-etc {
+    flex: 1;
     width: 100%;
     height: 42px;
     padding: 0 12px;
     box-sizing: border-box;
-
     border: 1px solid #ccc;
     border-radius: 4px;
-
     font-size: 14px;
     outline: none;
 }
 
 .join-input-etc:focus {
-    border-color: #888;
+    border-color: #333;
 }
 
 .join-input-etc::placeholder {
     color: #aaa;
 }
 
+/* =========================================
+   Find.js 전용 버튼 스타일
+   ========================================= */
+.find-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    max-width: 480px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.find-top-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.find-top-buttons button {
+    flex: 1;
+    height: 42px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 길쭉한 하단 버튼 (로그인으로 돌아가기) */
+.join-btn-full {
+    width: 100%;
+    height: 42px;
+    padding: 0 28px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    background: #f1f1f1;
+    color: #333;
+}
+
+.join-btn-full:hover {
+    background: #e2e2e2;
+}
 
 /* 버튼 영역 */
 .find-btn-area {
@@ -75,18 +131,21 @@
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .join-btn-join,
 .join-btn-zip_num {
     height: 42px;
     padding: 0 28px;
-
     border: none;
     border-radius: 4px;
-
     font-size: 14px;
     cursor: pointer;
+    flex: 1;
 }
 
 .join-btn-join {
@@ -107,107 +166,67 @@
     background: #ddd;
 }
 
-
 /* =========================================
    비밀번호 변경 완료 화면
    ========================================= */
-
 .password-success {
     width: 100%;
     min-height: 430px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 10px;
     box-sizing: border-box;
-
     background: #f7f7f7;
     border-radius: 20px;
 }
 
-
-/* 점선 테두리 박스 */
-.success-inner {
-    width: 100%;
-    max-width: 480px;
-    min-height: 360px;
-
+.success-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    box-sizing: border-box;
-    padding: 35px 25px;
-
-    border: 1px dashed #222;
+    text-align: center;
 }
 
-
-/* ✓ 변경 완료 */
 .success-title {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-
     margin-top: 0;
     font-size: 15px;
-    font-weight: 400;
     color: #222;
 }
 
-.success-check {
+.success-message {
+    margin: 20px 0 0;
     font-size: 16px;
-    font-weight: 400;
-}
-
-
-/* 비밀번호가 변경되었습니다. */
-.success-main {
-    margin: 38px 0 0;
-
-    font-size: 14px;
-    font-weight: 400;
+    font-weight: bold;
     color: #222;
-
-    text-align: center;
 }
 
-
-/* 새로운 비밀번호로 / 로그인해주세요. */
 .success-sub {
-    margin: 25px 0 0;
-
+    margin: 15px 0 0;
     font-size: 14px;
     line-height: 1.8;
-    color: #222;
-
-    text-align: center;
+    color: #666;
 }
 
-
-/* 로그인하기 버튼 */
 .success-login-btn {
     width: 175px;
     height: 42px;
-
-    margin-top: 30px;
-
-    background: transparent;
-    border: 1px dashed #222;
-
+    margin-top: 25px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
     font-size: 14px;
-    color: #222;
-
     cursor: pointer;
 }
 
 .success-login-btn:hover {
-    background: #fff;
+    background: #222;
 }
-
 
 /* 하단 hr */
 .join-wrapper hr {
@@ -216,13 +235,10 @@
     border-top: 1px solid #ddd;
 }
 
-
 /* =========================================
-   모바일
+   모바일 대응
    ========================================= */
-
 @media (max-width: 480px) {
-
     .join-wrapper {
         padding: 25px 15px;
     }
@@ -240,8 +256,8 @@
     }
 
     .join-label {
-        display: block;
         width: 100%;
+        min-width: 100%;
         margin-bottom: 7px;
     }
 
@@ -252,22 +268,5 @@
     .join-btn-join,
     .join-btn-zip_num {
         width: 100%;
-    }
-
-    .password-success {
-        min-height: 380px;
-    }
-
-    .success-inner {
-        min-height: 330px;
-        padding: 30px 15px;
-    }
-
-    .success-main {
-        margin-top: 35px;
-    }
-
-    .success-login-btn {
-        width: 170px;
     }
 }

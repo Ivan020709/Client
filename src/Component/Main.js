@@ -7,17 +7,17 @@ import banner1 from '../Img/banner.png';
 import banner2 from '../Img/banner2.png';
 import banner3 from '../Img/banner3.png';
 import banner4 from '../Img/banner4.png';
-import '../style/Main.css';
+import '../style/main.css';
 
 function Main() {
 
     const navigate = useNavigate();
-    const settings = {dots: true, infinite: true, speed: 500, slidesToShow: 1, slidesToScroll: 1, autoplay: true, autoplaySpeed: 3000, arrows: true };
+    const settings = { dots: true, infinite: true, speed: 500, slidesToShow: 1, slidesToScroll: 1, autoplay: true, autoplaySpeed: 3000, arrows: true };
     /* ================================
        오늘의 기분
     ================================= */
     const [todayMood, setTodayMood] = useState(null);
-    const moods = [{emoji: '😊', name: '좋아요'}, {emoji: '🙂', name: '괜찮아요'}, {emoji: '😐', name: '그저 그래요'}, {emoji: '😔', name: '우울해요'}, {emoji: '😣', name: '힘들어요'}];
+    const moods = [{ emoji: '😊', name: '좋아요' }, { emoji: '🙂', name: '괜찮아요' }, { emoji: '😐', name: '그저 그래요' }, { emoji: '😔', name: '우울해요' }, { emoji: '😣', name: '힘들어요' }];
     /* ================================
        최근 고민 게시글
        나중에 axios 연결
@@ -31,10 +31,10 @@ function Main() {
             ================================= */}
             <div className="main-banner">
                 <Slider {...settings}>
-                    <div><img src={banner1} alt="메인 배너 1"/></div>
-                    <div><img src={banner2} alt="메인 배너 2"/></div>
-                    <div><img src={banner3} alt="메인 배너 3"/></div>
-                    <div><img src={banner4} alt="메인 배너 4"/></div>
+                    <div><img src={banner1} alt="메인 배너 1" /></div>
+                    <div><img src={banner2} alt="메인 배너 2" /></div>
+                    <div><img src={banner3} alt="메인 배너 3" /></div>
+                    <div><img src={banner4} alt="메인 배너 4" /></div>
                 </Slider>
             </div>
             {/* ================================
@@ -56,7 +56,7 @@ function Main() {
                     {/* 기분 선택 */}
                     <div className="mood-list">
                         {moods.map((mood) => (
-                            <button key={mood.name} className={ todayMood === mood.name ? 'mood-item active' : 'mood-item'} onClick={() => setTodayMood(mood.name)}>
+                            <button key={mood.name} className={todayMood === mood.name ? 'mood-item active' : 'mood-item'} onClick={() => setTodayMood(mood.name)}>
                                 <span className="mood-emoji">{mood.emoji}</span>
                                 <span className="mood-name">{mood.name}</span>
                             </button>
