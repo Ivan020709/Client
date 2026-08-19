@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './submenu.css';
+import './SubMenu.css';
 
 function SubMenu() {
     const navigate = useNavigate();
