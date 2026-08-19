@@ -18,6 +18,8 @@ import Find from './Component/member/find/Find';
 import FindId from './Component/member/find/Findid';
 import FindPass from './Component/member/find/Findpass';
 
+import TalkAI from './Component/ai/TalkAI'
+
 function App() {
     return (
         <div>
@@ -32,9 +34,10 @@ function App() {
                     <Route path='/boardWrite' element={<BoardWrite />} />
 
                     <Route path='/boardView/:boardnum' element={<BoardView />} />
-                    <Route path="/updateBoard/:boardnum" element={<UpdateBoard />}/>
+                    <Route path="/updateBoard/:boardnum" element={<UpdateBoard />} />
                     {/*ai대화 */}
                     <Route path='/selectAi' element={<SelectAi />} />
+                    <Route path='/talkAI' element={<TalkAI />} />
                     {/*이용안내*/}
                     <Route path='/info' element={<Info />} />
                     <Route path='/hellow' element={<Hellow />} />
