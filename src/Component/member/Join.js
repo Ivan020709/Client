@@ -5,6 +5,7 @@ import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 import '../../style/member/Join.css';
+import { Cookies } from 'react-cookie'
 
 function Join() {
     const loginUser = useSelector(state => state.user);
@@ -37,12 +38,13 @@ function Join() {
 
 
     const [isOpen, setIsOpen] = useState(false);
+    const cookies = new Cookies()
 
     const modalStyle = {
         overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
         content: {
             left: '0', right: '0', top: '50%', bottom: 'auto', margin: 'auto',
-            width: '500px', height: '420px', padding: '0', overflow: 'hidden',
+            width: '500px', height: '500px', padding: '0', overflow: 'hidden',
             transform: 'translateY(-50%)'
         }
     };
@@ -59,15 +61,15 @@ function Join() {
     };
 
     function idCheck() {
-        if (!email) return alert('아이디를 입력하세요.');
+        if (!email) return alert('이메일를 입력하세요.');
         axios.post('/api/member/emailCheck', null, { params: { email: email } })
             .then((result) => {
                 if (result.data.msg === 'OK') {
-                    setIdCheckResult('※ 사용 가능한 아이디입니다.');
+                    setIdCheckResult('※ 사용 가능한 이메일입니다.');
                     setMsgStyle({ color: 'blue', flex: '1', fontWeight: 'bold' });
                     setReid(email);
                 } else {
-                    setIdCheckResult('※ 중복되는 아이디입니다.');
+                    setIdCheckResult('※ 중복되는 이메일입니다.');
                     setMsgStyle({ color: 'red', flex: '1', fontWeight: 'bold' });
                     setReid('');
                 }
@@ -158,6 +160,7 @@ function Join() {
         })
             .then(() => {
                 alert('회원 가입이 완료되었습니다.');
+                cookies.remove('user', { path: '/' });
                 navigate('/memberLogin');
             })
             .catch((err) => {
@@ -181,7 +184,7 @@ function Join() {
             <div className="join-form">
                 <div className="join-box">
                     <div className="join-row">
-                        <label className="join-label">아이디</label>
+                        <label className="join-label">이메일</label>
                         <input className="join-input-id" type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value); setReid(''); setIdCheckResult(''); }} placeholder="이메일 형식(예: abc@abc.com)" />
                         <button className="join-btn-zip_num" onClick={idCheck}>중복확인</button>
                     </div>

@@ -6,7 +6,7 @@ import '../../../style/member/Find.css';
 function FindId() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [foundId, setFoundId] = useState(''); // 성공 시 아이디가 담기는 곳
+    const [foundId, setFoundId] = useState(''); 
     const navigate = useNavigate();
 
     const handleFindId = () => {
@@ -16,7 +16,7 @@ function FindId() {
         axios.post('/api/member/findId', { name: name, phone: phone })
             .then((result) => {
                 if (result.data && result.data.userid) {
-                    setFoundId(result.data.userid); // 성공 시 데이터 저장 -> 화면에 결과 출력됨
+                    setFoundId(result.data.userid); 
                 } else {
                     alert('일치하는 회원 정보를 찾을 수 없습니다.');
                     setFoundId('');
@@ -57,7 +57,6 @@ function FindId() {
                 </div>
             </div>
 
-            {/* 성공했을 때만 나타나는 결과 */}
             {foundId ? (
                 <div style={{ margin: '20px auto', padding: '15px', maxWidth: '480px', backgroundColor: '#f9f9f9', border: '1px solid #ddd', textAlign: 'center', boxSizing: 'border-box' }}>
                     <p style={{ margin: 0 }}>회원님의 아이디(이메일)는 다음과 같습니다:</p>

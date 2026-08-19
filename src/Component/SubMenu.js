@@ -8,25 +8,24 @@ function SubMenu() {
         <div className="sub_menu">
             <div className="sub_menu_top">
                 <div className="sub_menu_item">
-                    <div className="sub_menu_title">대화 하기</div>
+                    <div className="sub_menu_title">고민상담</div>
                     <div className="sub_dropdown">
-                        <div onClick={() => { navigate('/SelectAi') }}>대화 신청</div>
-                        <div>감정 일기</div>
-                        <div>나의 캘린더</div>
+                        <div>필로그란?</div>
+                        <div onClick={() => { navigate('/SelectAi') }}>대화신청</div>
+                        <div onClick={() => navigate('/Diary')}>감정 일기</div>
                     </div>
                 </div>
 
                 <div className="sub_menu_item">
-                    <div className="sub_menu_title">랭 킹</div>
-                    <div className="sub_dropdown">
-                        <div>순위</div>
-                    </div>
+                    <div className="sub_menu_title">마이페이지</div>
                 </div>
                 <div className="sub_menu_item">
                     <div className="sub_menu_title">커뮤니티</div>
                     <div className="sub_dropdown">
-                        <div onClick={() => { navigate('/BoardList') }}>고민게시판</div>
-                        <div>문의사항</div>
+                        <div onClick={() => { navigate('/BoardList') }}>자유게시판</div>
+                        <div>일기 공유</div>
+                        <div>문의 사항</div>
+                        <div>공지 사항</div>
                     </div>
                 </div>
                 <div className="sub_menu_item">
@@ -34,7 +33,7 @@ function SubMenu() {
                     <div className="sub_dropdown">
                         <div onClick={() => { navigate('/Hellow') }}>인사말</div>
                         <div onClick={() => { navigate('/Info') }}>상담센터</div>
-                        <div>결제 이용안내</div>
+                        <div>위치 정보</div>
                     </div>
                 </div>
 

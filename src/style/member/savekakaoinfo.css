@@ -1,0 +1,414 @@
+.save-kakao-wrapper {
+    width: 580px;
+    margin: 60px auto;
+    padding: 40px 0;
+
+    box-sizing: border-box;
+
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* 제목 */
+.save-kakao-title {
+    margin: 0 0 10px;
+
+    text-align: center;
+
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.save-kakao-description {
+    margin: 0 0 30px;
+
+    text-align: center;
+
+    font-size: 14px;
+    color: #888;
+}
+
+
+/* 입력 영역 */
+.save-kakao-form {
+    width: 88%;
+    margin: 0 auto;
+}
+
+.save-kakao-box {
+    width: 100%;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+
+/* 한 줄 */
+.save-kakao-row {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 55px;
+
+    border-bottom: 1px solid #eee;
+
+    box-sizing: border-box;
+}
+
+.save-kakao-row:last-child {
+    border-bottom: none;
+}
+
+
+/* 라벨 */
+.save-kakao-label {
+    flex: 0 0 120px;
+
+    width: 120px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    background-color: #f7f7f7;
+    border-right: 1px solid #eee;
+
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* 기본 input */
+.save-kakao-input {
+    flex: 1;
+
+    width: 0;
+    height: 55px;
+
+    padding: 0 15px;
+
+    border: none;
+    outline: none;
+
+    background-color: white;
+
+    box-sizing: border-box;
+
+    font-size: 14px;
+    color: #333;
+}
+
+.save-kakao-input::placeholder {
+    color: #aaa;
+}
+
+.save-kakao-input:focus {
+    background-color: #fcfcfc;
+}
+
+
+/* 생년월일 */
+.save-kakao-birth {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+
+    padding: 0 10px;
+}
+
+.save-kakao-input-year {
+    width: 80px;
+    height: 35px;
+
+    padding: 0 5px;
+
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    outline: none;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.save-kakao-input-month,
+.save-kakao-input-day {
+    width: 55px;
+    height: 35px;
+
+    padding: 0 5px;
+
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    outline: none;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.save-kakao-input-year:focus,
+.save-kakao-input-month:focus,
+.save-kakao-input-day:focus {
+    border-color: #999;
+}
+
+.save-kakao-birth-text {
+    margin: 0 6px 0 4px;
+
+    color: #777;
+    font-size: 13px;
+}
+
+
+/* 주소 검색 */
+.save-kakao-address-area {
+    display: flex;
+    flex: 1;
+
+    height: 55px;
+}
+
+.save-kakao-address-area .save-kakao-input {
+    flex: 1;
+}
+
+.save-kakao-address-btn {
+    width: 110px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-left: 1px solid #ddd;
+
+    background-color: #f5f5f5;
+
+    color: #555;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.save-kakao-address-btn:hover {
+    background-color: #eee;
+}
+
+
+/* 버튼 */
+.save-kakao-btn-group {
+    width: 88%;
+
+    display: flex;
+
+    gap: 10px;
+
+    margin: 20px auto 0;
+}
+
+.save-kakao-submit,
+.save-kakao-cancel {
+    flex: 1;
+
+    height: 48px;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+
+/* 확인 */
+.save-kakao-submit {
+    border: none;
+
+    background-color: #333;
+    color: white;
+}
+
+.save-kakao-submit:hover {
+    background-color: #222;
+}
+
+
+/* 취소 */
+.save-kakao-cancel {
+    border: 1px solid #ddd;
+
+    background-color: white;
+    color: #555;
+}
+
+.save-kakao-cancel:hover {
+    background-color: #f7f7f7;
+}
+
+
+/* 주소 모달 */
+.save-kakao-modal-close {
+    display: block;
+
+    margin: 10px auto;
+
+    padding: 8px 20px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #333;
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* 모바일 */
+@media (max-width: 650px) {
+
+    .save-kakao-wrapper {
+        width: calc(100% - 30px);
+        margin: 30px auto;
+    }
+
+    .save-kakao-label {
+        flex: 0 0 100px;
+        width: 100px;
+    }
+
+    .save-kakao-form,
+    .save-kakao-btn-group {
+        width: 92%;
+    }
+
+    .save-kakao-input-year {
+        width: 70px;
+    }
+
+    .save-kakao-input-month,
+    .save-kakao-input-day {
+        width: 50px;
+    }
+
+    .save-kakao-address-btn {
+        width: 95px;
+    }
+}
+
+/* =========================
+   Profile
+========================= */
+
+.save-kakao-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px 0 30px;
+}
+
+.save-kakao-profile-image {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #ddd;
+    border-radius: 50%;
+
+    background-color: #f5f5f5;
+
+    overflow: visible;
+}
+
+.save-kakao-profile-image img {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.save-kakao-profile-image span {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.save-kakao-profile-camera {
+    position: absolute;
+
+    right: -5px;
+    bottom: -5px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #ddd;
+    border-radius: 50%;
+
+    background-color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.save-kakao-profile-camera:hover {
+    background-color: #f5f5f5;
+}
+
+/* =========================
+   닉네임 / 이메일 중복확인
+========================= */
+
+.save-kakao-check-btn {
+    width: 100px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-left: 1px solid #ddd;
+
+    background-color: #f5f5f5;
+
+    color: #555;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.save-kakao-check-btn:hover {
+    background-color: #eee;
+}

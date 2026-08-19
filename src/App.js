@@ -19,7 +19,10 @@ import FindId from './Component/member/find/Findid';
 import FindPass from './Component/member/find/Findpass';
 
 import TalkAI from './Component/ai/TalkAI'
-
+import DiaryList from './Component/diary/DiaryList';
+import Diary from './Component/member/Diary';
+import Savekakaoinfo from "./Component/member/Savekakaoinfo";
+import MyPage from "./Component/mypage/MyPage";
 function App() {
     return (
         <div>
@@ -35,6 +38,7 @@ function App() {
 
                     <Route path='/boardView/:boardnum' element={<BoardView />} />
                     <Route path="/updateBoard/:boardnum" element={<UpdateBoard />} />
+
                     {/*ai대화 */}
                     <Route path='/selectAi' element={<SelectAi />} />
                     <Route path='/talkAI' element={<TalkAI />} />
@@ -42,10 +46,18 @@ function App() {
                     <Route path='/info' element={<Info />} />
                     <Route path='/hellow' element={<Hellow />} />
 
+                    {/* 마이페이지 */}
+                    <Route path='/myPage' element={<MyPage />} />
+
                     {/* 아이디 비밀번호 찾기 */}
                     <Route path='/find' element={<Find />} />
                     <Route path='/findId' element={<FindId />} />
                     <Route path='/findPass' element={<FindPass />} />
+
+                    <Route path='/diaryList' element={<DiaryList />} />
+                    <Route path='/Diary' element={<Diary />} />
+                    <Route path="/savekakaoinfo/:userid" element={<Savekakaoinfo />} />
+
                 </Route>
             </Routes>
         </div>

@@ -1,4 +1,4 @@
-/* 전체 영역 */
+/* 전체 영역 (가운데 정렬) */
 .join-wrapper {
     width: 100%;
     max-width: 600px;
@@ -16,14 +16,14 @@
     color: #222;
 }
 
-/* 입력 폼 전체 영역 고정 */
+/* 입력 폼 전체 영역 고정 (가운데 정렬) */
 .join-form {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-/* 입력 박스 컨테이너 (너비를 100%로 확실히 고정) */
+/* 입력 박스 컨테이너 (가운데 정렬) */
 .join-box {
     width: 100%;
     max-width: 480px;
@@ -35,12 +35,13 @@
     margin: 0 auto;
 }
 
-/* 입력 행 (라벨과 인풋을 나란히 배치) */
+/* 입력 행 (라벨과 인풋을 나란히 배치하고 내부를 왼쪽 정렬) */
 .join-row {
     display: flex;
     align-items: center;
     width: 100%;
     margin-bottom: 15px;
+    justify-content: flex-start; /* 내부 요소를 왼쪽 정렬 */
 }
 
 .join-row:last-child {
@@ -125,7 +126,7 @@
     background: #e2e2e2;
 }
 
-/* 버튼 영역 */
+/* 버튼 영역 (가운데 정렬) */
 .find-btn-area {
     display: flex;
     justify-content: center;

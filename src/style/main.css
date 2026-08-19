@@ -5,139 +5,567 @@
 .main-page {
     width: 100%;
     max-width: 1400px;
+
     min-height: 917px;
+
     margin: 0 auto;
+
     padding: 10px 0 80px;
+
     box-sizing: border-box;
 }
+
+
 /* =================================
-   메인 배너
+   유선 노트 배너
 ================================= */
-.main-banner {
+
+.notebook-banner {
+    position: relative;
     width: 100%;
+    min-height: 570px;
     overflow: hidden;
+    border: 1px solid #9d7049;
     border-radius: 20px;
+    box-sizing: border-box;
+    background-color: #bf8b59;
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 39px,
+            rgba(87, 49, 26, 0.30) 40px,
+            transparent 41px
+        ),
+        linear-gradient(135deg, #cf9d68 0%, #ad7548 100%);
+    box-shadow: inset 0 0 55px rgba(75, 40, 19, 0.22), 0 10px 24px rgba(81, 48, 25, 0.14);
 }
-.main-banner img {
+
+/* =================================
+   공유 감정일기
+================================= */
+.shared-diary-section {
+    margin-top: 30px;
+    padding: 30px 34px 34px;
+    border: 1px solid #e6d8c5;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fffaf1 0%, #f8f1e7 100%);
+    box-shadow: 0 8px 22px rgba(96, 65, 35, 0.08);
+}
+
+.shared-diary-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.shared-diary-eyebrow {
+    margin: 0 0 7px;
+    color: #b0845b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.shared-diary-heading h2 {
+    margin: 0;
+    color: #513a28;
+    font-size: 25px;
+}
+
+.shared-diary-heading p:last-child {
+    margin: 7px 0 0;
+    color: #8d7964;
+    font-size: 13px;
+}
+
+.shared-diary-more {
+    flex-shrink: 0;
+    padding: 10px 15px;
+    border: 1px solid #d9c2a7;
+    border-radius: 999px;
+    background: #fffdf9;
+    color: #866344;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.shared-diary-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+.shared-diary-empty { grid-column: 1 / -1; margin: 18px 0; color: #9b8875; text-align: center; font-size: 14px; }
+
+.shared-diary-card {
+    position: relative;
+    min-height: 184px;
+    padding: 20px 20px 18px;
+    border: 1px solid rgba(198, 167, 133, 0.45);
+    border-radius: 15px 15px 15px 4px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 3px 5px 12px rgba(120, 83, 48, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shared-diary-card:hover {
+    transform: translateY(-5px) rotate(-1deg);
+    box-shadow: 5px 10px 18px rgba(120, 83, 48, 0.14);
+}
+
+.shared-diary-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shared-diary-date { color: #a27a56; font-size: 12px; font-weight: 700; }
+.shared-diary-mood { padding: 4px 8px; border-radius: 999px; background: #f8e4c9; color: #9d6c3e; font-size: 11px; }
+.shared-diary-card h3 { margin: 20px 0 8px; color: #58422f; font-size: 18px; }
+.shared-diary-card p { display: -webkit-box; margin: 0; overflow: hidden; color: #786a5b; font-size: 13px; line-height: 1.7; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.shared-diary-author { position: absolute; right: 18px; bottom: 16px; color: #b1977c; font-size: 11px; }
+
+@media (max-width: 760px) {
+    .shared-diary-section { padding: 24px 18px; }
+    .shared-diary-heading { align-items: flex-start; flex-direction: column; }
+    .shared-diary-list { grid-template-columns: 1fr; }
+}
+
+.notebook-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 108px;
+    width: 2px;
+    background-color: rgba(133, 60, 45, 0.52);
+}
+
+.notebook-banner::after {
+    content: '';
+    position: absolute;
+    top: 22px;
+    bottom: 22px;
+    left: 23px;
+    width: 22px;
+    border-radius: 20px;
+    background-image: radial-gradient(ellipse at center, #6e432b 0 27%, #d6a36d 30% 43%, transparent 46%);
+    background-size: 22px 42px;
+    background-repeat: repeat-y;
+    opacity: 0.9;
+}
+
+/* 유선 노트 안의 추천 게시글 메모지 */
+.notebook-memo-list {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(190px, 245px));
+    gap: 26px 30px;
+    transform: translate(-50%, -50%);
+}
+
+.notebook-memo {
+    position: relative;
     width: 100%;
-    height: 600px;
-    display: block;
-    object-fit: contain;
+    height: 185px;
+    padding: 24px 22px 30px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    box-sizing: border-box;
+    background: var(--memo-color);
+    color: #4c4231;
+    text-align: left;
+    cursor: pointer;
+    transform: rotate(var(--memo-rotation));
+    box-shadow: 4px 6px 12px rgba(60, 60, 40, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+.notebook-memo::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background: #d95c5c;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.notebook-memo::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: calc(50% - 5px);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.notebook-memo:hover,
+.notebook-memo:focus-visible {
+    outline: none;
+    transform: rotate(0deg) translateY(-9px) scale(1.04);
+    box-shadow: 6px 12px 22px rgba(60, 60, 40, 0.3);
+}
+
+.notebook-memo-heading {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+
+.notebook-memo-title {
+    min-width: 0;
+    overflow: hidden;
+    color: #4d412e;
+    font-size: 20px;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.notebook-memo-category {
+    flex-shrink: 0;
+    color: #7c6847;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.notebook-memo-content {
+    display: -webkit-box;
+    margin: 15px 0 0;
+    overflow: hidden;
+    color: #675a43;
+    font-size: 12px;
+    line-height: 1.65;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.notebook-memo-arrow {
+    position: absolute;
+    right: 18px;
+    bottom: 15px;
+    color: #6a583c;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.notebook-memo-actions {
+    position: absolute;
+    bottom: 15px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notebook-memo-actions button {
+    padding: 3px 6px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.38);
+    color: #796145;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.notebook-memo-actions button:hover,
+.notebook-memo-actions button:focus-visible {
+    background: rgba(255, 255, 255, 0.72);
+    outline: none;
+}
+
+.notebook-memo-like.is-liked {
+    color: #d95c5c;
+}
+
+.board-report-modal-backdrop {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(48, 31, 20, 0.45);
+}
+
+.board-report-modal {
+    width: min(100%, 390px);
+    padding: 24px;
+    border-radius: 14px;
+    box-sizing: border-box;
+    background: #fffaf2;
+    box-shadow: 0 12px 35px rgba(42, 25, 13, 0.28);
+}
+
+.board-report-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.board-report-modal-header h2 {
+    margin: 0;
+    color: #49301e;
+    font-size: 20px;
+}
+
+.board-report-modal-header button {
+    border: none;
+    background: none;
+    color: #80634b;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.board-report-modal-title {
+    margin: 16px 0 20px;
+    overflow: hidden;
+    color: #6d523c;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.board-report-modal label {
+    display: block;
+    margin: 14px 0 7px;
+    color: #60442f;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.board-report-modal label span {
+    color: #a48a76;
+    font-weight: 400;
+}
+
+.board-report-modal select,
+.board-report-modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddc8b1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: #fff;
+    color: #49301e;
+    font: inherit;
+    font-size: 13px;
+}
+
+.board-report-modal textarea {
+    min-height: 92px;
+    resize: vertical;
+}
+
+.board-report-submit {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #7b5136;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.board-report-submit:hover {
+    background: #62402c;
+}
+
 
 /* =================================
    컨텐츠 영역
 ================================= */
+
 .main-content {
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
+
     gap: 20px;
+
     margin-top: 25px;
 }
+
 
 /* =================================
    컨텐츠 공통 박스
 ================================= */
+
 .main-content-box {
     min-height: 390px;
+
     padding: 28px;
+
     box-sizing: border-box;
+
     background-color: white;
+
     border: 1px solid #e8e8e8;
+
     border-radius: 18px;
+
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
+
+
 /* =================================
    제목 영역
 ================================= */
+
 .content-title-area {
     display: flex;
+
     justify-content: space-between;
     align-items: flex-start;
+
     margin-bottom: 25px;
 }
 
 .content-title-area h2 {
     margin: 0 0 7px;
+
     font-size: 21px;
     font-weight: 700;
+
     color: #333;
 }
 
 .content-title-area p {
     margin: 0;
+
     font-size: 13px;
+
     color: #999;
 }
+
+
 /* 아이콘 */
+
 .content-icon {
     font-size: 28px;
 }
 
+
 /* =================================
    오늘의 기분
 ================================= */
+
 .mood-box {
     display: flex;
+
     flex-direction: column;
 }
+
+
 /* 기분 목록 */
+
 .mood-list {
     display: flex;
+
     justify-content: space-between;
+
     gap: 5px;
+
     margin-top: 5px;
 }
+
 .mood-item {
     width: 58px;
     height: 72px;
+
     padding: 5px 2px;
+
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
+
     gap: 5px;
+
     border: 1px solid #eee;
+
     border-radius: 12px;
+
     background-color: #fafafa;
+
     cursor: pointer;
+
     transition: all 0.2s;
 }
 
 .mood-item:hover {
     transform: translateY(-3px);
+
     border-color: #b7deda;
+
     background-color: #f5fbfa;
 }
 
 .mood-item.active {
     border: 2px solid #54c3bd;
+
     background-color: #eefaf9;
 }
 
+
 /* 이모지 */
+
 .mood-emoji {
     font-size: 25px;
 }
 
+
 /* 기분 이름 */
+
 .mood-name {
     font-size: 10px;
+
     color: #777;
+
     white-space: nowrap;
 }
 
+
 /* 선택 결과 */
+
 .mood-result {
     min-height: 55px;
+
     margin-top: 22px;
     padding: 12px;
+
     box-sizing: border-box;
+
     border-radius: 10px;
+
     background-color: #f8f9fa;
+
     text-align: center;
+
     font-size: 13px;
+
     line-height: 1.6;
+
     color: #888;
 }
 
@@ -145,21 +573,31 @@
     color: #54b8b2;
 }
 
+
 /* =================================
    공통 버튼
 ================================= */
 
 .main-action-btn {
     width: 100%;
+
     height: 45px;
+
     margin-top: auto;
+
     border: none;
+
     border-radius: 9px;
+
     background-color: #54c3bd;
+
     color: white;
+
     font-size: 14px;
     font-weight: 600;
+
     cursor: pointer;
+
     transition: background-color 0.2s;
 }
 
@@ -167,22 +605,31 @@
     background-color: #43aaa5;
 }
 
+
 /* =================================
    게시판
 ================================= */
+
 .board-box {
     display: flex;
+
     flex-direction: column;
 }
+
 
 /* 더보기 */
 
 .more-btn {
     padding: 0;
+
     border: none;
+
     background: none;
+
     color: #999;
+
     font-size: 12px;
+
     cursor: pointer;
 }
 
@@ -190,20 +637,29 @@
     color: #54b8b2;
 }
 
+
 /* 게시글 목록 */
 
 .recent-post-list {
     display: flex;
+
     flex-direction: column;
 }
 
+
 /* 게시글 */
+
 .recent-post {
     display: flex;
+
     align-items: center;
+
     gap: 8px;
+
     min-height: 62px;
+
     border-bottom: 1px solid #eee;
+
     cursor: pointer;
 }
 
@@ -217,26 +673,41 @@
 
 
 /* 카테고리 */
+
 .post-category {
     flex-shrink: 0;
+
     width: 55px;
+
     padding: 5px 3px;
+
     border-radius: 5px;
+
     background-color: #f1f7f6;
+
     color: #54aaa5;
+
     text-align: center;
+
     font-size: 10px;
 }
+
 
 /* 제목 */
 
 .post-title {
     flex: 1;
+
     overflow: hidden;
+
     white-space: nowrap;
+
     text-overflow: ellipsis;
+
     color: #555;
+
     font-size: 13px;
+
     transition: color 0.2s;
 }
 
@@ -245,18 +716,36 @@
 
 .post-date {
     flex-shrink: 0;
+
     color: #aaa;
+
     font-size: 11px;
 }
+
 
 /* =================================
    반응형
 ================================= */
+
+@media (max-width: 1200px) {
+
+    .notebook-banner {
+        min-height: 570px;
+    }
+
+    .notebook-memo-list {
+        right: auto;
+    }
+
+}
+
 @media (max-width: 1000px) {
+
     .main-page {
         padding-left: 20px;
         padding-right: 20px;
     }
+
     .main-content {
         grid-template-columns: 1fr;
     }
@@ -269,30 +758,76 @@
 
 
 @media (max-width: 600px) {
+
     .main-page {
         padding: 10px 15px 50px;
     }
-    .main-banner img {
-        height: 350px;
+
+    .notebook-banner {
+        min-height: 600px;
     }
+
+    .notebook-banner::before {
+        left: 68px;
+    }
+
+    .notebook-memo-list {
+        top: 50%;
+        right: 24px;
+        left: 82px;
+        grid-template-columns: 1fr;
+        gap: 23px;
+        transform: translateY(-50%);
+    }
+
+    .notebook-memo {
+        height: 105px;
+        padding: 17px 18px 23px;
+    }
+
+    .notebook-memo-title {
+        font-size: 17px;
+    }
+
+    .notebook-memo-content {
+        margin-top: 8px;
+        -webkit-line-clamp: 2;
+    }
+
+    .notebook-memo-actions {
+        bottom: 10px;
+        left: 13px;
+    }
+
+    .notebook-memo-arrow {
+        right: 13px;
+        bottom: 10px;
+    }
+
     .main-content {
         gap: 15px;
     }
+
     .main-content-box {
         padding: 22px;
+
         min-height: 330px;
     }
+
     .mood-list {
         gap: 3px;
     }
+
     .mood-item {
         width: 52px;
     }
+
 }
 
 /* =================================
    이번 달 AI 랭킹 1위
 ================================= */
+
 .ranking-box {
     display: flex;
     flex-direction: column;

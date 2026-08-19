@@ -1,0 +1,603 @@
+/* ================================
+   마이페이지 전체
+================================ */
+
+.mypage-wrapper {
+    width: 580px;
+    margin: 60px auto;
+    padding: 0 0 40px;
+
+    background: #fff;
+
+    border: 1px solid #e2e5e8;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .06),
+        0 2px 8px rgba(0, 0, 0, .03);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   제목
+================================ */
+
+.mypage-title {
+    width: 100%;
+
+    margin: 0;
+    padding: 38px 0 20px;
+
+    text-align: center;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #343a40;
+
+    letter-spacing: -1px;
+}
+
+.mypage-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 14px auto 0;
+
+    background: #adb5bd;
+
+    border-radius: 10px;
+}
+
+
+/* ================================
+   프로필
+================================ */
+
+.mypage-profile-area {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    margin: 0 0 30px;
+
+    box-sizing: border-box;
+}
+
+.mypage-profile-preview {
+    position: relative;
+
+    width: 150px;
+    height: 150px;
+
+    border: 1px solid #dfe3e6;
+    border-radius: 50%;
+
+    background: #f5f6f7;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+
+    color: #adb5bd;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+}
+
+.mypage-profile-preview img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* ================================
+   프로필 카메라
+================================ */
+
+.mypage-profile-camera {
+    position: absolute;
+
+    right: -3px;
+    bottom: -3px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 3px solid #fff;
+
+    border-radius: 50%;
+
+    background: #868e96;
+
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, .18);
+
+    transition:
+        background .2s,
+        transform .15s;
+}
+
+.mypage-profile-camera:hover {
+    background: #6c757d;
+
+    transform: scale(1.05);
+}
+
+.mypage-profile-camera:active {
+    transform: scale(.95);
+}
+
+
+/* ================================
+   폼
+================================ */
+
+.mypage-form {
+    width: 88%;
+
+    display: flex;
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+
+.mypage-box {
+    width: 100%;
+
+    background: #fff;
+
+    border: 1px solid #e1e5e8;
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, .02);
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   입력 한 줄
+================================ */
+
+.mypage-row {
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+    align-items: stretch;
+
+    border-bottom: 1px solid #edf0f2;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   라벨
+================================ */
+
+.mypage-label {
+    flex: 0 0 120px;
+    width: 120px;
+
+    height: 52px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f4f5f6;
+
+    color: #495057;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    letter-spacing: -.3px;
+
+    border-right: 1px solid #e5e8eb;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   입력창
+================================ */
+
+.mypage-input {
+    flex: 1 1 auto;
+
+    width: auto;
+    min-width: 0;
+
+    height: 52px;
+
+    padding: 0 16px;
+
+    margin: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: #fff;
+
+    color: #343a40;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+.mypage-input::placeholder {
+    color: #b6bcc2;
+}
+
+.mypage-input:focus {
+    background: #fafbfc;
+
+    box-shadow:
+        inset 3px 0 0 #adb5bd;
+}
+
+
+/* ================================
+   중복확인 / 주소검색 버튼
+================================ */
+
+.mypage-check-btn {
+    flex: 0 0 110px;
+
+    width: 110px;
+    min-width: 110px;
+
+    height: 52px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+
+    border-left: 1px solid #e1e5e8;
+
+    background: #868e96;
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s,
+        transform .1s;
+}
+
+.mypage-check-btn:hover {
+    background: #6c757d;
+}
+
+.mypage-check-btn:active {
+    transform: scale(.98);
+}
+
+
+/* ================================
+   닉네임 확인 메시지
+================================ */
+
+.mypage-check-message {
+    height: 0;
+    padding-left: 120px;
+
+    display: flex;
+    align-items: center;
+
+    background: #fafbfc;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    transition: height 0.2s ease;
+}
+
+.mypage-check-message span {
+    font-size: 12px;
+}
+.mypage-check-message:has(span:not(:empty)) {
+    height: 32px;
+}
+
+/* ================================
+   마지막 주소
+================================ */
+
+.mypage-row:last-child {
+    border-bottom: 1px solid #bebfc0;
+}
+
+
+/* ================================
+   안내 문구
+================================ */
+
+.mypage-msg {
+    width: 88%;
+
+    margin-top: 16px;
+
+    padding: 0 3px;
+
+    color: #868e96;
+
+    font-size: 12px;
+
+    text-align: left;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   버튼 그룹
+================================ */
+
+.mypage-btn-group {
+    width: 88%;
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 18px;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   수정하기
+================================ */
+
+.mypage-btn-save {
+    flex: 1;
+
+    width: auto;
+
+    height: 52px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #adb5bd,
+            #868e96
+        );
+
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: -.3px;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(108, 117, 125, .2);
+
+    box-sizing: border-box;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s;
+}
+
+.mypage-btn-save:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #868e96,
+            #6c757d
+        );
+
+    box-shadow:
+        0 6px 15px rgba(108, 117, 125, .25);
+
+    transform: translateY(-1px);
+}
+
+.mypage-btn-save:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 3px 8px rgba(108, 117, 125, .2);
+}
+
+
+/* ================================
+   취소
+================================ */
+
+.mypage-btn-cancel {
+    flex: 1;
+
+    width: auto;
+
+    height: 52px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid #ced4da;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    color: #6c757d;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: -.3px;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s,
+        border-color .2s,
+        color .2s;
+}
+
+.mypage-btn-cancel:hover {
+    background: #f8f9fa;
+
+    border-color: #adb5bd;
+
+    color: #495057;
+}
+
+
+/* ================================
+   주소 검색 Modal
+================================ */
+
+.ReactModal__Overlay {
+    z-index: 1000 !important;
+
+    background-color:
+        rgba(0, 0, 0, .45) !important;
+}
+
+.ReactModal__Content {
+    border: none !important;
+
+    border-radius: 14px !important;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, .2) !important;
+}
+
+.ReactModal__Content button {
+    height: 38px;
+
+    padding: 0 18px;
+
+    margin: 8px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #868e96;
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.ReactModal__Content button:hover {
+    background: #6c757d;
+}
+
+
+/* ================================
+   모바일
+================================ */
+
+@media (max-width: 650px) {
+
+    .mypage-wrapper {
+        width: calc(100% - 30px);
+
+        margin: 30px auto;
+    }
+
+    .mypage-title {
+        font-size: 26px;
+    }
+
+    .mypage-profile-preview {
+        width: 130px;
+        height: 130px;
+    }
+
+    .mypage-profile-camera {
+        width: 38px;
+        height: 38px;
+
+        font-size: 16px;
+    }
+
+    .mypage-label {
+        flex-basis: 105px;
+        width: 105px;
+    }
+
+    .mypage-check-btn {
+        flex-basis: 95px;
+        width: 95px;
+        min-width: 95px;
+    }
+}

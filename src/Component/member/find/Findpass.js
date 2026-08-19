@@ -87,6 +87,14 @@ function FindPass() {
                             비밀번호 찾기
                         </button>
 
+                        {/* '변경' 버튼을 눌러 UpdatePwd로 이동 */}
+                        <button
+                            className="join-btn-join"
+                            onClick={() => navigate('/updatePwd')}
+                        >
+                            변경
+                        </button>
+
                         <button
                             className="join-btn-zip_num"
                             onClick={() => navigate('/find')}
