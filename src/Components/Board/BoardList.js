@@ -1,165 +1,201 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
-
+import ReportModal from '../Common/ReportModal';
 import './BoardList.css';
 
+const CATEGORY_ICONS = {
+    연애: '💗', 가족: '🏠', 친구관계: '🫂', 진로: '🧭', 학교: '🎒', 기타: '📣'
+};
+const MEMO_COLORS = ['#ffdede', '#fff4b8', '#dff1ff', '#e7ddff', '#dff5df', '#ffe8c9', '#f9dff1', '#dff5ef'];
+
+function relativeTime(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    const minutes = Math.max(0, Math.floor((Date.now() - date.getTime()) / 60000));
+    if (minutes < 1) return '방금 전';
+    if (minutes < 60) return `${minutes}분 전`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}시간 전`;
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `${days}일 전`;
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function authorName(post) {
+    if (post.isprivate && !post.email) return '비공개';
+    return post.email?.split('@')[0] || `마음친구 ${post.userid}`;
+}
+
 function BoardList() {
-
     const navigate = useNavigate();
-    // 게시글 목록
+    const loginUser = useSelector((state) => state.user);
     const [posts, setPosts] = useState([]);
-    // 페이징
     const [paging, setPaging] = useState(null);
-    // 현재 페이지
     const [page, setPage] = useState(1);
-    const [searchType, setSearchType] = useState('title');
-    const [searchKeyword, setSearchKeyword] = useState('');
+    const [sort, setSort] = useState('latest');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+    const [reportTarget, setReportTarget] = useState(null);
 
-    // 페이지가 변경될 때마다 게시글 조회
+    const loadPosts = async (pageNumber, sortType = sort) => {
+        setLoading(true);
+        setError('');
+        try {
+            const result = await axios.get(`/api/board/getBoardList/${pageNumber}`, {
+                params: { sort: sortType }
+            });
+            setPosts(result.data.boardList || []);
+            setPaging(result.data.paging);
+        } catch (loadError) {
+            console.error(loadError);
+            setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        getBoardList(page);
-    }, [page]);
+        loadPosts(page, sort);
+    }, [page, sort]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // 게시글 목록 조회
-    const getBoardList = (page) => {
-        axios.get(`/api/board/getBoardList/${page}`)
-            .then((result) => {
-                // console.log('게시글 목록:', result.data);
-                setPosts(result.data.boardList);
-                setPaging(result.data.paging);
-            }).catch((err) => { console.error('게시글 목록 조회 실패:', err); });
+    const requireLogin = (message) => {
+        if (loginUser?.userid) return true;
+        alert(message);
+        navigate('/memberLogin', { state: { from: '/boardList' } });
+        return false;
     };
 
-    // 검색
-    const handleSearch = (e) => {
-        e.preventDefault();
-        if (!searchKeyword.trim()) { return; }
-        // console.log('검색:', searchType, searchKeyword);
-        // 나중에 검색 API 연결
+    const changeSort = (nextSort) => {
+        if (sort === nextSort) return;
+        setPage(1);
+        setSort(nextSort);
     };
 
-    // 글쓰기
-    const handleWrite = () => { navigate('/boardWrite'); };
-
-    // 게시글 클릭
-    const handlePostClick = (boardnum) => {
-        axios.post('/api/board/plusCount', null, { params: { boardnum } })
-            .then((result) => {
-                navigate(`/boardView/${boardnum}`)
-            })
-            .catch((err) => { console.error(err) })
+    const openPost = async (boardnum) => {
+        try {
+            await axios.post('/api/board/plusCount', null, { params: { boardnum } });
+            navigate(`/boardView/${boardnum}`);
+        } catch (openError) {
+            console.error(openError);
+        }
     };
 
-    const ROWS_PER_PAGE = 5;
+    const toggleLike = async (event, post) => {
+        event.stopPropagation();
+        if (!requireLogin('공감은 로그인 후 이용할 수 있습니다.')) return;
+        try {
+            const result = await axios.post('/api/board/toggleLike', null, {
+                params: { boardId: post.boardnum }
+            });
+            setPosts((current) => current.map((item) => item.boardnum === post.boardnum
+                ? { ...item, likedByMe: result.data.liked, likeCount: result.data.likeCount }
+                : item));
+            if (sort === 'likes') await loadPosts(page, sort);
+        } catch (likeError) {
+            console.error(likeError);
+            alert('공감 처리에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        }
+    };
 
-    const totalPages = Math.ceil(
-        (paging?.totalCount ?? 0) / ROWS_PER_PAGE
-    );
-
-    // 페이지 이동
-    const handlePage = (pageNumber) => {
-        if (pageNumber < 1 || pageNumber > totalPages) {
+    const openReport = (event, post) => {
+        event.stopPropagation();
+        if (!requireLogin('신고는 로그인 후 이용할 수 있습니다.')) return;
+        if (Number(post.userid) === Number(loginUser.userid)) {
+            alert('본인의 게시글은 신고할 수 없습니다.');
             return;
         }
-
-        setPage(pageNumber);
+        setReportTarget(post);
     };
 
+    const totalPages = Math.ceil((paging?.totalCount ?? 0) / (paging?.displayRow || 8));
+
     return (
-        <div className="board-list-page">
-            {/* 페이지 헤더 */}
-            <div className="board-header">
-                <div>
-                    <h1>고민 게시판</h1>
-                    <p>여러분의 고민과 이야기를 자유롭게 나눠보세요.</p>
-                </div>
-            </div>
-            {/* 게시글 영역 */}
-            <div className="board-container">
-                {/* 게시글 수 */}
-                <div className="board-top">
-                    <span>전체 게시글 <strong>{paging?.totalCount ?? 0}</strong></span>
-                    <button className="board-write-btn" onClick={handleWrite}>글쓰기</button>
-                </div>
-                {/* 게시글 목록 */}
-                <div className="board-table">
-                    {/* 테이블 헤더 */}
-                    <div className="board-table-header">
-                        <div className="board-number">번호</div>
-                        <div className="board-title">제목</div>
-                        <div className="board-writer">작성자</div>
-                        <div className="board-date">작성일</div>
-                        <div className="board-view">조회</div>
+        <main className="concern-board-page">
+            <header className="concern-board-hero">
+                <span>FEEL TOGETHER</span>
+                <h1>고민 게시판</h1>
+                <p>혼자 담아두었던 마음을 나누고, 서로에게 따뜻한 공감을 건네요.</p>
+            </header>
+
+            <section className="concern-board-container" aria-label="고민 게시글 목록">
+                <div className="concern-board-toolbar">
+                    <div className="concern-sort" role="group" aria-label="게시글 정렬">
+                        <button className={sort === 'latest' ? 'active' : ''} onClick={() => changeSort('latest')}>✨ 최신순</button>
+                        <button className={sort === 'likes' ? 'active' : ''} onClick={() => changeSort('likes')}>💗 공감순</button>
                     </div>
-                    {/* 게시글 */}
-                    {posts.length > 0 ? (
-                        posts.map((post) => (
-                            <div className="board-row" key={post.boardnum} onClick={() => handlePostClick(post.boardnum)}>
-                                <div className="board-number">{post.boardnum}</div>
-                                <div className="board-title">{post.title}</div>
-                                <div className="board-writer">{post.userid}</div>
-                                <div className="board-date">{post.indate ? post.indate.substring(0, 10) : ''}</div>
-                                <div className="board-view">{post.viewcount}</div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="board-empty">게시글이 없습니다.</div>
-                    )}
+                    <div className="concern-board-actions">
+                        <span>전체 <strong>{paging?.totalCount ?? 0}</strong>개</span>
+                        <button className="concern-write-button" onClick={() => requireLogin('글쓰기는 로그인 후 이용할 수 있습니다.') && navigate('/boardWrite')}>고민 나누기</button>
+                    </div>
                 </div>
-                {/* 검색 */}
-                <form className="board-search" onSubmit={handleSearch}>
-                    <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                        <option value="userid">작성자</option>
-                    </select>
-                    <input type="text" placeholder="검색어를 입력해주세요." value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
-                    <button type="submit">검색</button>
-                </form>
-                {/* 페이지네이션 */}
-                {totalPages > 1 && (
-                    <div className="pagination">
 
-                        {/* 이전 */}
-                        {page > 1 && (
-                            <button
-                                className="page-arrow"
-                                onClick={() => handlePage(page - 1)}
+                {loading ? (
+                    <div className="concern-board-message">게시글을 불러오고 있어요.</div>
+                ) : error ? (
+                    <div className="concern-board-message error">{error}<button onClick={() => loadPosts(page, sort)}>다시 시도</button></div>
+                ) : posts.length === 0 ? (
+                    <div className="concern-board-message">아직 등록된 고민이 없습니다. 첫 이야기를 남겨보세요.</div>
+                ) : (
+                    <div className="notebook-board">
+                        <div className="notebook-board-rings" aria-hidden="true" />
+                        <div className="notebook-board-line" aria-hidden="true" />
+                        <div className="notebook-board-grid">
+                        {posts.map((post, index) => (
+                            <article
+                                className={`notebook-board-memo${post.isprivate ? ' private' : ''}`}
+                                key={post.boardnum}
+                                style={{
+                                    '--memo-color': MEMO_COLORS[index % MEMO_COLORS.length],
+                                    '--memo-rotation': `${index % 2 === 0 ? -1 : 1}deg`
+                                }}
+                                onClick={() => openPost(post.boardnum)}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter' || event.key === ' ') {
+                                        event.preventDefault();
+                                        openPost(post.boardnum);
+                                    }
+                                }}
+                                role="button"
+                                tabIndex={0}
                             >
-                                &lt;
-                            </button>
-                        )}
-
-                        {/* 페이지 번호 */}
-                        {Array.from(
-                            { length: totalPages },
-                            (_, index) => index + 1
-                        ).map((pageNumber) => (
-                            <button
-                                key={pageNumber}
-                                className={`page ${page === pageNumber ? 'active' : ''
-                                    }`}
-                                onClick={() => handlePage(pageNumber)}
-                            >
-                                {pageNumber}
-                            </button>
+                                <div className="notebook-memo-pin" aria-hidden="true" />
+                                <div className="notebook-board-heading">
+                                    <h2>{post.title}</h2>
+                                    <span>#{post.category || '고민'}</span>
+                                </div>
+                                <p className="notebook-board-content">{post.content || (post.isprivate ? '작성자만 확인할 수 있는 고민입니다.' : '내용이 없습니다.')}</p>
+                                <div className="notebook-board-meta">
+                                    <span>{post.isprivate ? '🔒 ' : `${CATEGORY_ICONS[post.category] || '💬'} `}{authorName(post)} · {relativeTime(post.indate)}</span>
+                                </div>
+                                <div className="notebook-board-actions">
+                                    <button className={post.likedByMe ? 'liked' : ''} onClick={(event) => toggleLike(event, post)}>♡ <span>공감 {post.likeCount || 0}</span></button>
+                                    <span>댓글 {post.commentCount || 0}</span>
+                                    <span>조회 {post.viewcount || 0}</span>
+                                    <button className="notebook-board-report" onClick={(event) => openReport(event, post)}>신고</button>
+                                </div>
+                                <span className="notebook-board-arrow" aria-hidden="true">→</span>
+                            </article>
                         ))}
-
-                        {/* 다음 */}
-                        {page < totalPages && (
-                            <button
-                                className="page-arrow"
-                                onClick={() => handlePage(page + 1)}
-                            >
-                                &gt;
-                            </button>
+                        </div>
+                        {totalPages > 1 && (
+                            <nav className="concern-pagination on-notebook" aria-label="게시판 페이지">
+                                <button disabled={page === 1} onClick={() => setPage((current) => current - 1)} aria-label="이전 페이지">‹</button>
+                                {Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => (
+                                    <button key={number} className={page === number ? 'active' : ''} onClick={() => setPage(number)}>{number}</button>
+                                ))}
+                                <button disabled={page === totalPages} onClick={() => setPage((current) => current + 1)} aria-label="다음 페이지">›</button>
+                            </nav>
                         )}
-
                     </div>
                 )}
-            </div>
-        </div>
+
+            </section>
+
+            {reportTarget && <ReportModal post={reportTarget} onClose={() => setReportTarget(null)} />}
+        </main>
     );
 }
 

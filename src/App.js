@@ -13,6 +13,7 @@ import SelectAi from "./Components/Ai/SelectAi";
 
 import Info from "./Components/Info/Info";
 import Hellow from "./Components/Info/Hellow";
+import Map from "./Components/Info/Map";
 
 import Find from './Components/Member/Find/Find';
 import FindId from './Components/Member/Find/FindId';
@@ -20,10 +21,16 @@ import FindPass from './Components/Member/Find/FindPass';
 
 import TalkAI from './Components/Ai/TalkAI'
 import DiaryList from './Components/Diary/DiaryList';
-import Diary from './Components/Member/Diary';
+import Diary from './Components/Calendar/Diary';
 import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
 import MyPage from "./Components/MyPage/MyPage";
 import Feelog from './Components/Intro/Feelog';
+
+import EmotionDiary from "./Components/Calendar/EmotionDiary";
+import EmotionCalendar from "./Components/Calendar/EmotionCalendar";
+import NoticeList from "./Components/Notice/NoticeList";
+import NoticeWrite from "./Components/Notice/NoticeWrite";
+import NoticeView from "./Components/Notice/NoticeView";
 
 function App() {
     return (
@@ -49,9 +56,14 @@ function App() {
                     {/*이용안내*/}
                     <Route path='/info' element={<Info />} />
                     <Route path='/hellow' element={<Hellow />} />
+                    <Route path='/map' element={<Map />} />
 
                     {/* 마이페이지 */}
                     <Route path='/myPage' element={<MyPage />} />
+
+                    {/* 다이어리 */}
+                    <Route path='/emotionDiary' element={<EmotionDiary />} />
+                    <Route path='/emotionCalendar' element={<EmotionCalendar />} />
 
                     {/* 아이디 비밀번호 찾기 */}
                     <Route path='/find' element={<Find />} />
@@ -61,6 +73,11 @@ function App() {
                     <Route path='/diaryList' element={<DiaryList />} />
                     <Route path='/Diary' element={<Diary />} />
                     <Route path="/savekakaoinfo/:userid" element={<SaveKakaoInfo />} />
+
+                    {/* 공지사항 */}
+                    <Route path="/noticeList" element={<NoticeList />} />
+                    <Route path="/noticeWrite" element={<NoticeWrite />} />
+                    <Route path="/noticeView/:noticenum" element={<NoticeView />} />
 
                 </Route>
             </Routes>

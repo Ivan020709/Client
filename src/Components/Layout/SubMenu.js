@@ -45,7 +45,7 @@ function SubMenu() {
                     {openMenu === 3 && <div className="sub_dropdown">
                         <div onClick={() => navigate('/Hellow')}>인사말</div>
                         <div onClick={() => navigate('/Info')}>상담센터</div>
-                        <div>위치 정보</div>
+                        <div onClick={() => navigate('/Map')}>위치 정보</div>
                     </div>}
                 </div>
             </div>

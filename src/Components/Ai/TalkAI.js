@@ -292,6 +292,10 @@ function TalkAI() {
         setMessage("");
     };
 
+    function share() {
+        axios.post("/api/ai/emotion")
+    }
+
 
     // =====================================================
     // 화면
@@ -699,6 +703,14 @@ function TalkAI() {
                             className="talk-ai-new-conversation-button"
                         >
                             새로운 대화 시작하기
+                        </button>
+
+                        {/* 공유하기 */}
+                        <button
+                            onClick={share}
+                            className="talk-ai-share-button"
+                        >
+                            공유하기
                         </button>
 
                     </div>

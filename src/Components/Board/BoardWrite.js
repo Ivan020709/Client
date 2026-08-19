@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import './BoardWrite.css';
@@ -8,7 +7,6 @@ import './BoardWrite.css';
 function BoardWrite() {
 
     const navigate = useNavigate();
-    const loginUser = useSelector(state => state.user);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     // 카테고리
@@ -33,7 +31,7 @@ function BoardWrite() {
             return;
         }
         // 서버로 보낼 데이터
-        const boardData = { title: title, content: content, userid: loginUser.userid, email: loginUser.email, isPrivate, category };
+        const boardData = { title, content, isprivate: isPrivate, category };
         // console.log('게시글 등록:', boardData);
         axios.post('/api/board/insertBoard', boardData)
             .then((result) => {

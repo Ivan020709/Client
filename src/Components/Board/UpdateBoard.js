@@ -65,9 +65,10 @@ function UpdateBoard() {
 
         const boardData = {
             boardnum: Number(boardnum),
-            email: post.email,
             title: title,
-            content: content
+            content: content,
+            category: post.category,
+            isprivate: Boolean(post.isprivate)
         };
 
         axios.post('/api/board/updateBoard', boardData)

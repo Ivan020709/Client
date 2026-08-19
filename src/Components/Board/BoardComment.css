@@ -1,0 +1,12 @@
+.board-comments { margin-top: 28px; padding: 28px; border: 1px solid #e9e0f2; border-radius: 24px; background: #fff; }
+.board-comments h3 { margin: 0 0 20px; color: #39304f; }
+.board-comments h3 strong { color: #7561a8; }
+.board-comment-item { position: relative; padding: 18px 4px; border-bottom: 1px solid #f0eaf5; }
+.board-comment-meta { display: flex; justify-content: space-between; color: #8b8097; font-size: 13px; }
+.board-comment-item p { margin: 12px 0 0; color: #51485c; line-height: 1.7; white-space: pre-wrap; }
+.board-comment-actions { position: absolute; right: 0; bottom: 13px; display: flex; gap: 7px; }
+.board-comment-actions button, .board-comment-edit button { border: 0; background: transparent; color: #7561a8; cursor: pointer; }
+.board-comment-empty { padding: 24px; color: #9c93a5; text-align: center; }
+.board-comment-form, .board-comment-edit { display: flex; gap: 10px; margin-top: 20px; }
+.board-comment-form textarea, .board-comment-edit textarea { flex: 1; min-height: 76px; padding: 12px; border: 1px solid #ded3ea; border-radius: 14px; box-sizing: border-box; resize: vertical; font: inherit; }
+.board-comment-form > button { min-width: 100px; border: 0; border-radius: 14px; background: #7561a8; color: #fff; font-weight: 700; cursor: pointer; }

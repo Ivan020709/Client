@@ -1,0 +1,15 @@
+:root {
+  --feelog-primary: #7561a8;
+  --feelog-primary-dark: #665299;
+  --feelog-soft: #f1eafd;
+  --feelog-accent: #ee8790;
+  --feelog-bg: #fffdfd;
+  --feelog-text: #39304f;
+  --feelog-muted: #756c82;
+  --feelog-border: #e9e0f2;
+  --feelog-card-radius: 24px;
+  --feelog-shadow: 0 12px 35px rgba(100, 80, 120, .08);
+}
+
+button, input, select, textarea { font-family: inherit; }
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 3px solid rgba(117, 97, 168, .28); outline-offset: 2px; }

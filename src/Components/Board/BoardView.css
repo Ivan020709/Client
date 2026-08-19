@@ -357,3 +357,9 @@
         height: 42px;
     }
 }
+.board-view-page { background: #fffdfd; color: #39304f; }
+.board-view-post { border-color: #e9e0f2; border-radius: 24px; box-shadow: 0 12px 35px rgba(100, 80, 120, .06); }
+.board-view-category { background: #f1eafd; color: #7561a8; }
+.board-view-reactions { display: flex; gap: 10px; margin-top: 24px; }
+.board-view-reactions button { padding: 9px 14px; border: 1px solid #ded3ea; border-radius: 999px; background: #fff; color: #7561a8; cursor: pointer; }
+.board-view-reactions button.is-liked { border-color: #efb9c2; background: #fff2f4; color: #d75d72; }

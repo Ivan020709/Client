@@ -1,0 +1,369 @@
+.notice-list-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.notice-header {
+    width: 1100px;
+    margin: 0 auto 40px;
+}
+
+.notice-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.notice-header p {
+    margin: 0;
+    color: #777;
+    font-size: 15px;
+}
+
+
+/* =========================
+   Container
+========================= */
+
+.notice-container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* =========================
+   Top
+========================= */
+
+.notice-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.notice-top span {
+    font-size: 15px;
+    color: #555;
+}
+
+.notice-top strong {
+    margin-left: 5px;
+    color: #c85c5c;
+}
+
+
+/* =========================
+   공지 작성 버튼
+========================= */
+
+.notice-write-btn {
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #e57373;
+    color: white;
+
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.notice-write-btn:hover {
+    background-color: #d95f5f;
+}
+
+
+/* =========================
+   Table
+========================= */
+
+.notice-table {
+    width: 100%;
+    border-top: 2px solid #333;
+}
+
+
+/* =========================
+   Table Header
+========================= */
+
+.notice-table-header {
+    display: flex;
+    align-items: center;
+
+    height: 50px;
+
+    border-bottom: 1px solid #ddd;
+    background-color: #fafafa;
+
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* =========================
+   게시글 Row
+========================= */
+
+.notice-row {
+    display: flex;
+    align-items: center;
+
+    min-height: 55px;
+
+    border-bottom: 1px solid #eee;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.notice-row:hover {
+    background-color: #fafafa;
+}
+
+
+/* =========================
+   고정 공지
+========================= */
+
+.notice-row.notice-fixed {
+    background-color: #fff5f5;
+    border-bottom: 1px solid #f3d6d6;
+}
+
+.notice-row.notice-fixed:hover {
+    background-color: #ffeded;
+}
+
+/* 고정 공지 제목 */
+.notice-row.notice-fixed .notice-title {
+    color: #a83a3a;
+    font-weight: 600;
+}
+
+/* 고정 공지 📌 */
+.notice-row.notice-fixed .notice-pin {
+    font-size: 15px;
+}
+/* =========================
+   번호
+========================= */
+
+.notice-number {
+    width: 65px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+}
+
+
+/* =========================
+   제목
+========================= */
+
+.notice-title {
+    flex: 1;
+
+    padding: 0 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-align: center;
+}
+
+
+/* =========================
+   작성일
+========================= */
+
+.notice-date {
+    width: 130px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* =========================
+   조회수
+========================= */
+
+.notice-view {
+    width: 80px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* =========================
+   Empty
+========================= */
+
+.notice-empty {
+    padding: 80px 0;
+
+    text-align: center;
+
+    color: #999;
+}
+
+
+/* =========================
+   Search
+========================= */
+
+.notice-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 35px;
+
+    gap: 5px;
+}
+
+.notice-search select {
+    width: 100px;
+    height: 40px;
+
+    padding: 0 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    background-color: white;
+
+    cursor: pointer;
+}
+
+.notice-search input {
+    width: 350px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    outline: none;
+}
+
+.notice-search input:focus {
+    border-color: #e57373;
+}
+
+.notice-search button {
+    width: 70px;
+    height: 40px;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #e57373;
+    color: white;
+
+    cursor: pointer;
+}
+
+.notice-search button:hover {
+    background-color: #d95f5f;
+}
+
+
+/* =========================
+   Pagination
+========================= */
+
+.notice-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 35px;
+
+    gap: 5px;
+}
+
+
+/* 페이지 버튼 */
+
+.notice-pagination .notice-page,
+.notice-pagination .notice-page-arrow {
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    background-color: white;
+    color: #777;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+/* 현재 페이지 */
+
+.notice-pagination .notice-page.active {
+    background-color: #e57373;
+    color: white;
+
+    border-color: #e57373;
+}
+
+
+/* 페이지 Hover */
+
+.notice-pagination .notice-page:hover:not(.active),
+.notice-pagination .notice-page-arrow:hover {
+    background-color: #fff0f0;
+    border-color: #f0b5b5;
+    color: #c85c5c;
+}
+
+
+/* =========================
+   이전 / 다음
+========================= */
+
+.notice-pagination .notice-page-arrow {
+    color: #888;
+}
+
+.notice-pagination .notice-page-arrow:hover {
+    background-color: #fff0f0;
+    border-color: #f0b5b5;
+    color: #c85c5c;
+}
+
+.notice-row.notice-fixed {
+    background-color: #fff3f3;
+}

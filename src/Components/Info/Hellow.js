@@ -27,19 +27,19 @@ function Hellow() {
                     <div className="growth-item">
                         <span>💬</span>
                         <strong style={{ cursor: 'pointer' }}>대화</strong>
-                        <small>AI와 편하게 이야기하기</small>
+                        <small>"오늘 속상했던 일, 털어놓고 푹 자는 거 어때?"</small>
                     </div>
 
                     <div className="growth-item">
-                        <span>🌱</span>
-                        <strong>성장</strong>{/* 대화를 통한 경험치상승 비슷한 페이지로 이동 */}
-                        <small>대화를 통해 경험치 쌓기</small>
+                        <span>📔</span>
+                        <strong>감정 일기</strong>{/* 대화를 통한 경험치상승 비슷한 페이지로 이동 */}
+                        <small>"나를 제일 잘 아는 방법, 하루 한 줄 감정일기로 시작해 봐."</small>
                     </div>
 
                     <div className="growth-item">
-                        <span>✨</span>
-                        <strong>랭킹</strong>{/* 랭킹 페이지로 이동 */}
-                        <small>나만의 AI 랭킹확인하기</small>
+                        <span>📅</span>
+                        <strong>캘린더</strong>
+                        <small>"지나온 날들의 너의 기분을 한 눈에 확인 할 수 있어"</small>
                     </div>
                 </div>
 

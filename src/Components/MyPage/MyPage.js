@@ -53,7 +53,8 @@ function MyPage() {
             }
         })
             .then((result) => {
-                const member = result.data;
+                console.log('DB에서 받은 member:', result.data.member);
+                const member = result.data.member;
 
                 setEmail(member.email || '');
                 setNickname(member.nickname || '');
@@ -184,7 +185,7 @@ function MyPage() {
             alert('닉네임 중복확인을 해주세요.');
             return;
         }
-        if (!loginUser.snsid) {
+        if (loginUser.provider === 'Local') {
 
             if (!pwd) {
                 return alert('비밀번호를 입력하세요.');
@@ -193,21 +194,10 @@ function MyPage() {
             if (pwd !== pwdChk) {
                 return alert('비밀번호 체크가 일치하지 않습니다.');
             }
-
         }
 
         if (!phone.trim()) {
             alert('전화번호를 입력하세요.');
-            return;
-        }
-
-        if (!zip_num) {
-            alert('우편번호를 입력하세요.');
-            return;
-        }
-
-        if (!address1) {
-            alert('주소를 입력하세요.');
             return;
         }
 
@@ -223,7 +213,7 @@ function MyPage() {
             savefilename: savefilename
         };
 
-        if (!loginUser.snsid) {
+        if (!loginUser.pwd) {
             member.pwd = pwd;
         }
 
@@ -366,7 +356,7 @@ function MyPage() {
                                 <input
                                     className="mypage-input"
                                     type="text"
-                                    value={loginUser.nickname}
+                                    value={nickname}
                                     onChange={(e) => {
                                         setNickname(e.target.value);
                                         setRenickname('');
@@ -393,7 +383,7 @@ function MyPage() {
 
                             {/* 비번 */}
                             {/* 일반 회원만 비밀번호 표시 */}
-                            {!loginUser.snsid && (
+                            {loginUser.provider === 'Local' && (
                                 <>
                                     {/* 비번 */}
                                     <div className="mypage-row">
@@ -444,7 +434,7 @@ function MyPage() {
                                 <input
                                     className="mypage-input"
                                     type="text"
-                                    value={loginUser.phone}
+                                    value={phone}
                                     onChange={(e) =>
                                         setPhone(e.target.value)
                                     }

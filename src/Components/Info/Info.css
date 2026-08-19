@@ -1,188 +1,456 @@
+/* =========================================================
+   Feelog 상담센터 / 위치 정보
+   Beige / Ivory / Rose Beige Style
+========================================================= */
+
+
+/* =========================================================
+   1. 전체 영역
+========================================================= */
+
 .nearby-center {
-    width: 100%;
+    width: 90%;
     max-width: 1000px;
-    margin: 50px auto;
-    padding: 40px;
+
+    margin: 70px auto 90px;
+
+    padding: 40px 0;
+
     box-sizing: border-box;
+
     text-align: center;
+
+    color: #4f4944;
 }
 
+
+/* =========================================================
+   2. 제목
+========================================================= */
+
 .nearby-center h2 {
-    margin: 0;
-    font-size: 30px;
-    color: #343a40;
+    margin: 0 0 10px;
+
+    font-family: "Jua", sans-serif;
+
+    font-size: 34px;
+    font-weight: 400;
+
+    letter-spacing: -0.5px;
+
+    color: #4f4944;
 }
+
+
+/* =========================================================
+   3. 설명
+========================================================= */
 
 .nearby-center-desc {
     margin: 12px 0 35px;
-    color: #868e96;
+
+    color: #817971;
+
     font-size: 14px;
+
+    line-height: 1.7;
 }
+
+
+/* =========================================================
+   4. 검색 / 안내 카드
+========================================================= */
 
 .nearby-center-box {
     width: 100%;
     max-width: 600px;
+
     margin: 0 auto;
+
     padding: 50px 30px;
-    border: 1px solid #e1e5e8;
-    border-radius: 20px;
-    background: #fff;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+    border: none;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf5f0,
+            #fffaf7
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(80, 65, 55, 0.055);
+
     box-sizing: border-box;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.nearby-center-icon {
-    font-size: 55px;
-    margin-bottom: 15px;
+
+.nearby-center-box:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 38px
+        rgba(80, 65, 55, 0.08);
 }
+
+
+/* =========================================================
+   5. 아이콘
+========================================================= */
+
+.nearby-center-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #f3e6df;
+
+    color: #b68b78;
+
+    font-size: 42px;
+}
+
+
+/* =========================================================
+   6. 카드 제목
+========================================================= */
 
 .nearby-center-box h3 {
     margin: 0 0 12px;
-    font-size: 22px;
-    color: #343a40;
+
+    font-family: "Jua", sans-serif;
+
+    font-size: 23px;
+    font-weight: 400;
+
+    color: #4f4944;
 }
+
+
+/* =========================================================
+   7. 카드 설명
+========================================================= */
 
 .nearby-center-box p {
     margin: 0 0 25px;
-    line-height: 1.7;
-    color: #868e96;
+
+    color: #817971;
+
     font-size: 14px;
+
+    line-height: 1.8;
 }
+
+
+/* =========================================================
+   8. 위치 찾기 버튼
+========================================================= */
 
 .nearby-center-btn {
-    width: 250px;
-    height: 50px;
+    width: 220px;
+    height: 52px;
+
     border: none;
-    border-radius: 10px;
-    background: #868e96;
-    color: #fff;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c19a87,
+            #b68b78
+        );
+
+    color: #ffffff;
+
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
+
     cursor: pointer;
-    transition: 0.2s;
+
+    box-shadow:
+        0 8px 20px
+        rgba(182, 139, 120, 0.20);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
 }
+
 
 .nearby-center-btn:hover {
-    background: #6c757d;
-    transform: translateY(-1px);
+    transform: translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    box-shadow:
+        0 12px 25px
+        rgba(159, 117, 99, 0.23);
 }
 
+
 .nearby-center-btn:disabled {
-    background: #ced4da;
+    background: #d8cec8;
+
+    color: #ffffff;
+
     cursor: default;
+
+    box-shadow: none;
+
     transform: none;
 }
 
+
+/* =========================================================
+   9. 위치 정보
+========================================================= */
+
 .location-info {
     margin-top: 20px;
-    color: #198754;
+
+    color: #9f7563;
+
     font-size: 13px;
-}
-.nearby-center {
-    width: 90%;
-    max-width: 1000px;
-    margin: 50px auto;
-    text-align: center;
+
+    line-height: 1.6;
 }
 
-.nearby-center h2 {
-    margin-bottom: 10px;
-    font-size: 30px;
-    color: #333;
+
+/* =========================================================
+   10. 검색 결과
+========================================================= */
+
+.center-result {
+    width: 100%;
+
+    margin-top: 40px;
+
+    padding: 35px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf5f0,
+            #fffdfb
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(80, 65, 55, 0.05);
+
+    box-sizing: border-box;
 }
 
-.nearby-center-desc {
-    margin-bottom: 30px;
-    color: #777;
+
+/* =========================================================
+   11. 결과 제목
+========================================================= */
+
+.center-result h3 {
+    margin: 0 0 8px;
+
+    font-family: "Jua", sans-serif;
+
+    font-size: 25px;
+    font-weight: 400;
+
+    color: #4f4944;
 }
 
-.nearby-center-box {
-    padding: 40px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    background: #fff;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
 
-.nearby-center-icon {
-    font-size: 45px;
-    margin-bottom: 10px;
-}
+/* =========================================================
+   12. 결과 설명
+========================================================= */
 
-.nearby-center-box h3 {
-    margin: 10px 0;
-}
+.center-result-desc {
+    margin: 0 0 20px;
 
-.nearby-center-box p {
-    color: #777;
+    color: #817971;
+
+    font-size: 14px;
+
     line-height: 1.7;
 }
 
-.nearby-center-btn {
-    margin-top: 20px;
-    padding: 14px 25px;
-    border: none;
-    border-radius: 8px;
-    background: #007bff;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.nearby-center-btn:hover {
-    background: #0069d9;
-}
-
-.nearby-center-btn:disabled {
-    background: #aaa;
-    cursor: default;
-}
-
-.center-result {
-    margin-top: 40px;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    background: #fff;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.center-result h3 {
-    margin-bottom: 8px;
-    font-size: 24px;
-}
-
-.center-result-desc {
-    color: #777;
-    margin-bottom: 20px;
-}
+/* =========================================================
+   13. 지도
+========================================================= */
 
 .map-box {
     width: 100%;
     height: 450px;
+
     overflow: hidden;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #f8f5f1;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80, 65, 55, 0.06);
 }
+
 
 .map-box iframe {
     display: block;
+
     width: 100%;
     height: 100%;
+
+    border: none;
 }
+
+
+/* =========================================================
+   14. 지도 외부 보기 버튼
+========================================================= */
 
 .google-map-btn {
-    margin-top: 15px;
-    padding: 12px 20px;
-    border: 1px solid #ddd;
-    border-radius: 7px;
-    background: #fff;
-    color: #555;
-    font-weight: bold;
+    margin-top: 18px;
+
+    padding: 12px 22px;
+
+    border: 1px solid #dfcfc5;
+
+    border-radius: 25px;
+
+    background: #fffdfb;
+
+    color: #75665d;
+
+    font-size: 13px;
+    font-weight: 600;
+
     cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
+
 .google-map-btn:hover {
-    background: #f5f5f5;
+    transform: translateY(-2px);
+
+    background: #f3e6df;
+
+    border-color: #d8bbaa;
+
+    color: #9f7563;
+}
+
+
+/* =========================================================
+   15. 반응형
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .nearby-center {
+        width: 92%;
+
+        margin: 45px auto 70px;
+
+        padding: 25px 0;
+    }
+
+
+    .nearby-center h2 {
+        font-size: 29px;
+    }
+
+
+    .nearby-center-box {
+        padding: 40px 22px;
+    }
+
+
+    .center-result {
+        padding: 25px 18px;
+    }
+
+
+    .map-box {
+        height: 350px;
+
+        border-radius: 16px;
+    }
+
+
+    .nearby-center-btn {
+        width: 200px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .nearby-center {
+        width: 94%;
+    }
+
+
+    .nearby-center h2 {
+        font-size: 26px;
+    }
+
+
+    .nearby-center-desc {
+        font-size: 13px;
+    }
+
+
+    .nearby-center-box {
+        padding: 35px 18px;
+    }
+
+
+    .nearby-center-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 35px;
+    }
+
+
+    .nearby-center-box h3 {
+        font-size: 21px;
+    }
+
+
+    .map-box {
+        height: 300px;
+    }
 }

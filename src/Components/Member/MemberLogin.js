@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
@@ -15,14 +15,16 @@ function MemberLogin() {
     const [msg, setMsg] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const returnPath = location.state?.from || '/';
     const dispatch = useDispatch();
     const cookies = new Cookies();
 
     useEffect(() => {
         if (loginUser && loginUser.userid) {
-            navigate('/');
+            navigate(returnPath, { replace: true });
         }
-    }, [loginUser, navigate]);
+    }, [loginUser, navigate, returnPath]);
 
 
     function onSubmit() {
@@ -33,7 +35,7 @@ function MemberLogin() {
                 if (result.data.msg === 'OK') {
                     dispatch(loginAction(result.data.loginUser))
                     cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
-                    navigate('/')
+                    navigate(returnPath, { replace: true })
 
                 } else {
                     setMsg(result.data.msg)

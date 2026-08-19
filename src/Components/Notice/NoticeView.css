@@ -1,0 +1,356 @@
+/* ================================
+   전체 페이지
+================================ */
+
+.notice-view-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background-color: #f7f8fa;
+
+    padding: 60px 0 100px;
+
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   페이지 헤더
+================================ */
+
+.notice-view-header {
+    width: 900px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: center;
+}
+
+.notice-view-header h1 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #222;
+}
+
+
+/* ================================
+   뒤로가기
+================================ */
+
+.notice-back-btn {
+    width: 40px;
+    height: 40px;
+
+    margin-right: 10px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 30px;
+
+    color: #777;
+
+    cursor: pointer;
+}
+
+.notice-back-btn:hover {
+    color: #e57373;
+}
+
+
+/* ================================
+   전체 컨테이너
+================================ */
+
+.notice-view-container {
+    width: 900px;
+
+    margin: 0 auto;
+}
+
+
+/* ================================
+   공지사항
+================================ */
+
+.notice-view-post {
+    padding: 35px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ================================
+   고정 공지
+================================ */
+
+.notice-view-fixed {
+    background-color: #fffafa;
+
+    border: 1px solid #f3d2d2;
+}
+
+
+/* 고정 공지 표시 */
+
+.notice-view-fixed-badge {
+    display: inline-block;
+
+    padding: 6px 13px;
+
+    margin-bottom: 15px;
+
+    border-radius: 20px;
+
+    background-color: #fff0f0;
+
+    color: #d95f5f;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   제목
+================================ */
+
+.notice-view-title {
+    margin: 0 0 20px;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    color: #222;
+
+    word-break: break-word;
+}
+
+
+/* ================================
+   공지 정보
+================================ */
+
+.notice-view-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #eee;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+.notice-view-info strong {
+    color: #666;
+}
+
+
+/* ================================
+   내용
+================================ */
+
+.notice-view-content {
+    min-height: 350px;
+
+    padding: 30px 5px;
+
+    box-sizing: border-box;
+
+    color: #444;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* ================================
+   버튼 영역
+================================ */
+
+.notice-view-buttons {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eee;
+}
+
+
+/* ================================
+   목록
+================================ */
+
+.notice-list-btn {
+    width: 90px;
+    height: 42px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    background-color: white;
+
+    color: #555;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.notice-list-btn:hover {
+    background-color: #fff5f5;
+
+    border-color: #f0caca;
+
+    color: #c85c5c;
+}
+
+
+/* ================================
+   관리자 버튼
+================================ */
+
+.notice-admin-buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+.notice-update-btn,
+.notice-delete-btn {
+    width: 70px;
+    height: 42px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+/* 수정 */
+
+.notice-update-btn {
+    border: 1px solid #e5b5b5;
+
+    background-color: white;
+
+    color: #c85c5c;
+}
+
+.notice-update-btn:hover {
+    background-color: #fff0f0;
+}
+
+
+/* 삭제 */
+
+.notice-delete-btn {
+    border: none;
+
+    background-color: #e57373;
+
+    color: white;
+}
+
+.notice-delete-btn:hover {
+    background-color: #d95f5f;
+}
+
+
+/* ================================
+   로딩
+================================ */
+
+.notice-loading {
+    padding: 100px 0;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   반응형
+================================ */
+
+@media (max-width: 950px) {
+
+    .notice-view-header,
+    .notice-view-container {
+        width: calc(100% - 40px);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .notice-view-page {
+        padding-top: 30px;
+    }
+
+    .notice-view-header h1 {
+        font-size: 24px;
+    }
+
+    .notice-view-post {
+        padding: 25px 20px;
+    }
+
+    .notice-view-title {
+        font-size: 21px;
+    }
+
+    .notice-view-info {
+        flex-wrap: wrap;
+
+        gap: 8px 15px;
+    }
+
+    .notice-view-content {
+        min-height: 300px;
+
+        padding: 25px 0;
+    }
+
+    .notice-admin-buttons {
+        gap: 5px;
+    }
+
+    .notice-update-btn,
+    .notice-delete-btn {
+        width: 65px;
+    }
+
+}

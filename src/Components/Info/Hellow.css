@@ -1,129 +1,437 @@
+/* =========================================================
+   Feelog 인사말 페이지
+   Beige / Ivory / Rose Beige Style
+========================================================= */
+
+
+/* =========================================================
+   1. 전체 페이지
+========================================================= */
+
 .hello-page {
     width: 100%;
     min-height: 600px;
-    padding: 60px 20px;
+
+    padding: 70px 20px 90px;
+
     box-sizing: border-box;
-    background: #f8f9fa;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdfb 0%,
+            #faf5f0 100%
+        );
+
+    color: #4f4944;
 }
+
+
+/* =========================================================
+   2. 메인 컨테이너
+========================================================= */
 
 .hello-container {
     width: 90%;
     max-width: 900px;
+
     margin: 0 auto;
+
     padding: 60px 50px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    text-align: center;
+
     box-sizing: border-box;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdfb,
+            #fffaf7
+        );
+
+    border: none;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(80, 65, 55, 0.055);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.hello-icon {
-    font-size: 45px;
-    margin-bottom: 20px;
+
+.hello-container:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 40px
+        rgba(80, 65, 55, 0.075);
 }
+
+
+/* =========================================================
+   3. 아이콘
+========================================================= */
+
+.hello-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 22px;
+
+    border-radius: 50%;
+
+    background: #f3e6df;
+
+    color: #b68b78;
+
+    font-size: 40px;
+}
+
+
+/* =========================================================
+   4. 제목
+========================================================= */
 
 .hello-container h2 {
     margin: 0 0 25px;
-    color: #343a40;
-    font-size: 30px;
-    font-weight: 700;
+
+    font-family: "Jua", sans-serif;
+
+    color: #4f4944;
+
+    font-size: 34px;
+
+    line-height: 1.4;
+
+    font-weight: 400;
+
+    letter-spacing: -0.5px;
 }
+
+
+/* =========================================================
+   5. 기본 문장
+========================================================= */
 
 .hello-container p {
     margin: 0;
-    color: #6c757d;
+
+    color: #817971;
+
     font-size: 16px;
+
     line-height: 2;
 }
 
+
+/* =========================================================
+   6. 메인 문장
+========================================================= */
+
 .hello-main {
-    color: #495057 !important;
+    color: #6f6963 !important;
 }
+
+
+/* =========================================================
+   7. 구분선
+   - 진한 선 대신 로즈베이지 포인트
+========================================================= */
 
 .hello-divider {
     width: 45px;
     height: 3px;
+
     margin: 30px auto;
-    background: #adb5bd;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d8bbaa,
+            #b68b78
+        );
+
     border-radius: 10px;
 }
 
+
+/* =========================================================
+   8. 성장 / 핵심 가치 영역
+========================================================= */
+
 .hello-growth {
     width: 100%;
-    margin: 40px 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
 
-.growth-item {
-    flex: 1;
-    min-height: 140px;
-    padding: 25px 15px;
+    margin: 42px 0;
+
     display: flex;
-    flex-direction: column;
+
     justify-content: center;
-    align-items: center;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 15px;
+
+    gap: 20px;
+
     box-sizing: border-box;
 }
 
-.growth-item span {
-    margin-bottom: 10px;
-    font-size: 30px;
+
+/* =========================================================
+   9. 성장 카드
+========================================================= */
+
+.growth-item {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 145px;
+
+    padding: 25px 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf5f0,
+            #fffaf7
+        );
+
+    border: none;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 7px 22px
+        rgba(80, 65, 55, 0.045);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
+
+
+.growth-item:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(80, 65, 55, 0.075);
+}
+
+
+/* =========================================================
+   10. 성장 카드 아이콘
+========================================================= */
+
+.growth-item span {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    margin-bottom: 12px;
+
+    border-radius: 15px;
+
+    background: #f3e6df;
+
+    color: #b68b78;
+
+    font-size: 27px;
+}
+
+
+/* =========================================================
+   11. 성장 카드 제목
+========================================================= */
 
 .growth-item strong {
     margin-bottom: 7px;
-    color: #495057;
-    font-size: 16px;
+
+    color: #4f4944;
+
+    font-family: "Jua", sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
 }
 
+
+/* =========================================================
+   12. 성장 카드 설명
+========================================================= */
+
 .growth-item small {
-    color: #868e96;
+    color: #817971;
+
     font-size: 12px;
+
+    line-height: 1.5;
 }
+
+
+/* =========================================================
+   13. 강조 문장
+========================================================= */
 
 .hello-highlight {
     margin-top: 35px !important;
-    color: #495057 !important;
-    font-size: 19px !important;
+
+    color: #6f625b !important;
+
+    font-family: "Jua", sans-serif;
+
+    font-size: 20px !important;
+
+    line-height: 1.7 !important;
+
+    font-weight: 400;
 }
+
+
+/* =========================================================
+   14. 마지막 문장
+========================================================= */
 
 .hello-bottom {
     margin-top: 20px !important;
-    color: #868e96 !important;
+
+    color: #9a8e86 !important;
+
     font-size: 14px !important;
+
+    line-height: 1.8 !important;
 }
 
-@media (max-width: 650px) {
+
+/* =========================================================
+   15. 반응형
+========================================================= */
+
+@media (max-width: 700px) {
+
     .hello-page {
-        padding: 30px 15px;
+        padding: 45px 15px 70px;
     }
+
 
     .hello-container {
         width: 100%;
-        padding: 40px 20px;
+
+        padding: 45px 25px;
+
+        border-radius: 23px;
     }
 
-    .hello-container h2 {
-        font-size: 24px;
+
+    .hello-icon {
+        width: 62px;
+        height: 62px;
+
+        font-size: 35px;
     }
+
+
+    .hello-container h2 {
+        font-size: 29px;
+    }
+
 
     .hello-container p {
         font-size: 14px;
+
+        line-height: 1.9;
     }
+
 
     .hello-growth {
         flex-direction: column;
-        gap: 10px;
+
+        gap: 12px;
     }
 
+
     .growth-item {
-        min-height: 100px;
+        width: 100%;
+
+        min-height: 110px;
+
+        padding: 20px;
+    }
+
+
+    .growth-item span {
+        width: 45px;
+        height: 45px;
+
+        font-size: 24px;
+    }
+
+
+    .growth-item strong {
+        font-size: 17px;
+    }
+
+
+    .hello-highlight {
+        font-size: 18px !important;
+    }
+}
+
+
+/* =========================================================
+   16. 작은 모바일
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .hello-page {
+        padding: 35px 12px 60px;
+    }
+
+
+    .hello-container {
+        padding: 38px 18px;
+    }
+
+
+    .hello-container h2 {
+        font-size: 26px;
+    }
+
+
+    .hello-container p {
+        font-size: 13px;
+    }
+
+
+    .hello-highlight {
+        font-size: 17px !important;
+    }
+
+
+    .hello-bottom {
+        font-size: 13px !important;
     }
 }

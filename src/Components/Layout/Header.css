@@ -1,51 +1,213 @@
+/* =========================================================
+   Header
+   Feelog Beige / Rose Beige Style
+
+   기준:
+   - 전체 배경 : 100%
+   - 실제 콘텐츠 : max-width 1280px
+   - IntroHero와 동일한 폭
+========================================================= */
+
+
+/* =========================================================
+   1. 헤더 전체
+========================================================= */
+
 .header {
     width: 100%;
-    max-width: 1400px;
-    height: 70px;
+    height: 76px;
+
+    background: #fffdfb;
+    color: #5a4d45;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   2. 헤더 내부
+   - 로고와 로그인 위치를 1280px 기준으로 정렬
+========================================================= */
+
+.headerInner {
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 30px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    margin: 0 auto;
-
-    border-bottom: none;
     box-sizing: border-box;
 }
 
-/* 왼쪽 로고 */
+
+/* =========================================================
+   3. 로고
+========================================================= */
+
 .logo {
     display: flex;
     align-items: center;
 
+    height: 100%;
+
     cursor: pointer;
 }
 
-.logo > div {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
+
+/* 로고 이미지 */
+
+.logo img {
+    width: 135px;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
 
-/* 오른쪽 로그인 */
+
+/* 로고 Hover */
+
+.logo:hover img {
+    transform: translateY(-1px);
+    opacity: 0.88;
+}
+
+
+/* =========================================================
+   4. 오른쪽 로그인 영역
+========================================================= */
+
 .login {
     display: flex;
     align-items: center;
 }
 
+
+/* 로그인 / 회원가입 묶음 */
+
 .login > div {
     display: flex;
     align-items: center;
-    gap: 20px;
 
-    font-size: 1rem;
+    gap: 26px;
+
+    font-size: 14px;
 }
+
+
+/* 각각의 메뉴 */
 
 .login > div > div {
+    position: relative;
+
+    color: #75665d;
+
     cursor: pointer;
+
     white-space: nowrap;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
+
+/* Hover */
+
 .login > div > div:hover {
-    color: #007bff;
+    color: #9a7967;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   5. 메뉴 사이 구분선
+========================================================= */
+
+.login > div > div:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    right: -14px;
+    top: 50%;
+
+    width: 1px;
+    height: 11px;
+
+    transform: translateY(-50%);
+
+    background: #e5d8cf;
+}
+
+
+/* =========================================================
+   6. 태블릿 / 작은 화면
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .header {
+        height: 68px;
+    }
+
+
+    .headerInner {
+        padding: 0 20px;
+    }
+
+
+    .logo img {
+        width: 110px;
+    }
+
+
+    .login > div {
+        gap: 18px;
+        font-size: 13px;
+    }
+
+
+    .login > div > div:not(:last-child)::after {
+        right: -10px;
+    }
+}
+
+
+/* =========================================================
+   7. 모바일
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .headerInner {
+        padding: 0 15px;
+    }
+
+
+    .logo img {
+        width: 95px;
+    }
+
+
+    .login > div {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+
+    .login > div > div:not(:last-child)::after {
+        display: none;
+    }
 }
