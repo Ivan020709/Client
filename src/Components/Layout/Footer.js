@@ -1,0 +1,69 @@
+import React from "react";
+import "../style/Footer.css";
+
+const Footer = () => {
+    return (
+        <footer className="footer">
+            <div className="footer-inner">
+
+                <div className="footer-top">
+
+                    {/* 로고 / 사이트 소개 */}
+                    <div className="footer-brand">
+                        <div className="footer-logo">
+                            필<span>로그</span>
+                        </div>
+
+                        <p>
+                            혼자 간직했던 마음을<br />
+                            편하게 꺼내놓을 수 있는 공간
+                        </p>
+                    </div>
+
+                    {/* 메뉴 */}
+                    <div className="footer-menu">
+                        <div className="footer-menu-title">서비스</div>
+                        <a href="/ai">대화하기</a>
+                        <a href="/diary">감정일기</a>
+                        <a href="/calendar">감정 캘린더</a>
+                        <a href="/board">공감 게시판</a>
+                    </div>
+
+                    {/* 안내 */}
+                    <div className="footer-menu">
+                        <div className="footer-menu-title">이용안내</div>
+                        <a href="/notice">공지사항</a>
+                        <a href="/terms">이용약관</a>
+                        <a href="/privacy">개인정보처리방침</a>
+                    </div>
+
+                    {/* 메시지 */}
+                    <div className="footer-message">
+                        <div className="footer-message-icon">♡</div>
+                        <p>
+                            오늘 하루도<br />
+                            당신의 마음이 조금은<br />
+                            가벼워지기를 바랍니다.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div className="footer-bottom">
+                    <div>
+                        © 2026 필로그. All rights reserved.
+                    </div>
+
+                    <div className="footer-bottom-info">
+                        <span>AI 감정상담 서비스</span>
+                        <span>.</span>
+                        <span>Contact : support@example.com</span>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;

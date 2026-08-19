@@ -1,0 +1,192 @@
+/* =========================
+   Footer
+========================= */
+
+.footer {
+    width: 100%;
+    background: #f8f5f1;
+    border-top: 1px solid #eee8e1;
+    color: #6f6963;
+    margin-top: 80px;
+}
+
+.footer-inner {
+    width: 1200px;
+    max-width: calc(100% - 80px);
+    margin: 0 auto;
+}
+
+/* =========================
+   Footer Top
+========================= */
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 55px 0 45px;
+}
+
+/* =========================
+   Brand
+========================= */
+
+.footer-brand {
+    min-width: 300px;
+}
+
+.footer-logo {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #4f4944;
+    margin-bottom: 18px;
+}
+
+.footer-logo span {
+    color: #b68b78;
+}
+
+.footer-brand p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #918981;
+    letter-spacing: -0.3px;
+}
+
+/* =========================
+   Menu
+========================= */
+
+.footer-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    min-width: 140px;
+}
+
+.footer-menu-title {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #625b55;
+}
+
+.footer-menu a {
+    width: fit-content;
+    text-decoration: none;
+    font-size: 13px;
+    color: #918981;
+    transition: color 0.2s ease;
+}
+
+.footer-menu a:hover {
+    color: #b68b78;
+}
+
+/* =========================
+   Message
+========================= */
+
+.footer-message {
+    width: 220px;
+    padding: 22px 25px;
+    background: #fffdfb;
+    border: 1px solid #eee7e0;
+    border-radius: 18px;
+}
+
+.footer-message-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: #f3e6df;
+    color: #b68b78;
+    font-size: 18px;
+}
+
+.footer-message p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #817971;
+}
+
+/* =========================
+   Footer Bottom
+========================= */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+    border-top: 1px solid #e9e2db;
+    font-size: 12px;
+    color: #aaa29b;
+}
+
+.footer-bottom-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 900px) {
+
+    .footer-inner {
+        max-width: calc(100% - 40px);
+    }
+
+    .footer-top {
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .footer-brand {
+        width: 100%;
+    }
+
+    .footer-message {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .footer {
+        margin-top: 50px;
+    }
+
+    .footer-inner {
+        max-width: calc(100% - 30px);
+    }
+
+    .footer-top {
+        padding: 40px 0 30px;
+        gap: 30px;
+    }
+
+    .footer-menu {
+        min-width: 45%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        line-height: 1.6;
+    }
+
+    .footer-bottom-info {
+        flex-wrap: wrap;
+    }
+}

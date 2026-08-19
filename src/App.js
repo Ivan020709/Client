@@ -1,28 +1,28 @@
 import { Route, Routes } from "react-router-dom";
 
-import Main from './Component/Main'
-import UserLayout from './Component/UserLayout';
-import MemberLogin from './Component/member/MemberLogin';
-import Join from './Component/member/Join';
-import BoardList from './Component/board/BoardList'
-import BoardWrite from './Component/board/BoardWrite'
-import BoardView from "./Component/board/BoardView";
-import UpdateBoard from './Component/board/UpdateBoard';
+import Main from './Components/Main/Main'
+import UserLayout from './Components/Layout/UserLayout';
+import MemberLogin from './Components/Member/MemberLogin';
+import Join from './Components/Member/Join';
+import BoardList from './Components/Board/BoardList'
+import BoardWrite from './Components/Board/BoardWrite'
+import BoardView from "./Components/Board/BoardView";
+import UpdateBoard from './Components/Board/UpdateBoard';
 
-import SelectAi from "./Component/ai/SelectAi";
+import SelectAi from "./Components/Ai/SelectAi";
 
-import Info from "./Component/info/Info";
-import Hellow from "./Component/info/Hellow";
+import Info from "./Components/Info/Info";
+import Hellow from "./Components/Info/Hellow";
 
-import Find from './Component/member/find/Find';
-import FindId from './Component/member/find/Findid';
-import FindPass from './Component/member/find/Findpass';
+import Find from './Components/Member/Find/Find';
+import FindId from './Components/Member/Find/FindId';
+import FindPass from './Components/Member/Find/FindPass';
 
-import TalkAI from './Component/ai/TalkAI'
-import DiaryList from './Component/diary/DiaryList';
-import Diary from './Component/member/Diary';
-import Savekakaoinfo from "./Component/member/Savekakaoinfo";
-import MyPage from "./Component/mypage/MyPage";
+import TalkAI from './Components/Ai/TalkAI'
+import DiaryList from './Components/Diary/DiaryList';
+import Diary from './Components/Member/Diary';
+import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
+import MyPage from "./Components/MyPage/MyPage";
 function App() {
     return (
         <div>
@@ -56,7 +56,7 @@ function App() {
 
                     <Route path='/diaryList' element={<DiaryList />} />
                     <Route path='/Diary' element={<Diary />} />
-                    <Route path="/savekakaoinfo/:userid" element={<Savekakaoinfo />} />
+                    <Route path="/savekakaoinfo/:userid" element={<SaveKakaoInfo />} />
 
                 </Route>
             </Routes>
