@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../../style/ai/TalkAI.css";
+import "./TalkAI.css";
 
 function TalkAI() {
 
