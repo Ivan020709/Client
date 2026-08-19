@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import '../Main/Main.css';
 
 export default function DiaryList() {

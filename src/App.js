@@ -23,6 +23,8 @@ import DiaryList from './Components/Diary/DiaryList';
 import Diary from './Components/Member/Diary';
 import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
 import MyPage from "./Components/MyPage/MyPage";
+import Feelog from './Components/Intro/Feelog';
+
 function App() {
     return (
         <div>
@@ -38,10 +40,12 @@ function App() {
 
                     <Route path='/boardView/:boardnum' element={<BoardView />} />
                     <Route path="/updateBoard/:boardnum" element={<UpdateBoard />} />
+                    <Route path='/feelog' element={<Feelog />} />
 
                     {/*ai대화 */}
                     <Route path='/selectAi' element={<SelectAi />} />
                     <Route path='/talkAI' element={<TalkAI />} />
+
                     {/*이용안내*/}
                     <Route path='/info' element={<Info />} />
                     <Route path='/hellow' element={<Hellow />} />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import './Find.css';
 
 function UpdatePwd() {
@@ -35,7 +36,7 @@ function UpdatePwd() {
     return (
         <div className="join-wrapper">
             <h2 className="join-title">새 비밀번호 입력</h2>
-            
+
             <div className="join-form">
                 <div className="join-box">
                     <div className="join-row">
@@ -48,7 +49,7 @@ function UpdatePwd() {
                             placeholder="새 비밀번호 입력"
                         />
                     </div>
-                    
+
                     <div className="join-row">
                         <label className="join-label">비밀번호 확인</label>
                         <input
@@ -76,7 +77,7 @@ function UpdatePwd() {
                     취소
                 </button>
             </div>
-            
+
             <hr />
         </div>
     );

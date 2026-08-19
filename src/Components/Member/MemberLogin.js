@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 import { loginAction } from '../../store/userSlice';
+
 import './MemberLogin.css'
 
 function MemberLogin() {
@@ -24,20 +25,21 @@ function MemberLogin() {
     }, [loginUser, navigate]);
 
 
-    function onSubmit(){
-        if(!userid){return alert('아이디를 입력하세요.')}
-        if(!pwd){return alert('비밀번호를 입력하세요.')}
-        axios.post('/api/member/login', null, {params:{email:userid, pwd}})
-        .then((result)=>{
-            if(result.data.msg==='OK'){
-                dispatch(loginAction(result.data.loginUser))
-                cookies.set('user', JSON.stringify(result.data.loginUser), {path:'/'})
-                navigate('/')
-            }else{
-                setMsg(result.data.msg)
-            }
-        })
-        .catch((err)=>{console.error(err)})
+    function onSubmit() {
+        if (!userid) { return alert('아이디를 입력하세요.') }
+        if (!pwd) { return alert('비밀번호를 입력하세요.') }
+        axios.post('/api/member/login', null, { params: { email: userid, pwd } })
+            .then((result) => {
+                if (result.data.msg === 'OK') {
+                    dispatch(loginAction(result.data.loginUser))
+                    cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
+                    navigate('/')
+
+                } else {
+                    setMsg(result.data.msg)
+                }
+            })
+            .catch((err) => { console.error(err) })
     }
 
     return (
@@ -48,22 +50,22 @@ function MemberLogin() {
                     <div className="login-box">
                         <div className="login-row">
                             <label className="login-label">ID</label>
-                            <input className="login-input" type="text" value={userid} onChange={(e)=>setUserid(e.currentTarget.value)} placeholder="아이디를 입력해주세요."/>
+                            <input className="login-input" type="text" value={userid} onChange={(e) => setUserid(e.currentTarget.value)} placeholder="아이디를 입력해주세요." />
                         </div>
                         <div className="login-row">
                             <label className="login-label">PW</label>
-                            <input className="login-input" type="password" value={pwd} onChange={(e)=>setPwd(e.currentTarget.value)} placeholder="비밀번호를 입력해주세요."/>
+                            <input className="login-input" type="password" value={pwd} onChange={(e) => setPwd(e.currentTarget.value)} placeholder="비밀번호를 입력해주세요." />
                         </div>
                     </div>
                     <button className="btn-login" onClick={() => onSubmit()}>확인</button>
                 </div>
                 <label className="login-msg">{msg}</label>
                 <div className="login-extra">
-                    <button className="btn-kakao" onClick={()=>navigate('/join')}>회원 가입</button>
-                    <button className="btn-find" onClick={()=>navigate('/find')}>아이디/비밀번호 찾기</button>
+                    <button className="btn-kakao" onClick={() => navigate('/join')}>회원 가입</button>
+                    <button className="btn-find" onClick={() => navigate('/find')}>아이디/비밀번호 찾기</button>
                 </div>
                 <div className="login-footer">
-                    <button className="btn-join" onClick={()=>window.location.href='http://localhost:8070/member/kakaostart'}>KAKAO</button>
+                    <button className="btn-join" onClick={() => window.location.href = 'http://localhost:8070/member/kakaostart'}>KAKAO</button>
                 </div>
             </div>
         </div>

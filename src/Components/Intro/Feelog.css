@@ -1,0 +1,990 @@
+/* =========================================================
+   1. 폰트 및 전체 기본 설정
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.intro {
+  width: 100%;
+  min-height: 100vh;
+  background: #fffdfd;
+  color: #39304f;
+  font-family: 'Noto Sans KR', sans-serif;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   2. 메인 Hero 영역
+   - 홈페이지 맨 위에 보이는 첫 화면
+   - Feelog 소개 문구 + 캐릭터
+   ========================================================= */
+
+.introHero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  min-height: 610px;
+  margin: 0 auto;
+  padding: 80px 90px;
+
+  background: linear-gradient(135deg, #fff 45%, #f8f3ff);
+  border: 1px solid #e7dcf5;
+  border-radius: 0 0 45px 45px;
+}
+
+
+/* Hero 왼쪽 텍스트 */
+
+.heroText {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* FEEL + LOG 뱃지 */
+
+.heroBadge {
+  display: inline-block;
+  padding: 9px 18px;
+  margin-bottom: 25px;
+
+  border-radius: 30px;
+  background: #f1eafd;
+  color: #7160a1;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+/* Hero 메인 제목 */
+
+.heroText h1 {
+  margin: 0;
+
+  color: #33274b;
+  font-family: 'Jua', sans-serif;
+  font-size: 58px;
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: -2px;
+}
+
+
+/* Feelog 글자 색상 */
+
+.heroText h1 strong {
+  color: #7561a8;
+}
+
+
+/* Hero 설명 */
+
+.heroText p {
+  margin: 25px 0 32px;
+
+  color: #756c82;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+
+/* Hero / 하단 시작하기 버튼 */
+
+.heroText button,
+.introBottom button {
+  border: 0;
+  padding: 15px 25px;
+
+  border-radius: 30px;
+  background: #7763ad;
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px rgba(119, 99, 173, 0.22);
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+
+/* 버튼 마우스 오버 */
+
+.heroText button:hover,
+.introBottom button:hover {
+  transform: translateY(-3px);
+  background: #665299;
+}
+
+
+/* 버튼의 → */
+
+.heroText button span,
+.introBottom button span {
+  margin-left: 10px;
+}
+
+
+/* =========================================================
+   3. Hero 캐릭터 영역
+   - 하얀색 Feelog 캐릭터
+   ========================================================= */
+
+.heroCharacter {
+  position: relative;
+
+  width: 440px;
+  height: 430px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 캐릭터 뒤쪽의 연보라색 원 */
+
+.heroCharacter::before {
+  content: "";
+
+  position: absolute;
+
+  width: 380px;
+  height: 380px;
+
+  border-radius: 50%;
+  background: #f1eaff;
+}
+
+
+/* 캐릭터 이미지 */
+
+.heroCharacter img {
+  position: relative;
+
+  width: 330px;
+  height: auto;
+
+  z-index: 1;
+
+  filter: drop-shadow(
+    0 15px 15px rgba(90, 70, 120, 0.12)
+  );
+}
+
+
+/* =========================================================
+   4. 캐릭터 주변 하트
+   ========================================================= */
+
+.heartBubble,
+.characterHeart {
+  position: absolute;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #e8d7eb;
+
+  color: #ee8790;
+  font-size: 27px;
+
+  box-shadow: 0 7px 20px rgba(80, 60, 100, 0.1);
+}
+
+
+/* Hero 캐릭터 위쪽 하트 */
+
+.heartBubble {
+  top: 45px;
+  right: 55px;
+}
+
+
+/* =========================================================
+   5. 일반 섹션 공통
+   - ABOUT
+   - 기능 소개
+   - 이용 방법
+   ========================================================= */
+
+.introSection {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 100px 30px;
+}
+
+
+/* =========================================================
+   6. ABOUT FEELLOG 제목
+   ========================================================= */
+
+.sectionTitle {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+
+  margin-bottom: 35px;
+}
+
+
+/* 제목 앞 하트 */
+
+.sectionTitle > span {
+  font-size: 30px;
+}
+
+
+/* 작은 영문 제목 */
+
+.sectionTitle small,
+.sectionHeading small,
+.introRecommend small {
+  color: #8a78b2;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+
+/* 큰 섹션 제목 */
+
+.sectionTitle h2,
+.sectionHeading h2,
+.introRecommend h2 {
+  margin: 7px 0 0;
+
+  font-family: 'Jua', sans-serif;
+  font-size: 40px;
+  line-height: 1.35;
+  font-weight: 400;
+
+  color: #392e50;
+}
+
+
+/* =========================================================
+   7. Feelog 소개 박스
+   ========================================================= */
+
+.aboutBox {
+  padding: 38px 45px;
+
+  border: 1px solid #eee5f4;
+  border-radius: 25px;
+
+  background: linear-gradient(135deg, #faf7ff, #fff);
+
+  box-shadow: 0 12px 35px rgba(100, 80, 120, 0.05);
+}
+
+
+/* 소개 문장 */
+
+.aboutBox p {
+  margin: 0 0 15px;
+
+  color: #6e657a;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+
+/* 마지막 문단은 아래 여백 제거 */
+
+.aboutBox p:last-child {
+  margin: 0;
+}
+
+
+/* =========================================================
+   8. 기능 소개 제목
+   ========================================================= */
+
+.sectionHeading {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+
+/* 기능 소개 제목 */
+
+.sectionHeading h2 {
+  margin-top: 8px;
+}
+
+
+/* 기능 소개 설명 */
+
+.sectionHeading p {
+  color: #81788b;
+  margin-top: 15px;
+}
+
+
+/* =========================================================
+   9. 기능 카드 영역
+   ========================================================= */
+
+.featureGrid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+
+/* 각각의 기능 카드 */
+
+.featureCard {
+  padding: 30px 25px;
+  min-height: 210px;
+
+  border: 1px solid #e9e0f2;
+  border-radius: 25px;
+
+  background: #fff;
+
+  transition: 0.25s;
+}
+
+
+/* 기능 카드 마우스 오버 */
+
+.featureCard:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 15px 30px rgba(90, 70, 120, 0.09);
+
+  border-color: #d7c9eb;
+}
+
+
+/* 기능 아이콘 */
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  margin-bottom: 18px;
+
+  border-radius: 15px;
+
+  background: #f3edff;
+
+  font-size: 25px;
+}
+
+
+/* 기능 제목 */
+
+.featureCard h3 {
+  margin: 0 0 10px;
+
+  font-family: 'Jua', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+
+  color: #423654;
+}
+
+
+/* 기능 설명 */
+
+.featureCard p {
+  margin: 0;
+
+  color: #81788c;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   10. 이용 방법 영역
+   ========================================================= */
+
+.process {
+  max-width: 1250px;
+}
+
+
+/* 4단계 전체 구조 */
+
+.processGrid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 35px
+    1fr 35px
+    1fr 35px
+    1fr;
+
+  align-items: center;
+}
+
+
+/* 각각의 단계 카드 */
+
+.processItem {
+  text-align: center;
+
+  padding: 30px 15px;
+
+  border: 1px solid #e8dff1;
+  border-radius: 23px;
+
+  background: #fff;
+}
+
+
+/* 01 / 02 / 03 / 04 번호 */
+
+.processItem > span {
+  display: flex;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 17px;
+
+  border-radius: 50%;
+
+  background: #e9e1f8;
+  color: #725da6;
+
+  font-weight: 700;
+}
+
+
+/* 단계 제목 */
+
+.processItem h3 {
+  margin: 0 0 8px;
+
+  font-family: 'Jua', sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+
+/* 단계 설명 */
+
+.processItem p {
+  margin: 0;
+
+  color: #81788b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* 단계 사이 → */
+
+.processArrow {
+  text-align: center;
+
+  color: #9b88c2;
+  font-size: 25px;
+}
+
+
+/* =========================================================
+   11. 추천 대상 영역
+   ========================================================= */
+
+.introRecommend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1120px;
+  min-height: 420px;
+
+  margin: 0 auto 100px;
+  padding: 55px 70px;
+
+  border-radius: 35px;
+
+  background: linear-gradient(
+    120deg,
+    #f1eafd,
+    #faf6ff
+  );
+
+  overflow: hidden;
+}
+
+
+/* 추천 대상 제목 */
+
+.introRecommend h2 {
+  font-size: 38px;
+  margin-bottom: 28px;
+}
+
+
+/* 추천 대상 목록 */
+
+.introRecommend ul {
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+
+/* 추천 대상 각각의 문장 */
+
+.introRecommend li {
+  position: relative;
+
+  margin: 14px 0;
+  padding-left: 30px;
+
+  color: #61576e;
+  font-size: 15px;
+}
+
+
+/* 추천 목록 앞의 체크 */
+
+.introRecommend li::before {
+  content: '✓';
+
+  position: absolute;
+
+  left: 0;
+  top: -2px;
+
+  width: 21px;
+  height: 21px;
+
+  border-radius: 50%;
+
+  background: #8875b8;
+  color: #fff;
+
+  text-align: center;
+
+  font-size: 12px;
+  line-height: 21px;
+}
+
+
+/* =========================================================
+   12. 추천 영역 캐릭터
+   ========================================================= */
+
+.recommendCharacter {
+  position: relative;
+
+  width: 360px;
+  height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 캐릭터 뒤쪽 흰색 원 */
+
+.recommendCharacter::before {
+  content: "";
+
+  position: absolute;
+
+  width: 290px;
+  height: 290px;
+
+  border-radius: 50%;
+
+  background: #fff;
+}
+
+
+/* 추천 영역 캐릭터 이미지 */
+
+.recommendCharacter img {
+  position: relative;
+
+  width: 245px;
+
+  z-index: 1;
+}
+
+
+/* 추천 영역 캐릭터 하트 */
+
+.characterHeart {
+  right: 25px;
+  top: 25px;
+
+  width: 48px;
+  height: 48px;
+
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   13. 페이지 마지막 CTA 영역
+   - Feelog 시작하기
+   ========================================================= */
+
+.introBottom {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 55px;
+
+  min-height: 300px;
+
+  padding: 50px;
+
+  background: linear-gradient(
+    135deg,
+    #8c78bb,
+    #7563a8
+  );
+
+  color: #fff;
+
+  overflow: hidden;
+}
+
+
+/* CTA 배경 장식 */
+
+.introBottom::before {
+  content: "";
+
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  right: -120px;
+  top: -300px;
+}
+
+
+/* 마지막 캐릭터 */
+
+.introBottom img {
+  position: relative;
+
+  width: 180px;
+
+  z-index: 1;
+}
+
+
+/* CTA 텍스트 */
+
+.introBottom div {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* CTA 작은 문장 */
+
+.introBottom span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 18px;
+  color: #e8e1f5;
+}
+
+
+/* CTA 메인 문장 */
+
+.introBottom strong {
+  display: block;
+
+  font-family: 'Jua', sans-serif;
+
+  font-size: 31px;
+  font-weight: 400;
+}
+
+
+/* CTA 버튼 */
+
+.introBottom button {
+  margin-top: 25px;
+
+  background: #fff;
+  color: #705ba4;
+
+  box-shadow: none;
+}
+
+
+/* CTA 버튼 Hover */
+
+.introBottom button:hover {
+  background: #f5efff;
+}
+
+
+/* CTA 버튼 안의 → */
+
+.introBottom button span {
+  display: inline;
+
+  margin: 0;
+
+  color: inherit;
+  font-size: inherit;
+}
+
+
+/* =========================================================
+   14. 태블릿 반응형
+   - 화면 너비 900px 이하
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  /* Hero 여백 축소 */
+  .introHero {
+    padding: 60px 40px;
+  }
+
+  /* Hero 제목 축소 */
+  .heroText h1 {
+    font-size: 45px;
+  }
+
+  /* Hero 캐릭터 영역 축소 */
+  .heroCharacter {
+    width: 350px;
+  }
+
+  .heroCharacter img {
+    width: 270px;
+  }
+
+  /* 기능 카드 3열 → 2열 */
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 과정 영역 2열 */
+  .processGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  /* 태블릿에서는 화살표 숨김 */
+  .processArrow {
+    display: none;
+  }
+
+  /* 추천 영역 여백 */
+  .introRecommend {
+    margin: 0 25px 70px;
+    padding: 45px;
+  }
+
+  /* 추천 캐릭터 축소 */
+  .recommendCharacter {
+    width: 280px;
+  }
+}
+
+
+/* =========================================================
+   15. 모바일 반응형
+   - 화면 너비 650px 이하
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  /* -------------------------
+     Hero
+     ------------------------- */
+
+  .introHero {
+    min-height: auto;
+
+    padding: 55px 25px;
+
+    display: block;
+
+    text-align: center;
+  }
+
+  /* 모바일 Hero 제목 */
+  .heroText h1 {
+    font-size: 38px;
+  }
+
+  /* 모바일 Hero 설명 */
+  .heroText p {
+    font-size: 15px;
+  }
+
+  /* 모바일 캐릭터 */
+  .heroCharacter {
+    width: 100%;
+    height: 280px;
+
+    margin-top: 20px;
+  }
+
+  /* 캐릭터 뒤 원 */
+  .heroCharacter::before {
+    width: 250px;
+    height: 250px;
+  }
+
+  /* 캐릭터 크기 */
+  .heroCharacter img {
+    width: 210px;
+  }
+
+  /* 하트 위치 */
+  .heartBubble {
+    right: 15%;
+    top: 15px;
+  }
+
+
+  /* -------------------------
+     일반 섹션
+     ------------------------- */
+
+  .introSection {
+    padding: 70px 20px;
+  }
+
+
+  /* 모바일 섹션 제목 */
+
+  .sectionTitle h2,
+  .sectionHeading h2 {
+    font-size: 32px;
+  }
+
+
+  /* 소개 박스 */
+
+  .aboutBox {
+    padding: 25px;
+  }
+
+
+  /* -------------------------
+     기능 카드
+     ------------------------- */
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* -------------------------
+     이용 과정
+     ------------------------- */
+
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* -------------------------
+     추천 영역
+     ------------------------- */
+
+  .introRecommend {
+    display: block;
+
+    text-align: center;
+
+    padding: 40px 25px;
+  }
+
+
+  /* 추천 목록은 왼쪽 정렬 */
+
+  .introRecommend li {
+    text-align: left;
+  }
+
+
+  /* 추천 캐릭터 */
+
+  .recommendCharacter {
+    width: 100%;
+
+    margin-top: 25px;
+  }
+
+
+  /* -------------------------
+     마지막 CTA
+     ------------------------- */
+
+  .introBottom {
+    flex-direction: column;
+
+    gap: 15px;
+
+    text-align: center;
+
+    padding: 55px 25px;
+  }
+
+
+  /* 마지막 캐릭터 크기 */
+
+  .introBottom img {
+    width: 130px;
+  }
+
+
+  /* 마지막 문장 크기 */
+
+  .introBottom strong {
+    font-size: 25px;
+  }
+}

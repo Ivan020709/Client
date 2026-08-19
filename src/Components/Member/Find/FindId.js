@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import './Find.css';
 
 function FindId() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [foundId, setFoundId] = useState(''); 
+    const [foundId, setFoundId] = useState('');
     const navigate = useNavigate();
 
     const handleFindId = () => {
@@ -16,7 +17,7 @@ function FindId() {
         axios.post('/api/member/findId', { name: name, phone: phone })
             .then((result) => {
                 if (result.data && result.data.userid) {
-                    setFoundId(result.data.userid); 
+                    setFoundId(result.data.userid);
                 } else {
                     alert('일치하는 회원 정보를 찾을 수 없습니다.');
                     setFoundId('');

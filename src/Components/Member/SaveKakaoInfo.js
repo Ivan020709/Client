@@ -1,22 +1,22 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import { Cookies } from 'react-cookie'
 import axios from 'axios';
-import './SaveKakaoInfo.css';
 import { loginAction } from '../../store/userSlice'
 
+import './SaveKakaoInfo.css';
 
 function SaveKakaoInfo() {
-    
+
     const navigate = useNavigate();
     //const { snsid } = useParams();
     //const { email } = useParams()
 
-    const {userid} = useParams()
-    const [loginUser, setLoginUser] = useState({}) 
+    const { userid } = useParams()
+    const [loginUser, setLoginUser] = useState({})
 
     const [reid, setReid] = useState('');
     const [idCheckResult, setIdCheckResult] = useState('');
@@ -36,7 +36,7 @@ function SaveKakaoInfo() {
     const [email, setEmail] = useState('');
     const [emailCheck, setEmailCheck] = useState(false);
 
-    
+
     // 비밀번호
     const [pwd, setPwd] = useState('');
     const [pwdChk, setPwdChk] = useState('');
@@ -50,7 +50,7 @@ function SaveKakaoInfo() {
     const [phone, setPhone] = useState('');
     const dispatch = useDispatch()
     const cookies = new Cookies()
-    
+
     const user = useSelector((state) => state.user);
 
     // 주소
@@ -72,33 +72,33 @@ function SaveKakaoInfo() {
         }
     };
 
-    
+
 
 
     useEffect(
-        ()=>{
-            axios.get('/api/member/getLoginUser', {params:{userid}})
-            .then((result)=>{
-                setLoginUser(result.data.loginUser)
-                if(result.data.loginUser.editcom == 'N'){
-                    setEmail(result.data.loginUser.email)
-                    setNickname(result.data.loginUser.nickname)
-                    setPhone(result.data.loginUser.phone)
-                    setAddress1(result.data.loginUser.address1)
-                    setAddress2(result.data.loginUser.address2)
-                    setAddress3(result.data.loginUser.address3)
-                    setZip_num(result.data.loginUser.zip_num)
-                }else{
-                    dispatch(loginAction(result.data.loginUser))
-                    cookies.set('user', JSON.stringify(result.data.loginUser), {path:'/'})
-                    navigate('/')
-                }
-            })
-            .catch((err)=>{console.error(err)})
-        },[]
+        () => {
+            axios.get('/api/member/getLoginUser', { params: { userid } })
+                .then((result) => {
+                    setLoginUser(result.data.loginUser)
+                    if (result.data.loginUser.editcom == 'N') {
+                        setEmail(result.data.loginUser.email)
+                        setNickname(result.data.loginUser.nickname)
+                        setPhone(result.data.loginUser.phone)
+                        setAddress1(result.data.loginUser.address1)
+                        setAddress2(result.data.loginUser.address2)
+                        setAddress3(result.data.loginUser.address3)
+                        setZip_num(result.data.loginUser.zip_num)
+                    } else {
+                        dispatch(loginAction(result.data.loginUser))
+                        cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
+                        navigate('/')
+                    }
+                })
+                .catch((err) => { console.error(err) })
+        }, []
     )
 
-    
+
 
 
     function idCheck() {
@@ -107,11 +107,11 @@ function SaveKakaoInfo() {
             .then((result) => {
                 if (result.data.msg === 'OK') {
                     setIdCheckResult('※ 사용 가능한 이메일입니다.');
-                    setMsgStyle({ color: 'blue', flex: '1', fontWeight: 'bold', fontSize:'15px' });
+                    setMsgStyle({ color: 'blue', flex: '1', fontWeight: 'bold', fontSize: '15px' });
                     setReid(email);
                 } else {
                     setIdCheckResult('※ 중복되는 이메일입니다.');
-                    setMsgStyle({ color: 'red', flex: '1', fontWeight: 'bold' , fontSize:'15px'});
+                    setMsgStyle({ color: 'red', flex: '1', fontWeight: 'bold', fontSize: '15px' });
                     setReid('');
                 }
             })
@@ -124,28 +124,28 @@ function SaveKakaoInfo() {
             .then((result) => {
                 if (result.data.msg === 'OK') {
                     setNicknameCheckResult('※ 사용 가능한 닉네임입니다.');
-                    setNicknameMsgStyle({ color: 'blue', flex: '1', fontWeight: 'bold', fontSize:'15px' });
+                    setNicknameMsgStyle({ color: 'blue', flex: '1', fontWeight: 'bold', fontSize: '15px' });
                     setRenickname(nickname);
                 } else {
                     setNicknameCheckResult('※ 중복되는 닉네임입니다.');
-                    setNicknameMsgStyle({ color: 'red', flex: '1', fontWeight: 'bold', fontSize:'15px' });
+                    setNicknameMsgStyle({ color: 'red', flex: '1', fontWeight: 'bold', fontSize: '15px' });
                     setRenickname('');
                 }
             })
             .catch((err) => console.error(err));
     }
-    
-    function onSubmit(){
+
+    function onSubmit() {
 
         //카카오 가입 시 멤버 수정
-        axios.post('/api/member/updateKakaoMember', {userid, email, nickname, zip_num, address1, address2, address3, phone, editcom: 'Y'})
-        .then((result)=>{
-            dispatch(loginAction(result.data.loginUser))
-            cookies.set('user', JSON.stringify(result.data.loginUser), {path:'/'})
-            alert('카카오 멤버 가입이 완료되었습니다')
-            navigate('/')
-        })
-        .catch((err)=>{console.error(err)})
+        axios.post('/api/member/updateKakaoMember', { userid, email, nickname, zip_num, address1, address2, address3, phone, editcom: 'Y' })
+            .then((result) => {
+                dispatch(loginAction(result.data.loginUser))
+                cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
+                alert('카카오 멤버 가입이 완료되었습니다')
+                navigate('/')
+            })
+            .catch((err) => { console.error(err) })
     }
 
 
@@ -160,7 +160,7 @@ function SaveKakaoInfo() {
     };
 
 
-    
+
 
 
     return (
@@ -180,9 +180,9 @@ function SaveKakaoInfo() {
 
                 <div className="save-kakao-box">
 
-                   
 
-                {/* 이메일 */}
+
+                    {/* 이메일 */}
                     <div className="save-kakao-row">
 
                         <label className="save-kakao-label">
@@ -204,7 +204,7 @@ function SaveKakaoInfo() {
                     <div><label style={nicknameMsgStyle}>{nicknameCheckResult}</label></div>
 
 
-                    
+
 
                     {/* 전화번호 */}
                     <div className="save-kakao-row">
@@ -332,10 +332,10 @@ function SaveKakaoInfo() {
 
 
 
-            <Modal style={modalStyle} isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-                        <DaumPostcode onComplete={completeHandler} />
-                        <button onClick={() => setIsOpen(false)}>CLOSE</button>
-             </Modal>
+                <Modal style={modalStyle} isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
+                    <DaumPostcode onComplete={completeHandler} />
+                    <button onClick={() => setIsOpen(false)}>CLOSE</button>
+                </Modal>
             </div>
         </div>
     );

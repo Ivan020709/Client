@@ -601,3 +601,283 @@
         min-width: 95px;
     }
 }
+
+/* =================================
+   마이페이지 전체
+================================= */
+
+.mypage-layout {
+    width: 100%;
+
+    margin: 60px auto 40px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   사이드바
+================================= */
+
+.mypage-sidebar {
+    width: 210px;
+    min-width: 210px;
+
+    margin-left: calc((100% - 1100px) / 2);
+
+    background: #fff;
+
+    border: 1px solid #e2e5e8;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .06),
+        0 2px 8px rgba(0, 0, 0, .03);
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   사이드바 제목
+================================= */
+
+.mypage-sidebar-title {
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 24px;
+
+    border-bottom: 1px solid #edf0f2;
+
+    color: #343a40;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   사이드바 메뉴
+================================= */
+
+.mypage-sidebar-menu {
+    padding: 10px 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   메뉴
+================================= */
+
+.mypage-sidebar-item {
+    width: 100%;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 24px;
+
+    border: none;
+
+    background: #fff;
+
+    color: #6c757d;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s,
+        color .2s;
+}
+
+
+.mypage-sidebar-item:hover {
+    background: #f8f9fa;
+
+    color: #343a40;
+}
+
+
+.mypage-sidebar-item.active {
+    background: #f1f3f5;
+
+    color: #343a40;
+
+    font-weight: 700;
+
+    box-shadow:
+        inset 3px 0 0 #868e96;
+}
+
+
+/* =================================
+   사이드바 하단
+================================= */
+
+.mypage-sidebar-bottom {
+    padding: 12px 0;
+
+    border-top: 1px solid #edf0f2;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   회원탈퇴
+================================= */
+
+.mypage-sidebar-delete {
+    width: 100%;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 24px;
+
+    border: none;
+
+    background: #fff;
+
+    color: #adb5bd;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s,
+        color .2s;
+}
+
+.mypage-sidebar-delete:hover {
+    background: #fafafa;
+
+    color: #868e96;
+}
+
+
+.mypage-sidebar-delete.active {
+    background: #f8f9fa;
+
+    color: #868e96;
+
+    font-weight: 700;
+
+    box-shadow:
+        inset 3px 0 0 #adb5bd;
+}
+
+
+/* =================================
+   오른쪽 내용
+================================= */
+
+.mypage-content {
+    width: 580px;
+
+    min-width: 580px;
+
+    margin-left: 25px;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   기존 회원정보 수정 박스
+================================= */
+
+.mypage-content .mypage-wrapper {
+    width: 580px;
+
+    margin: 0;
+}
+
+
+/* =================================
+   모바일
+================================= */
+
+@media (max-width: 850px) {
+
+    .mypage-layout {
+        width: 100%;
+    }
+
+
+    .mypage-sidebar {
+        position: static;
+
+        width: calc(100% - 30px);
+
+        margin: 30px auto 0;
+    }
+
+
+    .mypage-sidebar-menu {
+        display: flex;
+
+        padding: 0;
+    }
+
+
+    .mypage-sidebar-item {
+        flex: 1;
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+
+    .mypage-sidebar-delete {
+        justify-content: center;
+
+        padding: 0;
+    }
+
+
+    .mypage-content {
+        width: 100%;
+    }
+
+
+    .mypage-content .mypage-wrapper {
+        width: calc(100% - 30px);
+
+        margin: 30px auto 40px;
+    }
+
+}

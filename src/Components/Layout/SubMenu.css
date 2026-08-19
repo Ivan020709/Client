@@ -50,9 +50,6 @@
     color: #007bff;
 }
 
-/* ================================
-   드롭다운
-================================ */
 .sub_dropdown {
     position: absolute;
     top: 50px;
@@ -63,20 +60,8 @@
     border: 1px solid #ddd;
     border-radius: 0 0 10px 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
     z-index: 1000;
     box-sizing: border-box;
-    transform: translateY(-5px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-}
-
-.sub_menu_item:hover .sub_dropdown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
 }
 
 .sub_dropdown div {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './BoardList.css';
 import axios from 'axios';
+
+import './BoardList.css';
 
 function BoardList() {
 
@@ -43,11 +44,11 @@ function BoardList() {
 
     // 게시글 클릭
     const handlePostClick = (boardnum) => {
-        axios.post('/api/board/plusCount', null, {params:{boardnum}} )
-        .then((result)=>{
-            navigate(`/boardView/${boardnum}`)
-        })
-        .catch((err)=>{console.error(err)})
+        axios.post('/api/board/plusCount', null, { params: { boardnum } })
+            .then((result) => {
+                navigate(`/boardView/${boardnum}`)
+            })
+            .catch((err) => { console.error(err) })
     };
 
     const ROWS_PER_PAGE = 5;
@@ -98,7 +99,7 @@ function BoardList() {
                                 <div className="board-number">{post.boardnum}</div>
                                 <div className="board-title">{post.title}</div>
                                 <div className="board-writer">{post.userid}</div>
-                                <div className="board-date">{post.indate?post.indate.substring(0, 10):''}</div>
+                                <div className="board-date">{post.indate ? post.indate.substring(0, 10) : ''}</div>
                                 <div className="board-view">{post.viewcount}</div>
                             </div>
                         ))
@@ -113,7 +114,7 @@ function BoardList() {
                         <option value="content">내용</option>
                         <option value="userid">작성자</option>
                     </select>
-                    <input type="text" placeholder="검색어를 입력해주세요." value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)}/>
+                    <input type="text" placeholder="검색어를 입력해주세요." value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
                     <button type="submit">검색</button>
                 </form>
                 {/* 페이지네이션 */}
@@ -137,9 +138,8 @@ function BoardList() {
                         ).map((pageNumber) => (
                             <button
                                 key={pageNumber}
-                                className={`page ${
-                                    page === pageNumber ? 'active' : ''
-                                }`}
+                                className={`page ${page === pageNumber ? 'active' : ''
+                                    }`}
                                 onClick={() => handlePage(pageNumber)}
                             >
                                 {pageNumber}

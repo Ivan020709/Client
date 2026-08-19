@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+
 import './BoardWrite.css';
 
 function BoardWrite() {
@@ -32,7 +33,7 @@ function BoardWrite() {
             return;
         }
         // 서버로 보낼 데이터
-        const boardData = {title: title, content: content, userid: loginUser.userid, email: loginUser.email, isPrivate, category};
+        const boardData = { title: title, content: content, userid: loginUser.userid, email: loginUser.email, isPrivate, category };
         // console.log('게시글 등록:', boardData);
         axios.post('/api/board/insertBoard', boardData)
             .then((result) => {
@@ -68,7 +69,7 @@ function BoardWrite() {
                         </select>
                     </div>
                     <label className="private-option">
-                        <input type="checkbox" checked={isPrivate} onChange={(e) => setIsPrivate(e.target.checked)}/>
+                        <input type="checkbox" checked={isPrivate} onChange={(e) => setIsPrivate(e.target.checked)} />
                         <span className="private-toggle"></span>
                         <span className="private-text">비공개 글</span>
                     </label>
@@ -76,13 +77,13 @@ function BoardWrite() {
                 {/* 제목 */}
                 <div className="board-write-field">
                     <label htmlFor="board-title">제목</label>
-                    <input id="board-title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력해주세요." maxLength={200}/>
+                    <input id="board-title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력해주세요." maxLength={200} />
                     <div className="board-write-count">{title.length} / 200</div>
                 </div>
                 {/* 내용 */}
                 <div className="board-write-field content-field">
                     <label htmlFor="board-content">내용</label>
-                    <textarea id="board-content" value={content} onChange={(e) => setContent(e.target.value)} placeholder="고민이나 이야기를 자유롭게 작성해주세요."/>
+                    <textarea id="board-content" value={content} onChange={(e) => setContent(e.target.value)} placeholder="고민이나 이야기를 자유롭게 작성해주세요." />
                     <div className="board-write-count">{content.length}자</div>
                 </div>
                 {/* 버튼 */}

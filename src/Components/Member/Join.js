@@ -4,8 +4,9 @@ import axios from 'axios';
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
+import { Cookies } from 'react-cookie';
+
 import './Join.css';
-import { Cookies } from 'react-cookie'
 
 function Join() {
     const loginUser = useSelector(state => state.user);
@@ -22,37 +23,30 @@ function Join() {
     const [renickname, setRenickname] = useState('');
     const [nicknameCheckResult, setNicknameCheckResult] = useState('');
     const [nicknameMsgStyle, setNicknameMsgStyle] = useState({ flex: '1' });
-
     const [savefilename, setSavefilename] = useState('');
     const [imgSrc, setImgSrc] = useState('');
-
     const [year, setYear] = useState('');
     const [month, setMonth] = useState('');
     const [day, setDay] = useState('');
     const [phone, setPhone] = useState('');
-
     const [zip_num, setZip_num] = useState('');
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
     const [address3, setAddress3] = useState('');
-
-
     const [isOpen, setIsOpen] = useState(false);
-    const cookies = new Cookies()
+    const cookies = new Cookies();
 
     const modalStyle = {
         overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
-        content: {
-            left: '0', right: '0', top: '50%', bottom: 'auto', margin: 'auto',
-            width: '500px', height: '500px', padding: '0', overflow: 'hidden',
-            transform: 'translateY(-50%)'
-        }
+        content: { left: '0', right: '0', top: '50%', bottom: 'auto', margin: 'auto', width: '500px', height: '500px', padding: '0', overflow: 'hidden', transform: 'translateY(-50%)' }
     };
 
+    // 로그인 상태라면 회원가입 페이지 대신 메인으로 이동
     useEffect(() => {
         if (loginUser && loginUser.email) navigate('/');
     }, [loginUser, navigate]);
 
+    // 다음 우편번호 검색 완료 후 주소 정보 저장
     const completeHandler = (data) => {
         setZip_num(data.zonecode);
         setAddress1(data.address);
@@ -60,6 +54,7 @@ function Join() {
         setIsOpen(false);
     };
 
+    // 이메일 중복 확인
     function idCheck() {
         if (!email) return alert('이메일를 입력하세요.');
         axios.post('/api/member/emailCheck', null, { params: { email: email } })
@@ -77,6 +72,7 @@ function Join() {
             .catch((err) => console.error(err));
     }
 
+    // 닉네임 중복 확인
     function nicknameCheck() {
         if (!nickname.trim()) return alert('닉네임을 입력하세요.');
         axios.post('/api/member/nicknameCheck', null, { params: { nickname: nickname } })
@@ -94,19 +90,17 @@ function Join() {
             .catch((err) => console.error(err));
     }
 
+    // 프로필 이미지 업로드
     function fileup(e) {
         const file = e.target.files[0];
         if (!file) return;
-
         if (!file.type.startsWith('image/')) {
             alert('이미지 파일만 선택할 수 있습니다.');
             e.target.value = '';
             return;
         }
-
         const formData = new FormData();
         formData.append('image', file);
-
         axios.post('/api/member/fileupload', formData)
             .then((result) => {
                 setSavefilename(result.data.savefilename);
@@ -118,6 +112,15 @@ function Join() {
             });
     }
 
+    // 전화번호는 숫자 11자리만 저장하고 하이픈을 자동으로 추가
+    function handlePhoneChange(e) {
+        let value = e.currentTarget.value.replace(/\D/g, '').slice(0, 11);
+        if (value.length > 3 && value.length <= 7) value = `${value.slice(0, 3)}-${value.slice(3)}`;
+        else if (value.length > 7) value = `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7)}`;
+        setPhone(value);
+    }
+
+    // 회원가입 입력값 검증 및 회원가입 요청
     function onSubmit() {
         if (!email) return alert('아이디를 입력하세요.');
         if (reid !== email) return alert('아이디 중복을 확인해주세요.');
@@ -127,37 +130,17 @@ function Join() {
         if (!nickname) return alert('닉네임을 입력하세요.');
         if (renickname !== nickname) return alert('닉네임 중복을 확인해주세요.');
         if (!year || !month || !day) return alert('생년월일을 입력하세요.');
-
-        if (isNaN(year) || isNaN(month) || isNaN(day) || Number(year) < 1901 || Number(year) > 2026 || Number(month) < 1 || Number(month) > 12 || Number(day) < 1 || Number(day) > 31) {
-            return alert('올바른 생년월일을 입력하세요.');
-        }
+        if (isNaN(year) || isNaN(month) || isNaN(day) || Number(year) < 1901 || Number(year) > 2026 || Number(month) < 1 || Number(month) > 12 || Number(day) < 1 || Number(day) > 31) return alert('올바른 생년월일을 입력하세요.');
 
         const date = new Date(Number(year), Number(month) - 1, Number(day));
-
-        if (date.getFullYear() !== Number(year) || date.getMonth() !== Number(month) - 1 || date.getDate() !== Number(day)) {
-            return alert('존재하지 않는 날짜입니다.');
-        }
-
+        if (date.getFullYear() !== Number(year) || date.getMonth() !== Number(month) - 1 || date.getDate() !== Number(day)) return alert('존재하지 않는 날짜입니다.');
         if (!phone) return alert('번호를 입력하세요.');
-        if (!zip_num) return alert('우편번호를 입력하세요.');
+        if (zip_num === '') return alert('우편번호를 입력하세요.');
         if (!address1) return alert('주소를 입력하세요.');
 
         const birth = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
-        axios.post('/api/member/insertMember', {
-            email: email,
-            pwd: pwd,
-            name: name,
-            nickname: nickname,
-            birth: birth,
-            phone: phone,
-            zip_num: zip_num,
-            address1: address1,
-            address2: address2,
-            address3: address3,
-            savefilename: savefilename,
-            provider: 'Local'
-        })
+        axios.post('/api/member/insertMember', { email: email, pwd: pwd, name: name, nickname: nickname, birth: birth, phone: phone, zip_num: zip_num, address1: address1, address2: address2, address3: address3, savefilename: savefilename, provider: 'Local' })
             .then(() => {
                 alert('회원 가입이 완료되었습니다.');
                 cookies.remove('user', { path: '/' });
@@ -211,6 +194,7 @@ function Join() {
                         <button className="join-btn-zip_num" onClick={nicknameCheck}>중복확인</button>
                     </div>
                     <div><label style={nicknameMsgStyle}>{nicknameCheckResult}</label></div>
+
                     <div className="join-row">
                         <label className="join-label">생년월일</label>
                         <input className="join-input-four" type="text" placeholder="YYYY" maxLength="4" value={year} onChange={(e) => setYear(e.currentTarget.value)} />
@@ -223,7 +207,7 @@ function Join() {
 
                     <div className="join-row">
                         <label className="join-label">전화번호</label>
-                        <input className="join-input-etc" type="text" value={phone} onChange={(e) => setPhone(e.currentTarget.value)} placeholder="010-XXXX-XXXX" />
+                        <input className="join-input-etc" type="text" value={phone} onChange={handlePhoneChange} placeholder="010-XXXX-XXXX" maxLength="13" />
                     </div>
 
                     <Modal style={modalStyle} isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>

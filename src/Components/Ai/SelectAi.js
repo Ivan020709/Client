@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import './SelectAi.css';
 
 import ai1 from '../../Img/ai1.png';
@@ -91,7 +92,7 @@ function SelectAi() {
                 {/* AI 1 */}
                 <div className="ai-card">
                     <div className="ai-image-box">
-                        <img src={ai1} alt="AI 1" className="ai-image"/>
+                        <img src={ai1} alt="AI 1" className="ai-image" />
                     </div>
                     <div className="ai-info">
                         <h3>멍멍이</h3>
@@ -110,7 +111,7 @@ function SelectAi() {
                 {/* AI 2 */}
                 <div className="ai-card">
                     <div className="ai-image-box">
-                        <img src={ai2} alt="AI 2"className="ai-image"/>
+                        <img src={ai2} alt="AI 2" className="ai-image" />
                     </div>
                     <div className="ai-info">
                         <h3>별</h3>
@@ -130,7 +131,7 @@ function SelectAi() {
                 {/* AI 3 */}
                 <div className="ai-card">
                     <div className="ai-image-box">
-                        <img src={ai3}alt="AI 3"className="ai-image"/>
+                        <img src={ai3} alt="AI 3" className="ai-image" />
                     </div>
                     <div className="ai-info">
                         <h3>달</h3>

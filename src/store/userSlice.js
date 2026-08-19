@@ -5,6 +5,7 @@ const cookies = new Cookies()
 const initialState={
     userid : '',
     pwd : '',
+    nickname:'',
     name : '',
     email : '',
     phone : '',
@@ -23,9 +24,10 @@ const initialState={
 }
 const getLoginUser=()=>{
     const memberInfo = cookies.get('user');
-    if( memberInfo  && memberInfo.id ){
+    if( memberInfo  && memberInfo.userid ){
         memberInfo.userid = decodeURIComponent( memberInfo.userid )
         memberInfo.pwd = decodeURIComponent( memberInfo.pwd )
+        memberInfo.nickname = decodeURIComponent( memberInfo.nickname )
         memberInfo.name = decodeURIComponent( memberInfo.name )
         memberInfo.email = decodeURIComponent( memberInfo.email )
         memberInfo.phone = decodeURIComponent( memberInfo.phone )
@@ -33,9 +35,9 @@ const getLoginUser=()=>{
         memberInfo.mbti = decodeURIComponent( memberInfo.mbti )
         memberInfo.savefilename = decodeURIComponent( memberInfo.savefilename )
         memberInfo.zip_num = decodeURIComponent( memberInfo.zip_num )
-        memberInfo.addres1 = decodeURIComponent( memberInfo.addres1 )
-        memberInfo.addres2 = decodeURIComponent( memberInfo.addres2 )
-        memberInfo.addres3 = decodeURIComponent( memberInfo.addres3 )
+        memberInfo.address1 = decodeURIComponent( memberInfo.address1 )
+        memberInfo.address2 = decodeURIComponent( memberInfo.address2 )
+        memberInfo.address3 = decodeURIComponent( memberInfo.address3 )
         memberInfo.indate = decodeURIComponent( memberInfo.indate )
         memberInfo.provider = decodeURIComponent( memberInfo.provider )
         memberInfo.snsid = decodeURIComponent( memberInfo.snsid )
@@ -58,15 +60,16 @@ const userSlice = createSlice(
                 state.userid = action.payload.userid
                 state.pwd = action.payload.pwd
                 state.name = action.payload.name
+                state.nickname = action.payload.nickname
                 state.email = action.payload.email
                 state.phone = action.payload.phone
                 state.birth = action.payload.birth
                 state.mbti = action.payload.mbti
                 state.savefilename = action.payload.savefilename
                 state.zip_num = action.payload.zip_num
-                state.addres1 = action.payload.addres1
-                state.addres2 = action.payload.addres2
-                state.addres3 = action.payload.addres3
+                state.address1 = action.payload.address1
+                state.address2 = action.payload.address2
+                state.address3 = action.payload.address3
                 state.indate = action.payload.indate
                 state.provider = action.payload.provider
                 state.snsid = action.payload.snsid
@@ -79,15 +82,16 @@ const userSlice = createSlice(
                 state.userid = ''
                 state.pwd = ''
                 state.name = ''
+                state.nickname = ''
                 state.email = ''
                 state.phone = ''
                 state.birth = ''
                 state.mbti = ''
                 state.savefilename = ''
                 state.zip_num = ''
-                state.addres1 = ''
-                state.addres2 = ''
-                state.addres3 = ''
+                state.address1 = ''
+                state.address2 = ''
+                state.address3 = ''
                 state.indate = ''
                 state.provider = ''
                 state.snsid = ''

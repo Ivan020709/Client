@@ -193,7 +193,7 @@
    카테고리 메모지
 ================================ */
 
-.ai-extra-area > div {
+.ai-extra-area>div {
     position: relative;
     width: 200px;
     height: 130px;
@@ -224,7 +224,7 @@
    메모지 핀
 ================================ */
 
-.ai-extra-area > div::before {
+.ai-extra-area>div::before {
     content: '';
     position: absolute;
     top: -11px;
@@ -244,7 +244,7 @@
    핀 하이라이트
 ================================ */
 
-.ai-extra-area > div::after {
+.ai-extra-area>div::after {
     content: '';
     position: absolute;
     top: -8px;
@@ -261,52 +261,52 @@
    메모지 색상
 ================================ */
 
-.ai-extra-area > div:nth-child(1) {
+.ai-extra-area>div:nth-child(1) {
     background: #ffdede;
     transform: rotate(-3deg);
 }
 
 
-.ai-extra-area > div:nth-child(2) {
+.ai-extra-area>div:nth-child(2) {
     background: #fff4b8;
     transform: rotate(2deg);
 }
 
 
-.ai-extra-area > div:nth-child(3) {
+.ai-extra-area>div:nth-child(3) {
     background: #dff1ff;
     transform: rotate(-1deg);
 }
 
-.ai-extra-area > div:nth-child(4) {
+.ai-extra-area>div:nth-child(4) {
     background: #e7ddff;
     transform: rotate(3deg);
 }
 
-.ai-extra-area > div:nth-child(5) {
+.ai-extra-area>div:nth-child(5) {
     background: #dff5df;
     transform: rotate(-2deg);
 }
 
-.ai-extra-area > div:nth-child(6) {
+.ai-extra-area>div:nth-child(6) {
     background: #ffe8c9;
     transform: rotate(2deg);
 }
 
 
-.ai-extra-area > div:nth-child(7) {
+.ai-extra-area>div:nth-child(7) {
     background: #e8e8ff;
     transform: rotate(-3deg);
 }
 
 
-.ai-extra-area > div:nth-child(8) {
+.ai-extra-area>div:nth-child(8) {
     background: #ffe0ef;
     transform: rotate(2deg);
 }
 
 
-.ai-extra-area > div:nth-child(9) {
+.ai-extra-area>div:nth-child(9) {
     background: #e0f4ef;
     transform: rotate(-2deg);
 }
@@ -315,11 +315,9 @@
    메모지 Hover
 ================================ */
 
-.ai-extra-area > div:hover {
+.ai-extra-area>div:hover {
     transform:
-        rotate(0deg)
-        translateY(-10px)
-        scale(1.04);
+        rotate(0deg) translateY(-10px) scale(1.04);
     box-shadow:
         6px 12px 22px rgba(60, 60, 40, 0.22);
 }
@@ -365,6 +363,7 @@
 .SelectAi_btn button:active {
     transform: translateY(0);
 }
+
 /* ================================
    대화 시작 버튼 영역
 ================================ */
@@ -486,9 +485,7 @@
 .ai-extra-area .category.selected {
 
     transform:
-        rotate(0deg)
-        translateY(-8px)
-        scale(1.08);
+        rotate(0deg) translateY(-8px) scale(1.08);
 
     border:
         3px solid #719d7d;
@@ -521,8 +518,7 @@
 .ai-extra-area .category:hover {
 
     transform:
-        translateY(-5px)
-        scale(1.03);
+        translateY(-5px) scale(1.03);
 
     box-shadow:
         5px 10px 20px rgba(70, 70, 50, 0.2);
