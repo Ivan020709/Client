@@ -211,6 +211,12 @@ function NoticeWrite() {
                 <div className="notice-write-buttons">
 
                     <button
+                        type="submit"
+                        className="notice-submit-btn"
+                    >
+                        공지 등록
+                    </button>
+                    <button
                         type="button"
                         className="notice-cancel-btn"
                         onClick={handleCancel}
@@ -219,12 +225,6 @@ function NoticeWrite() {
                     </button>
 
 
-                    <button
-                        type="submit"
-                        className="notice-submit-btn"
-                    >
-                        공지 등록
-                    </button>
 
                 </div>
 

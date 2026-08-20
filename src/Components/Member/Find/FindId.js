@@ -62,7 +62,7 @@ function FindId() {
                 <div style={{ margin: '20px auto', padding: '15px', maxWidth: '480px', backgroundColor: '#f9f9f9', border: '1px solid #ddd', textAlign: 'center', boxSizing: 'border-box' }}>
                     <p style={{ margin: 0 }}>회원님의 아이디(이메일)는 다음과 같습니다:</p>
                     <p style={{ fontSize: '18px', color: 'blue', fontWeight: 'bold', marginTop: '10px' }}>{foundId}</p>
-                    <button className="join-btn-join" style={{ marginTop: '15px', width: '100%' }} onClick={() => navigate('/Login')}>로그인으로 가기</button>
+                    <button className="join-btn-join" style={{ marginTop: '15px', width: '100%' }} onClick={() => navigate('/memberLogin')}>로그인으로 가기</button>
                 </div>
             ) : (
                 <div className="find-btn-area">

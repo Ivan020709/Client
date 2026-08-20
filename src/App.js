@@ -10,6 +10,9 @@ import BoardView from "./Components/Board/BoardView";
 import UpdateBoard from './Components/Board/UpdateBoard';
 
 import SelectAi from "./Components/Ai/SelectAi";
+import G from "./Components/Ai/G";
+import Lo from "./Components/Ai/Lo";
+import Feel from "./Components/Ai/Feel";
 
 import Info from "./Components/Info/Info";
 import Hellow from "./Components/Info/Hellow";
@@ -19,7 +22,6 @@ import Find from './Components/Member/Find/Find';
 import FindId from './Components/Member/Find/FindId';
 import FindPass from './Components/Member/Find/FindPass';
 
-import TalkAI from './Components/Ai/TalkAI'
 import DiaryList from './Components/Diary/DiaryList';
 import Diary from './Components/Calendar/Diary';
 import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
@@ -40,6 +42,8 @@ import UpdateInquiry from './Components/Board/UpdateInquiry'
 import AdminPage from './Components/MyPage/AdminPage'
 import ErrorLog from './Components/MyPage/ErrorLog'
 
+import UpdatePwd from './Components/Member/Find/UpdatePwd';
+
 function App() {
     return (
         <div>
@@ -59,7 +63,9 @@ function App() {
 
                     {/*ai대화 */}
                     <Route path='/selectAi' element={<SelectAi />} />
-                    <Route path='/talkAI' element={<TalkAI />} />
+                    <Route path='/g' element={<G />} />
+                    <Route path='/lo' element={<Lo />} />
+                    <Route path='/feel' element={<Feel />} />
 
                     {/*이용안내*/}
                     <Route path='/info' element={<Info />} />
@@ -79,6 +85,7 @@ function App() {
                     <Route path='/find' element={<Find />} />
                     <Route path='/findId' element={<FindId />} />
                     <Route path='/findPass' element={<FindPass />} />
+                    <Route path='/updatePwd' element={<UpdatePwd />} />
 
                     <Route path='/diaryList' element={<DiaryList />} />
                     <Route path='/Diary' element={<Diary />} />
@@ -93,6 +100,8 @@ function App() {
                     <Route path="/inquiryView" element={<InquiryView />} />
                     <Route path="/inquiryWrite" element={<InquiryWrite />} />
                     <Route path="/updateInquiry" element={<UpdateInquiry />} />
+
+                    <Route path='/updatePwd' element={<UpdatePwd />} />
 
                 </Route>
             </Routes>

@@ -5,27 +5,30 @@ import axios from 'axios';
 import './Find.css';
 
 function UpdatePwd() {
+    const [userid, setUserid] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
 
     const handleUpdate = () => {
+        if (!userid) return alert('아이디를 입력하세요.');
         if (!password) return alert('새 비밀번호를 입력하세요.');
-        if (password !== confirmPassword) return alert('비밀번호가 일치하지 않습니다.');
 
-        axios.post('/api/member/updatePwd', { password })
+        if (password !== confirmPassword) {
+            return alert('비밀번호가 일치하지 않습니다.');
+        }
+
+        axios.post('/api/member/updatePwd', {
+            userid: userid,
+            password: password
+        })
             .then((result) => {
-                // 성공 시 새로운 윈도우 창 띄우기
-                const successWindow = window.open('', '_blank', 'width=400,height=300,left=300,top=300');
-                if (successWindow) {
-                    successWindow.document.write(`
-                        <div style="font-family: sans-serif; text-align: center; padding: 40px;">
-                            <h2 style="color: #333;">변경 성공!</h2>
-                            <p style="color: #666;">비밀번호가 성공적으로 변경되었습니다.</p>
-                        </div>
-                    `);
+                if (result.data.msg === 'OK') {
+                    alert('비밀번호가 변경되었습니다.');
+                    navigate('/memberLogin');
+                } else {
+                    alert('비밀번호 변경에 실패했습니다.');
                 }
-                navigate('/Login');
             })
             .catch((err) => {
                 console.error(err);
@@ -35,6 +38,17 @@ function UpdatePwd() {
 
     return (
         <div className="join-wrapper">
+            <div className="join-row">
+                <label className="join-label">아이디</label>
+                <input
+                    className="join-input-etc"
+                    type="text"
+                    value={userid}
+                    onChange={(e) => setUserid(e.currentTarget.value)}
+                    placeholder="abc@abc.com"
+                />
+            </div>
+
             <h2 className="join-title">새 비밀번호 입력</h2>
 
             <div className="join-form">

@@ -24,7 +24,7 @@ function FindPass() {
         })
             .then((result) => {
                 if (result.data.msg === 'OK') {
-                    setIsSuccess(true);
+                    navigate('/updatePwd');
                 } else {
                     alert('일치하는 회원 정보를 찾을 수 없습니다.');
                 }
@@ -88,14 +88,6 @@ function FindPass() {
                             비밀번호 찾기
                         </button>
 
-                        {/* '변경' 버튼을 눌러 UpdatePwd로 이동 */}
-                        <button
-                            className="join-btn-join"
-                            onClick={() => navigate('/updatePwd')}
-                        >
-                            변경
-                        </button>
-
                         <button
                             className="join-btn-zip_num"
                             onClick={() => navigate('/find')}
@@ -124,7 +116,7 @@ function FindPass() {
 
                         <button
                             className="success-login-btn"
-                            onClick={() => navigate('/Login')}
+                            onClick={() => navigate('/memberLogin')}
                         >
                             로그인하기
                         </button>

@@ -163,473 +163,290 @@
 }
 
 
+/* =========================================================
+   게시판
+========================================================= */
+
+.diary-board {
+    overflow: hidden;
+    border: 1px solid #d9cbc0;
+    border-radius: 8px;
+    background: #e6d8ca;
+    box-shadow:
+        0 6px 20px rgba(85, 65, 50, .08);
+}
+
+
 /* =========================
-   Diary Tabs
+   게시판 상단
 ========================= */
 
-.diary-tabs {
+.board-header {
+    height: 48px;
     display: flex;
-    gap: 4px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #e5d9d0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 22px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d1c0b2;
+    background: #cbb6a5;
+    color: #fffaf5;
+    font-size: 12px;
+    letter-spacing: .8px;
 }
 
-.diary-tabs button {
-    min-width: 150px;
-    height: 45px;
-    padding: 0 20px;
-    border: none;
-    border-bottom: 2px solid transparent;
-    background: transparent;
-    color: #a09690;
-    cursor: pointer;
-    font-size: 14px;
-    transition: .2s;
+.board-header span:last-child {
+    font-size: 11px;
+    letter-spacing: 0;
+    opacity: .8;
 }
 
-.diary-tabs button:hover {
-    color: #665950;
-    background: #faf5f1;
-}
 
-.diary-tabs button.active {
-    border-bottom: 2px solid #9a7f6d;
-    color: #665246;
-    font-weight: bold;
+/* =========================
+   게시판 본체
+========================= */
+
+.diary-pin-board {
+    min-height: 520px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 38px 25px;
+    padding: 45px 35px 50px;
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.15)
+        ),
+        #dfcfc0;
 }
 
 
 /* =========================================================
-   일기장 목록
+   메모지
 ========================================================= */
 
-.diary-note-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px 20px;
-    padding: 12px 5px 25px;
-}
-
-
-/* =========================
-   Diary Cover
-========================= */
-
-.diary-cover {
-    height: 235px;
+.diary-memo-wrap {
+    min-height: 225px;
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    position: relative;
+    align-items: flex-start;
     cursor: pointer;
-    perspective: 800px;
+    transition: .25s ease;
 }
 
-
-/* =========================
-   책
-========================= */
-
-.diary-book {
-    width: 145px;
-    height: 190px;
-    position: relative;
-    box-sizing: border-box;
-    padding: 32px 15px 15px;
-    border-radius: 5px 10px 10px 5px;
-    background:
-        linear-gradient(90deg,
-            #8e6f5d 0,
-            #a88974 5px,
-            #c7aa94 6px,
-            #d8bda8 100%);
-    color: #fffaf5;
-    box-shadow:
-        5px 7px 0 #765b4b,
-        8px 12px 18px rgba(82, 61, 47, .18);
-    transform: rotate(-2deg);
-    transition: .3s ease;
-}
-
-
-/* 책 표지 안쪽 */
-
-.diary-book::before {
-    content: "";
-    position: absolute;
-    inset: 7px 8px 7px 13px;
-    border: 1px solid rgba(255, 245, 235, .5);
-    border-radius: 3px 7px 7px 3px;
-    pointer-events: none;
-}
-
-
-/* 책 등 */
-
-.diary-book-binding {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 9px;
-    height: 100%;
-    border-radius: 5px 0 0 5px;
-    background: #755846;
-    box-shadow:
-        inset -2px 0 rgba(255, 255, 255, .12),
-        inset 2px 0 rgba(0, 0, 0, .08);
-}
-
-
-/* 책 페이지 느낌 */
-
-.diary-book::after {
-    content: "";
-    position: absolute;
-    right: -4px;
-    top: 8px;
-    width: 4px;
-    height: 174px;
-    border-radius: 0 3px 3px 0;
-    background:
-        repeating-linear-gradient(to bottom,
-            #eee0d2 0,
-            #eee0d2 3px,
-            #d8c7b7 4px,
-            #eee0d2 5px);
-}
-
-
-/* =========================
-   Hover
-========================= */
-
-.diary-cover:hover .diary-book {
-    transform:
-        translateY(-9px) rotate(0deg) scale(1.03);
-
-    box-shadow:
-        6px 10px 0 #765b4b,
-        12px 18px 25px rgba(82, 61, 47, .22);
-}
-
-
-/* =========================
-   깃털펜
-========================= */
-
-.diary-book-icon {
-    position: absolute;
-    top: -46px;
-    right: -18px;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 46px;
-    transform: rotate(-28deg);
-    filter:
-        drop-shadow(2px 3px 2px rgba(70, 48, 35, .18));
+.diary-memo-wrap:hover {
+    transform: translateY(-8px) rotate(0deg);
     z-index: 5;
 }
 
 
-/* 깃털펜 받침 느낌 */
+/* =========================
+   메모지 핀
+========================= */
 
-.diary-book-icon::after {
+.memo-pin {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%) rotate(-10deg);
+    font-size: 25px;
+    filter:
+        drop-shadow(
+            1px 3px 2px
+            rgba(70, 50, 38, .25)
+        );
+}
+
+
+/* =========================
+   메모지 본체
+========================= */
+
+.diary-memo {
+    width: 100%;
+    min-height: 205px;
+    position: relative;
+    padding: 23px 20px 18px;
+    box-sizing: border-box;
+
+    background: #fff1a8;
+
+    box-shadow:
+        3px 6px 10px
+        rgba(70, 50, 38, .16);
+
+    transition: .25s ease;
+}
+
+
+/* 메모지 살짝 접힌 효과 */
+
+.diary-memo::after {
     content: "";
     position: absolute;
-    width: 35px;
-    height: 5px;
-    bottom: 4px;
-    left: 15px;
-    border-radius: 50%;
-    background: rgba(82, 57, 43, .18);
-    transform: rotate(15deg);
-    z-index: -1;
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    border-width:
+        0 0 25px 25px;
+
+    border-color:
+        transparent
+        transparent
+        #e4cf80
+        transparent;
 }
 
 
 /* =========================
-   책 제목
+   메모지 색상
 ========================= */
 
-.diary-book-title {
-    position: relative;
-    z-index: 2;
-    margin-top: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 245, 235, .4);
-    text-align: center;
-    color: #fffaf5;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 17px;
+.memo-0 .diary-memo {
+    background: #fff1a8;
+}
+
+.memo-1 .diary-memo {
+    background: #ffd9df;
+}
+
+.memo-2 .diary-memo {
+    background: #dff3c5;
+}
+
+.memo-3 .diary-memo {
+    background: #d9ecff;
+}
+
+.memo-4 .diary-memo {
+    background: #eadcff;
+}
+
+
+/* =========================
+   메모지 상단
+========================= */
+
+.memo-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        1px dashed
+        rgba(100, 75, 55, .22);
+}
+
+.memo-date {
+    color: #766456;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+    font-size: 13px;
     font-weight: bold;
-    letter-spacing: 1px;
+}
+
+.memo-emotion {
+    font-size: 24px;
 }
 
 
 /* =========================
-   날짜
+   메모 내용
 ========================= */
 
-.diary-book-date {
-    position: relative;
-    z-index: 2;
-    margin-top: 22px;
-    text-align: center;
-    color: #f8e9dc;
+.memo-content {
+    min-height: 90px;
+    padding: 18px 3px 10px;
+}
+
+.memo-content p {
+    margin: 0;
+
+    color: #5e5148;
+
+    font-family:
+        "Noto Sans KR",
+        sans-serif;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    word-break: break-word;
+}
+
+
+/* =========================
+   메모 하단
+========================= */
+
+.memo-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 10px;
+
+    border-top:
+        1px dashed
+        rgba(100, 75, 55, .18);
+}
+
+.memo-writer {
+    color: #746356;
     font-size: 11px;
-}
-
-
-/* =========================
-   작성자
-========================= */
-
-.diary-book-writer {
-    position: relative;
-    z-index: 2;
-    margin-top: 8px;
-    text-align: center;
-    color: #fff8f1;
-    font-size: 12px;
     font-weight: bold;
 }
 
-
-/* =========================
-   클릭 안내
-========================= */
-
-.diary-book-hint {
-    position: absolute;
-    bottom: 11px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    color: rgba(255, 248, 241, .55);
+.memo-hint {
+    color: #9a8878;
     font-size: 8px;
     letter-spacing: 1.5px;
 }
 
 
 /* =========================
-   카드별 색상
+   메모별 기울기
 ========================= */
 
-.diary-cover:nth-child(4n+1) .diary-book {
-    background:
-        linear-gradient(90deg,
-            #8f715e 0,
-            #aa8973 5px,
-            #cbb09b 100%);
+.memo-0 {
+    transform: rotate(-2deg);
 }
 
-.diary-cover:nth-child(4n+2) .diary-book {
-    background:
-        linear-gradient(90deg,
-            #8a705f 0,
-            #b0917c 5px,
-            #d3b9a4 100%);
+.memo-1 {
+    transform: rotate(2deg);
 }
 
-.diary-cover:nth-child(4n+3) .diary-book {
-    background:
-        linear-gradient(90deg,
-            #806957 0,
-            #9e806c 5px,
-            #c3a58f 100%);
+.memo-2 {
+    transform: rotate(-1deg);
 }
 
-.diary-cover:nth-child(4n) .diary-book {
-    background:
-        linear-gradient(90deg,
-            #917764 0,
-            #b29580 5px,
-            #d7bda8 100%);
+.memo-3 {
+    transform: rotate(2deg);
+}
+
+.memo-4 {
+    transform: rotate(-2deg);
 }
 
 
-/* =========================================================
-   일기 모달
-========================================================= */
+/* hover 시 그림자 */
 
-.diary-modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    background: rgba(55, 43, 35, .42);
-    backdrop-filter: blur(3px);
-    animation: modalFade .2s ease;
-}
-
-@keyframes modalFade {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-
-/* =========================
-   Modal
-========================= */
-
-.diary-modal {
-    width: 480px;
-    max-width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-    padding: 38px 40px 32px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background: #fffaf5;
+.diary-memo-wrap:hover .diary-memo {
     box-shadow:
-        0 20px 60px rgba(54, 40, 31, .25);
-    animation: modalOpen .25s ease;
-}
-
-@keyframes modalOpen {
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(.97);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-
-/* =========================
-   Modal Close
-========================= */
-
-.diary-modal-close {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: transparent;
-    color: #8d7d73;
-    font-size: 27px;
-    cursor: pointer;
-}
-
-.diary-modal-close:hover {
-    color: #4c4039;
-}
-
-
-/* =========================
-   Modal Icon
-========================= */
-
-.diary-modal-icon {
-    margin-bottom: 18px;
-    text-align: center;
-    font-size: 40px;
-}
-
-
-/* =========================
-   Modal Header
-========================= */
-
-.diary-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e8dcd2;
-}
-
-.diary-modal-header h3 {
-    margin: 0 0 7px;
-    color: #4d413a;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 19px;
-}
-
-.diary-modal-header span {
-    color: #95877e;
-    font-size: 12px;
-}
-
-
-/* =========================
-   Modal Emotion
-========================= */
-
-.diary-modal-emotion {
-    min-width: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.diary-modal-emotion span {
-    font-size: 30px;
-}
-
-.diary-modal-emotion small {
-    color: #897970;
-    font-size: 11px;
-}
-
-
-/* =========================
-   Modal Content
-========================= */
-
-.diary-modal-content {
-    min-height: 150px;
-    margin: 25px 0;
-    padding: 22px;
-    box-sizing: border-box;
-    border-radius: 7px;
-    background: #f7eee7;
-    color: #5a4d45;
-    font-size: 15px;
-    line-height: 1.9;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-
-
-/* =========================
-   Modal Button
-========================= */
-
-.diary-modal-close-btn {
-    width: 100%;
-    height: 42px;
-    border: none;
-    border-radius: 5px;
-    background: #8d7768;
-    color: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    transition: .2s;
-}
-
-.diary-modal-close-btn:hover {
-    background: #766154;
+        6px 12px 20px
+        rgba(70, 50, 38, .22);
 }
 
 
@@ -663,6 +480,251 @@
 
 
 /* =========================================================
+   일기 모달
+========================================================= */
+
+.diary-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background:
+        rgba(55, 43, 35, .42);
+
+    backdrop-filter: blur(3px);
+
+    animation:
+        modalFade .2s ease;
+}
+
+
+@keyframes modalFade {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================
+   Modal
+========================= */
+
+.diary-modal {
+    width: 480px;
+    max-width: 100%;
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    position: relative;
+
+    padding: 38px 40px 32px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    background: #fffaf5;
+
+    box-shadow:
+        0 20px 60px
+        rgba(54, 40, 31, .25);
+
+    animation:
+        modalOpen .25s ease;
+}
+
+
+@keyframes modalOpen {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(15px)
+            scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================
+   Modal Close
+========================= */
+
+.diary-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8d7d73;
+
+    font-size: 27px;
+
+    cursor: pointer;
+}
+
+.diary-modal-close:hover {
+    color: #4c4039;
+}
+
+
+/* =========================
+   Modal Icon
+========================= */
+
+.diary-modal-icon {
+    margin-bottom: 18px;
+
+    text-align: center;
+
+    font-size: 40px;
+}
+
+
+/* =========================
+   Modal Header
+========================= */
+
+.diary-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid #e8dcd2;
+}
+
+.diary-modal-header h3 {
+    margin: 0 0 7px;
+
+    color: #4d413a;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 19px;
+}
+
+.diary-modal-header span {
+    color: #95877e;
+    font-size: 12px;
+}
+
+
+/* =========================
+   Modal Emotion
+========================= */
+
+.diary-modal-emotion {
+    min-width: 60px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 4px;
+}
+
+.diary-modal-emotion span {
+    font-size: 30px;
+}
+
+.diary-modal-emotion small {
+    color: #897970;
+    font-size: 11px;
+}
+
+
+/* =========================
+   Modal Content
+========================= */
+
+.diary-modal-content {
+    min-height: 150px;
+
+    margin: 25px 0;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    background: #f7eee7;
+
+    color: #5a4d45;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================
+   Modal Button
+========================= */
+
+.diary-modal-close-btn {
+    width: 100%;
+    height: 42px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #8d7768;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: .2s;
+}
+
+.diary-modal-close-btn:hover {
+    background: #766154;
+}
+
+
+/* =========================================================
    Emotion Calendar
 ========================================================= */
 
@@ -673,34 +735,48 @@
 
 .calendar-box {
     flex: 1;
+
     padding: 25px;
+
     border: 1px solid #e7dbd2;
     border-radius: 8px;
+
     background: #fffdfb;
-    box-shadow: 0 3px 12px rgba(90, 68, 52, .04);
+
+    box-shadow:
+        0 3px 12px
+        rgba(90, 68, 52, .04);
 }
 
 .calendar-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     margin-bottom: 25px;
 }
 
 .calendar-title h3 {
     margin: 0;
+
     color: #51463f;
+
     font-size: 18px;
 }
 
 .calendar-title button {
     width: 32px;
     height: 32px;
+
     border: 1px solid #ddd0c6;
     border-radius: 5px;
+
     background: #fff;
+
     color: #665950;
+
     cursor: pointer;
+
     font-size: 20px;
 }
 
@@ -708,12 +784,18 @@
     background: #f7eee8;
 }
 
+
 .calendar-week {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns:
+        repeat(7, 1fr);
+
     margin-bottom: 5px;
+
     text-align: center;
+
     color: #8d8179;
+
     font-size: 13px;
 }
 
@@ -721,20 +803,35 @@
     padding: 10px 0;
 }
 
+
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border-top: 1px solid #eee5df;
-    border-left: 1px solid #eee5df;
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    border-top:
+        1px solid #eee5df;
+
+    border-left:
+        1px solid #eee5df;
 }
+
 
 .calendar-day {
     height: 75px;
+
     position: relative;
-    border-right: 1px solid #eee5df;
-    border-bottom: 1px solid #eee5df;
+
+    border-right:
+        1px solid #eee5df;
+
+    border-bottom:
+        1px solid #eee5df;
+
     background: #fff;
+
     cursor: pointer;
+
     transition: .2s;
 }
 
@@ -749,29 +846,40 @@
 
 .calendar-day.selected {
     background: #f4e8df;
-    box-shadow: inset 0 0 0 2px #9b806d;
+
+    box-shadow:
+        inset 0 0 0 2px #b89578;
 }
 
 .day-number {
     position: absolute;
+
     top: 8px;
     left: 8px;
+
     color: #8b8079;
+
     font-size: 12px;
 }
 
 .emotion-emoji {
     position: absolute;
+
     top: 27px;
     left: 50%;
-    transform: translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     font-size: 25px;
 }
 
 .comment-mark {
     position: absolute;
+
     right: 6px;
     bottom: 5px;
+
     font-size: 13px;
 }
 
@@ -782,24 +890,34 @@
 
 .emotion-summary {
     width: 200px;
+
     padding: 25px;
+
     box-sizing: border-box;
+
     border: 1px solid #e7dbd2;
     border-radius: 8px;
+
     background: #fffdfb;
 }
 
 .emotion-summary h3 {
     margin: 0 0 20px;
+
     color: #51463f;
+
     font-size: 17px;
 }
 
 .emotion-item {
     display: flex;
     justify-content: space-between;
+
     padding: 12px 0;
-    border-bottom: 1px solid #eee5df;
+
+    border-bottom:
+        1px solid #eee5df;
+
     font-size: 14px;
 }
 
@@ -814,44 +932,63 @@
 
 .diary-box {
     margin-top: 25px;
+
     padding: 30px;
+
     border: 1px solid #e7dbd2;
     border-radius: 8px;
+
     background: #fffdfb;
-    box-shadow: 0 3px 12px rgba(90, 68, 52, .04);
+
+    box-shadow:
+        0 3px 12px
+        rgba(90, 68, 52, .04);
 }
 
 .diary-box h3 {
     margin: 0 0 25px;
+
     color: #51463f;
+
     font-size: 18px;
 }
 
 .emotion-select p,
-.comment-area>p {
+.comment-area > p {
     margin: 0 0 12px;
+
     color: #554941;
+
     font-size: 14px;
+
     font-weight: bold;
 }
 
 .emotion-buttons {
     display: flex;
+
     gap: 10px;
+
     margin-bottom: 25px;
 }
 
 .emotion-buttons button {
     width: 70px;
     height: 70px;
+
     display: flex;
     flex-direction: column;
+
     justify-content: center;
     align-items: center;
+
     gap: 5px;
+
     border: 1px solid #ddd0c6;
     border-radius: 7px;
+
     background: #fff;
+
     cursor: pointer;
 }
 
@@ -861,6 +998,7 @@
 
 .emotion-buttons button small {
     color: #82756e;
+
     font-size: 11px;
 }
 
@@ -870,54 +1008,113 @@
 
 .emotion-buttons button.emotion-active {
     border: 2px solid #947a69;
+
     background: #f7ece4;
 }
 
+.emotion-buttons button:disabled {
+    opacity: .75;
+
+    cursor: default;
+}
+
+
 .comment-area textarea {
     width: 100%;
+
     min-height: 100px;
+
     padding: 12px;
+
     box-sizing: border-box;
+
     border: 1px solid #ddd0c6;
+
     border-radius: 5px;
+
     resize: vertical;
+
     outline: none;
+
     background: #fff;
+
     color: #51463f;
+
     font-family: inherit;
+
     font-size: 14px;
+
     line-height: 1.5;
 }
 
 .comment-area textarea:focus {
-    border-color: #a58a78;
+    border-color: #b89578;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(184,149,120,.12);
 }
+
+.comment-area textarea:read-only {
+    background: #f4eee7;
+
+    color: #6f6258;
+
+    cursor: default;
+
+    border-color: #dfd2c5;
+}
+
 
 .comment-bottom {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
+
+    gap: 10px;
+
     margin-top: 10px;
 }
 
 .comment-bottom span {
     color: #a29790;
+
     font-size: 12px;
 }
 
 .comment-bottom button {
-    width: 80px;
-    height: 38px;
+    min-width: 72px;
+
+    padding: 9px 20px;
+
     border: none;
-    border-radius: 5px;
-    background: #8d7768;
+
+    border-radius: 10px;
+
+    background: #b89578;
+
     color: #fff;
+
     cursor: pointer;
-    font-size: 13px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: all .2s ease;
 }
 
 .comment-bottom button:hover {
-    background: #756054;
+    background: #9f7d62;
+
+    transform:
+        translateY(-1px);
+}
+
+.comment-bottom button:active {
+    transform:
+        translateY(0);
 }
 
 
@@ -927,81 +1124,115 @@
 
 .profile-edit-box {
     display: flex;
+
     gap: 50px;
+
     padding: 40px;
+
     border: 1px solid #e7dbd2;
     border-radius: 8px;
+
     background: #fffdfb;
 }
 
 .profile-image-area {
     width: 150px;
+
     display: flex;
     flex-direction: column;
+
     align-items: center;
 }
 
 .profile-big-image {
     width: 120px;
     height: 120px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     margin-bottom: 15px;
+
     border-radius: 50%;
+
     background: #f5e9df;
+
     font-size: 55px;
 }
 
 .profile-image-area button {
     padding: 8px 15px;
+
     border: 1px solid #ddd0c6;
     border-radius: 4px;
+
     background: #fff;
+
     color: #665950;
+
     cursor: pointer;
+
     font-size: 13px;
 }
 
 .profile-form {
     flex: 1;
+
     max-width: 500px;
 }
 
 .form-row {
     display: flex;
     align-items: center;
+
     margin-bottom: 18px;
 }
 
 .form-row label {
     width: 90px;
+
     color: #554941;
+
     font-size: 14px;
+
     font-weight: bold;
 }
 
 .form-row input,
 .form-row select {
     flex: 1;
+
     height: 42px;
+
     padding: 0 12px;
+
     box-sizing: border-box;
+
     border: 1px solid #ddd0c6;
+
     border-radius: 4px;
+
     outline: none;
+
     background: #fff;
 }
 
 .save-profile-btn {
     width: 100%;
     height: 45px;
+
     margin-top: 10px;
+
     border: none;
     border-radius: 4px;
+
     background: #8d7768;
+
     color: #fff;
+
     cursor: pointer;
+
     font-size: 14px;
 }
 
@@ -1015,37 +1246,53 @@
 ========================================================= */
 
 .setting-box {
-    border-top: 2px solid #8d7768;
+    border-top:
+        2px solid #8d7768;
+
     background: #fffdfb;
 }
 
 .setting-item {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
+
     min-height: 80px;
+
     padding: 0 20px;
-    border-bottom: 1px solid #eee5df;
+
+    border-bottom:
+        1px solid #eee5df;
 }
 
 .setting-item strong {
     color: #554941;
+
     font-size: 14px;
 }
 
 .setting-item p {
     margin: 5px 0 0;
+
     color: #a29790;
+
     font-size: 12px;
 }
 
 .logout-btn {
     padding: 8px 15px;
+
     border: 1px solid #ddd0c6;
+
     border-radius: 4px;
+
     background: #fff;
+
     color: #665950;
+
     cursor: pointer;
+
     font-size: 13px;
 }
 
@@ -1065,17 +1312,21 @@
         width: calc(100% - 40px);
     }
 
-    .diary-note-list {
-        grid-template-columns: repeat(3, 1fr);
+    .diary-pin-board {
+        grid-template-columns:
+            repeat(3, 1fr);
     }
+
 }
 
 
-@media(max-width:1000px) {
+@media(max-width:900px) {
 
-    .diary-note-list {
-        grid-template-columns: repeat(3, 1fr);
+    .diary-pin-board {
+        grid-template-columns:
+            repeat(2, 1fr);
     }
+
 }
 
 
@@ -1115,9 +1366,13 @@
         flex-direction: column;
     }
 
-    .diary-note-list {
-        grid-template-columns: repeat(2, 1fr);
+    .diary-pin-board {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        padding: 35px 25px 40px;
     }
+
 }
 
 
@@ -1135,56 +1390,47 @@
         font-size: 27px;
     }
 
-    .diary-note-list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px 10px;
-        padding-left: 0;
-        padding-right: 0;
+
+    .diary-pin-board {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+        padding:
+            40px 25px 45px;
     }
 
-    .diary-cover {
-        height: 210px;
+
+    .diary-memo-wrap {
+        width: 90%;
+        margin: 0 auto;
     }
 
-    .diary-book {
-        width: 125px;
-        height: 165px;
-        padding-top: 28px;
+
+    .board-header {
+        padding: 0 15px;
     }
 
-    .diary-book-icon {
-        top: -39px;
-        right: -15px;
-        font-size: 38px;
-    }
 
-    .diary-book-title {
-        font-size: 14px;
-    }
-
-    .diary-book-date {
-        margin-top: 18px;
+    .board-header span:first-child {
         font-size: 10px;
     }
 
-    .diary-book-writer {
-        font-size: 11px;
+
+    .board-header span:last-child {
+        font-size: 9px;
     }
 
-    .diary-tabs button {
-        min-width: 0;
-        flex: 1;
-        padding: 0 8px;
-        font-size: 12px;
-    }
 
     .emotion-buttons {
         flex-wrap: wrap;
     }
 
+
     .profile-edit-box {
         padding: 25px;
     }
+
 
     .form-row {
         flex-direction: column;
@@ -1196,106 +1442,24 @@
         width: auto;
     }
 
+
     .diary-modal {
-        padding: 32px 22px 25px;
+        padding:
+            32px 22px 25px;
     }
+
 }
 
 
 @media(max-width:420px) {
 
-    .diary-note-list {
-        grid-template-columns: 1fr 1fr;
+    .diary-pin-board {
+        padding:
+            35px 15px 40px;
     }
 
-    .diary-book {
-        width: 115px;
-        height: 155px;
+    .diary-memo-wrap {
+        width: 95%;
     }
 
-    .diary-book-icon {
-        font-size: 34px;
-        top: -36px;
-    }
-
-    .diary-book-title {
-        font-size: 13px;
-    }
-
-    /* =========================
-   일기 수정 상태
-========================= */
-
-    .comment-area textarea:read-only {
-        background: #f4eee7;
-        color: #6f6258;
-        cursor: default;
-        border-color: #dfd2c5;
-    }
-
-    .comment-area textarea:not(:read-only) {
-        background: #fffdf9;
-        border-color: #c9a98d;
-    }
-
-    .emotion-buttons button:disabled {
-        opacity: 0.75;
-        cursor: default;
-        transform: none;
-    }
-
-    .emotion-buttons button:disabled:hover {
-        transform: none;
-    }
-
-    /* 저장 / 수정 버튼 */
-    .comment-bottom button {
-        min-width: 72px;
-        padding: 9px 20px;
-        border: none;
-        border-radius: 10px;
-        background: #b89578;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all .2s ease;
-    }
-
-    .comment-bottom button:hover {
-        background: #9f7d62;
-        transform: translateY(-1px);
-    }
-
-    .comment-bottom button:active {
-        transform: translateY(0);
-    }
-
-    /* 수정 가능한 상태 */
-    .comment-area textarea:not(:read-only):focus {
-        outline: none;
-        border-color: #b89578;
-        box-shadow: 0 0 0 3px rgba(184, 149, 120, .12);
-    }
-
-    /* 저장된 일기 표시 */
-    .calendar-day .comment-mark {
-        position: absolute;
-        right: 5px;
-        bottom: 4px;
-        font-size: 11px;
-    }
-
-    /* 선택된 날짜 */
-    .calendar-day.selected {
-        box-shadow: inset 0 0 0 2px #b89578;
-    }
-
-    /* 수정 버튼이 들어간 하단 영역 */
-    .comment-bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-    }
 }

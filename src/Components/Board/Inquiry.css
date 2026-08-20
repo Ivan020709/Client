@@ -1,0 +1,58 @@
+/* 문의 게시판 공통 스타일 */
+.inquiry-list-page, .inquiry-view-page, .inquiry-write-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f7f8fa;
+    padding: 60px 0 100px;
+    box-sizing: border-box;
+}
+
+/* 헤더 공통 */
+.inquiry-header, .inquiry-view-header, .inquiry-write-header {
+    width: 900px;
+    margin: 0 auto 35px;
+}
+.inquiry-header h1, .inquiry-view-header h1, .inquiry-write-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* 테이블 스타일 (List) */
+.inquiry-container { width: 900px; margin: 0 auto; padding: 20px; background: #fff; border-radius: 12px; }
+.inquiry-table { width: 100%; border-top: 2px solid #333; }
+.inquiry-table-header { display: flex; height: 50px; border-bottom: 1px solid #ddd; background-color: #fafafa; align-items: center; font-weight: bold; justify-content: center; }
+.inquiry-row { display: flex; height: 55px; border-bottom: 1px solid #eee; align-items: center; cursor: pointer; }
+.inquiry-row:hover { background-color: #fafafa; }
+.inquiry-number { width: 80px; text-align: center; }
+.inquiry-title { flex: 1; padding: 0 20px; }
+.inquiry-writer { width: 100px; text-align: center; }
+.inquiry-date { width: 120px; text-align: center; }
+.inquiry-status { width: 80px; text-align: center; color: #555; }
+
+/* 작성 및 폼 스타일 */
+.inquiry-write-container { width: 900px; margin: 0 auto; padding: 35px; background: #fff; border-radius: 12px; }
+.inquiry-write-container input, .inquiry-write-container textarea, .inquiry-write-container select {
+    width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;
+}
+.inquiry-submit-btn { padding: 10px 30px; background: #333; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+
+
+/* 추가버튼 스타일 */
+.inquiry-cancel-btn {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #555;
+    border-radius: 6px;
+}
+.inquiry-cancel-btn:hover {
+    background-color: #f5f5f5;
+}
+.inquiry-submit-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 30px;
+}

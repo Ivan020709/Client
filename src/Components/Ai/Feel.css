@@ -1,86 +1,122 @@
 /* =========================================================
-   전체 페이지
+   Feelog - 필과 고민상담
+   Beige / Ivory / Brown / Rose Beige
+========================================================= */
+
+
+/* =========================================================
+   1. 전체 페이지
 ========================================================= */
 
 .talk-ai-page {
     min-height: 100vh;
-    padding: 40px 20px;
+
+    padding: 60px 20px 80px;
+
     box-sizing: border-box;
 
     background:
-        radial-gradient(circle at top left, rgba(180, 160, 220, 0.12), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(160, 190, 230, 0.12), transparent 35%),
-        #f8f6f3;
+        radial-gradient(
+            circle at top left,
+            rgba(230, 207, 194, 0.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(220, 195, 180, 0.20),
+            transparent 35%
+        ),
+        #f8f4ef;
 
     font-family:
         "Noto Sans KR",
         "Pretendard",
         Arial,
         sans-serif;
+
+    color: #4f4944;
+}
+
+
+.talk-ai-page *,
+.talk-ai-page *::before,
+.talk-ai-page *::after {
+    box-sizing: border-box;
 }
 
 
 /* =========================================================
-   메인 컨테이너
+   2. 메인 컨테이너
 ========================================================= */
 
 .talk-ai-container {
     width: 100%;
     max-width: 820px;
+
     margin: 0 auto;
 
     padding: 32px;
-    box-sizing: border-box;
 
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 253, 251, 0.96);
+
+    border: 1px solid #eee4dc;
 
     border-radius: 28px;
 
     box-shadow:
-        0 10px 40px rgba(60, 45, 70, 0.08);
-
-    border: 1px solid rgba(255, 255, 255, 0.8);
+        0 12px 35px rgba(100, 80, 60, 0.08);
 }
 
 
 /* =========================================================
-   Header
+   3. Header
 ========================================================= */
 
 .talk-ai-header {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
 
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
+
 
 .talk-ai-title {
     margin: 0;
 
+    color: #4f4944;
+
     font-size: 30px;
     font-weight: 700;
 
-    color: #403b46;
     letter-spacing: -1px;
 }
+
 
 .talk-ai-subtitle {
     margin: 8px 0 0;
 
+    color: #817971;
+
     font-size: 14px;
-    color: #99929d;
 }
+
+
+/* =========================================================
+   새 대화 버튼
+========================================================= */
 
 .talk-ai-new-button {
     padding: 10px 16px;
 
-    border: 1px solid #e8e3e8;
+    border: 1px solid #e5d8cf;
+
     border-radius: 12px;
 
-    background: #fff;
+    background: #fffdfb;
 
-    color: #77717a;
+    color: #776c65;
 
     font-size: 13px;
 
@@ -89,131 +125,89 @@
     transition: all 0.2s ease;
 }
 
+
 .talk-ai-new-button:hover {
-    background: #f7f3f8;
-    border-color: #dcd3df;
+    background: #faf3ee;
+
+    border-color: #d8bbaa;
+
+    color: #6f625b;
 }
 
 
 /* =========================================================
-   캐릭터 선택
-========================================================= */
-
-.talk-ai-character-section {
-    margin-bottom: 18px;
-}
-
-.talk-ai-section-title {
-    margin: 0 0 12px;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    color: #625b66;
-}
-
-.talk-ai-character-list {
-    display: flex;
-    gap: 12px;
-}
-
-.talk-ai-character {
-    flex: 1;
-
-    padding: 18px 12px;
-
-    border: 1px solid #e8e3e8;
-    border-radius: 18px;
-
-    background: #fff;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
-}
-
-.talk-ai-character:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 18px rgba(80, 60, 90, 0.08);
-
-    border-color: #d9d0dd;
-}
-
-.talk-ai-character-selected {
-    border: 2px solid #9d8ba8;
-
-    background:
-        linear-gradient(145deg,
-            #faf7fb,
-            #f5f0f7);
-
-    box-shadow:
-        0 5px 18px rgba(100, 75, 110, 0.08);
-}
-
-.talk-ai-character-emoji {
-    font-size: 34px;
-
-    margin-bottom: 9px;
-}
-
-.talk-ai-character-name {
-    font-size: 17px;
-    font-weight: 700;
-
-    color: #49424e;
-
-    margin-bottom: 5px;
-}
-
-.talk-ai-character-description {
-    font-size: 12px;
-    line-height: 1.5;
-
-    color: #99929d;
-}
-
-
-/* =========================================================
-   현재 캐릭터
+   4. 현재 캐릭터
 ========================================================= */
 
 .talk-ai-current-character {
     display: flex;
+
     align-items: center;
 
-    gap: 8px;
+    gap: 10px;
 
-    padding: 13px 16px;
+    padding: 10px 16px;
 
     margin-bottom: 18px;
 
-    border-radius: 14px;
+    border: 1px solid #eee3db;
 
-    background: #faf8fa;
+    border-radius: 15px;
 
-    color: #817a84;
+    background:
+        linear-gradient(
+            135deg,
+            #fffdfb,
+            #faf5f0
+        );
+
+    color: #817971;
 
     font-size: 13px;
 }
 
+
 .talk-ai-current-character strong {
-    color: #514956;
+    color: #a77b68;
 }
 
+
 .talk-ai-current-emoji {
-    font-size: 21px;
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
 
 
 /* =========================================================
-   채팅창
+   현재 필 이미지
+========================================================= */
+
+.talk-ai-character-image {
+    width: 45px;
+    height: 45px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    display: block;
+
+    border: 2px solid #f0e2d9;
+
+    box-shadow:
+        0 4px 10px rgba(100, 75, 60, 0.10);
+}
+
+
+/* =========================================================
+   5. 채팅창
 ========================================================= */
 
 .talk-ai-chat-box {
@@ -223,44 +217,56 @@
 
     padding: 24px;
 
-    box-sizing: border-box;
+    border: 1px solid #eee5de;
 
-    border: 1px solid #eee9ee;
     border-radius: 22px;
 
     background:
-        linear-gradient(180deg,
-            #fcfafc 0%,
-            #faf9f8 100%);
+        linear-gradient(
+            180deg,
+            #fffdfb 0%,
+            #faf7f3 100%
+        );
 
     scroll-behavior: smooth;
 }
 
 
-/* 스크롤바 */
+/* =========================================================
+   스크롤바
+========================================================= */
 
 .talk-ai-chat-box::-webkit-scrollbar {
     width: 6px;
 }
 
+
 .talk-ai-chat-box::-webkit-scrollbar-track {
     background: transparent;
 }
 
+
 .talk-ai-chat-box::-webkit-scrollbar-thumb {
-    background: #ddd5df;
+    background: #dfd0c6;
+
     border-radius: 10px;
 }
 
 
+.talk-ai-chat-box::-webkit-scrollbar-thumb:hover {
+    background: #ccb8aa;
+}
+
+
 /* =========================================================
-   빈 채팅
+   6. 빈 채팅
 ========================================================= */
 
 .talk-ai-empty {
     height: 100%;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
@@ -268,45 +274,61 @@
 
     text-align: center;
 
-    color: #aaa3ad;
+    color: #aaa09a;
 }
 
-.talk-ai-empty-emoji {
-    font-size: 55px;
 
-    margin-bottom: 14px;
+.talk-ai-empty-image {
+    width: 90px;
+    height: 90px;
 
-    filter: drop-shadow(0 5px 8px rgba(80, 60, 90, 0.08));
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    display: block;
+
+    margin-bottom: 18px;
+
+    border: 3px solid #f0e2d9;
+
+    box-shadow:
+        0 8px 18px rgba(100, 75, 60, 0.12);
 }
+
 
 .talk-ai-empty h3 {
     margin: 0 0 8px;
 
-    font-size: 18px;
-    font-weight: 600;
+    color: #5b514b;
 
-    color: #635c67;
+    font-size: 18px;
+
+    font-weight: 600;
 }
+
 
 .talk-ai-empty p {
     margin: 0;
 
-    font-size: 13px;
+    color: #978b83;
 
-    color: #aaa3ad;
+    font-size: 13px;
 }
 
 
 /* =========================================================
-   사용자 메시지
+   7. 사용자 메시지
 ========================================================= */
 
 .talk-ai-user-message-wrapper {
     display: flex;
+
     justify-content: flex-end;
 
     margin-bottom: 17px;
 }
+
 
 .talk-ai-user-message {
     max-width: 70%;
@@ -317,11 +339,13 @@
         18px 18px 5px 18px;
 
     background:
-        linear-gradient(135deg,
-            #71657a,
-            #62566c);
+        linear-gradient(
+            135deg,
+            #c19a87,
+            #b68b78
+        );
 
-    color: #fff;
+    color: #ffffff;
 
     font-size: 14px;
 
@@ -330,29 +354,64 @@
     white-space: pre-wrap;
 
     box-shadow:
-        0 4px 10px rgba(80, 60, 90, 0.08);
+        0 5px 12px rgba(150, 110, 90, 0.12);
 }
 
 
 /* =========================================================
-   AI 메시지
+   8. AI 메시지
 ========================================================= */
 
 .talk-ai-ai-message-wrapper {
     display: flex;
+
     flex-direction: column;
+
     align-items: flex-start;
 
     margin-bottom: 18px;
 }
 
+
+/* =========================================================
+   AI 이름 + 이미지
+========================================================= */
+
 .talk-ai-ai-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
     margin: 0 0 6px 5px;
 
-    font-size: 12px;
+    color: #81756d;
 
-    color: #918994;
+    font-size: 12px;
 }
+
+
+.talk-ai-message-image {
+    width: 28px;
+    height: 28px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    display: block;
+
+    border: 1px solid #eadbd1;
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.08);
+}
+
+
+/* =========================================================
+   AI 말풍선
+========================================================= */
 
 .talk-ai-ai-message {
     max-width: 70%;
@@ -362,11 +421,11 @@
     border-radius:
         18px 18px 18px 5px;
 
-    background: #fff;
+    background: #fffdfb;
 
-    border: 1px solid #eee9ee;
+    border: 1px solid #eee4dc;
 
-    color: #55505a;
+    color: #625b55;
 
     font-size: 14px;
 
@@ -375,12 +434,12 @@
     white-space: pre-wrap;
 
     box-shadow:
-        0 3px 10px rgba(70, 55, 75, 0.04);
+        0 4px 10px rgba(90, 70, 55, 0.05);
 }
 
 
 /* =========================================================
-   입력 영역
+   9. 입력 영역
 ========================================================= */
 
 .talk-ai-input-area {
@@ -391,6 +450,7 @@
     margin-top: 15px;
 }
 
+
 .talk-ai-input {
     flex: 1;
 
@@ -400,14 +460,13 @@
 
     padding: 14px 16px;
 
-    box-sizing: border-box;
+    border: 1px solid #e4d8cf;
 
-    border: 1px solid #e4dfe5;
     border-radius: 15px;
 
-    background: #fff;
+    background: #fffdfb;
 
-    color: #49434c;
+    color: #514a45;
 
     font-size: 14px;
 
@@ -422,98 +481,65 @@
         box-shadow 0.2s ease;
 }
 
+
 .talk-ai-input:focus {
-    border-color: #a899b0;
+    border-color: #c19a87;
 
     box-shadow:
-        0 0 0 3px rgba(160, 140, 170, 0.1);
+        0 0 0 3px rgba(193, 154, 135, 0.12);
 }
 
+
 .talk-ai-input::placeholder {
-    color: #b8b1b9;
+    color: #b2a59d;
 }
 
 
 /* =========================================================
-   보내기 버튼
+   10. 보내기 버튼
 ========================================================= */
 
 .talk-ai-send-button {
     width: 80px;
 
     border: none;
+
     border-radius: 15px;
 
     background:
-        linear-gradient(135deg,
-            #70647a,
-            #5f5369);
+        linear-gradient(
+            135deg,
+            #c19a87,
+            #b68b78
+        );
 
     color: #fff;
 
     font-size: 14px;
+
     font-weight: 600;
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-}
-
-.talk-ai-send-button:hover {
-    transform: translateY(-1px);
-}
-
-.talk-ai-send-button-disabled {
-    background: #d5d1d5;
-
-    cursor: not-allowed;
-
-    transform: none;
-}
-
-
-/* =========================================================
-   대화 종료
-========================================================= */
-
-.talk-ai-finish-button {
-    width: 100%;
-
-    margin-top: 12px;
-
-    padding: 15px;
-
-    border: none;
-    border-radius: 15px;
-
-    background:
-        linear-gradient(135deg,
-            #a58eaa,
-            #917b97);
-
-    color: #fff;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
+    box-shadow:
+        0 5px 12px rgba(150, 110, 90, 0.14);
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
-.talk-ai-finish-button:hover {
+
+.talk-ai-send-button:hover {
     transform: translateY(-1px);
 
     box-shadow:
-        0 5px 15px rgba(120, 90, 125, 0.15);
+        0 8px 16px rgba(150, 110, 90, 0.18);
 }
 
-.talk-ai-finish-button-disabled {
-    background: #d4d0d4;
+
+.talk-ai-send-button-disabled {
+    background: #d8d0ca;
 
     cursor: not-allowed;
 
@@ -524,7 +550,65 @@
 
 
 /* =========================================================
-   분석 결과 전체
+   11. 대화 종료
+========================================================= */
+
+.talk-ai-finish-button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c19a87,
+            #b68b78
+        );
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 15px rgba(150, 110, 90, 0.14);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.talk-ai-finish-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 9px 20px rgba(150, 110, 90, 0.20);
+}
+
+
+.talk-ai-finish-button-disabled {
+    background: #d8d0ca;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   12. 분석 결과 전체
 ========================================================= */
 
 .talk-ai-analysis-result {
@@ -532,7 +616,7 @@
 
     padding-top: 30px;
 
-    border-top: 1px solid #eee9ee;
+    border-top: 1px solid #eee3db;
 }
 
 
@@ -546,29 +630,32 @@
     margin-bottom: 25px;
 }
 
+
 .talk-ai-result-header h2 {
     margin: 0 0 8px;
 
-    font-size: 23px;
+    color: #554c46;
 
-    color: #4d4652;
+    font-size: 23px;
 }
+
 
 .talk-ai-result-header p {
     margin: 0;
 
-    font-size: 13px;
+    color: #9b9088;
 
-    color: #a19aa3;
+    font-size: 13px;
 }
 
 
 /* =========================================================
-   감정
+   13. 감정
 ========================================================= */
 
 .talk-ai-emotion-box {
     display: flex;
+
     align-items: center;
 
     gap: 16px;
@@ -577,51 +664,58 @@
 
     margin-bottom: 10px;
 
+    border: 1px solid #eee1d8;
+
     border-radius: 18px;
 
     background:
-        linear-gradient(135deg,
-            #faf6fb,
-            #f8f6f3);
-
-    border: 1px solid #eee7f0;
+        linear-gradient(
+            135deg,
+            #fff8f4,
+            #faf5f0
+        );
 }
+
 
 .talk-ai-result-emoji {
     font-size: 48px;
 }
 
+
 .talk-ai-result-label {
-    font-size: 12px;
-
-    color: #a29aa5;
-
     margin-bottom: 4px;
+
+    color: #a0968f;
+
+    font-size: 12px;
 }
 
+
 .talk-ai-main-emotion {
+    color: #594f49;
+
     font-size: 20px;
 
     font-weight: 700;
-
-    color: #4d4652;
 }
+
 
 .talk-ai-intensity {
     margin-left: auto;
 
-    font-size: 12px;
+    color: #968b84;
 
-    color: #99919c;
+    font-size: 12px;
 }
 
+
 .talk-ai-intensity strong {
-    color: #655b69;
+    color: #a77b68;
 }
 
 
 /* =========================================================
-   감정 태그
+   14. 감정 태그
 ========================================================= */
 
 .talk-ai-emotion-list {
@@ -634,21 +728,22 @@
     margin-bottom: 20px;
 }
 
+
 .talk-ai-emotion-tag {
     padding: 7px 11px;
 
     border-radius: 20px;
 
-    background: #f0ebf1;
+    background: #f3e6df;
 
-    color: #776c7c;
+    color: #79685f;
 
     font-size: 12px;
 }
 
 
 /* =========================================================
-   고민 요약
+   15. 고민 요약
 ========================================================= */
 
 .talk-ai-result-box {
@@ -656,26 +751,29 @@
 
     margin-bottom: 15px;
 
-    border: 1px solid #eee9ee;
+    border: 1px solid #eee4dc;
 
     border-radius: 18px;
 
-    background: #fff;
+    background: #fffdfb;
 }
+
 
 .talk-ai-result-title {
     margin-bottom: 12px;
 
-    font-size: 15px;
-    font-weight: 700;
+    color: #5b514b;
 
-    color: #554d59;
+    font-size: 15px;
+
+    font-weight: 700;
 }
+
 
 .talk-ai-result-text {
     margin: 0;
 
-    color: #615b63;
+    color: #665e58;
 
     font-size: 14px;
 
@@ -686,7 +784,7 @@
 
 
 /* =========================================================
-   감정 일기
+   16. 감정 일기
 ========================================================= */
 
 .talk-ai-diary-box {
@@ -694,28 +792,32 @@
 
     margin-bottom: 15px;
 
+    border: 1px solid #eee0d5;
+
     border-radius: 20px;
 
     background:
-        linear-gradient(145deg,
-            #fffdf9,
-            #faf7f1);
-
-    border: 1px solid #eee7dd;
+        linear-gradient(
+            145deg,
+            #fffdfb,
+            #faf5ef
+        );
 }
+
 
 .talk-ai-diary-title {
     margin-bottom: 20px;
 
+    color: #5b514b;
+
     font-size: 18px;
 
     font-weight: 700;
-
-    color: #554d51;
 }
 
+
 .talk-ai-diary-content {
-    color: #615a5b;
+    color: #665e58;
 
     font-size: 14px;
 
@@ -726,7 +828,7 @@
 
 
 /* =========================================================
-   저장 안내
+   17. 저장 안내
 ========================================================= */
 
 .talk-ai-save-notice {
@@ -734,11 +836,13 @@
 
     margin-bottom: 15px;
 
+    border: 1px solid #eee2d9;
+
     border-radius: 13px;
 
-    background: #f7f4f7;
+    background: #faf6f2;
 
-    color: #89818b;
+    color: #8d8179;
 
     font-size: 12px;
 
@@ -747,7 +851,7 @@
 
 
 /* =========================================================
-   새로운 대화
+   18. 새로운 대화
 ========================================================= */
 
 .talk-ai-new-conversation-button {
@@ -757,13 +861,13 @@
 
     margin-top: 5px;
 
-    border: 1px solid #ddd6df;
+    border: 1px solid #ddcec4;
 
     border-radius: 14px;
 
-    background: #fff;
+    background: #fffdfb;
 
-    color: #665d69;
+    color: #766960;
 
     font-size: 14px;
 
@@ -772,15 +876,18 @@
     transition: all 0.2s ease;
 }
 
-.talk-ai-new-conversation-button:hover {
-    background: #f8f4f9;
 
-    border-color: #cfc3d3;
+.talk-ai-new-conversation-button:hover {
+    background: #faf3ee;
+
+    border-color: #cdb1a2;
+
+    color: #6b5b53;
 }
 
 
 /* =========================================================
-   공유하기
+   19. 공유하기
 ========================================================= */
 
 .talk-ai-share-button {
@@ -795,39 +902,47 @@
     border-radius: 14px;
 
     background:
-        linear-gradient(135deg,
-            #8c7a94,
-            #76647e);
+        linear-gradient(
+            135deg,
+            #c19a87,
+            #b68b78
+        );
 
     color: #fff;
 
     font-size: 14px;
+
     font-weight: 600;
 
     cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(150, 110, 90, 0.14);
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
+
 .talk-ai-share-button:hover {
     transform: translateY(-1px);
 
     box-shadow:
-        0 5px 15px rgba(100, 80, 110, 0.15);
+        0 8px 18px rgba(150, 110, 90, 0.20);
 }
 
 
 /* =========================================================
-   반응형
+   20. 반응형 - Tablet
 ========================================================= */
 
 @media (max-width: 700px) {
 
     .talk-ai-page {
-        padding: 20px 10px;
+        padding: 35px 10px 60px;
     }
+
 
     .talk-ai-container {
         padding: 20px;
@@ -835,33 +950,21 @@
         border-radius: 22px;
     }
 
+
     .talk-ai-header {
         align-items: flex-start;
     }
+
 
     .talk-ai-title {
         font-size: 24px;
     }
 
-    .talk-ai-character-list {
-        gap: 7px;
+
+    .talk-ai-subtitle {
+        font-size: 13px;
     }
 
-    .talk-ai-character {
-        padding: 14px 7px;
-    }
-
-    .talk-ai-character-emoji {
-        font-size: 28px;
-    }
-
-    .talk-ai-character-name {
-        font-size: 15px;
-    }
-
-    .talk-ai-character-description {
-        font-size: 10px;
-    }
 
     .talk-ai-chat-box {
         height: 450px;
@@ -869,14 +972,17 @@
         padding: 16px;
     }
 
+
     .talk-ai-user-message,
     .talk-ai-ai-message {
         max-width: 82%;
     }
 
+
     .talk-ai-emotion-box {
         flex-wrap: wrap;
     }
+
 
     .talk-ai-intensity {
         width: 100%;
@@ -889,50 +995,127 @@
 
 
 /* =========================================================
-   작은 모바일
+   21. 반응형 - 작은 모바일
 ========================================================= */
 
 @media (max-width: 480px) {
 
+    .talk-ai-page {
+        padding: 25px 8px 50px;
+    }
+
+
     .talk-ai-container {
         padding: 15px;
+
+        border-radius: 20px;
     }
 
-    .talk-ai-character-list {
-        flex-direction: column;
+
+    .talk-ai-header {
+        margin-bottom: 22px;
     }
 
-    .talk-ai-character {
-        display: flex;
 
-        align-items: center;
-
-        text-align: left;
-
-        gap: 10px;
+    .talk-ai-title {
+        font-size: 21px;
     }
 
-    .talk-ai-character-emoji {
-        margin: 0;
+
+    .talk-ai-subtitle {
+        margin-top: 6px;
+
+        font-size: 12px;
     }
 
-    .talk-ai-character-description {
-        margin-left: auto;
+
+    .talk-ai-new-button {
+        padding: 8px 11px;
+
+        font-size: 12px;
     }
+
+
+    .talk-ai-current-character {
+        padding: 9px 12px;
+
+        font-size: 12px;
+    }
+
+
+    .talk-ai-character-image {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .talk-ai-current-emoji {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .talk-ai-chat-box {
+        height: 430px;
+
+        padding: 14px;
+    }
+
+
+    .talk-ai-user-message,
+    .talk-ai-ai-message {
+        max-width: 86%;
+
+        padding: 11px 14px;
+
+        font-size: 13px;
+    }
+
+
+    .talk-ai-message-image {
+        width: 25px;
+        height: 25px;
+    }
+
 
     .talk-ai-input-area {
         gap: 6px;
     }
 
+
+    .talk-ai-input {
+        padding: 12px;
+
+        font-size: 13px;
+    }
+
+
     .talk-ai-send-button {
         width: 65px;
     }
+
+
+    .talk-ai-finish-button {
+        padding: 14px;
+    }
+
 
     .talk-ai-result-emoji {
         font-size: 40px;
     }
 
+
     .talk-ai-main-emotion {
         font-size: 18px;
+    }
+
+
+    .talk-ai-diary-box {
+        padding: 20px;
+    }
+
+
+    .talk-ai-diary-title {
+        font-size: 17px;
     }
 }

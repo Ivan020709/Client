@@ -25,6 +25,7 @@ function SubMenu() {
                     {openMenu === 0 && <div className="sub_dropdown">
                         <div onClick={() => navigate('/SelectAi')}>대화신청</div>
                         <div onClick={() => navigate('/Diary')}>감정 일기</div>
+                        <div>일기 공유</div>
                     </div>}
                 </div>
                 <div className="sub_menu_item" onMouseEnter={() => handleEnter(1)} onMouseLeave={handleLeave}>
@@ -33,10 +34,9 @@ function SubMenu() {
                 <div className="sub_menu_item" onMouseEnter={() => handleEnter(2)} onMouseLeave={handleLeave}>
                     <div className="sub_menu_title">커뮤니티</div>
                     {openMenu === 2 && <div className="sub_dropdown">
-                        <div onClick={() => navigate('/BoardList')}>자유게시판</div>
-                        <div>일기 공유</div>
-                        <div>문의 사항</div>
-                        <div>공지 사항</div>
+                        <div onClick={() => navigate('/BoardList')}>고민 게시판</div>
+                        <div onClick={() => navigate('/InquiryList')}>문의 사항</div>
+                        <div onClick={() => navigate('/NoticeList')}>공지 사항</div>
                     </div>}
                 </div>
                 <div className="sub_menu_item" onMouseEnter={() => handleEnter(3)} onMouseLeave={handleLeave}>

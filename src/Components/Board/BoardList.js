@@ -39,6 +39,7 @@ function BoardList() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [reportTarget, setReportTarget] = useState(null);
+    const [reportBoardnum, setReportBoardnum] = useState(null);
 
     const loadPosts = async (pageNumber, sortType = sort) => {
         setLoading(true);
@@ -111,6 +112,7 @@ function BoardList() {
             return;
         }
         setReportTarget(post);
+        setReportBoardnum(post.boardnum);
     };
 
     const totalPages = Math.ceil((paging?.totalCount ?? 0) / (paging?.displayRow || 8));
@@ -146,42 +148,42 @@ function BoardList() {
                         <div className="notebook-board-rings" aria-hidden="true" />
                         <div className="notebook-board-line" aria-hidden="true" />
                         <div className="notebook-board-grid">
-                        {posts.map((post, index) => (
-                            <article
-                                className={`notebook-board-memo${post.isprivate ? ' private' : ''}`}
-                                key={post.boardnum}
-                                style={{
-                                    '--memo-color': MEMO_COLORS[index % MEMO_COLORS.length],
-                                    '--memo-rotation': `${index % 2 === 0 ? -1 : 1}deg`
-                                }}
-                                onClick={() => openPost(post.boardnum)}
-                                onKeyDown={(event) => {
-                                    if (event.key === 'Enter' || event.key === ' ') {
-                                        event.preventDefault();
-                                        openPost(post.boardnum);
-                                    }
-                                }}
-                                role="button"
-                                tabIndex={0}
-                            >
-                                <div className="notebook-memo-pin" aria-hidden="true" />
-                                <div className="notebook-board-heading">
-                                    <h2>{post.title}</h2>
-                                    <span>#{post.category || '고민'}</span>
-                                </div>
-                                <p className="notebook-board-content">{post.content || (post.isprivate ? '작성자만 확인할 수 있는 고민입니다.' : '내용이 없습니다.')}</p>
-                                <div className="notebook-board-meta">
-                                    <span>{post.isprivate ? '🔒 ' : `${CATEGORY_ICONS[post.category] || '💬'} `}{authorName(post)} · {relativeTime(post.indate)}</span>
-                                </div>
-                                <div className="notebook-board-actions">
-                                    <button className={post.likedByMe ? 'liked' : ''} onClick={(event) => toggleLike(event, post)}>♡ <span>공감 {post.likeCount || 0}</span></button>
-                                    <span>댓글 {post.commentCount || 0}</span>
-                                    <span>조회 {post.viewcount || 0}</span>
-                                    <button className="notebook-board-report" onClick={(event) => openReport(event, post)}>신고</button>
-                                </div>
-                                <span className="notebook-board-arrow" aria-hidden="true">→</span>
-                            </article>
-                        ))}
+                            {posts.map((post, index) => (
+                                <article
+                                    className={`notebook-board-memo${post.isprivate ? ' private' : ''}`}
+                                    key={post.boardnum}
+                                    style={{
+                                        '--memo-color': MEMO_COLORS[index % MEMO_COLORS.length],
+                                        '--memo-rotation': `${index % 2 === 0 ? -1 : 1}deg`
+                                    }}
+                                    onClick={() => openPost(post.boardnum)}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Enter' || event.key === ' ') {
+                                            event.preventDefault();
+                                            openPost(post.boardnum);
+                                        }
+                                    }}
+                                    role="button"
+                                    tabIndex={0}
+                                >
+                                    <div className="notebook-memo-pin" aria-hidden="true" />
+                                    <div className="notebook-board-heading">
+                                        <h2>{post.title}</h2>
+                                        <span>#{post.category || '고민'}</span>
+                                    </div>
+                                    <p className="notebook-board-content">{post.content || (post.isprivate ? '작성자만 확인할 수 있는 고민입니다.' : '내용이 없습니다.')}</p>
+                                    <div className="notebook-board-meta">
+                                        <span>{post.isprivate ? '🔒 ' : `${CATEGORY_ICONS[post.category] || '💬'} `}{authorName(post)} · {relativeTime(post.indate)}</span>
+                                    </div>
+                                    <div className="notebook-board-actions">
+                                        <button className={post.likedByMe ? 'liked' : ''} onClick={(event) => toggleLike(event, post)}>♡ <span>공감 {post.likeCount || 0}</span></button>
+                                        <span>댓글 {post.commentCount || 0}</span>
+                                        <span>조회 {post.viewcount || 0}</span>
+                                        <button className="notebook-board-report" onClick={(event) => openReport(event, post)}>신고</button>
+                                    </div>
+                                    <span className="notebook-board-arrow" aria-hidden="true">→</span>
+                                </article>
+                            ))}
                         </div>
                         {totalPages > 1 && (
                             <nav className="concern-pagination on-notebook" aria-label="게시판 페이지">
@@ -197,7 +199,13 @@ function BoardList() {
 
             </section>
 
-            {reportTarget && <ReportModal post={reportTarget} onClose={() => setReportTarget(null)} />}
+            {reportTarget && (
+                <ReportModal
+                    post={reportTarget}
+                    boardnum={reportBoardnum}
+                    onClose={() => setReportTarget(null)}
+                />
+            )}
         </main>
     );
 }

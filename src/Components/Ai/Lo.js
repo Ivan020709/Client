@@ -1,43 +1,53 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import "./TalkAI.css";
+import "./Lo.css";
 
-function TalkAI() {
+import aiImage1 from "../../Img/로로.png";
+import aiImage2 from "../../Img/로로2.png";
+//import aiImage3 from "../../Img/로로3.png";
+
+
+function Lo() {
+
+    const character = "로";
+
+
+    // =====================================================
+    // Lo 이미지 랜덤 선택
+    // 페이지에 들어올 때마다 3개 중 하나 선택
+    // =====================================================
+
+    const aiImages = [
+        aiImage1,
+        aiImage2,
+       // aiImage3
+    ];
+
+
+    const [aiImage] = useState(() => {
+
+        const randomIndex =
+            Math.floor(
+                Math.random() * aiImages.length
+            );
+
+        return aiImages[randomIndex];
+
+    });
+
 
     // =====================================================
     // 상태
     // =====================================================
 
-    const [character, setCharacter] = useState("필");
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
+
     const [loading, setLoading] = useState(false);
     const [analyzing, setAnalyzing] = useState(false);
+
     const [analysis, setAnalysis] = useState(null);
-
-
-    // =====================================================
-    // 캐릭터
-    // =====================================================
-
-    const characters = [
-        {
-            name: "필",
-            description: "따뜻하고 공감해주는 AI",
-            emoji: "💙"
-        },
-        {
-            name: "로",
-            description: "차분하고 논리적인 AI",
-            emoji: "💜"
-        },
-        {
-            name: "그",
-            description: "밝고 편안한 AI",
-            emoji: "💛"
-        }
-    ];
 
 
     // =====================================================
@@ -45,52 +55,19 @@ function TalkAI() {
     // =====================================================
 
     const [sessionId] = useState(() => {
+
         return (
             Date.now().toString() +
-            Math.random().toString(36).substring(2)
+            Math.random()
+                .toString(36)
+                .substring(2)
         );
+
     });
 
 
     // =====================================================
-    // 현재 캐릭터 정보
-    // =====================================================
-
-    const selectedCharacter = characters.find(
-        (item) => item.name === character
-    );
-
-
-    // =====================================================
-    // 캐릭터 변경
-    // =====================================================
-
-    const changeCharacter = (name) => {
-
-        if (name === character) {
-            return;
-        }
-
-        if (messages.length > 0) {
-
-            const result = window.confirm(
-                "캐릭터를 변경하면 현재 대화가 초기화됩니다.\n변경하시겠습니까?"
-            );
-
-            if (!result) {
-                return;
-            }
-        }
-
-        setCharacter(name);
-        setMessages([]);
-        setAnalysis(null);
-        setMessage("");
-    };
-
-
-    // =====================================================
-    // AI 채팅
+    // AI 메시지 전송
     // =====================================================
 
     const sendMessage = async () => {
@@ -103,20 +80,25 @@ function TalkAI() {
             return;
         }
 
+
         const userText = message.trim();
+
 
         const userMessage = {
             sender: "USER",
             content: userText
         };
 
+
         setMessages((prev) => [
             ...prev,
             userMessage
         ]);
 
+
         setMessage("");
         setLoading(true);
+
 
         try {
 
@@ -133,17 +115,18 @@ function TalkAI() {
                 }
             );
 
-            console.log("AI 응답:", response.data);
 
             const aiMessage = {
                 sender: "AI",
                 content: response.data.message
             };
 
+
             setMessages((prev) => [
                 ...prev,
                 aiMessage
             ]);
+
 
         } catch (error) {
 
@@ -152,27 +135,28 @@ function TalkAI() {
                 error
             );
 
-            const errorMessage = {
-                sender: "AI",
-                content:
-                    "죄송해요. AI 서버와 연결할 수 없습니다."
-            };
 
             setMessages((prev) => [
                 ...prev,
-                errorMessage
+                {
+                    sender: "AI",
+                    content:
+                        "죄송해요. AI 서버와 연결할 수 없습니다."
+                }
             ]);
+
 
         } finally {
 
             setLoading(false);
 
         }
+
     };
 
 
     // =====================================================
-    // Enter 입력
+    // Enter
     // =====================================================
 
     const handleKeyDown = (e) => {
@@ -186,7 +170,9 @@ function TalkAI() {
             e.preventDefault();
 
             sendMessage();
+
         }
+
     };
 
 
@@ -205,19 +191,24 @@ function TalkAI() {
             return;
         }
 
+
         if (loading || analyzing) {
             return;
         }
+
 
         const result = window.confirm(
             "대화를 종료하고\n요약 → 감정 분석 → 일기 작성을 진행할까요?"
         );
 
+
         if (!result) {
             return;
         }
 
+
         setAnalyzing(true);
+
 
         try {
 
@@ -233,12 +224,9 @@ function TalkAI() {
                 }
             );
 
-            console.log(
-                "대화 분석 결과:",
-                response.data
-            );
 
             setAnalysis(response.data);
+
 
             setTimeout(() => {
 
@@ -246,6 +234,7 @@ function TalkAI() {
                     document.getElementById(
                         "analysis-result"
                     );
+
 
                 if (resultElement) {
 
@@ -257,6 +246,7 @@ function TalkAI() {
 
             }, 100);
 
+
         } catch (error) {
 
             console.error(
@@ -264,15 +254,18 @@ function TalkAI() {
                 error
             );
 
+
             alert(
                 "대화 분석 중 오류가 발생했습니다."
             );
+
 
         } finally {
 
             setAnalyzing(false);
 
         }
+
     };
 
 
@@ -288,19 +281,19 @@ function TalkAI() {
                 "현재 대화를 삭제하고 새 대화를 시작할까요?"
             );
 
+
             if (!result) {
                 return;
             }
+
         }
+
 
         setMessages([]);
         setAnalysis(null);
         setMessage("");
-    };
 
-    function share() {
-        axios.post("/api/ai/emotion")
-    }
+    };
 
 
     // =====================================================
@@ -309,29 +302,33 @@ function TalkAI() {
 
     return (
 
-        <div className="talk-ai-page">
+        <div className="lo-page">
 
-            <div className="talk-ai-container">
+            <div className="lo-container">
 
-                {/* Header */}
 
-                <div className="talk-ai-header">
+                {/* =================================================
+                    Header
+                ================================================= */}
+
+                <div className="lo-header">
 
                     <div>
 
-                        <h1 className="talk-ai-title">
-                            AI 고민상담
+                        <h1 className="lo-title">
+                            로와 고민상담
                         </h1>
 
-                        <p className="talk-ai-subtitle">
-                            당신의 이야기를 편하게 들려주세요.
+                        <p className="lo-subtitle">
+                            즐겁고 편안하게 이야기를 나눠보세요.
                         </p>
 
                     </div>
 
+
                     <button
                         onClick={newConversation}
-                        className="talk-ai-new-button"
+                        className="lo-new-button"
                     >
                         새 대화
                     </button>
@@ -339,71 +336,27 @@ function TalkAI() {
                 </div>
 
 
-                {/* 캐릭터 선택 */}
+                {/* =================================================
+                    현재 AI
+                ================================================= */}
 
-                <div className="talk-ai-character-section">
+                <div className="lo-current">
 
-                    <h3 className="talk-ai-section-title">
-                        상담 캐릭터
-                    </h3>
+                    <span className="lo-current-image">
 
-                    <div className="talk-ai-character-list">
+                        <img
+                            src={aiImage}
+                            alt="로"
+                            className="lo-character-image"
+                        />
 
-                        {characters.map((item) => {
-
-                            const selected =
-                                character === item.name;
-
-                            return (
-
-                                <button
-                                    key={item.name}
-                                    onClick={() =>
-                                        changeCharacter(
-                                            item.name
-                                        )
-                                    }
-                                    className={
-                                        selected
-                                            ? "talk-ai-character talk-ai-character-selected"
-                                            : "talk-ai-character"
-                                    }
-                                >
-
-                                    <div className="talk-ai-character-emoji">
-                                        {item.emoji}
-                                    </div>
-
-                                    <div className="talk-ai-character-name">
-                                        {item.name}
-                                    </div>
-
-                                    <div className="talk-ai-character-description">
-                                        {item.description}
-                                    </div>
-
-                                </button>
-
-                            );
-                        })}
-
-                    </div>
-
-                </div>
-
-
-                {/* 현재 캐릭터 */}
-
-                <div className="talk-ai-current-character">
-
-                    <span className="talk-ai-current-emoji">
-                        {selectedCharacter?.emoji}
                     </span>
+
 
                     <span>
                         지금은{" "}
                         <strong>
-                            {character}
+                            로
                         </strong>
                         와 대화하고 있어요.
                     </span>
@@ -411,25 +364,29 @@ function TalkAI() {
                 </div>
 
 
-                {/* 채팅 */}
+                {/* =================================================
+                    채팅
+                ================================================= */}
 
-                <div className="talk-ai-chat-box">
+                <div className="lo-chat-box">
+
 
                     {messages.length === 0 && (
 
-                        <div className="talk-ai-empty">
+                        <div className="lo-empty">
 
-                            <div className="talk-ai-empty-emoji">
-                                {selectedCharacter?.emoji}
-                            </div>
+                            <img
+                                src={aiImage}
+                                alt="로"
+                                className="lo-empty-image"
+                            />
 
                             <h3>
-                                {character}와
-                                이야기를 시작해보세요.
+                                로와 이야기를 시작해보세요.
                             </h3>
 
                             <p>
-                                오늘 어떤 고민이 있으신가요?
+                                오늘 어떤 이야기가 있으신가요?
                             </p>
 
                         </div>
@@ -444,26 +401,35 @@ function TalkAI() {
                                 key={index}
                                 className={
                                     item.sender === "USER"
-                                        ? "talk-ai-user-message-wrapper"
-                                        : "talk-ai-ai-message-wrapper"
+                                        ? "lo-user-wrapper"
+                                        : "lo-ai-wrapper"
                                 }
                             >
 
                                 {item.sender === "AI" && (
 
-                                    <div className="talk-ai-ai-name">
-                                        {selectedCharacter?.emoji}
-                                        {" "}
-                                        {character}
+                                    <div className="lo-ai-name">
+
+                                        <img
+                                            src={aiImage}
+                                            alt="로"
+                                            className="lo-message-image"
+                                        />
+
+                                        <span>
+                                            로
+                                        </span>
+
                                     </div>
 
                                 )}
 
+
                                 <div
                                     className={
                                         item.sender === "USER"
-                                            ? "talk-ai-user-message"
-                                            : "talk-ai-ai-message"
+                                            ? "lo-user-message"
+                                            : "lo-ai-message"
                                     }
                                 >
                                     {item.content}
@@ -475,19 +441,25 @@ function TalkAI() {
                     )}
 
 
-                    {/* AI 로딩 */}
-
                     {loading && (
 
-                        <div className="talk-ai-ai-message-wrapper">
+                        <div className="lo-ai-wrapper">
 
-                            <div className="talk-ai-ai-name">
-                                {selectedCharacter?.emoji}
-                                {" "}
-                                {character}
+                            <div className="lo-ai-name">
+
+                                <img
+                                    src={aiImage}
+                                    alt="로"
+                                    className="lo-message-image"
+                                />
+
+                                <span>
+                                    로
+                                </span>
+
                             </div>
 
-                            <div className="talk-ai-ai-message">
+                            <div className="lo-ai-message">
                                 생각하고 있어요...
                             </div>
 
@@ -498,18 +470,20 @@ function TalkAI() {
                 </div>
 
 
-                {/* 입력 */}
+                {/* =================================================
+                    입력
+                ================================================= */}
 
-                <div className="talk-ai-input-area">
+                <div className="lo-input-area">
 
                     <textarea
                         value={message}
-                        placeholder={`${character}에게 고민을 이야기해보세요.`}
+                        placeholder="로에게 이야기를 들려주세요."
                         onChange={(e) =>
                             setMessage(e.target.value)
                         }
                         onKeyDown={handleKeyDown}
-                        className="talk-ai-input"
+                        className="lo-input"
                         disabled={
                             loading ||
                             analyzing ||
@@ -517,6 +491,7 @@ function TalkAI() {
                         }
                         rows={1}
                     />
+
 
                     <button
                         onClick={sendMessage}
@@ -528,11 +503,11 @@ function TalkAI() {
                         }
                         className={
                             loading ||
-                                analyzing ||
-                                !message.trim() ||
-                                analysis !== null
-                                ? "talk-ai-send-button talk-ai-send-button-disabled"
-                                : "talk-ai-send-button"
+                            analyzing ||
+                            !message.trim() ||
+                            analysis !== null
+                                ? "lo-send-button lo-send-button-disabled"
+                                : "lo-send-button"
                         }
                     >
                         보내기
@@ -541,7 +516,9 @@ function TalkAI() {
                 </div>
 
 
-                {/* 대화 종료 */}
+                {/* =================================================
+                    대화 종료
+                ================================================= */}
 
                 {!analysis && (
 
@@ -554,9 +531,9 @@ function TalkAI() {
                         }
                         className={
                             analyzing ||
-                                messages.length === 0
-                                ? "talk-ai-finish-button talk-ai-finish-button-disabled"
-                                : "talk-ai-finish-button"
+                            messages.length === 0
+                                ? "lo-finish-button lo-finish-button-disabled"
+                                : "lo-finish-button"
                         }
                     >
 
@@ -570,24 +547,25 @@ function TalkAI() {
                 )}
 
 
-                {/* 분석 결과 */}
+                {/* =================================================
+                    분석 결과
+                ================================================= */}
 
                 {analysis && (
 
                     <div
                         id="analysis-result"
-                        className="talk-ai-analysis-result"
+                        className="lo-analysis"
                     >
 
-                        <div className="talk-ai-result-header">
+                        <div className="lo-result-header">
 
                             <h2>
                                 오늘의 상담 기록
                             </h2>
 
                             <p>
-                                {character}와의 대화를
-                                정리했어요.
+                                로와의 대화를 정리했어요.
                             </p>
 
                         </div>
@@ -595,39 +573,33 @@ function TalkAI() {
 
                         {/* 감정 */}
 
-                        <div className="talk-ai-emotion-box">
+                        <div className="lo-emotion-box">
 
-                            <div className="talk-ai-result-emoji">
+                            <div className="lo-result-emoji">
                                 {analysis.emotion?.emoji || "😐"}
                             </div>
 
+
                             <div>
 
-                                <div className="talk-ai-result-label">
+                                <div className="lo-result-label">
                                     오늘의 감정
                                 </div>
 
-                                <div className="talk-ai-main-emotion">
-                                    {
-                                        analysis.emotion
-                                            ?.main_emotion ||
-                                        "알 수 없음"
-                                    }
+                                <div className="lo-main-emotion">
+                                    {analysis.emotion?.main_emotion ||
+                                        "알 수 없음"}
                                 </div>
 
                             </div>
 
-                            <div className="talk-ai-intensity">
 
-                                감정 강도
+                            <div className="lo-intensity">
+
+                                감정 강도{" "}
 
                                 <strong>
-                                    {" "}
-                                    {
-                                        analysis.emotion
-                                            ?.intensity || 0
-                                    }
-                                    /5
+                                    {analysis.emotion?.intensity || 0}/5
                                 </strong>
 
                             </div>
@@ -639,14 +611,14 @@ function TalkAI() {
 
                         {analysis.emotion?.emotions?.length > 0 && (
 
-                            <div className="talk-ai-emotion-list">
+                            <div className="lo-emotion-list">
 
                                 {analysis.emotion.emotions.map(
                                     (emotion, index) => (
 
                                         <span
                                             key={index}
-                                            className="talk-ai-emotion-tag"
+                                            className="lo-emotion-tag"
                                         >
                                             {emotion}
                                         </span>
@@ -659,64 +631,58 @@ function TalkAI() {
                         )}
 
 
-                        {/* 요약 */}
+                        {/* 고민 요약 */}
 
-                        <div className="talk-ai-result-box">
+                        <div className="lo-result-box">
 
-                            <div className="talk-ai-result-title">
+                            <div className="lo-result-title">
                                 📝 고민 요약
                             </div>
 
-                            <p className="talk-ai-result-text">
+                            <p className="lo-result-text">
                                 {analysis.summary}
                             </p>
 
                         </div>
 
 
-                        {/* 일기 */}
+                        {/* 감정 일기 */}
 
-                        <div className="talk-ai-diary-box">
+                        <div className="lo-diary-box">
 
-                            <div className="talk-ai-diary-title">
+                            <div className="lo-diary-title">
                                 📖 오늘의 감정 일기
                             </div>
 
-                            <div className="talk-ai-diary-content">
+                            <div className="lo-diary-content">
                                 {analysis.diary}
                             </div>
 
                         </div>
 
 
-                        {/* 안내 */}
+                        {/* 저장 안내 */}
 
-                        <div className="talk-ai-save-notice">
+                        <div className="lo-save-notice">
 
                             💡 오늘의 감정은 캘린더에서
                             이모지로 확인할 수 있어요.
+
                             <br />
+
                             캘린더의 이모지를 누르면
                             오늘의 고민 요약을 확인할 수 있습니다.
 
                         </div>
 
 
-                        {/* 새 대화 */}
+                        {/* 새로운 대화 */}
 
                         <button
                             onClick={newConversation}
-                            className="talk-ai-new-conversation-button"
+                            className="lo-new-conversation-button"
                         >
                             새로운 대화 시작하기
-                        </button>
-
-                        {/* 공유하기 */}
-                        <button
-                            onClick={share}
-                            className="talk-ai-share-button"
-                        >
-                            공유하기
                         </button>
 
                     </div>
@@ -728,6 +694,8 @@ function TalkAI() {
         </div>
 
     );
+
 }
 
-export default TalkAI;
+
+export default Lo;

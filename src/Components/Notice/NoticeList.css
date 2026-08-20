@@ -1,8 +1,13 @@
 .notice-list-page {
     width: 100%;
     min-height: 100vh;
+
     padding: 60px 0;
+
     box-sizing: border-box;
+
+    background-color: #fffdfb;
+    color: #4f4944;
 }
 
 
@@ -12,18 +17,30 @@
 
 .notice-header {
     width: 1100px;
+
     margin: 0 auto 40px;
 }
 
 .notice-header h1 {
     margin: 0 0 10px;
+
     font-size: 32px;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: #4f4944;
 }
 
 .notice-header p {
     margin: 0;
-    color: #777;
+
+    color: #918981;
+
     font-size: 15px;
+    line-height: 1.7;
+
+    letter-spacing: -0.3px;
 }
 
 
@@ -33,6 +50,7 @@
 
 .notice-container {
     width: 1100px;
+
     margin: 0 auto;
 }
 
@@ -43,20 +61,24 @@
 
 .notice-top {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
 
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .notice-top span {
-    font-size: 15px;
-    color: #555;
+    font-size: 14px;
+
+    color: #817971;
 }
 
 .notice-top strong {
     margin-left: 5px;
-    color: #c85c5c;
+
+    color: #b68b78;
+    font-weight: 700;
 }
 
 
@@ -67,18 +89,28 @@
 .notice-write-btn {
     padding: 10px 20px;
 
-    border: none;
-    border-radius: 5px;
+    border: 1px solid #b68b78;
+    border-radius: 10px;
 
-    background-color: #e57373;
-    color: white;
+    background-color: #b68b78;
+    color: #ffffff;
 
     cursor: pointer;
+
     font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .notice-write-btn:hover {
-    background-color: #d95f5f;
+    background-color: #a77d6c;
+    border-color: #a77d6c;
+
+    transform: translateY(-1px);
 }
 
 
@@ -88,7 +120,15 @@
 
 .notice-table {
     width: 100%;
-    border-top: 2px solid #333;
+
+    overflow: hidden;
+
+    border-top: 1px solid #dcd3cb;
+    border-bottom: 1px solid #e9e2db;
+
+    border-radius: 12px;
+
+    background-color: #fffdfb;
 }
 
 
@@ -98,15 +138,24 @@
 
 .notice-table-header {
     display: flex;
+
     align-items: center;
 
-    height: 50px;
+    height: 52px;
 
-    border-bottom: 1px solid #ddd;
-    background-color: #fafafa;
+    border-bottom: 1px solid #e9e2db;
 
-    font-weight: bold;
+    background-color: #f8f5f1;
+
+    color: #625b55;
+
+    font-weight: 700;
+
     text-align: center;
+
+    font-size: 13px;
+
+    letter-spacing: -0.2px;
 }
 
 
@@ -116,19 +165,28 @@
 
 .notice-row {
     display: flex;
+
     align-items: center;
 
-    min-height: 55px;
+    min-height: 58px;
 
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eee8e1;
+
+    background-color: #fffdfb;
 
     cursor: pointer;
 
-    transition: background-color 0.2s;
+    transition:
+        background-color 0.2s ease,
+        padding 0.2s ease;
+}
+
+.notice-row:last-child {
+    border-bottom: none;
 }
 
 .notice-row:hover {
-    background-color: #fafafa;
+    background-color: #faf6f2;
 }
 
 
@@ -137,24 +195,32 @@
 ========================= */
 
 .notice-row.notice-fixed {
-    background-color: #fff5f5;
-    border-bottom: 1px solid #f3d6d6;
+    background-color: #fdf5f1;
+
+    border-bottom: 1px solid #eee0d8;
 }
 
 .notice-row.notice-fixed:hover {
-    background-color: #ffeded;
+    background-color: #f9eee8;
 }
 
+
 /* 고정 공지 제목 */
+
 .notice-row.notice-fixed .notice-title {
-    color: #a83a3a;
+    color: #9c6d5c;
+
     font-weight: 600;
 }
 
-/* 고정 공지 📌 */
+
+/* 고정 공지 Pin */
+
 .notice-row.notice-fixed .notice-pin {
     font-size: 15px;
 }
+
+
 /* =========================
    번호
 ========================= */
@@ -165,6 +231,10 @@
     flex-shrink: 0;
 
     text-align: center;
+
+    color: #aaa29b;
+
+    font-size: 13px;
 }
 
 
@@ -178,10 +248,18 @@
     padding: 0 20px;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 
     text-align: center;
+
+    color: #5f5852;
+
+    font-size: 14px;
+
+    letter-spacing: -0.2px;
 }
 
 
@@ -196,8 +274,9 @@
 
     text-align: center;
 
-    color: #777;
-    font-size: 14px;
+    color: #918981;
+
+    font-size: 13px;
 }
 
 
@@ -212,8 +291,9 @@
 
     text-align: center;
 
-    color: #777;
-    font-size: 14px;
+    color: #aaa29b;
+
+    font-size: 13px;
 }
 
 
@@ -222,11 +302,15 @@
 ========================= */
 
 .notice-empty {
-    padding: 80px 0;
+    padding: 90px 0;
 
     text-align: center;
 
-    color: #999;
+    color: #aaa29b;
+
+    font-size: 14px;
+
+    background-color: #fffdfb;
 }
 
 
@@ -236,61 +320,118 @@
 
 .notice-search {
     display: flex;
+
     justify-content: center;
     align-items: center;
 
     margin-top: 35px;
 
-    gap: 5px;
+    gap: 6px;
 }
 
 .notice-search select {
-    width: 100px;
+    width: 105px;
     height: 40px;
 
     padding: 0 10px;
 
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #e2dad3;
 
-    background-color: white;
+    border-radius: 8px;
+
+    background-color: #fffdfb;
+
+    color: #6f6963;
 
     cursor: pointer;
+
+    outline: none;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
+.notice-search select:focus {
+    border-color: #c9a99b;
+
+    box-shadow:
+        0 0 0 3px rgba(182, 139, 120, 0.08);
+}
+
 
 .notice-search input {
     width: 350px;
     height: 40px;
 
-    padding: 0 12px;
+    padding: 0 14px;
 
     box-sizing: border-box;
 
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #e2dad3;
+
+    border-radius: 8px;
+
+    background-color: #fffdfb;
+
+    color: #5f5852;
 
     outline: none;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.notice-search input::placeholder {
+    color: #b3aca6;
 }
 
 .notice-search input:focus {
-    border-color: #e57373;
+    border-color: #c9a99b;
+
+    box-shadow:
+        0 0 0 3px rgba(182, 139, 120, 0.08);
 }
+
+
+/* =========================
+   Search Button
+========================= */
 
 .notice-search button {
     width: 70px;
     height: 40px;
 
-    border: none;
-    border-radius: 4px;
+    border: 1px solid #b68b78;
 
-    background-color: #e57373;
-    color: white;
+    border-radius: 8px;
+
+    background-color: #b68b78;
+
+    color: #ffffff;
 
     cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .notice-search button:hover {
-    background-color: #d95f5f;
+    background-color: #a77d6c;
+
+    border-color: #a77d6c;
+
+    transform: translateY(-1px);
 }
 
 
@@ -300,6 +441,7 @@
 
 .notice-pagination {
     display: flex;
+
     justify-content: center;
     align-items: center;
 
@@ -309,7 +451,9 @@
 }
 
 
-/* 페이지 버튼 */
+/* =========================
+   페이지 버튼
+========================= */
 
 .notice-pagination .notice-page,
 .notice-pagination .notice-page-arrow {
@@ -318,35 +462,55 @@
 
     padding: 0;
 
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #e2dad3;
 
-    background-color: white;
-    color: #777;
+    border-radius: 8px;
 
-    font-size: 14px;
+    background-color: #fffdfb;
+
+    color: #918981;
+
+    font-size: 13px;
 
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 
-/* 현재 페이지 */
+/* =========================
+   현재 페이지
+========================= */
 
 .notice-pagination .notice-page.active {
-    background-color: #e57373;
-    color: white;
+    background-color: #b68b78;
 
-    border-color: #e57373;
+    color: #ffffff;
+
+    border-color: #b68b78;
+
+    font-weight: 600;
 }
 
 
-/* 페이지 Hover */
+/* =========================
+   페이지 Hover
+========================= */
 
-.notice-pagination .notice-page:hover:not(.active),
-.notice-pagination .notice-page-arrow:hover {
-    background-color: #fff0f0;
-    border-color: #f0b5b5;
-    color: #c85c5c;
+.notice-pagination
+.notice-page:hover:not(.active),
+
+.notice-pagination
+.notice-page-arrow:hover {
+
+    background-color: #f7eee9;
+
+    border-color: #d5b8aa;
+
+    color: #a77d6c;
 }
 
 
@@ -355,15 +519,144 @@
 ========================= */
 
 .notice-pagination .notice-page-arrow {
-    color: #888;
+    color: #8f8881;
 }
 
 .notice-pagination .notice-page-arrow:hover {
-    background-color: #fff0f0;
-    border-color: #f0b5b5;
-    color: #c85c5c;
+    background-color: #f7eee9;
+
+    border-color: #d5b8aa;
+
+    color: #a77d6c;
 }
 
+
+/* =========================
+   고정 공지 강조
+========================= */
+
 .notice-row.notice-fixed {
-    background-color: #fff3f3;
+    background-color: #fdf5f1;
+}
+
+.notice-row.notice-fixed:hover {
+    background-color: #f9eee8;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 1150px) {
+
+    .notice-header,
+    .notice-container {
+        width: calc(100% - 80px);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .notice-list-page {
+        padding: 40px 0;
+    }
+
+    .notice-header,
+    .notice-container {
+        width: calc(100% - 40px);
+    }
+
+    .notice-header h1 {
+        font-size: 27px;
+    }
+
+    .notice-header p {
+        font-size: 14px;
+    }
+
+    .notice-top {
+        gap: 15px;
+    }
+
+    .notice-write-btn {
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+
+    .notice-date {
+        width: 90px;
+    }
+
+    .notice-view {
+        width: 60px;
+    }
+
+    .notice-number {
+        width: 45px;
+    }
+
+    .notice-title {
+        padding: 0 10px;
+        text-align: left;
+    }
+
+    .notice-search {
+        flex-wrap: wrap;
+    }
+
+    .notice-search input {
+        width: 250px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .notice-header,
+    .notice-container {
+        width: calc(100% - 30px);
+    }
+
+    .notice-list-page {
+        padding: 30px 0;
+    }
+
+    .notice-table-header {
+        height: 46px;
+        font-size: 12px;
+    }
+
+    .notice-row {
+        min-height: 52px;
+    }
+
+    .notice-number {
+        width: 40px;
+    }
+
+    .notice-date {
+        width: 75px;
+        font-size: 11px;
+    }
+
+    .notice-view {
+        display: none;
+    }
+
+    .notice-title {
+        font-size: 13px;
+    }
+
+    .notice-search input {
+        width: 200px;
+    }
+
+    .notice-search select {
+        width: 90px;
+    }
+
 }
