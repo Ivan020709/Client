@@ -23,7 +23,9 @@ function BoardView() {
     // 게시글 조회
     useEffect(() => {
 
-        axios.get(`/api/board/getBoard/${boardnum}`)
+        axios.get(`/api/board/getBoard/${boardnum}`, {
+            params: loginUser?.userid ? { userId: loginUser.userid } : {}
+        })
             .then((result) => {
                 // console.log('게시글 조회:', result.data);
 
@@ -35,7 +37,7 @@ function BoardView() {
                 navigate('/boardList');
             });
 
-    }, [boardnum, navigate]);
+    }, [boardnum, navigate, loginUser?.userid]);
 
 
     // 목록
@@ -57,7 +59,9 @@ function BoardView() {
             return;
         }
 
-        axios.delete(`/api/board/deleteBoard/${boardnum}`)
+        axios.delete(`/api/board/deleteBoard/${boardnum}`, {
+            params: { userId: loginUser.userid }
+        })
             .then(() => {
                 alert('게시글이 삭제되었습니다.');
                 navigate('/boardList');

@@ -127,6 +127,9 @@ function TalkAI() {
                     character: character,
                     message: userText,
                     history: messages
+                },
+                {
+                    withCredentials: true
                 }
             );
 
@@ -224,6 +227,9 @@ function TalkAI() {
                     session_id: sessionId,
                     character: character,
                     history: messages
+                },
+                {
+                    withCredentials: true
                 }
             );
 

@@ -37,7 +37,7 @@ function Find() {
                 {/* 로그인으로 돌아가기 버튼 (아래쪽에 길쭉하게 분리) */}
                 <button
                     className="join-btn-full"
-                    onClick={() => navigate('/Login')}
+                    onClick={() => navigate('/MemberLogin')}
                 >
                     로그인으로 돌아가기
                 </button>

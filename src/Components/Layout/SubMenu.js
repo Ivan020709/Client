@@ -23,7 +23,6 @@ function SubMenu() {
                 <div className="sub_menu_item" onMouseEnter={() => handleEnter(0)} onMouseLeave={handleLeave}>
                     <div className="sub_menu_title">고민상담</div>
                     {openMenu === 0 && <div className="sub_dropdown">
-                        <div onClick={() => navigate('/Feelog')}>필로그란?</div>
                         <div onClick={() => navigate('/SelectAi')}>대화신청</div>
                         <div onClick={() => navigate('/Diary')}>감정 일기</div>
                     </div>}

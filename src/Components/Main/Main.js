@@ -5,303 +5,424 @@ import axios from 'axios';
 
 import './Main.css';
 
+import characterHero from "../../Img/필로그1.png";
+import characterRecommend from "../../Img/필로그2.png";
+import characterBottom from "../../Img/필로그3.png";
+
 function Main() {
-
     const navigate = useNavigate();
-    const loginUser = useSelector(state => state.user);
-    /* ================================
-       오늘의 기분
-    ================================= */
-    const [todayMood, setTodayMood] = useState(null);
-    const moods = [{ emoji: '😊', name: '좋아요' }, { emoji: '🙂', name: '괜찮아요' }, { emoji: '😐', name: '그저 그래요' }, { emoji: '😔', name: '우울해요' }, { emoji: '😣', name: '힘들어요' }];
-    /* 기존 최근 고민 이야기 카드용 상태 */
-    const [recentPosts/*, setRecentPosts*/] = useState([]);
+    const loginUser = useSelector((state) => state.user);
 
-    /* ================================
-       유선 노트 배너 게시글
-    ================================= */
-    const [bannerPosts, setBannerPosts] = useState([]);
-    const [sharedDiaries, setSharedDiaries] = useState([]);
-    const [reportTarget, setReportTarget] = useState(null);
-    const [reportReason, setReportReason] = useState('부적절한 내용');
-    const [reportDetail, setReportDetail] = useState('');
-    const memoColors = ['#ffdede', '#fff4b8', '#dff1ff', '#e7ddff', '#dff5df', '#ffe8c9'];
-
-    useEffect(() => {
-        const getBannerPosts = async () => {
-            try {
-                const userId = loginUser?.userid;
-                const firstPageResult = await axios.get('/api/board/getBoardList/1', { params: userId ? { userId } : {} });
-                const firstPagePosts = firstPageResult.data.boardList || [];
-                const totalPages = Math.ceil((firstPageResult.data.paging?.totalCount || 0) / 5);
-
-                const otherPageResults = await Promise.all(
-                    Array.from({ length: Math.max(totalPages - 1, 0) }, (_, index) =>
-                        axios.get(`/api/board/getBoardList/${index + 2}`, { params: userId ? { userId } : {} })
-                    )
-                );
-                const allPosts = [
-                    ...firstPagePosts,
-                    ...otherPageResults.flatMap((result) => result.data.boardList || [])
-                ];
-                const shuffledColors = [...memoColors].sort(() => Math.random() - 0.5);
-
-                const shuffledPosts = [...allPosts]
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0, 4)
-                    .map((post, index) => ({
-                        ...post,
-                        memoColor: shuffledColors[index % shuffledColors.length],
-                        memoRotation: `${Math.floor(Math.random() * 7) - 3}deg`
-                    }));
-
-                setBannerPosts(shuffledPosts);
-            } catch (err) {
-                console.error('배너 게시글 조회 실패:', err);
-            }
-        };
-
-        getBannerPosts();
-    }, [loginUser]);
-
-    useEffect(() => {
-        axios.get('/api/diary/shared')
-            .then((result) => setSharedDiaries(result.data.diaries || []))
-            .catch((error) => console.error('공유 감정일기 조회 실패:', error));
-    }, []);
-
-    const handleBannerPostClick = (boardnum) => {
-        axios.post('/api/board/plusCount', null, { params: { boardnum } })
-            .then(() => navigate(`/boardView/${boardnum}`))
-            .catch((err) => console.error('게시글 조회수 증가 실패:', err));
-    };
-
-    const handleLike = async (event, post) => {
-        event.stopPropagation();
-
-        if (!loginUser?.userid) {
-            alert('좋아요는 로그인 후 이용할 수 있습니다.');
-            return;
-        }
-
-        try {
-            const result = await axios.post('/api/board/toggleLike', null, {
-                params: { boardId: post.boardnum, userId: loginUser.userid }
-            });
-            const liked = result.data.liked ?? !post.liked;
-            const likeCount = result.data.likeCount ?? Math.max(0, (post.likeCount || 0) + (liked ? 1 : -1));
-
-            setBannerPosts((posts) => posts.map((item) => (
-                item.boardnum === post.boardnum ? { ...item, liked, likeCount } : item
-            )));
-        } catch (err) {
-            console.error('좋아요 처리 실패:', err);
-            alert('좋아요 처리에 실패했습니다. 잠시 후 다시 시도해주세요.');
-        }
-    };
-
-    const openReportModal = (event, post) => {
-        event.stopPropagation();
-
-        if (!loginUser?.userid) {
-            alert('신고는 로그인 후 이용할 수 있습니다.');
-            return;
-        }
-
-        setReportTarget(post);
-        setReportReason('부적절한 내용');
-        setReportDetail('');
-    };
-
-    const handleReportSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            await axios.post('/api/board/reportBoard', {
-                boardId: reportTarget.boardnum,
-                reporterId: loginUser.userid,
-                reason: reportReason,
-                detail: reportDetail.trim()
-            });
-            alert('신고가 접수되었습니다. 검토 후 조치하겠습니다.');
-            setReportTarget(null);
-        } catch (err) {
-            console.error('신고 접수 실패:', err);
-            alert('신고 접수에 실패했습니다. 이미 신고한 게시글인지 확인해주세요.');
+    // Feelog 시작하기
+    const handleStart = () => {
+        if (loginUser && loginUser.userid) {
+            navigate("/selectAi");
+        } else {
+            navigate("/memberLogin");
         }
     };
 
     return (
-        <div className="main-page">
-            {/* ================================
-                유선 노트 배너
-            ================================= */}
-            <section className="notebook-banner">
-                <div className="notebook-memo-list" aria-label="추천 고민 게시글">
-                    {bannerPosts.map((post) => (
-                        <div
-                            className="notebook-memo"
-                            key={post.boardnum}
-                            style={{ '--memo-color': post.memoColor, '--memo-rotation': post.memoRotation }}
-                            onClick={() => handleBannerPostClick(post.boardnum)}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter' || event.key === ' ') {
-                                    event.preventDefault();
-                                    handleBannerPostClick(post.boardnum);
-                                }
-                            }}
-                            role="button"
-                            tabIndex={0}
-                            aria-label={`${post.title} 게시글 보러가기`}
-                        >
-                            <div className="notebook-memo-heading">
-                                <strong className="notebook-memo-title">{post.title}</strong>
-                                <span className="notebook-memo-category">#{post.category || '고민'}</span>
-                            </div>
-                            <p className="notebook-memo-content">{post.content}</p>
-                            <span className="notebook-memo-arrow" aria-hidden="true">→</span>
-                            <span className="notebook-memo-actions">
-                                <button
-                                    type="button"
-                                    className={`notebook-memo-like${post.liked ? ' is-liked' : ''}`}
-                                    onClick={(event) => handleLike(event, post)}
-                                    aria-label={`${post.title} 좋아요`}
-                                >
-                                    ♥ <span>{post.likeCount || 0}</span>
-                                </button>
-                                <button
-                                    type="button"
-                                    className="notebook-memo-report"
-                                    onClick={(event) => openReportModal(event, post)}
-                                    aria-label={`${post.title} 신고`}
-                                >
-                                    신고
-                                </button>
-                            </span>
-                        </div>
-                    ))}
+        <main className="main-page">
+
+            {/* =====================================================
+                1. 메인 Hero 영역
+            ===================================================== */}
+            <section className="main-hero">
+
+                <div className="main-hero-text">
+
+                    <span className="main-hero-badge">
+                        💗 FEEL + LOG
+                    </span>
+
+                    <h1>
+                        오늘의 마음을<br />
+                        <strong>Feelog</strong>에 기록해요
+                    </h1>
+
+                    <p>
+                        AI와 편하게 대화하며<br />
+                        나의 감정을 이해하고 하루를 돌아보는 시간
+                    </p>
+
+                    <button
+                        type="button"
+                        onClick={handleStart}
+                    >
+                        Feelog 시작하기 <span>→</span>
+                    </button>
+
                 </div>
+
+
+                <div className="main-hero-character">
+
+                    <div className="main-heart">
+                        ♥
+                    </div>
+
+                    <img
+                        src={characterHero}
+                        alt="Feelog 캐릭터"
+                    />
+
+                </div>
+
             </section>
-            <section className="shared-diary-section" aria-labelledby="shared-diary-title">
-                <div className="shared-diary-heading">
+
+
+            {/* =====================================================
+                2. Feelog 소개
+            ===================================================== */}
+            <section className="main-section">
+
+                <div className="main-section-title">
+
+                    <span>💗</span>
+
                     <div>
-                        <p className="shared-diary-eyebrow">AI와 함께 남긴 마음의 기록</p>
-                        <h2 id="shared-diary-title">오늘의 감정일기</h2>
-                        <p>상담을 마친 뒤 정리된 이야기를 서로 나눠보세요.</p>
+                        <small>ABOUT FEELLOG</small>
+
+                        <h2>
+                            마음을 말하면,<br />
+                            기록이 됩니다.
+                        </h2>
                     </div>
-                    <button type="button" className="shared-diary-more" onClick={() => navigate('/diaryList')}>전체 일기 보기 →</button>
+
                 </div>
-                <div className="shared-diary-list">
-                    {sharedDiaries.length === 0 ? <p className="shared-diary-empty">아직 공유된 감정일기가 없습니다.</p> : sharedDiaries.map((diary) => (
-                        <article className="shared-diary-card" key={diary.id}>
-                            <div className="shared-diary-card-top">
-                                <span className="shared-diary-date">{diary.date}</span>
-                                <span className="shared-diary-mood">{diary.mood}</span>
-                            </div>
-                            <h3>{diary.title}</h3>
-                            <p>{diary.content}</p>
-                            <span className="shared-diary-author">✦ {diary.author}</span>
-                        </article>
-                    ))}
+
+
+                <div className="main-about-box">
+
+                    <p>
+                        매일 일기를 쓰는 것이 어렵게 느껴지셨나요?
+                    </p>
+
+                    <p>
+                        Feelog는 AI와 자연스럽게 대화하며
+                        오늘의 감정과 생각을 기록할 수 있는
+                        감정 일기 서비스입니다.
+                    </p>
+
+                    <p>
+                        무슨 말을 써야 할지 고민하지 않아도 괜찮아요.<br />
+                        편하게 이야기를 나누는 것만으로
+                        나의 하루가 하나의 소중한 기록이 됩니다.
+                    </p>
+
                 </div>
+
             </section>
-            {reportTarget && (
-                <div className="board-report-modal-backdrop" role="presentation" onClick={() => setReportTarget(null)}>
-                    <form className="board-report-modal" onSubmit={handleReportSubmit} onClick={(event) => event.stopPropagation()}>
-                        <div className="board-report-modal-header">
-                            <h2>게시글 신고</h2>
-                            <button type="button" onClick={() => setReportTarget(null)} aria-label="신고 창 닫기">×</button>
-                        </div>
-                        <p className="board-report-modal-title">{reportTarget.title}</p>
-                        <label htmlFor="report-reason">신고 사유</label>
-                        <select id="report-reason" value={reportReason} onChange={(event) => setReportReason(event.target.value)}>
-                            <option>부적절한 내용</option>
-                            <option>욕설·혐오 표현</option>
-                            <option>개인정보 노출</option>
-                            <option>광고·도배</option>
-                            <option>기타</option>
-                        </select>
-                        <label htmlFor="report-detail">상세 내용 <span>(선택)</span></label>
-                        <textarea id="report-detail" value={reportDetail} onChange={(event) => setReportDetail(event.target.value)} maxLength="500" placeholder="검토에 필요한 내용을 입력해주세요." />
-                        <button type="submit" className="board-report-submit">신고 접수</button>
-                    </form>
+
+
+            {/* =====================================================
+                3. Feelog 주요 기능
+            ===================================================== */}
+            <section className="main-section main-features">
+
+                <div className="main-section-heading">
+
+                    <small>WHAT WE OFFER</small>
+
+                    <h2>
+                        Feelog가 함께할게요
+                    </h2>
+
+                    <p>
+                        나의 마음을 이해하고 기록하는 데 필요한
+                        기능을 한곳에 담았습니다.
+                    </p>
+
                 </div>
-            )}
-            {/* ================================
-                메인 컨텐츠
-            ================================= */}
-            <div className="main-content">
-                {/* ================================
-                    CONTENT 1
-                    오늘의 기분
-                ================================= */}
-                <div className="main-content-box mood-box">
-                    <div className="content-title-area">
-                        <div>
-                            <h2>오늘의 기분</h2>
-                            <p>오늘 하루는 어떤 기분인가요?</p>
+
+
+                <div className="main-feature-grid">
+
+                    <article className="main-feature-card">
+
+                        <div className="main-feature-icon">
+                            💬
                         </div>
-                        <span className="content-icon">🌿</span>
-                    </div>
-                    {/* 기분 선택 */}
-                    <div className="mood-list">
-                        {moods.map((mood) => (
-                            <button key={mood.name} className={todayMood === mood.name ? 'mood-item active' : 'mood-item'} onClick={() => setTodayMood(mood.name)}>
-                                <span className="mood-emoji">{mood.emoji}</span>
-                                <span className="mood-name">{mood.name}</span>
-                            </button>
-                        ))}
-                    </div>
-                    {/* 선택 결과 */}
-                    <div className="mood-result">{todayMood ? (<>오늘은 <strong>{todayMood}</strong> 기분이군요.<br />당신의 이야기를 AI에게 들려주세요.</>) : (<>오늘의 기분을 기록해보세요.</>)}</div>
-                    <button className="main-action-btn" onClick={() => navigate('/chat')}>AI 상담 시작하기 →</button>
-                </div>
-                {/* ================================
-                    CONTENT 2
-                    이번 달 AI 랭킹 1위
-                ================================= */}
-                <div className="main-content-box ranking-box">
-                    <div className="content-title-area">
-                        <div>
-                            <h2>이번 달 AI 랭킹 1위</h2>
-                            <p>가장 높은 레벨을 달성한 유저는?</p>
+
+                        <h3>
+                            AI 감정 대화
+                        </h3>
+
+                        <p>
+                            오늘 있었던 일을 AI에게 편하게 이야기하며
+                            자연스럽게 감정을 표현해보세요.
+                        </p>
+
+                    </article>
+
+
+                    <article className="main-feature-card">
+
+                        <div className="main-feature-icon">
+                            📝
                         </div>
-                        <span className="content-icon">🏆</span>
-                    </div>
-                    <div className="ranking-top">
-                        <div className="ranking-crown">🥇</div>
-                        <div className="ranking-user-name">행복한사람</div>{/* 더미데이터라서 나중에 수정 예정 */}
-                        <div className="ranking-model-name">🌿 따뜻한 AI</div>{/* 더미데이터라서 나중에 수정 예정 */}
-                        <div className="ranking-level">Lv.21</div>{/* 더미데이터라서 나중에 수정 예정 */}
-                    </div>
-                    <button className="main-action-btn" onClick={() => navigate('/ranking')}>전체 랭킹 보기 →</button>
-                </div>
-                {/* ================================
-                    CONTENT 3
-                    최근 고민 이야기
-                ================================= */}
-                <div className="main-content-box board-box">
-                    <div className="content-title-area">
-                        <div>
-                            <h2>최근 고민 이야기</h2>
-                            <p>다른 사람들의 고민을 살펴보세요.</p>
+
+                        <h3>
+                            감정일기 자동 정리
+                        </h3>
+
+                        <p>
+                            대화 속 이야기를 바탕으로 오늘의 감정과
+                            하루를 하나의 일기로 정리해줍니다.
+                        </p>
+
+                    </article>
+
+
+                    <article className="main-feature-card">
+
+                        <div className="main-feature-icon">
+                            😊
                         </div>
-                        <button className="more-btn" onClick={() => navigate('/boardList')}>더보기 →</button>
-                    </div>
-                    <div className="recent-post-list">
-                        {recentPosts.length > 0 ? (
-                            recentPosts.map((post) => (
-                                <div className="recent-post" key={post.boardnum} onClick={() => navigate(`/boardView/${post.boardnum}`)}>
-                                    {/* <span className="post-category">{post.category}</span> */}
-                                    <span className="post-title">{post.title}</span>
-                                    <span className="post-date">{post.date}</span>
-                                </div>
-                            ))
-                        ) : (<div className="no-recent-post">아직 등록된 게시글이 없습니다.</div>)}
-                    </div>
+
+                        <h3>
+                            오늘의 감정 선택
+                        </h3>
+
+                        <p>
+                            오늘 나의 대표 감정을 선택하고
+                            간단하게 하루의 마음을 기록할 수 있어요.
+                        </p>
+
+                    </article>
+
+
+                    <article className="main-feature-card">
+
+                        <div className="main-feature-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            감정 캘린더
+                        </h3>
+
+                        <p>
+                            날짜별 감정을 모아보며 시간이 지나면서
+                            변화하는 나의 마음을 확인해보세요.
+                        </p>
+
+                    </article>
+
+
+                    <article className="main-feature-card">
+
+                        <div className="main-feature-icon">
+                            🔍
+                        </div>
+
+                        <h3>
+                            과거 일기 검색
+                        </h3>
+
+                        <p>
+                            키워드를 통해 예전에 기록했던 감정일기를
+                            쉽고 빠르게 찾아볼 수 있어요.
+                        </p>
+
+                    </article>
+
                 </div>
-            </div>
-        </div>
+
+            </section>
+
+
+            {/* =====================================================
+                4. Feelog 이용 방법
+            ===================================================== */}
+            <section className="main-section main-process">
+
+                <div className="main-section-heading">
+
+                    <small>HOW IT WORKS</small>
+
+                    <h2>
+                        네 단계로 시작하는<br />
+                        나만의 감정 기록
+                    </h2>
+
+                </div>
+
+
+                <div className="main-process-grid">
+
+                    <div className="main-process-item">
+
+                        <span>01</span>
+
+                        <h3>
+                            AI와 대화하기
+                        </h3>
+
+                        <p>
+                            오늘 있었던 일을<br />
+                            편하게 이야기해요.
+                        </p>
+
+                    </div>
+
+
+                    <div className="main-process-arrow">
+                        →
+                    </div>
+
+
+                    <div className="main-process-item">
+
+                        <span>02</span>
+
+                        <h3>
+                            감정 표현하기
+                        </h3>
+
+                        <p>
+                            대화를 통해<br />
+                            나의 마음을 표현해요.
+                        </p>
+
+                    </div>
+
+
+                    <div className="main-process-arrow">
+                        →
+                    </div>
+
+
+                    <div className="main-process-item">
+
+                        <span>03</span>
+
+                        <h3>
+                            AI가 정리해줘요
+                        </h3>
+
+                        <p>
+                            대화 속 감정과 이야기를<br />
+                            일기로 정리해줘요.
+                        </p>
+
+                    </div>
+
+
+                    <div className="main-process-arrow">
+                        →
+                    </div>
+
+
+                    <div className="main-process-item">
+
+                        <span>04</span>
+
+                        <h3>
+                            감정일기 저장
+                        </h3>
+
+                        <p>
+                            오늘의 나를<br />
+                            소중하게 기록해요.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            {/* =====================================================
+                5. Feelog 추천 대상
+            ===================================================== */}
+            <section className="main-recommend">
+
+                <div>
+
+                    <small>
+                        FOR YOU
+                    </small>
+
+                    <h2>
+                        이런 분께<br />
+                        Feelog를 추천해요
+                    </h2>
+
+                    <ul>
+
+                        <li>
+                            내 감정을 표현하는 것이 어려운 분
+                        </li>
+
+                        <li>
+                            하루를 차분하게 돌아보고 싶은 분
+                        </li>
+
+                        <li>
+                            꾸준히 감정일기를 쓰고 싶은 분
+                        </li>
+
+                        <li>
+                            나의 감정 변화를 알고 싶은 분
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div className="main-recommend-character">
+
+                    <img
+                        src={characterRecommend}
+                        alt="Feelog 캐릭터"
+                    />
+
+                    <div className="main-character-heart">
+                        ♥
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            {/* =====================================================
+                6. 마지막 Feelog 시작하기 영역
+            ===================================================== */}
+            <section className="main-bottom">
+
+                <img
+                    src={characterBottom}
+                    alt="Feelog 캐릭터"
+                />
+
+
+                <div className="main-bottom-content">
+
+                    <span>
+                        오늘의 작은 대화가
+                    </span>
+
+                    <strong>
+                        내일의 나를 더 따뜻하게 만들어줘요.
+                    </strong>
+
+                    <button
+                        type="button"
+                        onClick={handleStart}
+                    >
+                        Feelog 시작하기 <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
     );
 }
 

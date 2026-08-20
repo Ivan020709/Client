@@ -13,7 +13,9 @@ function BoardComment({ boardId, onCountChange }) {
     const [editingContent, setEditingContent] = useState('');
 
     const loadComments = async () => {
-        const result = await axios.get(`/api/board/${boardId}/comments`);
+        const result = await axios.get(`/api/board/${boardId}/comments`, {
+            params: loginUser?.userid ? { userId: loginUser.userid } : {}
+        });
         const next = result.data.comments || [];
         setComments(next);
         onCountChange?.(next.length);
@@ -31,14 +33,18 @@ function BoardComment({ boardId, onCountChange }) {
     const create = async (event) => {
         event.preventDefault();
         if (!requireLogin() || !content.trim()) return;
-        await axios.post(`/api/board/${boardId}/comments`, { content });
+        await axios.post(`/api/board/${boardId}/comments`, { content }, {
+            params: { userId: loginUser.userid }
+        });
         setContent('');
         await loadComments();
     };
 
     const update = async (commentId) => {
         if (!editingContent.trim()) return;
-        await axios.put(`/api/board/comments/${commentId}`, { content: editingContent });
+        await axios.put(`/api/board/comments/${commentId}`, { content: editingContent }, {
+            params: { userId: loginUser.userid }
+        });
         setEditingId(null);
         setEditingContent('');
         await loadComments();
@@ -46,7 +52,9 @@ function BoardComment({ boardId, onCountChange }) {
 
     const remove = async (commentId) => {
         if (!window.confirm('댓글을 삭제하시겠습니까?')) return;
-        await axios.delete(`/api/board/comments/${commentId}`);
+        await axios.delete(`/api/board/comments/${commentId}`, {
+            params: { userId: loginUser.userid }
+        });
         await loadComments();
     };
 

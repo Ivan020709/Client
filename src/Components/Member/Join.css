@@ -1,472 +1,895 @@
-/* ================================ 회원가입 전체 ================================ */
+/* =========================================================
+   JOIN PAGE
+   Main Theme
+
+   #fffaf7
+   #fffdfb
+   #faf5f0
+   #b68b78
+========================================================= */
+
+
+/* =========================================================
+   전체
+========================================================= */
+
 .join-wrapper {
     width: 580px;
+
     margin: 60px auto;
+
     padding: 0 0 40px;
-    background: #fff;
-    border: 1px solid #e2e5e8;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .06), 0 2px 8px rgba(0, 0, 0, .03);
+
+    background: #fffaf7;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 12px 35px rgba(80, 65, 55, 0.045);
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    overflow: hidden;
 }
 
-/* ================================ 제목 ================================ */
-.join-title {
+
+/* =========================================================
+   제목
+========================================================= */
+
+.join-wrapper .join-title {
     width: 100%;
+
     margin: 0;
+
     padding: 38px 0 20px;
+
     text-align: center;
-    font-size: 30px;
-    font-weight: 700;
-    color: #343a40;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    color: #4f4944;
+
     letter-spacing: -1px;
 }
 
-.join-title::after {
+.join-wrapper .join-title::after {
     content: "";
+
     display: block;
-    width: 35px;
+
+    width: 38px;
+
     height: 3px;
+
     margin: 14px auto 0;
-    background: #adb5bd;
+
+    background: #b68b78;
+
     border-radius: 10px;
 }
 
-/* ================================ 프로필 사진 ================================ */
-.profile-area {
+
+/* =========================================================
+   프로필
+========================================================= */
+
+.join-wrapper .profile-area {
     width: 100%;
+
     display: flex;
+
     justify-content: center;
-    margin: 0 0 30px;
+
+    margin: 0 0 32px;
+
     box-sizing: border-box;
 }
 
-.profile-preview {
+.join-wrapper .profile-preview {
     position: relative;
+
     width: 150px;
+
     height: 150px;
-    border: 1px solid #dfe3e6;
+
+    border: 5px solid #f3e6df;
+
     border-radius: 50%;
-    background: #f5f6f7;
+
+    background: #faf5f0;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     overflow: visible;
-    color: #adb5bd;
+
+    color: #b68b78;
+
     font-size: 13px;
+
     box-sizing: border-box;
+
+    box-shadow:
+        0 8px 22px rgba(80, 65, 55, 0.07);
 }
 
-.profile-preview img {
+.join-wrapper .profile-preview img {
     width: 100%;
+
     height: 100%;
+
     display: block;
+
     object-fit: cover;
+
     border-radius: 50%;
 }
 
-.profile-camera-btn {
+
+/* =========================================================
+   카메라
+========================================================= */
+
+.join-wrapper .profile-camera-btn {
     position: absolute;
-    right: -3px;
-    bottom: -3px;
-    width: 42px;
-    height: 42px;
-    border: 3px solid #fff;
-    border-radius: 50%;
-    background: #868e96;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    box-sizing: border-box;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, .18);
-    transition: background .2s, transform .15s;
-}
 
-.profile-camera-btn:hover {
-    background: #6c757d;
-    transform: scale(1.05);
-}
+    right: -5px;
 
-.profile-camera-btn:active {
-    transform: scale(.95);
-}
+    bottom: -5px;
 
-/* ================================ 회원가입 폼 ================================ */
-.join-form {
-    width: 88%;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-}
+    width: 44px;
 
-.join-box {
-    width: 100%;
-    background: #fff;
-    border: 1px solid #e1e5e8;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .02);
-    box-sizing: border-box;
-}
+    height: 44px;
 
-/* ================================ 입력 한 줄 ================================ */
-.join-row {
-    width: 100%;
-    min-height: 52px;
-    display: flex;
-    align-items: stretch;
-    border-bottom: 1px solid #edf0f2;
-    box-sizing: border-box;
-}
-
-/* ================================ 라벨 ================================ */
-.join-label {
-    flex: 0 0 120px;
-    width: 120px;
-    height: 52px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f4f5f6;
-    color: #495057;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -.3px;
-    border-right: 1px solid #e5e8eb;
-    box-sizing: border-box;
-}
-
-/* ================================ 일반 입력창 ================================ */
-.join-input-etc {
-    flex: 1 1 auto;
-    width: auto;
-    min-width: 0;
-    height: 52px;
-    padding: 0 16px;
-    margin: 0;
-    border: none;
-    outline: none;
-    background: #fff;
-    color: #343a40;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.join-input-etc::placeholder {
-    color: #b6bcc2;
-}
-
-.join-input-etc:focus {
-    background: #fafbfc;
-    box-shadow: inset 3px 0 0 #adb5bd;
-}
-
-/* ================================ 아이디 입력 ================================ */
-.join-input-id {
-    flex: 1 1 auto;
-    width: auto;
-    min-width: 0;
-    height: 52px;
-    padding: 0 15px;
-    margin: 0;
-    border: none;
-    outline: none;
-    background: #fff;
-    color: #343a40;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.join-input-id::placeholder {
-    color: #b6bcc2;
-}
-
-.join-input-id:focus {
-    background: #fafbfc;
-    box-shadow: inset 3px 0 0 #adb5bd;
-}
-
-/* ================================ 우편번호 입력 ================================ */
-.join-input {
-    flex: 1 1 auto;
-    width: auto;
-    min-width: 0;
-    height: 52px;
-    padding: 0 15px;
-    margin: 0;
-    border: none;
-    outline: none;
-    background: #fff;
-    color: #343a40;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-/* ================================ 버튼 ================================ */
-.join-btn-zip_num {
-    flex: 0 0 110px;
-    width: 110px;
-    min-width: 110px;
-    height: 52px;
     padding: 0;
-    margin: 0;
-    border: none;
-    border-left: 1px solid #e1e5e8;
-    background: #868e96;
+
+    border: 3px solid #fffaf7;
+
+    border-radius: 50%;
+
+    background: #b68b78;
+
     color: #fff;
-    font-size: 13px;
-    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
     cursor: pointer;
+
     box-sizing: border-box;
-    transition: background .2s, transform .1s;
+
+    box-shadow:
+        0 7px 18px rgba(80, 65, 55, 0.14);
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.join-btn-zip_num:hover {
-    background: #6c757d;
+.join-wrapper .profile-camera-btn:hover {
+    background: #9f7563;
+
+    transform: scale(1.06);
+
+    box-shadow:
+        0 9px 22px rgba(80, 65, 55, 0.18);
 }
 
-.join-btn-zip_num:active {
+.join-wrapper .profile-camera-btn:active {
+    transform: scale(.96);
+}
+
+
+/* =========================================================
+   폼
+========================================================= */
+
+.join-wrapper .join-form {
+    width: 88%;
+
+    display: flex;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+
+.join-wrapper .join-box {
+    width: 100%;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 18px rgba(80, 65, 55, 0.035);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   입력 행
+========================================================= */
+
+.join-wrapper .join-row {
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: stretch;
+
+    border-bottom: 1px solid #f1e8e3;
+
+    box-sizing: border-box;
+}
+
+.join-wrapper .join-row:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   라벨
+========================================================= */
+
+.join-wrapper .join-label {
+    flex: 0 0 120px;
+
+    width: 120px;
+
+    height: 52px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #faf5f0;
+
+    color: #6f6963;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: -.3px;
+
+    border-right: 1px solid #f0e5df;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   입력창
+========================================================= */
+
+.join-wrapper .join-input,
+.join-wrapper .join-input-id,
+.join-wrapper .join-input-etc {
+    flex: 1 1 auto;
+
+    width: auto;
+
+    min-width: 0;
+
+    height: 52px;
+
+    padding: 0 16px;
+
+    margin: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: #fffdfb;
+
+    color: #4f4944;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.join-wrapper .join-input::placeholder,
+.join-wrapper .join-input-id::placeholder,
+.join-wrapper .join-input-etc::placeholder {
+    color: #c3b9b3;
+}
+
+.join-wrapper .join-input:focus,
+.join-wrapper .join-input-id:focus,
+.join-wrapper .join-input-etc:focus {
+    background: #fffaf7;
+
+    box-shadow:
+        inset 3px 0 0 #b68b78;
+}
+
+
+/* =========================================================
+   중복확인 / 주소검색
+========================================================= */
+
+.join-wrapper .join-btn-zip_num {
+    flex: 0 0 110px;
+
+    width: 110px;
+
+    min-width: 110px;
+
+    height: 52px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: none;
+
+    border-left: 1px solid #f0e5df;
+
+    background: #f3e6df;
+
+    color: #9f7563;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .1s ease;
+}
+
+.join-wrapper .join-btn-zip_num:hover {
+    background: #ead8ce;
+
+    color: #8e6656;
+}
+
+.join-wrapper .join-btn-zip_num:active {
     transform: scale(.98);
 }
 
-/* ================================ 중복확인 메시지 ================================ */
-.join-box>div:nth-child(2) {
+
+/* =========================================================
+   중복확인 메시지
+========================================================= */
+
+.join-wrapper .join-check-message {
     min-height: 0;
+
     height: 0;
+
     padding-left: 120px;
+
     display: flex;
+
     align-items: center;
-    background: #fafbfc;
+
+    background: #fffaf7;
+
     box-sizing: border-box;
+
     overflow: hidden;
+
+    transition: height .2s ease;
 }
 
-.join-box>div:nth-child(2):has(label:not(:empty)) {
+.join-wrapper .join-check-message:has(label:not(:empty)) {
     height: 32px;
 }
 
-.join-box>div:nth-child(2) label {
+.join-wrapper .join-check-message label {
     font-size: 12px;
 }
 
-/* ================================ 생년월일 ================================ */
-.join-input-four {
+
+/* =========================================================
+   생년월일
+========================================================= */
+
+.join-wrapper .join-input-four {
     flex: 0 0 80px;
+
     width: 80px;
+
     min-width: 80px;
+
     height: 34px;
+
     margin: auto 6px auto 12px;
+
     padding: 0 8px;
-    border: 1px solid #dfe3e6;
-    border-radius: 6px;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 8px;
+
     outline: none;
-    background: #fafbfc;
+
+    background: #fffaf7;
+
     text-align: center;
+
     font-size: 14px;
-    color: #343a40;
+
+    color: #4f4944;
+
     box-sizing: border-box;
 }
 
-.join-input-two {
+.join-wrapper .join-input-two {
     flex: 0 0 55px;
+
     width: 55px;
+
     min-width: 55px;
+
     height: 34px;
+
     margin: auto 5px;
+
     padding: 0 5px;
-    border: 1px solid #dfe3e6;
-    border-radius: 6px;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 8px;
+
     outline: none;
-    background: #fafbfc;
+
+    background: #fffaf7;
+
     text-align: center;
+
     font-size: 14px;
-    color: #343a40;
+
+    color: #4f4944;
+
     box-sizing: border-box;
 }
 
-.join-input-four::placeholder,
-.join-input-two::placeholder {
-    color: #adb5bd;
+.join-wrapper .join-input-four::placeholder,
+.join-wrapper .join-input-two::placeholder {
+    color: #c3b9b3;
 }
 
-.join-input-four:focus,
-.join-input-two:focus {
-    border-color: #adb5bd;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(173, 181, 189, .15);
+.join-wrapper .join-input-four:focus,
+.join-wrapper .join-input-two:focus {
+    border-color: #b68b78;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(182, 139, 120, .12);
 }
 
-.join-label-birth {
+.join-wrapper .join-label-birth {
     display: flex;
+
     align-items: center;
-    color: #868e96;
+
+    color: #9a8277;
+
     font-size: 13px;
+
     font-weight: 500;
 }
 
-/* ================================ 주소 ================================ */
-.join-field {
+
+/* =========================================================
+   주소
+========================================================= */
+
+.join-wrapper .join-field {
     width: 100%;
 }
 
-.join-field .join-row {
-    border-bottom: 1px solid #edf0f2;
+.join-wrapper .join-field .join-row {
+    border-bottom: 1px solid #f1e8e3;
 }
 
-.join-field:last-child .join-row {
-    border-bottom: 1px solid #bebfc0;
+.join-wrapper .join-field:last-child .join-row {
+    border-bottom: none;
 }
 
-/* ================================ 안내 문구 ================================ */
-.join_msg {
+
+/* =========================================================
+   안내문
+========================================================= */
+
+.join-wrapper .join_msg {
     width: 88%;
+
     margin-top: 16px;
+
     padding: 0 3px;
-    color: #868e96;
+
+    color: #9a918b;
+
     font-size: 12px;
+
     text-align: left;
+
+    line-height: 1.6;
+
     box-sizing: border-box;
 }
 
-/* ================================ 확인 / 취소 ================================ */
-.join-btn-group {
+
+/* =========================================================
+   버튼 그룹
+========================================================= */
+
+.join-wrapper .join-btn-group {
     width: 88%;
+
     display: flex;
+
     gap: 12px;
-    margin-top: 18px;
+
+    margin-top: 20px;
+
     box-sizing: border-box;
 }
 
-.join-btn-join {
-    flex: 1;
-    width: auto;
+
+/* =========================================================
+   ★ 확인 / 취소 공통
+========================================================= */
+
+.join-wrapper .join-action-btn {
+    flex: 1 1 0;
+
+    width: 0;
+
     height: 52px;
+
     margin: 0;
+
     padding: 0;
+
+    border-radius: 30px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: -.3px;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   확인
+========================================================= */
+
+.join-wrapper .join-btn-join {
     border: none;
-    border-radius: 9px;
-    background: linear-gradient(135deg, #adb5bd, #868e96);
+
+    background: #b68b78;
+
     color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -.3px;
-    white-space: nowrap;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(108, 117, 125, .2);
-    box-sizing: border-box;
-    transition: transform .2s, box-shadow .2s, background .2s;
+
+    box-shadow:
+        0 8px 20px rgba(182, 139, 120, .20);
 }
 
-.join-btn-join:hover {
-    background: linear-gradient(135deg, #868e96, #6c757d);
-    box-shadow: 0 6px 15px rgba(108, 117, 125, .25);
-    transform: translateY(-1px);
+.join-wrapper .join-btn-join:hover {
+    background: #9f7563;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 23px rgba(159, 117, 99, .24);
 }
 
-.join-btn-join:active {
+.join-wrapper .join-btn-join:active {
     transform: translateY(0);
-    box-shadow: 0 3px 8px rgba(108, 117, 125, .2);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, .18);
 }
 
-.join-btn-cancel {
-    flex: 1;
-    width: auto;
-    height: 52px;
-    margin: 0;
-    padding: 0;
-    border: 1px solid #ced4da;
-    border-radius: 9px;
-    background: #fff;
-    color: #6c757d;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -.3px;
-    white-space: nowrap;
-    cursor: pointer;
-    box-sizing: border-box;
-    transition: background .2s, border-color .2s, color .2s;
+
+/* =========================================================
+   취소
+========================================================= */
+
+.join-wrapper .join-btn-cancel {
+    border: 1px solid #eadbd3;
+
+    background: #fffdfb;
+
+    color: #9a8277;
+
+    box-shadow: none;
 }
 
-.join-btn-cancel:hover {
-    background: #f8f9fa;
-    border-color: #adb5bd;
-    color: #495057;
+.join-wrapper .join-btn-cancel:hover {
+    background: #faf5f0;
+
+    border-color: #d9bfb2;
+
+    color: #8e6656;
+
+    transform: translateY(-2px);
 }
 
-/* ================================ 구분선 ================================ */
+.join-wrapper .join-btn-cancel:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   구분선
+========================================================= */
+
 .join-wrapper hr {
     width: 88%;
+
     margin: 28px 0 0;
+
     border: none;
-    border-top: 1px solid #edf0f2;
+
+    border-top: 1px solid #f1e8e3;
 }
 
-/* ================================ 주소 검색 모달 ================================ */
+
+/* =========================================================
+   Modal
+========================================================= */
+
 .ReactModal__Overlay {
     z-index: 1000 !important;
-    background-color: rgba(0, 0, 0, .45) !important;
+
+    background-color:
+        rgba(79, 73, 68, .45) !important;
 }
 
 .ReactModal__Content {
-    border: none !important;
-    border-radius: 14px !important;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, .2) !important;
+    border: 1px solid #f0e5df !important;
+
+    border-radius: 20px !important;
+
+    background: #fffdfb !important;
+
+    box-shadow:
+        0 18px 45px rgba(80, 65, 55, .18) !important;
 }
 
-.ReactModal__Content button {
-    height: 38px;
-    padding: 0 18px;
+
+/* =========================================================
+   Modal CLOSE
+========================================================= */
+
+.ReactModal__Content .join-modal-close {
+    height: 40px;
+
+    padding: 0 20px;
+
     margin: 8px;
+
     border: none;
-    border-radius: 6px;
-    background: #868e96;
+
+    border-radius: 30px;
+
+    background: #b68b78;
+
     color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 13px;
-    font-weight: 600;
+
+    font-weight: 700;
+
     cursor: pointer;
-    transition: .2s;
+
+    box-shadow:
+        0 5px 14px rgba(182, 139, 120, .18);
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.ReactModal__Content button:hover {
-    background: #6c757d;
+.ReactModal__Content .join-modal-close:hover {
+    background: #9f7563;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(159, 117, 99, .22);
 }
 
-/* ================================ 모바일 ================================ */
+
+/* =========================================================
+   모바일
+========================================================= */
+
 @media (max-width: 650px) {
+
     .join-wrapper {
         width: calc(100% - 30px);
+
         margin: 30px auto;
+
+        border-radius: 22px;
     }
 
-    .join-title {
-        font-size: 26px;
+    .join-wrapper .join-title {
+        padding-top: 32px;
+
+        font-size: 29px;
     }
 
-    .profile-preview {
-        width: 130px;
-        height: 130px;
+    .join-wrapper .profile-preview {
+        width: 135px;
+
+        height: 135px;
     }
 
-    .profile-camera-btn {
-        width: 38px;
-        height: 38px;
+    .join-wrapper .profile-camera-btn {
+        width: 40px;
+
+        height: 40px;
+
         font-size: 16px;
     }
 
-    .join-label {
+    .join-wrapper .join-label {
         flex-basis: 105px;
+
         width: 105px;
     }
 
-    .join-btn-zip_num {
+    .join-wrapper .join-btn-zip_num {
         flex-basis: 95px;
+
         width: 95px;
+
         min-width: 95px;
+    }
+}
+
+
+/* =========================================================
+   작은 모바일
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .join-wrapper {
+        width: calc(100% - 20px);
+
+        margin: 20px auto 30px;
+
+        padding-bottom: 30px;
+
+        border-radius: 20px;
+    }
+
+    .join-wrapper .join-title {
+        padding-top: 28px;
+
+        font-size: 27px;
+    }
+
+    .join-wrapper .profile-area {
+        margin-bottom: 25px;
+    }
+
+    .join-wrapper .profile-preview {
+        width: 120px;
+
+        height: 120px;
+    }
+
+    .join-wrapper .profile-camera-btn {
+        width: 38px;
+
+        height: 38px;
+
+        font-size: 15px;
+    }
+
+    .join-wrapper .join-form,
+    .join-wrapper .join_msg,
+    .join-wrapper .join-btn-group {
+        width: calc(100% - 30px);
+    }
+
+    .join-wrapper .join-label {
+        flex-basis: 88px;
+
+        width: 88px;
+
+        font-size: 13px;
+    }
+
+    .join-wrapper .join-input,
+    .join-wrapper .join-input-id,
+    .join-wrapper .join-input-etc {
+        padding: 0 12px;
+
+        font-size: 13px;
+    }
+
+    .join-wrapper .join-btn-zip_num {
+        flex-basis: 82px;
+
+        width: 82px;
+
+        min-width: 82px;
+
+        font-size: 12px;
+    }
+
+    .join-wrapper .join-btn-group {
+        gap: 8px;
+    }
+
+    .join-wrapper .join-action-btn {
+        height: 49px;
+
+        font-size: 14px;
     }
 }

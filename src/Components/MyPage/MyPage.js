@@ -41,7 +41,7 @@ function MyPage() {
 
 
     useEffect(() => {
-        if (!loginUser || !loginUser.email) {
+        if (!loginUser || !loginUser.userid) {
             alert("로그인 후 이용해주세요");
             navigate('/memberLogin');
             return;

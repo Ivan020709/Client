@@ -37,6 +37,9 @@ import InquiryView from './Components/Board/InquiryView'
 import InquiryWrite from './Components/Board/InquiryWrite'
 import UpdateInquiry from './Components/Board/UpdateInquiry'
 
+import AdminPage from './Components/MyPage/AdminPage'
+import ErrorLog from './Components/MyPage/ErrorLog'
+
 function App() {
     return (
         <div>
@@ -65,6 +68,8 @@ function App() {
 
                     {/* 마이페이지 */}
                     <Route path='/myPage' element={<MyPage />} />
+                    <Route path='/adminPage' element={<AdminPage />} />
+                    <Route path='/errorLog' element={<ErrorLog />} />
 
                     {/* 다이어리 */}
                     <Route path='/emotionDiary' element={<EmotionDiary />} />

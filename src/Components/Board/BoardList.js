@@ -45,7 +45,10 @@ function BoardList() {
         setError('');
         try {
             const result = await axios.get(`/api/board/getBoardList/${pageNumber}`, {
-                params: { sort: sortType }
+                params: {
+                    sort: sortType,
+                    ...(loginUser?.userid ? { userId: loginUser.userid } : {})
+                }
             });
             setPosts(result.data.boardList || []);
             setPaging(result.data.paging);
@@ -88,7 +91,7 @@ function BoardList() {
         if (!requireLogin('공감은 로그인 후 이용할 수 있습니다.')) return;
         try {
             const result = await axios.post('/api/board/toggleLike', null, {
-                params: { boardId: post.boardnum }
+                params: { boardId: post.boardnum, userId: loginUser.userid }
             });
             setPosts((current) => current.map((item) => item.boardnum === post.boardnum
                 ? { ...item, likedByMe: result.data.liked, likeCount: result.data.likeCount }

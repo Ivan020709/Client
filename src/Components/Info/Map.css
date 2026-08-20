@@ -1,1045 +1,1259 @@
 /* =========================================================
    Map
    Feelog Location / Map Page
-   ========================================================= */
-
-* {
-  box-sizing: border-box;
-}
+   Main Theme
+   #fffdfb / #faf5f0 / #b68b78
+========================================================= */
 
 .map {
-  width: 100%;
-  min-height: 100vh;
-  background: #fffdfb;
-  color: #4f4944;
-  font-family: "Noto Sans KR", sans-serif;
-  overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
+
+    background: #fffdfb;
+    color: #4f4944;
+
+    font-family: "Noto Sans KR", sans-serif;
+
+    overflow: hidden;
+}
+
+.map *,
+.map *::before,
+.map *::after {
+    box-sizing: border-box;
 }
 
 
 /* =========================================================
    1. Hero
-   ========================================================= */
+========================================================= */
 
 .mapHero {
-  position: relative;
+    position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  width: 1200px;
-  max-width: calc(100% - 80px);
-  min-height: 500px;
+    width: 1200px;
+    max-width: calc(100% - 80px);
+    min-height: 500px;
 
-  margin: 0 auto;
+    margin: 0 auto;
 
-  padding: 70px 80px;
+    padding: 70px 80px;
 
-  background: #f8f5f1;
+    background:
+        linear-gradient(
+            135deg,
+            #faf5f0,
+            #fffaf7
+        );
 
-  border: 1px solid #eee7e0;
-  border-radius: 0 0 40px 40px;
+    border: 1px solid #f0e5df;
+    border-radius: 0 0 40px 40px;
+
+    box-shadow:
+        0 12px 35px rgba(80, 65, 55, 0.035);
 }
 
 
-/* Hero 텍스트 */
+/* =========================================================
+   Hero Text
+========================================================= */
 
 .mapHeroText {
-  position: relative;
-  z-index: 2;
+    position: relative;
+    z-index: 2;
 }
-
-
-/* Hero 배지 */
 
 .mapBadge {
-  display: inline-block;
+    display: inline-flex;
+    align-items: center;
 
-  padding: 8px 17px;
+    padding: 8px 17px;
 
-  margin-bottom: 22px;
+    margin-bottom: 22px;
 
-  border-radius: 30px;
+    border-radius: 30px;
 
-  background: #f3e6df;
+    background: #f3e6df;
 
-  color: #a77d6a;
+    color: #a77d6a;
 
-  font-size: 13px;
-  font-weight: 700;
+    font-size: 13px;
+    font-weight: 700;
 
-  letter-spacing: 1.2px;
+    letter-spacing: 1.2px;
 }
-
-
-/* Hero 제목 */
 
 .mapHeroText h1 {
-  margin: 0;
+    margin: 0;
 
-  color: #4f4944;
+    color: #4f4944;
 
-  font-family: "Jua", sans-serif;
+    font-family: "Jua", sans-serif;
 
-  font-size: 54px;
-  line-height: 1.3;
+    font-size: 54px;
+    line-height: 1.3;
 
-  font-weight: 400;
+    font-weight: 400;
 
-  letter-spacing: -2px;
+    letter-spacing: -2px;
 }
-
-
-/* Hero 설명 */
 
 .mapHeroText p {
-  margin: 22px 0 0;
+    margin: 22px 0 0;
 
-  color: #817971;
+    color: #817971;
 
-  font-size: 17px;
-  line-height: 1.9;
+    font-size: 17px;
+    line-height: 1.9;
 }
 
 
 /* =========================================================
-   2. Hero 캐릭터
-   ========================================================= */
+   2. Hero Character
+========================================================= */
 
 .mapHeroCharacter {
-  position: relative;
+    position: relative;
 
-  width: 390px;
-  height: 350px;
+    width: 390px;
+    height: 350px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-
-/* 캐릭터 뒤 원 */
 
 .mapCircle {
-  position: absolute;
+    position: absolute;
 
-  width: 310px;
-  height: 310px;
+    width: 310px;
+    height: 310px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  background: #f3e6df;
+    background:
+        radial-gradient(
+            circle,
+            #f3e6df 0%,
+            #f7eee9 70%,
+            #faf5f0 100%
+        );
 }
-
-
-/* 캐릭터 */
 
 .mapHeroCharacter img {
-  position: relative;
+    position: relative;
 
-  z-index: 1;
+    z-index: 1;
 
-  width: 245px;
-  height: 245px;
+    width: 245px;
+    height: 245px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  object-fit: cover;
+    object-fit: cover;
 
-  filter:
-    drop-shadow(
-      0 15px 15px rgba(80, 60, 50, 0.12)
-    );
+    filter:
+        drop-shadow(
+            0 15px 15px rgba(80, 60, 50, 0.12)
+        );
 }
 
-
-/* 하트 */
-
 .mapHeart {
-  position: absolute;
+    position: absolute;
 
-  z-index: 3;
+    z-index: 3;
 
-  right: 20px;
-  top: 30px;
+    right: 20px;
+    top: 30px;
 
-  width: 55px;
-  height: 55px;
+    width: 55px;
+    height: 55px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  background: #fffdfb;
+    background: #fffdfb;
 
-  border: 1px solid #eaded6;
+    border: 1px solid #eaded6;
 
-  color: #c8898b;
+    color: #c8898b;
 
-  font-size: 25px;
+    font-size: 25px;
 
-  box-shadow:
-    0 7px 20px rgba(80, 60, 50, 0.08);
+    box-shadow:
+        0 7px 20px rgba(80, 60, 50, 0.08);
 }
 
 
 /* =========================================================
-   3. 일반 Section
-   ========================================================= */
+   3. Section
+========================================================= */
 
 .mapSection {
-  width: 1120px;
-  max-width: calc(100% - 80px);
+    width: 1120px;
+    max-width: calc(100% - 80px);
 
-  margin: 0 auto;
+    margin: 0 auto;
 
-  padding: 100px 0;
+    padding: 100px 0;
 }
-
-
-/* Section 제목 */
 
 .mapSectionHeading {
-  text-align: center;
+    text-align: center;
 
-  margin-bottom: 45px;
+    margin-bottom: 45px;
 }
-
-
-/* 작은 영문 */
 
 .mapSectionHeading small,
 .companySection small {
-  color: #a77d6a;
+    color: #a77d6a;
 
-  font-size: 12px;
-  font-weight: 700;
+    font-size: 12px;
+    font-weight: 700;
 
-  letter-spacing: 2px;
+    letter-spacing: 2px;
 }
-
-
-/* 큰 제목 */
 
 .mapSectionHeading h2 {
-  margin: 8px 0 0;
+    margin: 8px 0 0;
 
-  color: #4f4944;
+    color: #4f4944;
 
-  font-family: "Jua", sans-serif;
+    font-family: "Jua", sans-serif;
 
-  font-size: 40px;
-  line-height: 1.35;
+    font-size: 40px;
+    line-height: 1.35;
 
-  font-weight: 400;
+    font-weight: 400;
 }
 
-
-/* 설명 */
-
 .mapSectionHeading p {
-  margin-top: 15px;
+    margin: 15px 0 0;
 
-  color: #817971;
+    color: #817971;
 
-  font-size: 15px;
+    font-size: 15px;
 }
 
 
 /* =========================================================
    4. 지도 + 회사 정보
-   ========================================================= */
+========================================================= */
 
 .mapBox {
-  display: grid;
+    display: grid;
 
-  grid-template-columns: 1.25fr 0.75fr;
+    grid-template-columns: 1.25fr 0.75fr;
 
-  min-height: 530px;
+    width: 100%;
+    min-height: 530px;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  background: #fffdfb;
+    background: #fffdfb;
 
-  border: 1px solid #eee7e0;
-  border-radius: 25px;
+    border: 1px solid #f0e5df;
 
-  box-shadow:
-    0 12px 35px rgba(80, 65, 55, 0.06);
+    border-radius: 25px;
+
+    box-shadow:
+        0 12px 35px rgba(80, 65, 55, 0.06);
 }
 
 
 /* =========================================================
-   5. 지도 영역
-   ========================================================= */
+   5. ★ 실제 카카오맵
+========================================================= */
 
-.fakeMap {
-  position: relative;
+/*
+    React에서 사용하는 코드:
 
-  min-height: 530px;
+    <div
+        className="realKakaoMap"
+        ref={mapRef}
+    />
 
-  overflow: hidden;
+    이 영역에 카카오맵이 표시됩니다.
+*/
 
-  background: #f1efeb;
+.realKakaoMap {
+    position: relative;
+
+    width: 100%;
+    height: 530px;
+    min-height: 530px;
+
+    overflow: hidden;
+
+    background: #f1efeb;
 }
 
 
-/* 지도 격자 */
+/*
+    카카오맵 내부 요소가
+    부모 크기를 제대로 사용하도록 설정
+*/
 
-.mapGrid {
-  position: absolute;
-
-  inset: 0;
-
-  opacity: 0.4;
-
-  background-image:
-    linear-gradient(
-      rgba(180, 175, 168, 0.25) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(180, 175, 168, 0.25) 1px,
-      transparent 1px
-    );
-
-  background-size: 50px 50px;
-}
-
-
-/* 지도 도로 */
-
-.mapRoad {
-  position: absolute;
-
-  background: #ffffff;
-
-  border: 1px solid #ded9d2;
-
-  transform: rotate(-15deg);
-}
-
-
-/* 도로 1 */
-
-.road1 {
-  width: 120%;
-  height: 35px;
-
-  left: -10%;
-  top: 42%;
-
-  transform: rotate(-12deg);
-}
-
-
-/* 도로 2 */
-
-.road2 {
-  width: 100%;
-  height: 24px;
-
-  left: 5%;
-  top: 63%;
-
-  transform: rotate(25deg);
-}
-
-
-/* 도로 3 */
-
-.road3 {
-  width: 100%;
-  height: 20px;
-
-  left: 5%;
-  top: 22%;
-
-  transform: rotate(30deg);
+.realKakaoMap > div {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 
 /* =========================================================
-   6. 지도 건물
-   ========================================================= */
+   지도 로딩 표시용
+========================================================= */
 
-.mapBuilding {
-  position: absolute;
+.map-loading {
+    position: absolute;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    inset: 0;
 
-  background: #dedbd5;
+    z-index: 10;
 
-  border: 1px solid #d1ccc4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  color: #817971;
+    background: #faf5f0;
 
-  font-size: 11px;
-}
+    color: #9f7563;
 
-
-/* Feelog 건물 */
-
-.building1 {
-  width: 120px;
-  height: 90px;
-
-  left: 25%;
-  top: 30%;
-
-  background: #fffdfb;
-
-  color: #a77d6a;
-
-  font-weight: 700;
-}
-
-
-/* 건물 2 */
-
-.building2 {
-  width: 80px;
-  height: 110px;
-
-  right: 15%;
-  top: 20%;
-}
-
-
-/* 건물 3 */
-
-.building3 {
-  width: 100px;
-  height: 80px;
-
-  right: 25%;
-  bottom: 20%;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 
 /* =========================================================
-   7. 지도 핀
-   ========================================================= */
+   지도 위 Feelog 정보 배지
+========================================================= */
 
-.mapPin {
-  position: absolute;
+.map-overlay-card {
+    position: absolute;
 
-  left: 52%;
-  top: 47%;
+    left: 20px;
+    bottom: 20px;
 
-  transform: translate(-50%, -50%);
+    z-index: 5;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding: 12px 17px;
+
+    border: 1px solid rgba(240, 229, 223, 0.9);
+
+    border-radius: 15px;
+
+    background: rgba(255, 253, 251, 0.94);
+
+    color: #4f4944;
+
+    box-shadow:
+        0 8px 20px rgba(80, 65, 55, 0.12);
+
+    backdrop-filter: blur(5px);
 }
 
+.map-overlay-card strong {
+    display: block;
 
-/* 핀 말풍선 */
+    margin-bottom: 3px;
 
-.pinBubble {
-  padding: 8px 14px;
+    color: #9f7563;
 
-  margin-bottom: 5px;
+    font-family: "Jua", sans-serif;
 
-  border-radius: 15px;
+    font-size: 16px;
 
-  background: #b68b78;
-
-  color: #ffffff;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  box-shadow:
-    0 8px 20px rgba(120, 90, 75, 0.2);
+    font-weight: 400;
 }
 
+.map-overlay-card span {
+    color: #817971;
 
-/* 핀 아이콘 */
-
-.pinIcon {
-  font-size: 42px;
-
-  filter:
-    drop-shadow(
-      0 5px 5px rgba(80, 60, 50, 0.15)
-    );
-}
-
-
-/* 지도 하단 텍스트 */
-
-.mapText {
-  position: absolute;
-
-  left: 25px;
-  bottom: 20px;
-
-  padding: 8px 14px;
-
-  border-radius: 15px;
-
-  background: rgba(255, 253, 251, 0.9);
-
-  color: #817971;
-
-  font-size: 12px;
+    font-size: 11px;
 }
 
 
 /* =========================================================
-   8. 회사 정보 Card
-   ========================================================= */
+   6. 회사 정보 Card
+========================================================= */
 
 .mapInfoCard {
-  padding: 45px 40px;
+    padding: 45px 40px;
 
-  background: #fffdfb;
+    background: #fffdfb;
 }
-
-
-/* FEELLOG */
 
 .infoLabel {
-  color: #a77d6a;
+    color: #a77d6a;
 
-  font-size: 11px;
-  font-weight: 700;
+    font-size: 11px;
+    font-weight: 700;
 
-  letter-spacing: 2px;
+    letter-spacing: 2px;
 }
-
-
-/* 회사 이름 */
 
 .mapInfoCard h3 {
-  margin: 7px 0 10px;
+    margin: 7px 0 10px;
 
-  color: #4f4944;
+    color: #4f4944;
 
-  font-family: "Jua", sans-serif;
+    font-family: "Jua", sans-serif;
 
-  font-size: 31px;
+    font-size: 31px;
 
-  font-weight: 400;
+    font-weight: 400;
 }
-
-
-/* 설명 */
 
 .infoDescription {
-  margin: 0 0 30px;
+    margin: 0 0 30px;
 
-  color: #817971;
+    color: #817971;
 
-  font-size: 13px;
-  line-height: 1.7;
+    font-size: 13px;
+
+    line-height: 1.7;
 }
 
 
-/* 회사 정보 */
+/* =========================================================
+   회사 정보
+========================================================= */
 
 .companyInfo {
-  display: flex;
+    display: flex;
 
-  flex-direction: column;
+    flex-direction: column;
 
-  gap: 22px;
+    gap: 22px;
 }
-
-
-/* 정보 하나 */
 
 .companyInfoItem {
-  display: flex;
+    display: flex;
 
-  gap: 14px;
+    align-items: flex-start;
 
-  align-items: flex-start;
+    gap: 14px;
 }
-
-
-/* 아이콘 */
 
 .companyIcon {
-  flex-shrink: 0;
+    flex-shrink: 0;
 
-  width: 38px;
-  height: 38px;
+    width: 38px;
+    height: 38px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  border-radius: 12px;
+    border-radius: 12px;
 
-  background: #f3e6df;
+    background: #f3e6df;
 
-  color: #b68b78;
+    color: #b68b78;
 
-  font-size: 17px;
+    font-size: 17px;
 }
-
-
-/* 정보 제목 */
 
 .companyInfoItem small {
-  display: block;
+    display: block;
 
-  margin-bottom: 4px;
+    margin-bottom: 4px;
 
-  color: #a99d95;
+    color: #a99d95;
 
-  font-size: 9px;
-  font-weight: 700;
+    font-size: 9px;
 
-  letter-spacing: 1.5px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
 }
-
-
-/* 정보 내용 */
 
 .companyInfoItem p {
-  margin: 0;
+    margin: 0;
 
-  color: #625b55;
+    color: #625b55;
 
-  font-size: 13px;
-  line-height: 1.6;
+    font-size: 13px;
+
+    line-height: 1.6;
 }
 
 
 /* =========================================================
-   9. 지도 버튼
-   ========================================================= */
+   7. 지도 버튼
+========================================================= */
 
 .mapButton {
-  width: 100%;
+    width: 100%;
+    height: 50px;
 
-  margin-top: 30px;
+    margin-top: 30px;
 
-  padding: 14px 20px;
+    padding: 0 20px;
 
-  border: 0;
-  border-radius: 25px;
+    border: none;
 
-  background: #b68b78;
+    border-radius: 30px;
 
-  color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
 
-  font-size: 13px;
-  font-weight: 700;
+    color: #fff;
 
-  cursor: pointer;
+    font-size: 13px;
 
-  transition: all 0.2s ease;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(182, 139, 120, 0.20);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 }
-
-
-/* 화살표 */
 
 .mapButton span {
-  margin-left: 8px;
+    margin-left: 8px;
 }
-
-
-/* Hover */
 
 .mapButton:hover {
-  transform: translateY(-2px);
+    transform: translateY(-2px);
 
-  background: #9f7462;
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
 
-  box-shadow:
-    0 8px 20px rgba(160, 115, 95, 0.18);
+    box-shadow:
+        0 11px 25px rgba(159, 117, 99, 0.23);
+}
+
+.mapButton:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, 0.18);
 }
 
 
 /* =========================================================
-   10. 오시는 길
-   ========================================================= */
+   8. 오시는 길
+========================================================= */
 
 .waySection {
-  padding-top: 30px;
+    padding-top: 30px;
 }
-
 
 .wayGrid {
-  display: grid;
+    display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
-  gap: 18px;
+    gap: 18px;
 }
-
-
-/* 카드 */
 
 .wayCard {
-  min-height: 230px;
+    min-height: 230px;
 
-  padding: 30px 25px;
+    padding: 30px 25px;
 
-  background: #fffdfb;
+    background: #fffdfb;
 
-  border: 1px solid #eee7e0;
-  border-radius: 22px;
+    border: 1px solid #f0e5df;
 
-  transition: all 0.2s ease;
+    border-radius: 22px;
+
+    box-shadow:
+        0 5px 18px rgba(80, 65, 55, 0.035);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
-
-
-/* Hover */
 
 .wayCard:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 
-  border-color: #dfcfc5;
+    border-color: #dfcfc5;
 
-  box-shadow:
-    0 15px 30px rgba(80, 65, 55, 0.07);
+    box-shadow:
+        0 15px 30px rgba(80, 65, 55, 0.07);
 }
-
-
-/* 아이콘 */
 
 .wayIcon {
-  width: 55px;
-  height: 55px;
+    width: 55px;
+    height: 55px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 
-  border-radius: 16px;
+    border-radius: 16px;
 
-  background: #f3e6df;
+    background: #f3e6df;
 
-  color: #b68b78;
+    color: #b68b78;
 
-  font-size: 25px;
+    font-size: 25px;
 }
-
-
-/* 영문 */
 
 .wayCard > span {
-  color: #a99d95;
+    color: #a99d95;
 
-  font-size: 10px;
-  font-weight: 700;
+    font-size: 10px;
 
-  letter-spacing: 1.5px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
 }
-
-
-/* 제목 */
 
 .wayCard h3 {
-  margin: 6px 0 10px;
+    margin: 6px 0 10px;
 
-  color: #4f4944;
+    color: #4f4944;
 
-  font-family: "Jua", sans-serif;
+    font-family: "Jua", sans-serif;
 
-  font-size: 21px;
+    font-size: 21px;
 
-  font-weight: 400;
+    font-weight: 400;
 }
-
-
-/* 설명 */
 
 .wayCard p {
-  margin: 0;
+    margin: 0;
 
-  color: #817971;
+    color: #817971;
 
-  font-size: 13px;
+    font-size: 13px;
 
-  line-height: 1.75;
+    line-height: 1.75;
 }
 
 
 /* =========================================================
-   11. 회사 소개
-   ========================================================= */
+   9. 회사 소개
+========================================================= */
 
 .companySection {
-  width: 1120px;
-  max-width: calc(100% - 80px);
+    width: 1120px;
+    max-width: calc(100% - 80px);
 
-  margin: 0 auto 100px;
+    margin: 0 auto 100px;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  border-radius: 30px;
+    border: 1px solid #f0e5df;
 
-  background:
-    linear-gradient(
-      120deg,
-      #f3e6df,
-      #faf6f2
-    );
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f3e6df,
+            #faf6f2
+        );
 }
-
 
 .companySectionInner {
-  display: flex;
+    display: flex;
 
-  align-items: center;
-  justify-content: space-between;
+    align-items: center;
 
-  gap: 50px;
+    justify-content: space-between;
 
-  padding: 60px 70px;
+    gap: 50px;
+
+    padding: 60px 70px;
 }
-
-
-/* 제목 */
 
 .companySection h2 {
-  margin: 10px 0 18px;
+    margin: 10px 0 18px;
 
-  color: #4f4944;
+    color: #4f4944;
 
-  font-family: "Jua", sans-serif;
+    font-family: "Jua", sans-serif;
 
-  font-size: 36px;
-  line-height: 1.4;
+    font-size: 36px;
 
-  font-weight: 400;
+    line-height: 1.4;
+
+    font-weight: 400;
 }
-
-
-/* 설명 */
 
 .companySection p {
-  margin: 0;
+    margin: 0;
 
-  color: #6f6963;
+    color: #6f6963;
 
-  font-size: 14px;
-  line-height: 1.8;
+    font-size: 14px;
+
+    line-height: 1.8;
 }
 
 
 /* =========================================================
-   12. 회사 Mini Card
-   ========================================================= */
+   10. 회사 Mini Card
+========================================================= */
 
 .companyMiniCard {
-  min-width: 310px;
+    min-width: 310px;
 
-  padding: 25px;
+    padding: 25px;
 
-  background: #fffdfb;
+    background: #fffdfb;
 
-  border: 1px solid #eee7e0;
+    border: 1px solid #eee2da;
 
-  border-radius: 20px;
+    border-radius: 20px;
 
-  box-shadow:
-    0 8px 25px rgba(80, 65, 55, 0.04);
+    box-shadow:
+        0 8px 25px rgba(80, 65, 55, 0.04);
 }
-
-
-/* Mini Card 항목 */
 
 .companyMiniCard > div {
-  display: flex;
+    display: flex;
 
-  flex-direction: column;
+    flex-direction: column;
 
-  gap: 4px;
+    gap: 4px;
 
-  padding: 13px 0;
+    padding: 13px 0;
 
-  border-bottom: 1px solid #eee7e0;
+    border-bottom: 1px solid #eee7e0;
 }
-
 
 .companyMiniCard > div:last-child {
-  border-bottom: 0;
+    border-bottom: none;
 }
-
-
-/* 영문 */
 
 .companyMiniCard span {
-  color: #a99d95;
+    color: #a99d95;
 
-  font-size: 9px;
-  font-weight: 700;
+    font-size: 9px;
 
-  letter-spacing: 1.5px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
 }
 
-
-/* 내용 */
-
 .companyMiniCard strong {
-  color: #625b55;
+    color: #625b55;
 
-  font-size: 13px;
-  font-weight: 600;
+    font-size: 13px;
+
+    font-weight: 600;
 }
 
 
 /* =========================================================
-   13. 마지막 CTA
-   ========================================================= */
+   11. 마지막 CTA
+========================================================= */
 
 .mapBottom {
-  position: relative;
+    position: relative;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
-  justify-content: center;
+    align-items: center;
 
-  gap: 55px;
+    justify-content: center;
 
-  min-height: 300px;
+    gap: 55px;
 
-  padding: 50px;
+    min-height: 300px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #b68b78,
-      #a77d6a
-    );
+    padding: 50px;
 
-  color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
 
-  overflow: hidden;
+    color: #fff;
+
+    overflow: hidden;
 }
-
-
-/* 배경 장식 */
 
 .mapBottom::before {
-  content: "";
+    content: "";
 
-  position: absolute;
+    position: absolute;
 
-  width: 600px;
-  height: 600px;
+    width: 600px;
+    height: 600px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  background:
-    rgba(255, 255, 255, 0.08);
+    background:
+        rgba(255, 255, 255, 0.08);
 
-  right: -120px;
-  top: -300px;
+    right: -120px;
+    top: -300px;
 }
-
-
-/* 캐릭터 */
 
 .mapBottomCharacter {
-  position: relative;
+    position: relative;
 
-  z-index: 1;
+    z-index: 1;
 }
-
 
 .mapBottomCharacter img {
-  width: 180px;
-  height: 180px;
+    width: 180px;
+    height: 180px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  object-fit: cover;
+    object-fit: cover;
 
-  filter:
-    drop-shadow(
-      0 12px 15px rgba(70, 50, 40, 0.18)
-    );
+    filter:
+        drop-shadow(
+            0 12px 15px rgba(70, 50, 40, 0.18)
+        );
 }
-
-
-/* CTA 텍스트 */
 
 .mapBottomText {
-  position: relative;
+    position: relative;
 
-  z-index: 1;
+    z-index: 1;
 }
-
-
-/* 작은 문장 */
 
 .mapBottomText > span {
-  display: block;
+    display: block;
 
-  margin-bottom: 7px;
+    margin-bottom: 7px;
 
-  color: #f3e6df;
+    color: #f3e6df;
 
-  font-size: 17px;
+    font-size: 17px;
 }
-
-
-/* 큰 문장 */
 
 .mapBottomText strong {
-  display: block;
+    display: block;
 
-  font-family: "Jua", sans-serif;
+    font-family: "Jua", sans-serif;
 
-  font-size: 29px;
+    font-size: 29px;
 
-  font-weight: 400;
+    font-weight: 400;
 }
-
-
-/* CTA 버튼 */
 
 .mapBottomText button {
-  margin-top: 23px;
+    height: 50px;
 
-  padding: 14px 24px;
+    margin-top: 23px;
 
-  border: 0;
-  border-radius: 30px;
+    padding: 0 24px;
 
-  background: #ffffff;
+    border: none;
 
-  color: #9f7462;
+    border-radius: 30px;
 
-  font-size: 14px;
-  font-weight: 700;
+    background: #fff;
 
-  cursor: pointer;
+    color: #9f7462;
 
-  transition: all 0.2s ease;
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(80, 55, 45, 0.12);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
 }
-
-
-/* 화살표 */
 
 .mapBottomText button span {
-  margin-left: 8px;
+    margin-left: 8px;
+}
+
+.mapBottomText button:hover {
+    transform: translateY(-3px);
+
+    background: #fff8f4;
+
+    box-shadow:
+        0 10px 22px rgba(80, 55, 45, 0.16);
 }
 
 
-/* Hover */
+/* =========================================================
+   12. 반응형
+========================================================= */
 
-.mapBottomText button:hover {
-  transform: translateY(-3px);
+@media (max-width: 1100px) {
 
-  background: #fff8f4;
+    .mapHero {
+        padding: 60px;
+    }
+
+    .mapHeroText h1 {
+        font-size: 46px;
+    }
+
+    .mapHeroCharacter {
+        width: 330px;
+    }
+
+    .mapInfoCard {
+        padding: 40px 30px;
+    }
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .mapHero {
+        width: calc(100% - 40px);
+        max-width: none;
+
+        min-height: auto;
+
+        padding: 55px 40px;
+
+        flex-direction: column;
+
+        text-align: center;
+
+        border-radius: 0 0 30px 30px;
+    }
+
+    .mapHeroText h1 {
+        font-size: 42px;
+    }
+
+    .mapHeroText p {
+        font-size: 15px;
+    }
+
+    .mapHeroCharacter {
+        width: 330px;
+        height: 300px;
+
+        margin-top: 20px;
+    }
+
+    .mapCircle {
+        width: 260px;
+        height: 260px;
+    }
+
+    .mapHeroCharacter img {
+        width: 210px;
+        height: 210px;
+    }
+
+    .mapSection {
+        width: calc(100% - 40px);
+        max-width: none;
+
+        padding: 75px 0;
+    }
+
+    .mapBox {
+        grid-template-columns: 1fr;
+    }
+
+    .realKakaoMap {
+        height: 450px;
+        min-height: 450px;
+    }
+
+    .mapInfoCard {
+        padding: 40px;
+    }
+
+    .wayGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .wayCard {
+        min-height: auto;
+    }
+
+    .companySection {
+        width: calc(100% - 40px);
+        max-width: none;
+    }
+
+    .companySectionInner {
+        padding: 50px 40px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .companyMiniCard {
+        min-width: 0;
+
+        width: 100%;
+    }
+
+    .mapBottom {
+        gap: 35px;
+
+        padding: 50px 30px;
+    }
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .mapHero {
+        width: calc(100% - 20px);
+
+        padding: 45px 20px;
+
+        border-radius: 0 0 25px 25px;
+    }
+
+    .mapBadge {
+        font-size: 11px;
+
+        padding: 7px 13px;
+    }
+
+    .mapHeroText h1 {
+        font-size: 34px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .mapHeroText p {
+        font-size: 14px;
+
+        line-height: 1.75;
+    }
+
+    .mapHeroCharacter {
+        width: 270px;
+        height: 250px;
+    }
+
+    .mapCircle {
+        width: 220px;
+        height: 220px;
+    }
+
+    .mapHeroCharacter img {
+        width: 175px;
+        height: 175px;
+    }
+
+    .mapHeart {
+        width: 45px;
+        height: 45px;
+
+        right: 0;
+        top: 20px;
+
+        font-size: 20px;
+    }
+
+    .mapSection {
+        width: calc(100% - 30px);
+
+        padding: 60px 0;
+    }
+
+    .mapSectionHeading {
+        margin-bottom: 30px;
+    }
+
+    .mapSectionHeading h2 {
+        font-size: 30px;
+    }
+
+    .mapSectionHeading p {
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+    .mapBox {
+        border-radius: 20px;
+    }
+
+    /* ★ 모바일 카카오맵 */
+
+    .realKakaoMap {
+        width: 100%;
+        height: 360px;
+        min-height: 360px;
+    }
+
+    .mapInfoCard {
+        padding: 30px 22px;
+    }
+
+    .mapInfoCard h3 {
+        font-size: 27px;
+    }
+
+    .companyInfo {
+        gap: 18px;
+    }
+
+    .companyInfoItem {
+        gap: 11px;
+    }
+
+    .companyIcon {
+        width: 35px;
+        height: 35px;
+
+        border-radius: 10px;
+
+        font-size: 15px;
+    }
+
+    .companyInfoItem p {
+        font-size: 12px;
+    }
+
+    .mapButton {
+        height: 48px;
+    }
+
+    .wayCard {
+        padding: 25px 22px;
+    }
+
+    .companySection {
+        width: calc(100% - 30px);
+
+        margin-bottom: 60px;
+
+        border-radius: 22px;
+    }
+
+    .companySectionInner {
+        padding: 40px 25px;
+    }
+
+    .companySection h2 {
+        font-size: 29px;
+    }
+
+    .companySection p {
+        font-size: 13px;
+    }
+
+    .companyMiniCard {
+        padding: 18px;
+    }
+
+    .mapBottom {
+        flex-direction: column;
+
+        gap: 20px;
+
+        text-align: center;
+
+        min-height: 400px;
+
+        padding: 50px 20px;
+    }
+
+    .mapBottomCharacter img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .mapBottomText > span {
+        font-size: 14px;
+    }
+
+    .mapBottomText strong {
+        font-size: 24px;
+    }
+
+    .mapBottomText button {
+        height: 48px;
+
+        margin-top: 20px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   아주 작은 모바일
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .mapHeroText h1 {
+        font-size: 30px;
+    }
+
+    .mapHeroCharacter {
+        width: 230px;
+    }
+
+    .mapCircle {
+        width: 190px;
+        height: 190px;
+    }
+
+    .mapHeroCharacter img {
+        width: 155px;
+        height: 155px;
+    }
+
+    .mapSectionHeading h2 {
+        font-size: 27px;
+    }
+
+    .realKakaoMap {
+        height: 320px;
+        min-height: 320px;
+    }
+
+    .mapInfoCard {
+        padding: 25px 18px;
+    }
+
+    .companyInfoItem p {
+        font-size: 11px;
+    }
+
+    .mapBottomText strong {
+        font-size: 21px;
+    }
 }

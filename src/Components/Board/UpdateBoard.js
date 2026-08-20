@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import './UpdateBoard.css';
@@ -8,6 +9,7 @@ function UpdateBoard() {
 
     const navigate = useNavigate();
     const { boardnum } = useParams();
+    const loginUser = useSelector((state) => state.user);
 
     // 게시글
     const [post, setPost] = useState(null);
@@ -19,7 +21,9 @@ function UpdateBoard() {
     // 게시글 조회
     useEffect(() => {
 
-        axios.get(`/api/board/getBoard/${boardnum}`)
+        axios.get(`/api/board/getBoard/${boardnum}`, {
+            params: loginUser?.userid ? { userId: loginUser.userid } : {}
+        })
             .then((result) => {
 
                 const board = result.data.board;
@@ -37,7 +41,7 @@ function UpdateBoard() {
 
             });
 
-    }, [boardnum, navigate]);
+    }, [boardnum, navigate, loginUser?.userid]);
 
 
     // 취소
@@ -65,6 +69,7 @@ function UpdateBoard() {
 
         const boardData = {
             boardnum: Number(boardnum),
+            userid: loginUser.userid,
             title: title,
             content: content,
             category: post.category,

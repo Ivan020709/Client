@@ -1,32 +1,37 @@
-/* ================================
+/* =========================================================
    마이페이지 전체
-================================ */
+   Main Page Theme
+   #fffdfb / #faf5f0 / #b68b78
+========================================================= */
 
 .mypage-wrapper {
     width: 580px;
     margin: 60px auto;
     padding: 0 0 40px;
 
-    background: #fff;
+    background: #fffaf7;
 
-    border: 1px solid #e2e5e8;
-    border-radius: 20px;
+    border: 1px solid #f0e5df;
+    border-radius: 25px;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, .06),
-        0 2px 8px rgba(0, 0, 0, .03);
+        0 12px 35px rgba(80, 65, 55, 0.045);
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
     box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    overflow: hidden;
 }
 
 
-/* ================================
+/* =========================================================
    제목
-================================ */
+========================================================= */
 
 .mypage-title {
     width: 100%;
@@ -36,10 +41,12 @@
 
     text-align: center;
 
-    font-size: 30px;
-    font-weight: 700;
+    font-family: 'Jua', sans-serif;
 
-    color: #343a40;
+    font-size: 32px;
+    font-weight: 400;
+
+    color: #4f4944;
 
     letter-spacing: -1px;
 }
@@ -49,20 +56,20 @@
 
     display: block;
 
-    width: 35px;
+    width: 38px;
     height: 3px;
 
     margin: 14px auto 0;
 
-    background: #adb5bd;
+    background: #b68b78;
 
     border-radius: 10px;
 }
 
 
-/* ================================
+/* =========================================================
    프로필
-================================ */
+========================================================= */
 
 .mypage-profile-area {
     width: 100%;
@@ -70,7 +77,7 @@
     display: flex;
     justify-content: center;
 
-    margin: 0 0 30px;
+    margin: 0 0 32px;
 
     box-sizing: border-box;
 }
@@ -81,10 +88,10 @@
     width: 150px;
     height: 150px;
 
-    border: 1px solid #dfe3e6;
+    border: 5px solid #f3e6df;
     border-radius: 50%;
 
-    background: #f5f6f7;
+    background: #faf5f0;
 
     display: flex;
     align-items: center;
@@ -92,11 +99,14 @@
 
     overflow: visible;
 
-    color: #adb5bd;
+    color: #b68b78;
 
     font-size: 13px;
 
     box-sizing: border-box;
+
+    box-shadow:
+        0 8px 22px rgba(80, 65, 55, 0.07);
 }
 
 .mypage-profile-preview img {
@@ -111,24 +121,24 @@
 }
 
 
-/* ================================
+/* =========================================================
    프로필 카메라
-================================ */
+========================================================= */
 
 .mypage-profile-camera {
     position: absolute;
 
-    right: -3px;
-    bottom: -3px;
+    right: -5px;
+    bottom: -5px;
 
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
 
-    border: 3px solid #fff;
+    border: 3px solid #fffaf7;
 
     border-radius: 50%;
 
-    background: #868e96;
+    background: #b68b78;
 
     color: #fff;
 
@@ -143,27 +153,31 @@
     box-sizing: border-box;
 
     box-shadow:
-        0 3px 8px rgba(0, 0, 0, .18);
+        0 7px 18px rgba(80, 65, 55, 0.14);
 
     transition:
-        background .2s,
-        transform .15s;
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .mypage-profile-camera:hover {
-    background: #6c757d;
+    background: #9f7563;
 
-    transform: scale(1.05);
+    transform: scale(1.06);
+
+    box-shadow:
+        0 9px 22px rgba(80, 65, 55, 0.18);
 }
 
 .mypage-profile-camera:active {
-    transform: scale(.95);
+    transform: scale(.96);
 }
 
 
-/* ================================
+/* =========================================================
    폼
-================================ */
+========================================================= */
 
 .mypage-form {
     width: 88%;
@@ -177,23 +191,23 @@
 .mypage-box {
     width: 100%;
 
-    background: #fff;
+    background: #fffdfb;
 
-    border: 1px solid #e1e5e8;
-    border-radius: 12px;
+    border: 1px solid #f0e5df;
+    border-radius: 18px;
 
     overflow: hidden;
 
     box-shadow:
-        0 2px 6px rgba(0, 0, 0, .02);
+        0 5px 18px rgba(80, 65, 55, 0.035);
 
     box-sizing: border-box;
 }
 
 
-/* ================================
+/* =========================================================
    입력 한 줄
-================================ */
+========================================================= */
 
 .mypage-row {
     width: 100%;
@@ -203,15 +217,19 @@
     display: flex;
     align-items: stretch;
 
-    border-bottom: 1px solid #edf0f2;
+    border-bottom: 1px solid #f1e8e3;
 
     box-sizing: border-box;
 }
 
+.mypage-row:last-child {
+    border-bottom: none;
+}
 
-/* ================================
+
+/* =========================================================
    라벨
-================================ */
+========================================================= */
 
 .mypage-label {
     flex: 0 0 120px;
@@ -223,24 +241,24 @@
     justify-content: center;
     align-items: center;
 
-    background: #f4f5f6;
+    background: #faf5f0;
 
-    color: #495057;
+    color: #6f6963;
 
     font-size: 14px;
     font-weight: 600;
 
     letter-spacing: -.3px;
 
-    border-right: 1px solid #e5e8eb;
+    border-right: 1px solid #f0e5df;
 
     box-sizing: border-box;
 }
 
 
-/* ================================
+/* =========================================================
    입력창
-================================ */
+========================================================= */
 
 .mypage-input {
     flex: 1 1 auto;
@@ -258,30 +276,34 @@
 
     outline: none;
 
-    background: #fff;
+    background: #fffdfb;
 
-    color: #343a40;
+    color: #4f4944;
 
     font-size: 14px;
 
     box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
 .mypage-input::placeholder {
-    color: #b6bcc2;
+    color: #c3b9b3;
 }
 
 .mypage-input:focus {
-    background: #fafbfc;
+    background: #fffaf7;
 
     box-shadow:
-        inset 3px 0 0 #adb5bd;
+        inset 3px 0 0 #b68b78;
 }
 
 
-/* ================================
+/* =========================================================
    중복확인 / 주소검색 버튼
-================================ */
+========================================================= */
 
 .mypage-check-btn {
     flex: 0 0 110px;
@@ -296,26 +318,29 @@
 
     border: none;
 
-    border-left: 1px solid #e1e5e8;
+    border-left: 1px solid #f0e5df;
 
-    background: #868e96;
+    background: #f3e6df;
 
-    color: #fff;
+    color: #9f7563;
 
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
 
     cursor: pointer;
 
     box-sizing: border-box;
 
     transition:
-        background .2s,
-        transform .1s;
+        background .2s ease,
+        color .2s ease,
+        transform .1s ease;
 }
 
 .mypage-check-btn:hover {
-    background: #6c757d;
+    background: #ead8ce;
+
+    color: #8e6656;
 }
 
 .mypage-check-btn:active {
@@ -323,45 +348,41 @@
 }
 
 
-/* ================================
+/* =========================================================
    닉네임 확인 메시지
-================================ */
+========================================================= */
 
 .mypage-check-message {
     height: 0;
+
     padding-left: 120px;
 
     display: flex;
     align-items: center;
 
-    background: #fafbfc;
+    background: #fffaf7;
+
+    color: #b68b78;
 
     box-sizing: border-box;
 
     overflow: hidden;
 
-    transition: height 0.2s ease;
+    transition: height .2s ease;
 }
 
 .mypage-check-message span {
     font-size: 12px;
 }
+
 .mypage-check-message:has(span:not(:empty)) {
     height: 32px;
 }
 
-/* ================================
-   마지막 주소
-================================ */
 
-.mypage-row:last-child {
-    border-bottom: 1px solid #bebfc0;
-}
-
-
-/* ================================
+/* =========================================================
    안내 문구
-================================ */
+========================================================= */
 
 .mypage-msg {
     width: 88%;
@@ -370,19 +391,21 @@
 
     padding: 0 3px;
 
-    color: #868e96;
+    color: #9a918b;
 
     font-size: 12px;
 
     text-align: left;
 
+    line-height: 1.6;
+
     box-sizing: border-box;
 }
 
 
-/* ================================
+/* =========================================================
    버튼 그룹
-================================ */
+========================================================= */
 
 .mypage-btn-group {
     width: 88%;
@@ -391,15 +414,15 @@
 
     gap: 12px;
 
-    margin-top: 18px;
+    margin-top: 20px;
 
     box-sizing: border-box;
 }
 
 
-/* ================================
+/* =========================================================
    수정하기
-================================ */
+========================================================= */
 
 .mypage-btn-save {
     flex: 1;
@@ -413,14 +436,12 @@
 
     border: none;
 
-    border-radius: 9px;
+    border-radius: 30px;
 
     background:
-        linear-gradient(
-            135deg,
-            #adb5bd,
-            #868e96
-        );
+        linear-gradient(135deg,
+            #b68b78,
+            #9f7563);
 
     color: #fff;
 
@@ -434,41 +455,39 @@
     cursor: pointer;
 
     box-shadow:
-        0 4px 10px rgba(108, 117, 125, .2);
+        0 8px 20px rgba(182, 139, 120, 0.22);
 
     box-sizing: border-box;
 
     transition:
-        transform .2s,
-        box-shadow .2s,
-        background .2s;
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 .mypage-btn-save:hover {
     background:
-        linear-gradient(
-            135deg,
-            #868e96,
-            #6c757d
-        );
+        linear-gradient(135deg,
+            #a77c69,
+            #8e6656);
 
     box-shadow:
-        0 6px 15px rgba(108, 117, 125, .25);
+        0 11px 25px rgba(159, 117, 99, 0.25);
 
-    transform: translateY(-1px);
+    transform: translateY(-3px);
 }
 
 .mypage-btn-save:active {
     transform: translateY(0);
 
     box-shadow:
-        0 3px 8px rgba(108, 117, 125, .2);
+        0 5px 12px rgba(159, 117, 99, 0.2);
 }
 
 
-/* ================================
+/* =========================================================
    취소
-================================ */
+========================================================= */
 
 .mypage-btn-cancel {
     flex: 1;
@@ -480,13 +499,13 @@
     margin: 0;
     padding: 0;
 
-    border: 1px solid #ced4da;
+    border: 1px solid #eadbd3;
 
-    border-radius: 9px;
+    border-radius: 30px;
 
-    background: #fff;
+    background: #fffdfb;
 
-    color: #6c757d;
+    color: #9a8277;
 
     font-size: 16px;
     font-weight: 700;
@@ -500,128 +519,106 @@
     box-sizing: border-box;
 
     transition:
-        background .2s,
-        border-color .2s,
-        color .2s;
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
 
 .mypage-btn-cancel:hover {
-    background: #f8f9fa;
+    background: #faf5f0;
 
-    border-color: #adb5bd;
+    border-color: #d9bfb2;
 
-    color: #495057;
+    color: #8e6656;
+
+    transform: translateY(-2px);
 }
 
 
-/* ================================
+/* =========================================================
    주소 검색 Modal
-================================ */
+========================================================= */
 
 .ReactModal__Overlay {
     z-index: 1000 !important;
 
     background-color:
-        rgba(0, 0, 0, .45) !important;
+        rgba(79, 73, 68, .45) !important;
 }
 
 .ReactModal__Content {
-    border: none !important;
+    border: 1px solid #f0e5df !important;
 
-    border-radius: 14px !important;
+    border-radius: 20px !important;
+
+    background: #fffdfb !important;
 
     box-shadow:
-        0 15px 40px rgba(0, 0, 0, .2) !important;
+        0 18px 45px rgba(80, 65, 55, .18) !important;
 }
 
 .ReactModal__Content button {
-    height: 38px;
+    height: 40px;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
     margin: 8px;
 
     border: none;
 
-    border-radius: 6px;
+    border-radius: 30px;
 
-    background: #868e96;
+    background: #b68b78;
 
     color: #fff;
 
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
 
     cursor: pointer;
 
-    transition: .2s;
+    box-shadow:
+        0 5px 14px rgba(182, 139, 120, .18);
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .ReactModal__Content button:hover {
-    background: #6c757d;
+    background: #9f7563;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(159, 117, 99, .22);
 }
 
 
-/* ================================
-   모바일
-================================ */
-
-@media (max-width: 650px) {
-
-    .mypage-wrapper {
-        width: calc(100% - 30px);
-
-        margin: 30px auto;
-    }
-
-    .mypage-title {
-        font-size: 26px;
-    }
-
-    .mypage-profile-preview {
-        width: 130px;
-        height: 130px;
-    }
-
-    .mypage-profile-camera {
-        width: 38px;
-        height: 38px;
-
-        font-size: 16px;
-    }
-
-    .mypage-label {
-        flex-basis: 105px;
-        width: 105px;
-    }
-
-    .mypage-check-btn {
-        flex-basis: 95px;
-        width: 95px;
-        min-width: 95px;
-    }
-}
-
-/* =================================
-   마이페이지 전체
-================================= */
+/* =========================================================
+   마이페이지 전체 레이아웃
+========================================================= */
 
 .mypage-layout {
     width: 100%;
 
-    margin: 60px auto 40px;
+    margin: 60px auto 100px;
 
     display: flex;
 
     align-items: flex-start;
 
     box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 
-/* =================================
+/* =========================================================
    사이드바
-================================= */
+========================================================= */
 
 .mypage-sidebar {
     width: 210px;
@@ -629,15 +626,14 @@
 
     margin-left: calc((100% - 1100px) / 2);
 
-    background: #fff;
+    background: #fffaf7;
 
-    border: 1px solid #e2e5e8;
+    border: 1px solid #f0e5df;
 
-    border-radius: 16px;
+    border-radius: 22px;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, .06),
-        0 2px 8px rgba(0, 0, 0, .03);
+        0 12px 35px rgba(80, 65, 55, 0.045);
 
     overflow: hidden;
 
@@ -645,9 +641,9 @@
 }
 
 
-/* =================================
+/* =========================================================
    사이드바 제목
-================================= */
+========================================================= */
 
 .mypage-sidebar-title {
     height: 70px;
@@ -658,34 +654,41 @@
 
     padding: 0 24px;
 
-    border-bottom: 1px solid #edf0f2;
+    border-bottom: 1px solid #f1e8e3;
 
-    color: #343a40;
+    background:
+        linear-gradient(135deg,
+            #faf5f0,
+            #fffaf7);
 
-    font-size: 19px;
+    color: #4f4944;
 
-    font-weight: 700;
+    font-family: 'Jua', sans-serif;
 
-    letter-spacing: -0.5px;
+    font-size: 21px;
+
+    font-weight: 400;
+
+    letter-spacing: -.5px;
 
     box-sizing: border-box;
 }
 
 
-/* =================================
+/* =========================================================
    사이드바 메뉴
-================================= */
+========================================================= */
 
 .mypage-sidebar-menu {
-    padding: 10px 0;
+    padding: 10px 8px;
 
     box-sizing: border-box;
 }
 
 
-/* =================================
+/* =========================================================
    메뉴
-================================= */
+========================================================= */
 
 .mypage-sidebar-item {
     width: 100%;
@@ -696,13 +699,17 @@
 
     align-items: center;
 
-    padding: 0 24px;
+    padding: 0 18px;
+
+    margin: 2px 0;
 
     border: none;
 
-    background: #fff;
+    border-radius: 14px;
 
-    color: #6c757d;
+    background: transparent;
+
+    color: #817971;
 
     font-size: 14px;
 
@@ -713,46 +720,47 @@
     box-sizing: border-box;
 
     transition:
-        background .2s,
-        color .2s;
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
-
 
 .mypage-sidebar-item:hover {
-    background: #f8f9fa;
+    background: #f3e6df;
 
-    color: #343a40;
+    color: #9f7563;
+
+    transform: translateX(2px);
 }
 
-
 .mypage-sidebar-item.active {
-    background: #f1f3f5;
+    background: #f3e6df;
 
-    color: #343a40;
+    color: #9f7563;
 
     font-weight: 700;
 
     box-shadow:
-        inset 3px 0 0 #868e96;
+        inset 3px 0 0 #b68b78;
 }
 
 
-/* =================================
+/* =========================================================
    사이드바 하단
-================================= */
+========================================================= */
 
 .mypage-sidebar-bottom {
-    padding: 12px 0;
+    padding: 12px 8px;
 
-    border-top: 1px solid #edf0f2;
+    border-top: 1px solid #f1e8e3;
 
     box-sizing: border-box;
 }
 
 
-/* =================================
+/* =========================================================
    회원탈퇴
-================================= */
+========================================================= */
 
 .mypage-sidebar-delete {
     width: 100%;
@@ -761,13 +769,15 @@
     display: flex;
     align-items: center;
 
-    padding: 0 24px;
+    padding: 0 18px;
 
     border: none;
 
-    background: #fff;
+    border-radius: 12px;
 
-    color: #adb5bd;
+    background: transparent;
+
+    color: #b8aaa2;
 
     font-size: 13px;
     font-weight: 500;
@@ -777,32 +787,31 @@
     box-sizing: border-box;
 
     transition:
-        background .2s,
-        color .2s;
+        background .2s ease,
+        color .2s ease;
 }
 
 .mypage-sidebar-delete:hover {
-    background: #fafafa;
+    background: #faf5f0;
 
-    color: #868e96;
+    color: #9f7563;
 }
 
-
 .mypage-sidebar-delete.active {
-    background: #f8f9fa;
+    background: #faf5f0;
 
-    color: #868e96;
+    color: #9f7563;
 
     font-weight: 700;
 
     box-shadow:
-        inset 3px 0 0 #adb5bd;
+        inset 3px 0 0 #d0ad9c;
 }
 
 
-/* =================================
+/* =========================================================
    오른쪽 내용
-================================= */
+========================================================= */
 
 .mypage-content {
     width: 580px;
@@ -815,9 +824,9 @@
 }
 
 
-/* =================================
+/* =========================================================
    기존 회원정보 수정 박스
-================================= */
+========================================================= */
 
 .mypage-content .mypage-wrapper {
     width: 580px;
@@ -826,14 +835,18 @@
 }
 
 
-/* =================================
+/* =========================================================
    모바일
-================================= */
+========================================================= */
 
 @media (max-width: 850px) {
 
     .mypage-layout {
         width: 100%;
+
+        margin-top: 30px;
+
+        flex-direction: column;
     }
 
 
@@ -842,14 +855,18 @@
 
         width: calc(100% - 30px);
 
-        margin: 30px auto 0;
+        min-width: 0;
+
+        margin: 0 auto;
+
+        border-radius: 20px;
     }
 
 
     .mypage-sidebar-menu {
         display: flex;
 
-        padding: 0;
+        padding: 6px;
     }
 
 
@@ -858,7 +875,14 @@
 
         justify-content: center;
 
-        padding: 0;
+        padding: 0 5px;
+
+        font-size: 13px;
+    }
+
+
+    .mypage-sidebar-item:hover {
+        transform: none;
     }
 
 
@@ -871,6 +895,10 @@
 
     .mypage-content {
         width: 100%;
+
+        min-width: 0;
+
+        margin-left: 0;
     }
 
 
@@ -879,5 +907,177 @@
 
         margin: 30px auto 40px;
     }
+}
 
+
+/* =========================================================
+   작은 모바일
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .mypage-wrapper {
+        width: calc(100% - 30px);
+
+        margin: 30px auto;
+
+        border-radius: 22px;
+    }
+
+
+    .mypage-title {
+        padding-top: 32px;
+
+        font-size: 29px;
+    }
+
+
+    .mypage-profile-preview {
+        width: 135px;
+        height: 135px;
+    }
+
+
+    .mypage-profile-camera {
+        width: 40px;
+        height: 40px;
+
+        font-size: 16px;
+    }
+
+
+    .mypage-label {
+        flex-basis: 105px;
+        width: 105px;
+    }
+
+
+    .mypage-check-message {
+        padding-left: 105px;
+    }
+
+
+    .mypage-check-btn {
+        flex-basis: 95px;
+        width: 95px;
+        min-width: 95px;
+    }
+}
+
+
+/* =========================================================
+   아주 작은 모바일
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .mypage-wrapper {
+        width: calc(100% - 20px);
+
+        margin: 20px auto 30px;
+
+        padding-bottom: 30px;
+
+        border-radius: 20px;
+    }
+
+
+    .mypage-title {
+        padding-top: 28px;
+
+        font-size: 27px;
+    }
+
+
+    .mypage-profile-area {
+        margin-bottom: 25px;
+    }
+
+
+    .mypage-profile-preview {
+        width: 120px;
+        height: 120px;
+    }
+
+
+    .mypage-profile-camera {
+        width: 38px;
+        height: 38px;
+
+        font-size: 15px;
+    }
+
+
+    .mypage-form,
+    .mypage-msg,
+    .mypage-btn-group {
+        width: calc(100% - 30px);
+    }
+
+
+    .mypage-label {
+        flex-basis: 88px;
+        width: 88px;
+
+        font-size: 13px;
+    }
+
+
+    .mypage-check-message {
+        padding-left: 88px;
+    }
+
+
+    .mypage-input {
+        padding: 0 12px;
+
+        font-size: 13px;
+    }
+
+
+    .mypage-check-btn {
+        flex-basis: 82px;
+        width: 82px;
+        min-width: 82px;
+
+        font-size: 12px;
+    }
+
+
+    .mypage-btn-group {
+        gap: 8px;
+    }
+
+
+    .mypage-btn-save,
+    .mypage-btn-cancel {
+        height: 49px;
+
+        font-size: 14px;
+    }
+
+
+    .mypage-sidebar {
+        width: calc(100% - 20px);
+
+        border-radius: 18px;
+    }
+
+
+    .mypage-sidebar-title {
+        height: 62px;
+
+        justify-content: center;
+
+        padding: 0;
+
+        font-size: 19px;
+    }
+
+
+    .mypage-sidebar-item {
+        height: 48px;
+
+        font-size: 12px;
+    }
 }

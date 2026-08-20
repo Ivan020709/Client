@@ -1,51 +1,105 @@
+/* =========================================================
+   고민 게시판
+   Feel Together / Warm Beige Theme
+
+   Main Theme
+   #fffaf7
+   #fffdfb
+   #faf5f0
+   #b68b78
+   #9f7563
+========================================================= */
+
 .concern-board-page {
     width: min(1240px, calc(100% - 40px));
     min-height: 760px;
+
     margin: 0 auto;
     padding: 52px 0 90px;
-    color: var(--feelog-text, #342f3b);
+
+    color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================================
+   게시판 상단
+========================================================= */
 
 .concern-board-hero {
     margin-bottom: 30px;
+
     text-align: center;
 }
 
 .concern-board-hero > span {
-    color: var(--feelog-primary, #7561a8);
+    color: #b68b78;
+
     font-size: 12px;
     font-weight: 800;
+
     letter-spacing: 0.18em;
 }
 
 .concern-board-hero h1 {
     margin: 9px 0;
-    font-family: var(--feelog-heading-font, inherit);
+
+    font-family: 'Jua', sans-serif;
+
     font-size: clamp(32px, 5vw, 45px);
+    font-weight: 400;
+
+    color: #4f4944;
+
+    letter-spacing: -1px;
 }
 
 .concern-board-hero p {
     margin: 0;
-    color: var(--feelog-muted, #7e7787);
+
+    color: #9a918b;
+
     font-size: 15px;
+    line-height: 1.6;
 }
+
+
+/* =========================================================
+   게시판 전체
+========================================================= */
 
 .concern-board-container {
     width: 100%;
 }
 
+
+/* =========================================================
+   상단 툴바
+========================================================= */
+
 .concern-board-toolbar,
 .concern-board-actions,
 .concern-sort {
     display: flex;
+
     align-items: center;
 }
 
 .concern-board-toolbar {
     justify-content: space-between;
+
     gap: 20px;
+
     margin-bottom: 18px;
 }
+
+
+/* =========================================================
+   정렬 버튼
+========================================================= */
 
 .concern-sort {
     gap: 9px;
@@ -53,299 +107,676 @@
 
 .concern-sort button {
     padding: 10px 17px;
-    border: 1px solid #ddd8e3;
+
+    border: 1px solid #eadbd3;
     border-radius: 999px;
-    background: #fff;
-    color: #686170;
-    font: inherit;
+
+    background: #fffdfb;
+
+    color: #9a8277;
+
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 13px;
     font-weight: 700;
+
     cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.concern-sort button:hover {
+    background: #faf5f0;
+
+    border-color: #d9bfb2;
+
+    color: #9f7563;
+
+    transform: translateY(-1px);
 }
 
 .concern-sort button.active {
-    border-color: #262329;
-    background: #262329;
+    border-color: #b68b78;
+
+    background: #b68b78;
+
     color: #fff;
-    box-shadow: 0 7px 16px rgba(38, 35, 41, 0.16);
+
+    box-shadow:
+        0 7px 16px rgba(182, 139, 120, 0.20);
 }
+
+.concern-sort button.active:hover {
+    background: #9f7563;
+
+    border-color: #9f7563;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   게시판 우측 정보
+========================================================= */
 
 .concern-board-actions {
     gap: 15px;
-    color: #837b8c;
+
+    color: #9a918b;
+
     font-size: 13px;
 }
 
 .concern-board-actions strong {
-    color: var(--feelog-primary, #7561a8);
+    color: #b68b78;
 }
+
+
+/* =========================================================
+   고민 나누기 버튼
+========================================================= */
 
 .concern-write-button {
     padding: 11px 18px;
-    border: 0;
+
+    border: none;
     border-radius: 999px;
-    background: var(--feelog-primary, #7561a8);
+
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
     color: #fff;
-    font: inherit;
+
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 13px;
     font-weight: 800;
+
     cursor: pointer;
-    box-shadow: 0 8px 18px rgba(117, 97, 168, 0.22);
+
+    box-shadow:
+        0 8px 18px rgba(182, 139, 120, 0.20);
+
+    box-sizing: border-box;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 }
+
+.concern-write-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
+
+    box-shadow:
+        0 11px 25px rgba(159, 117, 99, 0.24);
+
+    transform: translateY(-2px);
+}
+
+.concern-write-button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, 0.18);
+}
+
+
+/* =========================================================
+   노트 게시판
+========================================================= */
 
 .notebook-board {
     position: relative;
+
     min-height: 1050px;
+
     overflow: hidden;
+
     padding: 54px 62px 54px 142px;
-    border: 1px solid #9d7049;
+
+    border: 1px solid #e0c9bc;
     border-radius: 22px;
+
     box-sizing: border-box;
-    background-color: #bf8b59;
+
+    /*
+       기존 갈색 노트 느낌은 유지하되
+       마이페이지와 어울리는 따뜻한 베이지 계열
+    */
+    background-color: #ead8ce;
+
     background-image:
-        repeating-linear-gradient(to bottom, transparent 0, transparent 39px, rgba(87, 49, 26, 0.30) 40px, transparent 41px),
-        linear-gradient(135deg, #cf9d68 0%, #ad7548 100%);
-    box-shadow: inset 0 0 55px rgba(75, 40, 19, 0.22), 0 12px 28px rgba(81, 48, 25, 0.16);
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 39px,
+            rgba(159, 117, 99, 0.12) 40px,
+            transparent 41px
+        ),
+        linear-gradient(
+            135deg,
+            #f0e0d6 0%,
+            #dfc4b5 100%
+        );
+
+    box-shadow:
+        inset 0 0 55px rgba(108, 78, 63, 0.10),
+        0 12px 28px rgba(80, 65, 55, 0.10);
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================================
+   노트 세로선
+========================================================= */
 
 .notebook-board-line {
     position: absolute;
+
     top: 0;
     bottom: 0;
     left: 108px;
+
     width: 2px;
-    background: rgba(133, 60, 45, 0.52);
+
+    background: rgba(182, 139, 120, 0.38);
 }
+
+
+/* =========================================================
+   노트 링
+========================================================= */
 
 .notebook-board-rings {
     position: absolute;
+
     top: 22px;
     bottom: 22px;
     left: 23px;
+
     width: 22px;
+
     border-radius: 20px;
-    background-image: radial-gradient(ellipse at center, #6e432b 0 27%, #d6a36d 30% 43%, transparent 46%);
+
+    background-image:
+        radial-gradient(
+            ellipse at center,
+            #9f7563 0 27%,
+            #ead8ce 30% 43%,
+            transparent 46%
+        );
+
     background-repeat: repeat-y;
     background-size: 22px 42px;
-    opacity: 0.9;
+
+    opacity: 0.85;
 }
+
+
+/* =========================================================
+   메모 그리드
+========================================================= */
 
 .notebook-board-grid {
     position: relative;
+
     z-index: 1;
+
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 38px 44px;
 }
 
+
+/* =========================================================
+   메모
+========================================================= */
+
 .notebook-board-memo {
     position: relative;
+
     min-width: 0;
+
     height: 210px;
+
     padding: 26px 28px 45px;
+
     box-sizing: border-box;
+
     background: var(--memo-color);
-    color: #4c4231;
+
+    color: #4f4944;
+
     cursor: pointer;
+
     transform: rotate(var(--memo-rotation));
-    box-shadow: 5px 7px 14px rgba(60, 60, 40, 0.24);
-    transition: transform 0.24s ease, box-shadow 0.24s ease;
+
+    box-shadow:
+        5px 7px 14px rgba(80, 65, 55, 0.16);
+
+    transition:
+        transform .24s ease,
+        box-shadow .24s ease;
 }
 
 .notebook-board-memo:hover,
 .notebook-board-memo:focus-visible {
     z-index: 2;
+
     outline: none;
-    transform: rotate(0deg) translateY(-7px) scale(1.025);
-    box-shadow: 8px 14px 25px rgba(60, 60, 40, 0.31);
+
+    transform:
+        rotate(0deg)
+        translateY(-7px)
+        scale(1.025);
+
+    box-shadow:
+        8px 14px 25px rgba(80, 65, 55, 0.22);
 }
+
+
+/* =========================================================
+   비공개 메모
+========================================================= */
+
+.notebook-board-memo.private {
+    filter: saturate(.9);
+}
+
+
+/* =========================================================
+   메모 핀
+========================================================= */
 
 .notebook-memo-pin {
     position: absolute;
+
     top: -10px;
     left: 50%;
+
     width: 19px;
     height: 19px;
+
     border-radius: 50%;
-    background: #d95c5c;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+
+    background: #b68b78;
+
+    box-shadow:
+        1px 2px 4px rgba(80, 65, 55, 0.22);
+
     transform: translateX(-50%);
 }
 
 .notebook-memo-pin::after {
     content: '';
+
     position: absolute;
+
     top: 3px;
     left: 5px;
+
     width: 5px;
     height: 5px;
+
     border-radius: 50%;
+
     background: rgba(255, 255, 255, 0.75);
 }
 
+
+/* =========================================================
+   메모 제목
+========================================================= */
+
 .notebook-board-heading {
     display: flex;
+
     align-items: center;
+
     gap: 9px;
+
     min-width: 0;
 }
 
 .notebook-board-heading h2 {
     min-width: 0;
+
     margin: 0;
+
     overflow: hidden;
-    color: #4d412e;
+
+    color: #4f4944;
+
     font-size: 21px;
+    font-weight: 700;
+
     line-height: 1.3;
+
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .notebook-board-heading > span {
     flex-shrink: 0;
-    color: #7c6847;
+
+    color: #9f7563;
+
     font-size: 12px;
     font-weight: 800;
 }
 
+
+/* =========================================================
+   메모 내용
+========================================================= */
+
 .notebook-board-content {
     display: -webkit-box;
+
     margin: 14px 0 7px;
+
     overflow: hidden;
-    color: #675a43;
+
+    color: #6f625b;
+
     font-size: 13px;
+
     line-height: 1.65;
+
     word-break: keep-all;
+
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
 
+
+/* =========================================================
+   메모 작성자 / 시간
+========================================================= */
+
 .notebook-board-meta {
     overflow: hidden;
-    color: #826f54;
+
+    color: #9a8277;
+
     font-size: 11px;
+
     text-overflow: ellipsis;
+
     white-space: nowrap;
 }
 
+
+/* =========================================================
+   메모 하단 액션
+========================================================= */
+
 .notebook-board-actions {
     position: absolute;
+
     right: 24px;
     bottom: 15px;
     left: 24px;
+
     display: flex;
+
     align-items: center;
+
     gap: 11px;
-    color: #796145;
+
+    color: #8e7669;
+
     font-size: 11px;
     font-weight: 700;
 }
 
 .notebook-board-actions button {
     padding: 3px 6px;
+
     border: 0;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.38);
+
+    background: rgba(255, 255, 255, 0.42);
+
     color: inherit;
-    font: inherit;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: inherit;
+    font-weight: inherit;
+
     cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
 }
 
 .notebook-board-actions button:hover {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.75);
 }
 
 .notebook-board-actions button.liked {
-    color: #d84c61;
+    color: #c66d7a;
 }
+
+
+/* =========================================================
+   신고
+========================================================= */
 
 .notebook-board-report {
     margin-left: auto;
 }
 
+
+/* =========================================================
+   메모 화살표
+========================================================= */
+
 .notebook-board-arrow {
     position: absolute;
+
     right: 20px;
     top: 50%;
-    color: rgba(106, 88, 60, 0.42);
+
+    color: rgba(159, 117, 99, 0.38);
+
     font-size: 22px;
     font-weight: 800;
 }
 
+
+/* =========================================================
+   게시글 없음 / 오류
+========================================================= */
+
 .concern-board-message {
     display: flex;
+
     min-height: 360px;
+
     align-items: center;
     justify-content: center;
+
     flex-direction: column;
+
     gap: 12px;
-    border: 1px dashed #d7c3ad;
+
+    border: 1px dashed #d9bfb2;
     border-radius: 22px;
-    background: #bf8b59;
-    color: #fff9ee;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0e0d6,
+            #ead8ce
+        );
+
+    color: #7e6d64;
+
+    box-sizing: border-box;
 }
 
 .concern-board-message button {
     padding: 8px 14px;
-    border: 0;
+
+    border: none;
     border-radius: 999px;
-    background: #fff;
-    color: #75502f;
+
+    background: #fffdfb;
+
+    color: #9f7563;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+
     cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(80, 65, 55, 0.08);
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
+
+.concern-board-message button:hover {
+    background: #faf5f0;
+
+    color: #8e6656;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   페이지네이션
+========================================================= */
 
 .concern-pagination {
     display: flex;
+
     justify-content: center;
+
     gap: 7px;
+
     margin-top: 28px;
 }
 
 .concern-pagination.on-notebook {
     position: relative;
+
     z-index: 2;
+
     margin: 42px 0 0;
 }
 
 .concern-pagination.on-notebook button {
-    border-color: rgba(91, 56, 31, 0.35);
-    background: rgba(255, 249, 235, 0.9);
-    color: #765234;
-    box-shadow: 0 3px 8px rgba(76, 43, 20, 0.18);
+    border-color: rgba(159, 117, 99, 0.25);
+
+    background: rgba(255, 253, 251, 0.88);
+
+    color: #8e6f60;
+
+    box-shadow:
+        0 3px 8px rgba(80, 65, 55, 0.10);
 }
 
 .concern-pagination.on-notebook button.active {
-    border-color: #67452d;
-    background: #67452d;
+    border-color: #b68b78;
+
+    background: #b68b78;
+
     color: #fff;
 }
 
 .concern-pagination button {
     width: 36px;
     height: 36px;
-    border: 1px solid #e1dbe7;
+
+    border: 1px solid #eadbd3;
     border-radius: 50%;
-    background: #fff;
-    color: #756d7f;
+
+    background: #fffdfb;
+
+    color: #9a8277;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+
     cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.concern-pagination button:hover:not(:disabled) {
+    border-color: #d9bfb2;
+
+    background: #faf5f0;
+
+    color: #9f7563;
+
+    transform: translateY(-1px);
 }
 
 .concern-pagination button.active {
-    border-color: var(--feelog-primary, #7561a8);
-    background: var(--feelog-primary, #7561a8);
+    border-color: #b68b78;
+
+    background: #b68b78;
+
     color: #fff;
+
     font-weight: 800;
 }
 
 .concern-pagination button:disabled {
     cursor: default;
+
     opacity: 0.35;
 }
 
+
+/* =========================================================
+   태블릿
+========================================================= */
+
 @media (max-width: 900px) {
+
     .notebook-board {
         min-height: 0;
-        padding: 52px 35px 52px 110px;
+
+        padding:
+            52px
+            35px
+            52px
+            110px;
     }
 
     .notebook-board-line {
@@ -354,6 +785,7 @@
 
     .notebook-board-grid {
         grid-template-columns: 1fr;
+
         gap: 34px;
     }
 
@@ -362,23 +794,59 @@
     }
 }
 
+
+/* =========================================================
+   모바일
+========================================================= */
+
 @media (max-width: 620px) {
+
     .concern-board-page {
         width: calc(100% - 24px);
+
         padding-top: 34px;
     }
 
+
+    /* 상단 */
+
+    .concern-board-hero {
+        margin-bottom: 25px;
+    }
+
+    .concern-board-hero h1 {
+        font-size: 34px;
+    }
+
+    .concern-board-hero p {
+        font-size: 13px;
+    }
+
+
+    /* 툴바 */
+
     .concern-board-toolbar {
         align-items: stretch;
+
         flex-direction: column;
+
+        gap: 12px;
     }
 
     .concern-board-actions {
         justify-content: space-between;
     }
 
+
+    /* 노트 */
+
     .notebook-board {
-        padding: 46px 18px 46px 55px;
+        padding:
+            46px
+            18px
+            46px
+            55px;
+
         border-radius: 17px;
     }
 
@@ -390,14 +858,119 @@
         left: 7px;
     }
 
+
+    /* 메모 */
+
     .notebook-board-memo {
         height: 230px;
-        padding: 25px 20px 48px;
+
+        padding:
+            25px
+            20px
+            48px;
     }
+
+    .notebook-board-heading h2 {
+        font-size: 19px;
+    }
+
+    .notebook-board-content {
+        font-size: 12px;
+    }
+
+
+    /* 하단 액션 */
 
     .notebook-board-actions {
         right: 18px;
         left: 18px;
+
         gap: 7px;
+    }
+
+
+    /* 페이지 */
+
+    .concern-pagination {
+        gap: 5px;
+    }
+
+    .concern-pagination button {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+
+/* =========================================================
+   아주 작은 모바일
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .concern-board-page {
+        width: calc(100% - 20px);
+
+        padding-top: 25px;
+    }
+
+    .concern-board-hero h1 {
+        font-size: 31px;
+    }
+
+    .concern-sort button {
+        padding: 9px 14px;
+
+        font-size: 12px;
+    }
+
+    .concern-write-button {
+        padding: 10px 15px;
+
+        font-size: 12px;
+    }
+
+    .notebook-board {
+        padding:
+            42px
+            14px
+            42px
+            48px;
+
+        border-radius: 16px;
+    }
+
+    .notebook-board-line {
+        left: 36px;
+    }
+
+    .notebook-board-rings {
+        left: 5px;
+    }
+
+    .notebook-board-memo {
+        height: 225px;
+
+        padding:
+            23px
+            17px
+            46px;
+    }
+
+    .notebook-board-heading h2 {
+        font-size: 17px;
+    }
+
+    .notebook-board-heading > span {
+        font-size: 11px;
+    }
+
+    .notebook-board-actions {
+        right: 15px;
+        left: 15px;
+
+        gap: 5px;
+
+        font-size: 10px;
     }
 }

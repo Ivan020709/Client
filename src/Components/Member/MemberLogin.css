@@ -1,85 +1,125 @@
-/* =========================
-   로그인 전체 박스
-========================= */
+/* =========================================================
+   로그인 페이지
+   - 메인페이지와 동일한 따뜻한 베이지/브라운 톤
+   - 기존 로그인 페이지 크기 유지
+========================================================= */
+
 .login-wrapper {
     width: 520px;
     min-height: 580px;
 
     margin: 80px auto;
-    padding: 10px 40px 40px;
+    padding: 0 40px 40px;
 
-    background: #ffffff;
-    border: 1px solid #e1e4e8;
-    border-radius: 20px;
+    background: #fffdfb;
+
+    border: 1px solid #f0e5de;
+    border-radius: 25px;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.04);
+        0 12px 35px rgba(90, 70, 55, 0.06),
+        0 3px 10px rgba(90, 70, 55, 0.025);
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
     box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 
-/* =========================
+/* =========================================================
    제목
-========================= */
+========================================================= */
+
 .login-title {
     width: 100%;
 
     margin: 0;
-    padding: 40px 0 35px;
+    padding: 42px 0 32px;
 
     text-align: center;
 
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -1px;
+    color: #4f4944;
 
-    color: #343a40;
+    font-family: 'Jua', sans-serif;
+
+    font-size: 34px;
+    font-weight: 400;
+
+    letter-spacing: -1px;
+}
+
+.login-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 13px auto 0;
+
+    border-radius: 10px;
+
+    background: #b68b78;
 }
 
 
-/* =========================
+/* =========================================================
    로그인 입력 영역
-========================= */
+========================================================= */
+
 .login-form {
     display: flex;
     justify-content: center;
     align-items: stretch;
 
-    width: 100%;
+    width: 380px;
+    height: 104px;
 
     margin-top: 5px;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================
+/* =========================================================
    ID / PW 박스
-========================= */
+========================================================= */
+
 .login-box {
-    border: 1px solid #d8dde2;
-    border-radius: 10px 0 0 10px;
+    width: 285px;
+    height: 104px;
+
+    border: 1px solid #eaded7;
+    border-right: none;
+
+    border-radius: 12px 0 0 12px;
 
     overflow: hidden;
 
-    background: #fff;
+    background: #fffaf7;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================
+/* =========================================================
    ID / PW 한 줄
-========================= */
+========================================================= */
+
 .login-row {
     display: flex;
 
     width: 100%;
     height: 52px;
 
-    border-bottom: 1px solid #e2e5e8;
+    border-bottom: 1px solid #f0e7e2;
+
+    box-sizing: border-box;
 }
 
 .login-row:last-child {
@@ -87,31 +127,41 @@
 }
 
 
-/* =========================
+/* =========================================================
    ID / PW 라벨
-========================= */
+========================================================= */
+
 .login-label {
+    flex: 0 0 52px;
+
     width: 52px;
-
-    background: #f1f3f5;
-    color: #555;
-
-    font-size: 15px;
-    font-weight: 700;
+    height: 52px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    flex-shrink: 0;
+    background: #f3e6df;
+
+    color: #b68b78;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================
+/* =========================================================
    입력창
-========================= */
+========================================================= */
+
 .login-input {
-    width: 280px;
+    flex: 1;
+
+    width: auto;
+    min-width: 0;
+
     height: 52px;
 
     padding: 0 15px;
@@ -119,54 +169,86 @@
     border: none;
     outline: none;
 
-    background: #fff;
+    background: #fffaf7;
 
-    font-size: 16px;
-    color: #343a40;
+    color: #4f4944;
+
+    font-size: 14px;
 
     box-sizing: border-box;
 }
 
 .login-input::placeholder {
-    color: #adb5bd;
-    font-size: 14px;
+    color: #b8aaa2;
+    font-size: 13px;
 }
 
 .login-input:focus {
-    background: #fafbfc;
+    background: #fffdfb;
+
+    box-shadow:
+        inset 3px 0 0 #b68b78;
 }
 
 
-/* =========================
+/* =========================================================
    로그인 버튼
-========================= */
-.btn-login {
-    width: 95px;
+========================================================= */
 
-    background: #adb5bd;
-    color: #fff;
+.btn-login {
+    flex: 0 0 95px;
+
+    width: 95px;
+    height: 104px;
 
     border: none;
-    border-radius: 0 10px 10px 0;
 
-    font-size: 17px;
+    border-radius: 0 12px 12px 0;
+
+    background:
+        linear-gradient(135deg,
+            #b68b78,
+            #9f7563);
+
+    color: #ffffff;
+
+    font-size: 15px;
     font-weight: 700;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    box-shadow:
+        0 7px 18px rgba(182, 139, 120, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+    box-sizing: border-box;
 }
 
 .btn-login:hover {
-    background: #868e96;
+    background:
+        linear-gradient(135deg,
+            #a97d6b,
+            #916a59);
 
     transform: translateX(1px);
+
+    box-shadow:
+        0 9px 22px rgba(159, 117, 99, 0.23);
+}
+
+.btn-login:active {
+    transform: translateX(0);
 }
 
 
-/* =========================
+/* =========================================================
    로그인 오류 메시지
-========================= */
+========================================================= */
+
 .login-msg {
     width: 380px;
     min-height: 28px;
@@ -177,95 +259,129 @@
     justify-content: center;
     align-items: center;
 
-    font-size: 14px;
+    color: #c47f72;
+
+    font-size: 13px;
     font-weight: 600;
 
-    color: #e57373;
+    box-sizing: border-box;
 }
 
 
-/* =========================
+/* =========================================================
    회원가입 / 아이디 찾기
-========================= */
+========================================================= */
+
 .login-extra {
     display: flex;
+
     justify-content: space-between;
+
     gap: 12px;
 
     width: 380px;
     height: 50px;
 
     margin-top: 12px;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================
-   회원가입 버튼
-========================= */
+/* =========================================================
+   회원가입
+========================================================= */
+
 .btn-kakao {
     flex: 1;
 
-    background: #fff;
-    color: #666;
+    height: 50px;
 
-    border: 1px solid #d5d9dd;
-    border-radius: 9px;
+    border: 1px solid #eaded7;
+    border-radius: 10px;
 
-    font-size: 15px;
-    font-weight: 600;
+    background: #fffaf7;
 
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-}
-
-.btn-kakao:hover {
-    background: #f4f5f6;
-
-    border-color: #adb5bd;
-    color: #343a40;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-}
-
-
-/* =========================
-   아이디 / 비밀번호 찾기
-========================= */
-.btn-find {
-    flex: 1;
-
-    background: #fff;
-    color: #666;
-
-    border: 1px solid #d5d9dd;
-    border-radius: 9px;
+    color: #817971;
 
     font-size: 14px;
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.btn-find:hover {
-    background: #f4f5f6;
+.btn-kakao:hover {
+    background: #f3e6df;
 
-    border-color: #adb5bd;
-    color: #343a40;
+    border-color: #dfc7ba;
+
+    color: #9f7563;
 
     transform: translateY(-1px);
 
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 5px 14px rgba(80, 65, 55, 0.06);
 }
 
 
-/* =========================
+/* =========================================================
+   아이디 / 비밀번호 찾기
+========================================================= */
+
+.btn-find {
+    flex: 1;
+
+    height: 50px;
+
+    border: 1px solid #eaded7;
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #817971;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-find:hover {
+    background: #f3e6df;
+
+    border-color: #dfc7ba;
+
+    color: #9f7563;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(80, 65, 55, 0.06);
+}
+
+
+/* =========================================================
    카카오 영역
-========================= */
+========================================================= */
+
 .login-footer {
     display: flex;
     justify-content: center;
@@ -273,71 +389,178 @@
     width: 100%;
 
     margin-top: 14px;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================
-   카카오 로그인 버튼
-========================= */
+/* =========================================================
+   카카오 로그인
+========================================================= */
+
+/* =========================================================
+   카카오 로그인
+========================================================= */
+
 .btn-join {
     width: 380px;
     height: 52px;
 
+    border: none;
+    border-radius: 10px;
+
     background: #FEE500;
+
     color: #191919;
 
-    border: none;
-    border-radius: 9px;
-
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    box-sizing: border-box;
+
+    box-shadow:
+        0 5px 15px rgba(90, 80, 20, 0.10);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .btn-join:hover {
     background: #FDD835;
 
+    color: #191919;
+
     transform: translateY(-1px);
 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 7px 18px rgba(90, 80, 20, 0.15);
 }
 
 
-/* =========================
-   모바일 대응
-========================= */
+.btn-join:active {
+    transform: translateY(0);
+}
+
+/* =========================================================
+   모바일
+========================================================= */
+
 @media (max-width: 600px) {
 
     .login-wrapper {
         width: calc(100% - 30px);
+
         min-height: auto;
 
         margin: 40px auto;
-        padding: 10px 20px 30px;
+
+        padding: 0 20px 30px;
+
+        border-radius: 22px;
     }
+
 
     .login-title {
-        font-size: 28px;
-        padding: 30px 0;
+        padding: 32px 0 28px;
+
+        font-size: 30px;
     }
+
+
+    .login-form {
+        width: 100%;
+        max-width: 380px;
+    }
+
+
+    .login-box {
+        width: calc(100% - 85px);
+    }
+
 
     .login-input {
-        width: 220px;
+        width: auto;
     }
 
+
     .btn-login {
+        flex: 0 0 85px;
+
         width: 85px;
     }
 
-    .login-extra,
-    .btn-join {
-        width: 100%;
-    }
 
     .login-msg {
         width: 100%;
+        max-width: 380px;
+    }
+
+
+    .login-extra {
+        width: 100%;
+        max-width: 380px;
+    }
+
+
+    .btn-join {
+        width: 100%;
+        max-width: 380px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .login-wrapper {
+        width: calc(100% - 20px);
+
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    .login-title {
+        font-size: 28px;
+    }
+
+
+    .login-label {
+        flex-basis: 45px;
+        width: 45px;
+    }
+
+
+    .login-input {
+        padding: 0 10px;
+    }
+
+
+    .login-input::placeholder {
+        font-size: 12px;
+    }
+
+
+    .btn-login {
+        flex-basis: 75px;
+        width: 75px;
+
+        font-size: 14px;
+    }
+
+
+    .login-extra {
+        gap: 8px;
+    }
+
+
+    .btn-kakao,
+    .btn-find {
+        font-size: 12px;
     }
 }
