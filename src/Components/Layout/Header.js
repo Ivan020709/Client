@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutAction } from '../../store/userSlice';
 
-import logo from '../../Img/logo2.png';
-
 import './Header.css';
+
+import logo from '../../Img/logo2.png';
 
 function Header() {
     const loginUser = useSelector(state => state.user);

@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import './Feelog.css';
+
 import characterHero from "../../Img/필로그1.png";//첫번째 이미지      *이미지 파일 이름만 바꾸면됨
 import characterRecommend from "../../Img/필로그2.png";//중간 이미지    *이미지 파일 이름만 바꾸면됨
 import characterBottom from "../../Img/필로그3.png"; //맨 마지막 이미지     *이미지 파일 이름만 바꾸면됨
-
-import './Feelog.css';
 
 export default function Intro() {
   const navigate = useNavigate();
