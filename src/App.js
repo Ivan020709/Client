@@ -32,6 +32,11 @@ import NoticeList from "./Components/Notice/NoticeList";
 import NoticeWrite from "./Components/Notice/NoticeWrite";
 import NoticeView from "./Components/Notice/NoticeView";
 
+import InquiryList from './Components/Board/InquiryList'
+import InquiryView from './Components/Board/InquiryView'
+import InquiryWrite from './Components/Board/InquiryWrite'
+import UpdateInquiry from './Components/Board/UpdateInquiry'
+
 function App() {
     return (
         <div>
@@ -78,6 +83,11 @@ function App() {
                     <Route path="/noticeList" element={<NoticeList />} />
                     <Route path="/noticeWrite" element={<NoticeWrite />} />
                     <Route path="/noticeView/:noticenum" element={<NoticeView />} />
+
+                    <Route path="/inquiryList" element={<InquiryList />} />
+                    <Route path="/inquiryView" element={<InquiryView />} />
+                    <Route path="/inquiryWrite" element={<InquiryWrite />} />
+                    <Route path="/updateInquiry" element={<UpdateInquiry />} />
 
                 </Route>
             </Routes>
