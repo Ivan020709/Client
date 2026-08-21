@@ -1,0 +1,598 @@
+/* =========================================================
+   문의사항 페이지 전체
+   Rose Beige / Brown Theme
+========================================================= */
+
+.inquiry-list-page {
+    width: 100%;
+
+    min-height: 700px;
+
+    padding: 65px 20px 100px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    color: #4f4944;
+
+    background: #fffdfb;
+}
+
+
+/* =========================================================
+   상단 제목 영역
+========================================================= */
+
+.inquiry-header {
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 38px;
+}
+
+
+/* 제목 */
+
+.inquiry-header h1 {
+    margin: 0;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 34px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
+}
+
+
+/* 제목 밑 장식 */
+
+.inquiry-header h1::after {
+    content: "";
+
+    display: block;
+
+    width: 38px;
+    height: 3px;
+
+    margin: 14px auto 0;
+
+    border-radius: 10px;
+
+    background: #b68b78;
+}
+
+
+/* 설명 */
+
+.inquiry-header p {
+    margin: 16px 0 0;
+
+    color: #9a918b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   문의사항 컨테이너
+========================================================= */
+
+.inquiry-container {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   문의하기 버튼
+========================================================= */
+
+.inquiry-container > button {
+    display: block;
+
+    width: 110px;
+    height: 44px;
+
+    margin: 0 0 14px auto;
+    padding: 0;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(182, 139, 120, 0.20);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* 문의하기 Hover */
+
+.inquiry-container > button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 20px rgba(159, 117, 99, 0.24);
+}
+
+
+/* 문의하기 클릭 */
+
+.inquiry-container > button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 4px 10px rgba(159, 117, 99, 0.18);
+}
+
+
+/* =========================================================
+   문의사항 테이블
+========================================================= */
+
+.inquiry-table {
+    width: 100%;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 10px 28px rgba(80, 65, 55, 0.045);
+}
+
+
+/* =========================================================
+   테이블 공통
+========================================================= */
+
+.inquiry-table-header,
+.inquiry-row {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        80px
+        minmax(0, 1fr)
+        130px
+        120px
+        90px;
+
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   테이블 헤더
+========================================================= */
+
+.inquiry-table-header {
+    min-height: 54px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf5f0,
+            #fffaf7
+        );
+
+    border-bottom: 1px solid #f0e5df;
+
+    color: #6f6963;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   게시글 한 줄
+========================================================= */
+
+.inquiry-row {
+    min-height: 58px;
+
+    border-bottom: 1px solid #f1e8e3;
+
+    color: #5c554f;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* 마지막 줄 */
+
+.inquiry-row:last-child {
+    border-bottom: none;
+}
+
+
+/* Hover */
+
+.inquiry-row:hover {
+    background: #fff8f4;
+
+    color: #9f7563;
+}
+
+
+/* =========================================================
+   각 컬럼
+========================================================= */
+
+.inquiry-number,
+.inquiry-title,
+.inquiry-writer,
+.inquiry-date,
+.inquiry-status {
+    min-width: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* 번호 */
+
+.inquiry-number {
+    text-align: center;
+
+    color: #9a918b;
+}
+
+
+/* 제목 */
+
+.inquiry-title {
+    padding: 0 18px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #514943;
+
+    text-align: left;
+}
+
+
+/* 제목 Hover */
+
+.inquiry-row:hover .inquiry-title {
+    color: #9f7563;
+}
+
+
+/* 작성자 */
+
+.inquiry-writer {
+    padding: 0 10px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    text-align: center;
+
+    color: #817971;
+}
+
+
+/* 날짜 */
+
+.inquiry-date {
+    text-align: center;
+
+    color: #9a918b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   상태
+========================================================= */
+
+.inquiry-status {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* 상태 뱃지 */
+
+.inquiry-status {
+    color: #9f7563;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   문의 내역 없음
+========================================================= */
+
+.inquiry-table > div:not(.inquiry-table-header):not(.inquiry-row) {
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #aaa19b;
+
+    font-size: 14px;
+
+    background: #fffdfb;
+}
+
+
+/* =========================================================
+   태블릿
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .inquiry-list-page {
+        padding-top: 45px;
+    }
+
+
+    .inquiry-container {
+        max-width: calc(100% - 20px);
+    }
+
+
+    .inquiry-table-header,
+    .inquiry-row {
+        grid-template-columns:
+            60px
+            minmax(0, 1fr)
+            100px
+            100px
+            75px;
+    }
+
+
+    .inquiry-title {
+        padding: 0 12px;
+    }
+}
+
+
+/* =========================================================
+   모바일
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .inquiry-list-page {
+        padding:
+            35px 15px 70px;
+    }
+
+
+    .inquiry-header {
+        margin-bottom: 28px;
+    }
+
+
+    .inquiry-header h1 {
+        font-size: 29px;
+    }
+
+
+    .inquiry-header p {
+        font-size: 13px;
+
+        padding: 0 10px;
+    }
+
+
+    .inquiry-container {
+        width: 100%;
+        max-width: none;
+    }
+
+
+    .inquiry-container > button {
+        width: 100px;
+        height: 42px;
+
+        font-size: 12px;
+    }
+
+
+    .inquiry-table {
+        border-radius: 15px;
+    }
+
+
+    .inquiry-table-header,
+    .inquiry-row {
+        grid-template-columns:
+            50px
+            minmax(0, 1fr)
+            75px
+            80px;
+    }
+
+
+    /* 모바일에서는 작성자 숨김 */
+
+    .inquiry-table-header .inquiry-writer,
+    .inquiry-row .inquiry-writer {
+        display: none;
+    }
+
+
+    .inquiry-table-header {
+        min-height: 50px;
+
+        font-size: 12px;
+    }
+
+
+    .inquiry-row {
+        min-height: 55px;
+
+        font-size: 12px;
+    }
+
+
+    .inquiry-title {
+        padding: 0 10px;
+    }
+
+
+    .inquiry-date {
+        font-size: 11px;
+    }
+
+
+    .inquiry-status {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   작은 모바일
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .inquiry-list-page {
+        padding:
+            30px 10px 60px;
+    }
+
+
+    .inquiry-header h1 {
+        font-size: 27px;
+    }
+
+
+    .inquiry-header p {
+        font-size: 12px;
+    }
+
+
+    .inquiry-container > button {
+        width: 95px;
+        height: 40px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .inquiry-table {
+        border-radius: 13px;
+    }
+
+
+    .inquiry-table-header,
+    .inquiry-row {
+        grid-template-columns:
+            45px
+            minmax(0, 1fr)
+            70px;
+    }
+
+
+    /* 모바일에서는 날짜도 숨김 */
+
+    .inquiry-table-header .inquiry-date,
+    .inquiry-row .inquiry-date {
+        display: none;
+    }
+
+
+    .inquiry-table-header {
+        min-height: 48px;
+    }
+
+
+    .inquiry-row {
+        min-height: 53px;
+    }
+
+
+    .inquiry-title {
+        padding: 0 8px;
+    }
+}

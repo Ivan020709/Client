@@ -14,60 +14,60 @@ function NoticeList() {
 
     // 게시글 목록
     const [noticeList, setNoticeList] = useState([]);
-    const [paging, setPaging]=useState({})
-    const [pages, setPages]=useState([])
-    const [key, setKey]=useState('')
+    const [paging, setPaging] = useState({})
+    const [pages, setPages] = useState([])
+    const [key, setKey] = useState('')
 
     const [searchType, setSearchType] = useState('title');
 
     const ROWS_PER_PAGE = 10;
 
     useEffect(
-        ()=>{
-            axios.get('/api/notice/getNoticeList', {params:{page:1, key, searchType}})
-            .then((result)=>{
-                setNoticeList([...result.data.noticeList])
-                setPaging( result.data.paging)
-                let arr = [];
-                for( let i=result.data.paging.beginPage; i<=result.data.paging.endPage; i++){
-                    arr.push(i);
-                }
-                setPages( [...arr] )
-            })
-            .catch((err)=>{console.error(err)})
-        },[]
+        () => {
+            axios.get('/api/notice/getNoticeList', { params: { page: 1, key, searchType } })
+                .then((result) => {
+                    setNoticeList([...result.data.noticeList])
+                    setPaging(result.data.paging)
+                    let arr = [];
+                    for (let i = result.data.paging.beginPage; i <= result.data.paging.endPage; i++) {
+                        arr.push(i);
+                    }
+                    setPages([...arr])
+                })
+                .catch((err) => { console.error(err) })
+        }, []
     )
 
     function onPageMove(p) {
 
-    axios.get('/api/notice/getNoticeList', {
-        params: {
-            page: p,
-            key,
-            searchType
-        }
-    })
-    .then((result) => {
+        axios.get('/api/notice/getNoticeList', {
+            params: {
+                page: p,
+                key,
+                searchType
+            }
+        })
+            .then((result) => {
 
-        setNoticeList([...result.data.noticeList]);
-        setPaging(result.data.paging);
+                setNoticeList([...result.data.noticeList]);
+                setPaging(result.data.paging);
 
-        let arr = [];
+                let arr = [];
 
-        for (
-            let i = result.data.paging.beginPage;
-            i <= result.data.paging.endPage;
-            i++
-        ) {
-            arr.push(i);
-        }
+                for (
+                    let i = result.data.paging.beginPage;
+                    i <= result.data.paging.endPage;
+                    i++
+                ) {
+                    arr.push(i);
+                }
 
-        setPages([...arr]);
-    })
-    .catch((err) => {
-        console.error(err);
-    });
-}
+                setPages([...arr]);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
 
     // useEffect(() => {
     //     onPageMove(1);
@@ -112,15 +112,20 @@ function NoticeList() {
     };
 
     //공지사항 작성
-    // const handleWrite = () => {
+    const handleWrite = () => {
+        if (!loginUser?.userid) {
+            alert('로그인이 필요합니다.');
+            navigate('/memberLogin');
+            return;
+        }
 
-    //     // if (!isAdmin) {
-    //     //     alert('관리자만 공지사항을 작성할 수 있습니다.');
-    //     //     return;
-    //     // }
+        if (!isAdmin) {
+            alert('관리자만 공지사항을 작성할 수 있습니다.');
+            return;
+        }
 
-    //     navigate('/noticeWrite');
-    // };
+        navigate('/noticeWrite');
+    };
 
     //게시글 클릭
     const handlePostClick = (boardnum) => {
@@ -181,21 +186,14 @@ function NoticeList() {
                     </span>
 
                     {/* 관리자만 공지 작성 가능 */}
-                    <button
-                            className="notice-write-btn"
-                            // onClick={handleWrite}
-                            onClick={()=>navigate('/noticeWrite')}
-                        >
-                            공지 작성
-                        </button>
-                    {/* {isAdmin && (
+                    {isAdmin && (
                         <button
                             className="notice-write-btn"
                             onClick={handleWrite}
                         >
                             공지 작성
                         </button>
-                    )} */}
+                    )}
 
                 </div>
 
@@ -234,30 +232,29 @@ function NoticeList() {
                         noticeList.map((notice, index) => (
 
                             <div
-                                className={`notice-row ${
-                                    notice.fixed === 'Y'
-                                        ? 'notice-fixed'
-                                        : ''
-                                }`}
+                                className={`notice-row ${notice.fixed === 'Y'
+                                    ? 'notice-fixed'
+                                    : ''
+                                    }`}
                                 key={notice.noticenum}
                                 onClick={() =>
                                     handlePostClick(notice.noticenum)
                                 }
                             >
 
-                            {/* 번호 */}
-                            <div className="notice-number">
-                                {notice.fixed === 'Y' ? (
-                                    <span className="notice-pin">📌</span>
-                                ) : (
-                                    paging.totalCount -
-                                    (
-                                        (pages - 1) *
-                                        ROWS_PER_PAGE +
-                                        index
-                                    )
-                                )}
-                            </div>
+                                {/* 번호 */}
+                                <div className="notice-number">
+                                    {notice.fixed === 'Y' ? (
+                                        <span className="notice-pin">📌</span>
+                                    ) : (
+                                        paging.totalCount -
+                                        (
+                                            (pages - 1) *
+                                            ROWS_PER_PAGE +
+                                            index
+                                        )
+                                    )}
+                                </div>
 
 
                                 {/* 제목 */}
@@ -331,7 +328,7 @@ function NoticeList() {
                             setKey(e.target.value)
                         }
                     />
-                    <button onClick={()=>{ onPageMove(1) }}>
+                    <button onClick={() => { onPageMove(1) }}>
                         검색
                     </button>
 
@@ -366,11 +363,10 @@ function NoticeList() {
 
                             <button
                                 key={pageNumber}
-                                className={`notice-page ${
-                                    pages === pageNumber
-                                        ? 'active'
-                                        : ''
-                                }`}
+                                className={`notice-page ${pages === pageNumber
+                                    ? 'active'
+                                    : ''
+                                    }`}
                                 onClick={() =>
                                     handlePage(pageNumber)
                                 }

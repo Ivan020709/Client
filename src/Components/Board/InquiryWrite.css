@@ -1,0 +1,513 @@
+/* =========================================================
+   InquiryWrite 전체 페이지
+   InquiryWrite 전용 스타일
+========================================================= */
+
+.inquiry-write-page {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 60px auto 100px;
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    color: #4f4944;
+}
+
+
+/* =========================================================
+   헤더
+========================================================= */
+
+.inquiry-write-header {
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.inquiry-write-heading {
+    margin: 0;
+    padding: 0;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   작성 폼
+========================================================= */
+
+.inquiry-write-form {
+    width: 100%;
+
+    padding: 30px 32px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 28px rgba(80, 65, 55, 0.05);
+}
+
+
+/* =========================================================
+   제목 영역
+========================================================= */
+
+.inquiry-write-title-area {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   라벨
+========================================================= */
+
+.inquiry-write-label {
+    flex: 0 0 90px;
+
+    width: 90px;
+
+    color: #665950;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: -.3px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   제목 입력
+========================================================= */
+
+.inquiry-write-title-input {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   제목 Placeholder
+========================================================= */
+
+.inquiry-write-title-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* =========================================================
+   제목 Focus
+========================================================= */
+
+.inquiry-write-title-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   내용 영역
+========================================================= */
+
+.inquiry-write-content-area {
+    width: 100%;
+
+    margin-top: 20px;
+
+    display: flex;
+    align-items: flex-start;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   내용 라벨
+========================================================= */
+
+.inquiry-write-content-area .inquiry-write-label {
+    padding-top: 14px;
+}
+
+
+/* =========================================================
+   내용 입력
+========================================================= */
+
+.inquiry-write-content-input {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+
+    min-height: 320px;
+
+    padding: 15px;
+
+    resize: vertical;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   내용 Placeholder
+========================================================= */
+
+.inquiry-write-content-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* =========================================================
+   내용 Focus
+========================================================= */
+
+.inquiry-write-content-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   버튼 영역
+========================================================= */
+
+.inquiry-write-actions {
+    width: 100%;
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   버튼 공통
+========================================================= */
+
+.inquiry-write-list-btn,
+.inquiry-write-submit-btn {
+    width: 140px;
+
+    height: 48px;
+
+    padding: 0;
+
+    border-radius: 10px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   목록으로
+========================================================= */
+
+.inquiry-write-list-btn {
+    border: 1px solid #eadbd3;
+
+    background: #fffdfb;
+
+    color: #8e766a;
+}
+
+.inquiry-write-list-btn:hover {
+    background: #faf5f0;
+
+    border-color: #d9bfb2;
+
+    color: #9f7563;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(80, 65, 55, 0.08);
+}
+
+
+/* =========================================================
+   등록하기
+========================================================= */
+
+.inquiry-write-submit-btn {
+    border: 1px solid #d5b4a4;
+
+    background: #e9d2c5;
+
+    color: #624c42;
+
+    box-shadow:
+        0 3px 8px rgba(100, 75, 60, 0.05);
+}
+
+.inquiry-write-submit-btn:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* =========================================================
+   버튼 Active
+========================================================= */
+
+.inquiry-write-list-btn:active,
+.inquiry-write-submit-btn:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.06);
+}
+
+
+/* =========================================================
+   모바일
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .inquiry-write-page {
+        margin: 35px auto 60px;
+
+        padding: 0 15px;
+    }
+
+
+    .inquiry-write-heading {
+        font-size: 28px;
+    }
+
+
+    .inquiry-write-form {
+        padding: 25px 20px;
+    }
+
+
+    /* 제목 */
+
+    .inquiry-write-title-area {
+        display: block;
+    }
+
+
+    .inquiry-write-title-area .inquiry-write-label {
+        display: block;
+
+        width: 100%;
+
+        margin-bottom: 8px;
+    }
+
+
+    .inquiry-write-title-input {
+        width: 100%;
+    }
+
+
+    /* 내용 */
+
+    .inquiry-write-content-area {
+        display: block;
+
+        margin-top: 20px;
+    }
+
+
+    .inquiry-write-content-area .inquiry-write-label {
+        display: block;
+
+        width: 100%;
+
+        padding-top: 0;
+
+        margin-bottom: 8px;
+    }
+
+
+    .inquiry-write-content-input {
+        width: 100%;
+
+        min-height: 280px;
+    }
+
+
+    /* 버튼 */
+
+    .inquiry-write-actions {
+        gap: 8px;
+    }
+
+
+    .inquiry-write-list-btn,
+    .inquiry-write-submit-btn {
+        width: 50%;
+
+        height: 46px;
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   아주 작은 모바일
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .inquiry-write-page {
+        padding: 0 10px;
+    }
+
+
+    .inquiry-write-heading {
+        font-size: 25px;
+    }
+
+
+    .inquiry-write-form {
+        padding: 22px 16px;
+    }
+
+
+    .inquiry-write-content-input {
+        min-height: 250px;
+    }
+
+
+    .inquiry-write-list-btn,
+    .inquiry-write-submit-btn {
+        height: 44px;
+
+        font-size: 12px;
+    }
+
+}

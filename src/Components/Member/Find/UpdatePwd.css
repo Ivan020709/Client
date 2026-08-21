@@ -1,0 +1,353 @@
+/* =========================================================
+   UpdatePwd 페이지 전체
+========================================================= */
+
+.update-pwd-page {
+    width: 100%;
+
+    margin: 0;
+    padding: 65px 20px 80px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    color: #4f4944;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.update-pwd-title {
+    width: 100%;
+
+    margin: 0;
+    padding: 0 0 32px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+    font-weight: 400;
+
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+
+/* 제목 밑 장식 */
+
+.update-pwd-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 13px auto 0;
+
+    border-radius: 10px;
+
+    background: #c9977d;
+}
+
+
+/* =========================================================
+   입력 영역
+========================================================= */
+
+.update-pwd-form {
+    width: 520px;
+
+    margin: 0 auto;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   입력 박스
+========================================================= */
+
+.update-pwd-box {
+    width: 520px;
+
+    padding: 30px 40px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5de;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 28px rgba(90, 70, 55, 0.05);
+}
+
+
+/* =========================================================
+   입력 한 줄
+========================================================= */
+
+.update-pwd-row {
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* 두 번째 입력줄 간격 */
+
+.update-pwd-row + .update-pwd-row {
+    margin-top: 14px;
+}
+
+
+/* =========================================================
+   라벨
+========================================================= */
+
+.update-pwd-label {
+    width: 105px;
+
+    flex-shrink: 0;
+
+    color: #665950;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   입력창
+========================================================= */
+
+.update-pwd-input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Placeholder */
+
+.update-pwd-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* 입력창 Focus */
+
+.update-pwd-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   버튼 영역
+========================================================= */
+
+.update-pwd-button-area {
+    width: 520px;
+
+    margin: 20px auto 0;
+
+    display: flex;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   버튼 공통
+========================================================= */
+
+.update-pwd-button {
+    flex: 1;
+
+    height: 50px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   변경 완료
+========================================================= */
+
+.update-pwd-submit-button {
+    background: #e9d2c5;
+
+    border: 1px solid #d5b4a4;
+
+    color: #624c42;
+
+    box-shadow:
+        0 3px 8px rgba(100, 75, 60, 0.05);
+}
+
+
+/* =========================================================
+   취소
+========================================================= */
+
+.update-pwd-cancel-button {
+    background: #f7ebe4;
+
+    border: 1px solid #e5cfc3;
+
+    color: #765f54;
+}
+
+
+/* =========================================================
+   버튼 Hover
+========================================================= */
+
+.update-pwd-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+.update-pwd-submit-button:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+}
+
+
+.update-pwd-cancel-button:hover {
+    background: #e9d2c5;
+
+    border-color: #d5b4a4;
+
+    color: #624c42;
+}
+
+
+/* =========================================================
+   버튼 Active
+========================================================= */
+
+.update-pwd-button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.06);
+}
+
+
+/* =========================================================
+   Focus
+========================================================= */
+
+.update-pwd-button:focus {
+    outline: none;
+}
+
+
+.update-pwd-button:focus-visible {
+    outline: 2px solid #c9977d;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   구분선
+========================================================= */
+
+.update-pwd-divider {
+    width: 520px;
+
+    margin: 35px auto 0;
+
+    border: 0;
+
+    border-top: 1px solid #f0e5de;
+}

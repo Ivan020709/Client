@@ -1,0 +1,521 @@
+/* =========================================================
+   FindPass 페이지 전체
+   Find / FindId와 동일한 따뜻한 분위기
+========================================================= */
+
+.find-pass-page {
+    width: 100%;
+
+    margin: 0;
+    padding: 65px 20px 80px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    color: #4f4944;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.find-pass-title {
+    width: 100%;
+
+    margin: 0;
+    padding: 0 0 32px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+    font-weight: 400;
+
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+
+/* 제목 밑 장식 */
+
+.find-pass-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 13px auto 0;
+
+    border-radius: 10px;
+
+    background: #c9977d;
+}
+
+
+/* =========================================================
+   입력 영역
+========================================================= */
+
+.find-pass-form {
+    width: 520px;
+
+    margin: 0 auto;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   입력 박스
+========================================================= */
+
+.find-pass-box {
+    width: 520px;
+
+    padding: 30px 40px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5de;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 28px rgba(90, 70, 55, 0.05);
+}
+
+
+/* =========================================================
+   입력 한 줄
+========================================================= */
+
+.find-pass-row {
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* 줄 사이 간격 */
+
+.find-pass-row + .find-pass-row {
+    margin-top: 14px;
+}
+
+
+/* =========================================================
+   라벨
+========================================================= */
+
+.find-pass-label {
+    width: 85px;
+
+    flex-shrink: 0;
+
+    color: #665950;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   입력창
+========================================================= */
+
+.find-pass-input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Placeholder */
+
+.find-pass-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* 입력창 Focus */
+
+.find-pass-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   버튼 영역
+========================================================= */
+
+.find-pass-button-area {
+    width: 520px;
+
+    margin: 20px auto 0;
+
+    display: flex;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   버튼 공통
+========================================================= */
+
+.find-pass-button {
+    height: 50px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   비밀번호 찾기 버튼
+========================================================= */
+
+.find-pass-search-button {
+    width: 254px;
+
+    background: #e9d2c5;
+
+    border: 1px solid #d5b4a4;
+
+    color: #624c42;
+
+    box-shadow:
+        0 3px 8px rgba(100, 75, 60, 0.05);
+}
+
+
+/* =========================================================
+   이전으로 버튼
+========================================================= */
+
+.find-pass-back-button {
+    width: 254px;
+
+    background: #f7ebe4;
+
+    border: 1px solid #e5cfc3;
+
+    color: #765f54;
+}
+
+
+/* =========================================================
+   버튼 Hover
+========================================================= */
+
+.find-pass-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* 비밀번호 찾기 Hover */
+
+.find-pass-search-button:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+}
+
+
+/* 이전으로 Hover */
+
+.find-pass-back-button:hover {
+    background: #e9d2c5;
+
+    border-color: #d5b4a4;
+
+    color: #624c42;
+}
+
+
+/* =========================================================
+   버튼 Active
+========================================================= */
+
+.find-pass-button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.06);
+}
+
+
+/* =========================================================
+   Focus
+========================================================= */
+
+.find-pass-button:focus {
+    outline: none;
+}
+
+
+.find-pass-button:focus-visible {
+    outline: 2px solid #c9977d;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   비밀번호 변경 성공 화면
+========================================================= */
+
+.find-pass-success {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+
+
+.find-pass-success-box {
+    width: 520px;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5de;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 28px rgba(90, 70, 55, 0.05);
+}
+
+
+/* =========================================================
+   성공 제목
+========================================================= */
+
+.find-pass-success-title {
+    color: #665950;
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+
+.find-pass-success-title span {
+    display: inline-flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 27px;
+    height: 27px;
+
+    margin-right: 8px;
+
+    border-radius: 50%;
+
+    background: #e9d2c5;
+
+    color: #624c42;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   성공 메시지
+========================================================= */
+
+.find-pass-success-message {
+    margin-top: 25px;
+
+    color: #756961;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   성공 보조 문구
+========================================================= */
+
+.find-pass-success-sub {
+    margin: 10px 0 0;
+
+    color: #a2938b;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   로그인 버튼
+========================================================= */
+
+.find-pass-success-login {
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 25px;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d5b4a4;
+
+    border-radius: 10px;
+
+    background: #e9d2c5;
+
+    color: #624c42;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* 로그인 버튼 Hover */
+
+.find-pass-success-login:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* 로그인 버튼 Active */
+
+.find-pass-success-login:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   구분선
+========================================================= */
+
+.find-pass-divider {
+    width: 520px;
+
+    margin: 35px auto 0;
+
+    border: 0;
+
+    border-top: 1px solid #f0e5de;
+}

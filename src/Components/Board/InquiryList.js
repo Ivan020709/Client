@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import './Inquiry.css'; // 수정된 CSS 파일
+import './InquiryList.css'; 
 
 function InquiryList() {
     const navigate = useNavigate();

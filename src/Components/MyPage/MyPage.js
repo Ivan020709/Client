@@ -39,6 +39,34 @@ function MyPage() {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const handlePhoneChange = (e) => {
+
+        // 숫자만 남기기
+        let value = e.target.value.replace(/[^0-9]/g, '');
+        // 최대 11자리
+        value = value.substring(0, 11);
+        // 하이픈 자동 추가
+        if (value.length <= 3) {
+            // 010
+            value = value;
+        } else if (value.length <= 7) {
+            // 010-1234
+            value =
+                value.substring(0, 3) +
+                '-' +
+                value.substring(3);
+        } else {
+            // 010-1234-5678
+            value =
+                value.substring(0, 3) +
+                '-' +
+                value.substring(3, 7) +
+                '-' +
+                value.substring(7);
+        }
+        setPhone(value);
+    };
+
 
     useEffect(() => {
         if (!loginUser || !loginUser.userid) {
@@ -435,11 +463,12 @@ function MyPage() {
                                     className="mypage-input"
                                     type="text"
                                     value={phone}
-                                    onChange={(e) =>
-                                        setPhone(e.target.value)
-                                    }
+                                    onChange={handlePhoneChange}
                                     placeholder="010-XXXX-XXXX"
+                                    inputMode="numeric"
+                                    maxLength={13}
                                 />
+
 
                             </div>
 

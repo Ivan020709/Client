@@ -65,12 +65,6 @@ function Header() {
                                 <div onClick={onLogout}>
                                     로그아웃
                                 </div>
-
-                                <div
-                                    onClick={() => navigate('/myPage')}
-                                >
-                                    마이페이지
-                                </div>
                             </div>
                         )
                     }

@@ -76,6 +76,7 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
 
     margin: 0 0 32px;
 
@@ -109,6 +110,11 @@
         0 8px 22px rgba(80, 65, 55, 0.07);
 }
 
+
+/* =========================================================
+   프로필 이미지
+========================================================= */
+
 .mypage-profile-preview img {
     width: 100%;
     height: 100%;
@@ -116,6 +122,34 @@
     display: block;
 
     object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   프로필 사진이 없을 때 "사진" 글씨
+========================================================= */
+
+.mypage-profile-preview > span {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #b68b78;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    box-sizing: border-box;
 
     border-radius: 50%;
 }
@@ -439,9 +473,11 @@
     border-radius: 30px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #b68b78,
-            #9f7563);
+            #9f7563
+        );
 
     color: #fff;
 
@@ -467,9 +503,11 @@
 
 .mypage-btn-save:hover {
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #a77c69,
-            #8e6656);
+            #8e6656
+        );
 
     box-shadow:
         0 11px 25px rgba(159, 117, 99, 0.25);
@@ -657,9 +695,11 @@
     border-bottom: 1px solid #f1e8e3;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #faf5f0,
-            #fffaf7);
+            #fffaf7
+        );
 
     color: #4f4944;
 
@@ -938,6 +978,11 @@
     }
 
 
+    .mypage-profile-preview > span {
+        font-size: 12px;
+    }
+
+
     .mypage-profile-camera {
         width: 40px;
         height: 40px;
@@ -997,6 +1042,11 @@
     .mypage-profile-preview {
         width: 120px;
         height: 120px;
+    }
+
+
+    .mypage-profile-preview > span {
+        font-size: 11px;
     }
 
 
@@ -1080,4 +1130,5 @@
 
         font-size: 12px;
     }
+
 }

@@ -1,0 +1,476 @@
+/* =========================================================
+   FindId 페이지 전체
+   Find 페이지와 동일한 따뜻한 분위기
+========================================================= */
+
+.find-id-page {
+    width: 100%;
+
+    margin: 0;
+    padding: 65px 20px 80px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    color: #4f4944;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.find-id-title {
+    width: 100%;
+
+    margin: 0;
+    padding: 0 0 32px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+    font-weight: 400;
+
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+
+/* 제목 밑 장식 */
+
+.find-id-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 13px auto 0;
+
+    border-radius: 10px;
+
+    background: #c9977d;
+}
+
+
+/* =========================================================
+   입력 영역
+========================================================= */
+
+.find-id-form {
+    width: 520px;
+
+    margin: 0 auto;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   입력 박스
+========================================================= */
+
+.find-id-box {
+    width: 520px;
+
+    padding: 30px 40px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5de;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 28px rgba(90, 70, 55, 0.05);
+}
+
+
+/* =========================================================
+   한 줄
+========================================================= */
+
+.find-id-row {
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* 두 번째 줄 */
+
+.find-id-row + .find-id-row {
+    margin-top: 14px;
+}
+
+
+/* =========================================================
+   라벨
+========================================================= */
+
+.find-id-label {
+    width: 85px;
+
+    flex-shrink: 0;
+
+    color: #665950;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   입력창
+========================================================= */
+
+.find-id-input {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Placeholder */
+
+.find-id-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* 입력창 클릭 */
+
+.find-id-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   버튼 영역
+========================================================= */
+
+.find-id-button-area {
+    width: 520px;
+
+    margin: 20px auto 0;
+
+    display: flex;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   버튼 공통
+========================================================= */
+
+.find-id-button {
+    height: 50px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   아이디 찾기 버튼
+========================================================= */
+
+.find-id-search-button {
+    width: 254px;
+
+    background: #e9d2c5;
+
+    border: 1px solid #d5b4a4;
+
+    color: #624c42;
+
+    box-shadow:
+        0 3px 8px rgba(100, 75, 60, 0.05);
+}
+
+
+/* =========================================================
+   이전으로 버튼
+========================================================= */
+
+.find-id-back-button {
+    width: 254px;
+
+    background: #f7ebe4;
+
+    border: 1px solid #e5cfc3;
+
+    color: #765f54;
+}
+
+
+/* =========================================================
+   버튼 Hover
+========================================================= */
+
+.find-id-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* 아이디 찾기 Hover */
+
+.find-id-search-button:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+}
+
+
+/* 이전으로 Hover */
+
+.find-id-back-button:hover {
+    background: #e9d2c5;
+
+    border-color: #d5b4a4;
+
+    color: #624c42;
+}
+
+
+/* =========================================================
+   버튼 Active
+========================================================= */
+
+.find-id-button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.06);
+}
+
+
+/* =========================================================
+   Focus
+========================================================= */
+
+.find-id-button:focus {
+    outline: none;
+}
+
+
+.find-id-button:focus-visible {
+    outline: 2px solid #c9977d;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   아이디 찾기 결과
+========================================================= */
+
+.find-id-result {
+    width: 520px;
+
+    margin: 20px auto 0;
+
+    padding: 25px 30px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #eaded7;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 22px rgba(90, 70, 55, 0.05);
+}
+
+
+/* =========================================================
+   결과 안내 문구
+========================================================= */
+
+.find-id-result-message {
+    margin: 0;
+
+    color: #756961;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   찾은 아이디
+========================================================= */
+
+.find-id-result-value {
+    margin: 10px 0 0;
+
+    color: #b47e67;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   로그인으로 가기
+========================================================= */
+
+.find-id-result-button {
+    width: 100%;
+    height: 50px;
+
+    margin-top: 18px;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d5b4a4;
+
+    border-radius: 10px;
+
+    background: #e9d2c5;
+
+    color: #624c42;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* 로그인 버튼 Hover */
+
+.find-id-result-button:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* 로그인 버튼 클릭 */
+
+.find-id-result-button:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   구분선
+========================================================= */
+
+.find-id-divider {
+    width: 520px;
+
+    margin: 35px auto 0;
+
+    border: 0;
+
+    border-top: 1px solid #f0e5de;
+}

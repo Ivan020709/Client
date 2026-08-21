@@ -467,13 +467,11 @@ function EmotionCalendar({
 
                 <div
                     key={day}
-                    className={`calendar-day ${
-                        emotion || ""
-                    } ${
-                        isSelected
+                    className={`calendar-day ${emotion || ""
+                        } ${isSelected
                             ? "selected"
                             : ""
-                    }`}
+                        }`}
                     onClick={() =>
                         selectDate(day)
                     }
@@ -731,7 +729,7 @@ function EmotionCalendar({
 
                                         className={
                                             selectedEmotion ===
-                                            key
+                                                key
                                                 ? "emotion-active"
                                                 : ""
                                         }
@@ -800,7 +798,7 @@ function EmotionCalendar({
 
 
                             {hasSavedDiary &&
-                            !isEditing ? (
+                                !isEditing ? (
 
                                 <button
                                     type="button"
@@ -927,7 +925,7 @@ function Diary() {
 
                 const response =
                     await fetch(
-                        `http://localhost:8080/diary/mine/${userId}`
+                        `api/diary/mine/${userId}`
                     );
 
 
@@ -1233,7 +1231,7 @@ function Diary() {
 
             const existingDiary =
                 emotionData[
-                    selectedDate
+                selectedDate
                 ];
 
 
@@ -1531,7 +1529,7 @@ function Diary() {
             if (
                 emotion &&
                 emotionCount[
-                    emotion
+                emotion
                 ] !== undefined
             ) {
 

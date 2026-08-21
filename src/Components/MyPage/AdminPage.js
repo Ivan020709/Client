@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ErrorLog from './ErrorLog';
 import './AdminPage.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function AdminPage() {
 
@@ -9,9 +10,19 @@ function AdminPage() {
     const [selectedReport, setSelectedReport] = useState(null);
     const [reportList, setReportList] = useState([]);
     const [paging, setPaging] = useState({})
-    const [pages, setPages] = useState([])
+    const [pages, setPages] = useState(1)
+    const navigate = useNavigate();
 
     const ROWS_PER_PAGE = 10;
+
+    const totalPages = Math.ceil(
+    (paging?.totalCount ?? 0) / ROWS_PER_PAGE
+    );
+
+    const startPage = Math.floor((pages - 1) / 5) * 5 + 1;
+    const endPage = Math.min(startPage + 4, totalPages);
+
+        
 
     // 신고 목록
     useEffect(() => {
@@ -29,10 +40,7 @@ function AdminPage() {
             });
     }, [pages]);
 
-    const totalPages = Math.ceil(
-        (paging?.totalCount ?? 0) / ROWS_PER_PAGE
-    );
-
+  
     // 페이지 이동
     const handlePage = (pageNumber) => {
 
@@ -44,6 +52,29 @@ function AdminPage() {
     };
 
 
+    function deleteReport(){
+        const result = window.confirm(
+            '신고된 게시물을 삭제하시겠습니까?'
+        );
+
+        if (!result) {
+            return;
+        }
+         axios.delete('/api/admin/deleteReport', {
+            params: {
+                reportnum: selectedReport.reportnum
+            }
+        })
+            .then(() => {
+                alert('삭제되었습니다.');
+                navigate('/adminPage');
+            })
+            .catch((err) => {
+                console.error(err);
+                alert('삭제에 실패했습니다.');
+            });
+    }
+    
 
 
 
@@ -135,7 +166,6 @@ function AdminPage() {
                                         <div>신고 내용</div>
                                         <div>신고자</div>
                                         <div>신고일</div>
-                                        <div>상태</div>
 
                                     </div>
 
@@ -184,17 +214,7 @@ function AdminPage() {
                                                     {report.indate.substring(0, 10)}
                                                 </div>
 
-                                                <div>
-                                                    <div
-                                                        className={
-                                                            report.status === 'Y'
-                                                                ? 'report-status complete'
-                                                                : 'report-status waiting'
-                                                        }
-                                                    >
-                                                        {report.status === 'Y' ? '처리완료' : '미처리'}
-                                                    </div>
-                                                </div>
+                                                
 
                                             </div>
 
@@ -271,29 +291,9 @@ function AdminPage() {
                                                         <button
                                                             type="button"
                                                             className="report-delete-button"
-                                                            onClick={(e) => {
-
-                                                                e.stopPropagation();
-
-                                                                const result = window.confirm(
-                                                                    `신고된 ${report.targetType}을(를) 삭제하시겠습니까?`
-                                                                );
-
-                                                                if (!result) {
-                                                                    return;
-                                                                }
-
-                                                                setReportList((prevList) =>
-                                                                    prevList.map((item) =>
-                                                                        item.reportnum === report.reportnum
-                                                                            ? { ...item, status: '처리완료' }
-                                                                            : item
-                                                                    )
-                                                                );
-
-                                                            }}
+                                                            onClick={deleteReport}
                                                         >
-                                                            {report.targetType} 삭제
+                                                            삭제
                                                         </button>
                                                     )}
                                                 </div>
@@ -312,12 +312,12 @@ function AdminPage() {
                                     <div className="admin-pagination">
 
                                         {/* 이전 */}
-                                        {pages > 1 && (
+                                        {startPage > 1 && (
 
                                             <button
                                                 type="button"
                                                 onClick={() =>
-                                                    handlePage(pages - 1)
+                                                    handlePage(startPage - 1)
                                                 }
                                             >
                                                 &lt;
@@ -327,41 +327,26 @@ function AdminPage() {
 
                                         {/* 페이지 번호 */}
                                         {Array.from(
-                                            {
-                                                length: Math.min(
-                                                    5,
-                                                    totalPages -
-                                                    (Math.floor((pages - 1) / 5) * 5)
-                                                )
-                                            },
-                                            (_, index) =>
-                                                Math.floor((pages - 1) / 5) * 5 + index + 1
+                                            { length: endPage - startPage + 1 },
+                                            (_, index) => startPage + index
                                         ).map((pageNumber) => (
-
                                             <button
                                                 type="button"
                                                 key={pageNumber}
-                                                className={
-                                                    pages === pageNumber
-                                                        ? 'active'
-                                                        : ''
-                                                }
-                                                onClick={() =>
-                                                    handlePage(pageNumber)
-                                                }
+                                                className={pages === pageNumber ? 'active' : ''}
+                                                onClick={() => handlePage(pageNumber)}
                                             >
                                                 {pageNumber}
                                             </button>
-
                                         ))}
 
                                         {/* 다음 */}
-                                        {pages < totalPages && (
+                                        {endPage < totalPages && (
 
                                             <button
                                                 type="button"
                                                 onClick={() =>
-                                                    handlePage(pages + 1)
+                                                    handlePage(endPage + 1)
                                                 }
                                             >
                                                 &gt;

@@ -78,6 +78,16 @@ function BoardView() {
 
         e.preventDefault();
 
+        if (!loginUser?.userid) {
+            alert('댓글은 로그인 후 작성할 수 있습니다.');
+            navigate('/memberLogin', {
+                state: {
+                    from: `/boardView/${boardnum}`
+                }
+            });
+            return;
+        }
+
         if (!comment.trim()) {
             alert('댓글을 입력해주세요.');
             return;

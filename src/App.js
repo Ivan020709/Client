@@ -28,7 +28,6 @@ import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
 import MyPage from "./Components/MyPage/MyPage";
 import Feelog from './Components/Intro/Feelog';
 
-import EmotionDiary from "./Components/Calendar/EmotionDiary";
 import EmotionCalendar from "./Components/Calendar/EmotionCalendar";
 import NoticeList from "./Components/Notice/NoticeList";
 import NoticeWrite from "./Components/Notice/NoticeWrite";
@@ -44,6 +43,8 @@ import ErrorLog from './Components/MyPage/ErrorLog'
 
 import UpdatePwd from './Components/Member/Find/UpdatePwd';
 
+import ProtectedRoute from './Components/Auth/ProtectedRoute';
+
 function App() {
     return (
         <div>
@@ -54,32 +55,21 @@ function App() {
                     {/* 로그인 회원가입 */}
                     <Route path='/memberLogin' element={<MemberLogin />} />
                     <Route path='/Join' element={<Join />} />
+                    <Route path="/savekakaoinfo/:userid" element={<SaveKakaoInfo />} />
+
+                    {/* 자유 게시판 */}
                     <Route path='/boardList' element={<BoardList />} />
-                    <Route path='/boardWrite' element={<BoardWrite />} />
-
                     <Route path='/boardView/:boardnum' element={<BoardView />} />
-                    <Route path="/updateBoard/:boardnum" element={<UpdateBoard />} />
-                    <Route path='/feelog' element={<Feelog />} />
-
-                    {/*ai대화 */}
-                    <Route path='/selectAi' element={<SelectAi />} />
-                    <Route path='/g' element={<G />} />
-                    <Route path='/lo' element={<Lo />} />
-                    <Route path='/feel' element={<Feel />} />
 
                     {/*이용안내*/}
                     <Route path='/info' element={<Info />} />
                     <Route path='/hellow' element={<Hellow />} />
                     <Route path='/map' element={<Map />} />
+                    <Route path='/feelog' element={<Feelog />} />
 
-                    {/* 마이페이지 */}
-                    <Route path='/myPage' element={<MyPage />} />
+                    {/* 관리자 */}
                     <Route path='/adminPage' element={<AdminPage />} />
                     <Route path='/errorLog' element={<ErrorLog />} />
-
-                    {/* 다이어리 */}
-                    <Route path='/emotionDiary' element={<EmotionDiary />} />
-                    <Route path='/emotionCalendar' element={<EmotionCalendar />} />
 
                     {/* 아이디 비밀번호 찾기 */}
                     <Route path='/find' element={<Find />} />
@@ -87,21 +77,41 @@ function App() {
                     <Route path='/findPass' element={<FindPass />} />
                     <Route path='/updatePwd' element={<UpdatePwd />} />
 
+                    {/* 감정 일기 */}
                     <Route path='/diaryList' element={<DiaryList />} />
-                    <Route path='/Diary' element={<Diary />} />
-                    <Route path="/savekakaoinfo/:userid" element={<SaveKakaoInfo />} />
 
                     {/* 공지사항 */}
                     <Route path="/noticeList" element={<NoticeList />} />
                     <Route path="/noticeWrite" element={<NoticeWrite />} />
                     <Route path="/noticeView/:noticenum" element={<NoticeView />} />
 
-                    <Route path="/inquiryList" element={<InquiryList />} />
-                    <Route path="/inquiryView" element={<InquiryView />} />
-                    <Route path="/inquiryWrite" element={<InquiryWrite />} />
-                    <Route path="/updateInquiry" element={<UpdateInquiry />} />
+                    {/* 로그인 사용자만 이용 가능 */}
+                    <Route element={<ProtectedRoute />}>
 
-                    <Route path='/updatePwd' element={<UpdatePwd />} />
+                        {/* ai대화 */}
+                        <Route path='/selectAi' element={<SelectAi />} />
+                        <Route path='/g' element={<G />} />
+                        <Route path='/lo' element={<Lo />} />
+                        <Route path='/feel' element={<Feel />} />
+
+                        {/* 다이어리 */}
+                        <Route path='/Diary' element={<Diary />} />
+                        <Route path='/emotionCalendar' element={<EmotionCalendar />} />
+
+                        {/* 마이페이지 */}
+                        <Route path='/myPage' element={<MyPage />} />
+
+                        {/* 자유 게시판 */}
+                        <Route path='/boardWrite' element={<BoardWrite />} />
+                        <Route path="/updateBoard/:boardnum" element={<UpdateBoard />} />
+
+                        {/* 문의 사항 */}
+                        <Route path="/inquiryList" element={<InquiryList />} />
+                        <Route path="/inquiryView/:inquirynum" element={<InquiryView />} />
+                        <Route path="/inquiryWrite" element={<InquiryWrite />} />
+                        <Route path="/updateInquiry/:inquirynum" element={<UpdateInquiry />} />
+
+                    </Route>
 
                 </Route>
             </Routes>

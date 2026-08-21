@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import "./Feel.css";
 
@@ -9,6 +10,7 @@ import aiImage3 from "../../Img/필필1.png";
 
 
 function Feel() {
+    const loginUser = useSelector(state => state.user);
 
     const character = "필";
 
@@ -214,6 +216,7 @@ function Feel() {
             const response = await axios.post(
                 "/api/ai/analyze",
                 {
+                    userid: loginUser.userid,
                     session_id: sessionId,
                     character: character,
                     history: messages
@@ -506,9 +509,9 @@ function Feel() {
                         }
                         className={
                             loading ||
-                            analyzing ||
-                            !message.trim() ||
-                            analysis !== null
+                                analyzing ||
+                                !message.trim() ||
+                                analysis !== null
                                 ? "talk-ai-send-button talk-ai-send-button-disabled"
                                 : "talk-ai-send-button"
                         }
@@ -534,7 +537,7 @@ function Feel() {
                         }
                         className={
                             analyzing ||
-                            messages.length === 0
+                                messages.length === 0
                                 ? "talk-ai-finish-button talk-ai-finish-button-disabled"
                                 : "talk-ai-finish-button"
                         }

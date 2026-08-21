@@ -1,273 +1,259 @@
-/* 전체 영역 (가운데 정렬) */
-.join-wrapper {
+
+/* =========================================================
+   Find 페이지 전체
+========================================================= */
+
+.find-page {
     width: 100%;
-    max-width: 600px;
+    margin: 0;
+    padding: 80px 20px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+/* =========================================================
+   Find 메인 카드
+========================================================= */
+
+.find-page-card {
+    width: 520px;
+    height: 430px;
+
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 0 40px 40px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5de;
+    border-radius: 25px;
+
+    box-shadow:
+        0 12px 35px rgba(90, 70, 55, 0.06),
+        0 3px 10px rgba(90, 70, 55, 0.025);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.find-page-title {
+    width: 100%;
+
+    margin: 0;
+    padding: 42px 0 32px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+    font-weight: 400;
+
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+
+/* =========================================================
+   제목 밑 장식
+========================================================= */
+
+.find-page-title::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 13px auto 0;
+
+    border-radius: 10px;
+
+    background: #c9977d;
+}
+
+
+/* =========================================================
+   버튼 전체 영역
+========================================================= */
+
+.find-page-button-area {
+    width: 380px;
+
+    margin-top: 20px;
+
     box-sizing: border-box;
 }
 
-/* 제목 */
-.join-title {
-    margin: 0 0 30px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 600;
-    color: #222;
+
+/* =========================================================
+   위쪽 버튼 2개
+========================================================= */
+
+.find-page-top-buttons {
+    width: 380px;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+
+    gap: 12px;
+
+    box-sizing: border-box;
 }
 
-/* 입력 폼 전체 영역 고정 (가운데 정렬) */
-.join-form {
-    width: 100%;
+
+/* =========================================================
+   Find 페이지 전용 버튼
+========================================================= */
+
+.find-page-button {
+    width: 184px;
+    height: 50px;
+
+    min-width: 184px;
+    max-width: 184px;
+
+    min-height: 50px;
+    max-height: 50px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
     display: flex;
     justify-content: center;
-}
-
-/* 입력 박스 컨테이너 (가운데 정렬) */
-.join-box {
-    width: 100%;
-    max-width: 480px;
-    padding: 30px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-    margin: 0 auto;
-}
-
-/* 입력 행 (라벨과 인풋을 나란히 배치하고 내부를 왼쪽 정렬) */
-.join-row {
-    display: flex;
     align-items: center;
-    width: 100%;
-    margin-bottom: 15px;
-    justify-content: flex-start; /* 내부 요소를 왼쪽 정렬 */
-}
 
-.join-row:last-child {
-    margin-bottom: 0;
-}
+    /* 버튼 색상 */
+    background: #f7ebe4;
 
-/* 라벨 너비를 '90px'로 완벽하게 고정 */
-.join-label {
-    width: 90px;
-    min-width: 90px;
-    max-width: 90px;
-    font-size: 15px;
-    color: #333;
-    font-weight: 500;
-    text-align: left;
-    flex-shrink: 0;
-}
+    /* 테두리 */
+    border: 1px solid #e5cfc3;
 
-/* 입력창이 남은 공간을 정확히 균일하게 채우도록 설정 */
-.join-input-etc {
-    flex: 1;
-    width: 100%;
-    height: 42px;
-    padding: 0 12px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
+
+    /* 글자 */
+    color: #765f54;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+    text-align: center;
+
+    cursor: pointer;
+
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    box-shadow: 0 2px 7px rgba(100, 75, 60, 0.04);
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   로그인으로 돌아가기
+   ★ 위 버튼과 동일한 색상
+========================================================= */
+
+.find-page-back-button {
+    width: 380px;
+
+    min-width: 380px;
+    max-width: 380px;
+
+    height: 50px;
+
+    min-height: 50px;
+    max-height: 50px;
+
+    margin-top: 12px;
+
+    background: #f7ebe4;
+
+    border-color: #e5cfc3;
+
+    color: #765f54;
+}
+
+
+/* =========================================================
+   Hover
+========================================================= */
+
+.find-page-button:hover {
+    background: #e9d2c5;
+
+    border-color: #d5b4a4;
+
+    color: #624c42;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* =========================================================
+   클릭
+========================================================= */
+
+.find-page-button:active {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+
+    transform: translateY(0);
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.06);
+}
+
+
+/* =========================================================
+   Focus
+========================================================= */
+
+.find-page-button:focus {
     outline: none;
 }
 
-.join-input-etc:focus {
-    border-color: #333;
-}
 
-.join-input-etc::placeholder {
-    color: #aaa;
-}
+/* 키보드 선택 시 */
 
-/* =========================================
-   Find.js 전용 버튼 스타일
-   ========================================= */
-.find-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    max-width: 480px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
+.find-page-button:focus-visible {
+    outline: 2px solid #c9977d;
 
-.find-top-buttons {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-}
-
-.find-top-buttons button {
-    flex: 1;
-    height: 42px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-/* 길쭉한 하단 버튼 (로그인으로 돌아가기) */
-.join-btn-full {
-    width: 100%;
-    height: 42px;
-    padding: 0 28px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    background: #f1f1f1;
-    color: #333;
-}
-
-.join-btn-full:hover {
-    background: #e2e2e2;
-}
-
-/* 버튼 영역 (가운데 정렬) */
-.find-btn-area {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.join-btn-join,
-.join-btn-zip_num {
-    height: 42px;
-    padding: 0 28px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    flex: 1;
-}
-
-.join-btn-join {
-    background: #333;
-    color: #fff;
-}
-
-.join-btn-join:hover {
-    background: #222;
-}
-
-.join-btn-zip_num {
-    background: #eee;
-    color: #333;
-}
-
-.join-btn-zip_num:hover {
-    background: #ddd;
-}
-
-/* =========================================
-   비밀번호 변경 완료 화면
-   ========================================= */
-.password-success {
-    width: 100%;
-    min-height: 430px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    box-sizing: border-box;
-    background: #f7f7f7;
-    border-radius: 20px;
-}
-
-.success-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.success-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 0;
-    font-size: 15px;
-    color: #222;
-}
-
-.success-message {
-    margin: 20px 0 0;
-    font-size: 16px;
-    font-weight: bold;
-    color: #222;
-}
-
-.success-sub {
-    margin: 15px 0 0;
-    font-size: 14px;
-    line-height: 1.8;
-    color: #666;
-}
-
-.success-login-btn {
-    width: 175px;
-    height: 42px;
-    margin-top: 25px;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.success-login-btn:hover {
-    background: #222;
-}
-
-/* 하단 hr */
-.join-wrapper hr {
-    margin-top: 35px;
-    border: 0;
-    border-top: 1px solid #ddd;
-}
-
-/* =========================================
-   모바일 대응
-   ========================================= */
-@media (max-width: 480px) {
-    .join-wrapper {
-        padding: 25px 15px;
-    }
-
-    .join-title {
-        font-size: 23px;
-    }
-
-    .join-box {
-        padding: 20px 15px;
-    }
-
-    .join-row {
-        display: block;
-    }
-
-    .join-label {
-        width: 100%;
-        min-width: 100%;
-        margin-bottom: 7px;
-    }
-
-    .find-btn-area {
-        flex-direction: column;
-    }
-
-    .join-btn-join,
-    .join-btn-zip_num {
-        width: 100%;
-    }
+    outline-offset: 3px;
 }

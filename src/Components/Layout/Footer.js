@@ -1,8 +1,10 @@
 import React from "react";
 
 import "./Footer.css";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+    const navigate = useNavigate()
     return (
         <footer className="footer">
             <div className="footer-inner">
@@ -24,7 +26,7 @@ const Footer = () => {
                     {/* 메뉴 */}
                     <div className="footer-menu">
                         <div className="footer-menu-title">서비스</div>
-                        <a href="/ai">대화하기</a>
+                        <a href="/SelectAi">대화하기</a>
                         <a href="/diary">감정일기</a>
                         <a href="/calendar">감정 캘린더</a>
                         <a href="/board">공감 게시판</a>

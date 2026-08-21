@@ -1,0 +1,460 @@
+/* =========================================================
+   UpdateInquiry 전체
+========================================================= */
+
+.update-inquiry-page {
+    width: 100%;
+
+    margin: 0;
+    padding: 60px 20px 100px;
+
+    box-sizing: border-box;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    color: #4f4944;
+}
+
+
+/* =========================================================
+   제목 영역
+========================================================= */
+
+.update-inquiry-header {
+    width: 100%;
+
+    margin: 0 auto 30px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.update-inquiry-heading {
+    margin: 0;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
+}
+
+
+/* =========================================================
+   제목 밑 설명
+========================================================= */
+
+.update-inquiry-description {
+    margin: 14px 0 0;
+
+    color: #9a918b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   수정 폼
+========================================================= */
+
+.update-inquiry-form {
+    width: 700px;
+
+    margin: 0 auto;
+
+    padding: 35px 40px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(80, 65, 55, 0.06);
+}
+
+
+/* =========================================================
+   입력 필드
+========================================================= */
+
+.update-inquiry-field {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+.update-inquiry-field + .update-inquiry-field {
+    margin-top: 24px;
+}
+
+
+/* =========================================================
+   라벨
+========================================================= */
+
+.update-inquiry-label {
+    display: block;
+
+    margin: 0 0 9px;
+
+    color: #665950;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   제목 입력
+========================================================= */
+
+.update-inquiry-title-input {
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   제목 Placeholder
+========================================================= */
+
+.update-inquiry-title-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* =========================================================
+   제목 Focus
+========================================================= */
+
+.update-inquiry-title-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   내용 입력
+========================================================= */
+
+.update-inquiry-content-input {
+    width: 100%;
+
+    min-height: 320px;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    resize: vertical;
+
+    border: 1px solid #e7d8cf;
+
+    border-radius: 10px;
+
+    background: #fffaf7;
+
+    color: #514943;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   내용 Placeholder
+========================================================= */
+
+.update-inquiry-content-input::placeholder {
+    color: #b5a8a0;
+}
+
+
+/* =========================================================
+   내용 Focus
+========================================================= */
+
+.update-inquiry-content-input:focus {
+    border-color: #c9977d;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 151, 125, 0.12);
+}
+
+
+/* =========================================================
+   버튼 영역
+========================================================= */
+
+.update-inquiry-actions {
+    width: 100%;
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   버튼 공통
+========================================================= */
+
+.update-inquiry-cancel-btn,
+.update-inquiry-submit-btn {
+    width: 150px;
+
+    height: 48px;
+
+    padding: 0;
+
+    border-radius: 10px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   취소
+========================================================= */
+
+.update-inquiry-cancel-btn {
+    border: 1px solid #e5cfc3;
+
+    background: #f7ebe4;
+
+    color: #765f54;
+}
+
+
+.update-inquiry-cancel-btn:hover {
+    background: #e9d2c5;
+
+    border-color: #d5b4a4;
+
+    color: #624c42;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* =========================================================
+   수정 완료
+========================================================= */
+
+.update-inquiry-submit-btn {
+    border: 1px solid #d5b4a4;
+
+    background: #e9d2c5;
+
+    color: #624c42;
+
+    box-shadow:
+        0 3px 8px rgba(100, 75, 60, 0.05);
+}
+
+
+.update-inquiry-submit-btn:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
+/* =========================================================
+   버튼 Active
+========================================================= */
+
+.update-inquiry-cancel-btn:active,
+.update-inquiry-submit-btn:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 2px 6px rgba(100, 75, 60, 0.06);
+}
+
+
+/* =========================================================
+   Focus
+========================================================= */
+
+.update-inquiry-cancel-btn:focus,
+.update-inquiry-submit-btn:focus {
+    outline: none;
+}
+
+
+.update-inquiry-cancel-btn:focus-visible,
+.update-inquiry-submit-btn:focus-visible {
+    outline: 2px solid #c9977d;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   모바일
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .update-inquiry-page {
+        padding: 40px 15px 70px;
+    }
+
+
+    .update-inquiry-heading {
+        font-size: 29px;
+    }
+
+
+    .update-inquiry-form {
+        width: 100%;
+
+        padding: 28px 25px;
+
+        border-radius: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   작은 모바일
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .update-inquiry-page {
+        padding: 30px 10px 60px;
+    }
+
+
+    .update-inquiry-heading {
+        font-size: 27px;
+    }
+
+
+    .update-inquiry-description {
+        font-size: 13px;
+    }
+
+
+    .update-inquiry-form {
+        padding: 25px 18px;
+    }
+
+
+    .update-inquiry-content-input {
+        min-height: 280px;
+    }
+
+
+    .update-inquiry-actions {
+        gap: 8px;
+    }
+
+
+    .update-inquiry-cancel-btn,
+    .update-inquiry-submit-btn {
+        flex: 1;
+
+        width: auto;
+
+        height: 46px;
+
+        font-size: 13px;
+    }
+
+}

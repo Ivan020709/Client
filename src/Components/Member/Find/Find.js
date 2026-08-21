@@ -15,34 +15,48 @@ function Find() {
     }, [loginUser, navigate]);
 
     return (
-        <div className="join-wrapper">
-            <h2 className="join-title">아이디 / 비밀번호 찾기</h2>
-            <div className="find-container">
-                {/* 아이디 찾기, 비밀번호 찾기 버튼을 한 줄에 같은 크기로 배치 */}
-                <div className="find-top-buttons">
+        <div className="find-page">
+
+            <div className="find-page-card">
+
+                <h2 className="find-page-title">
+                    아이디 / 비밀번호 찾기
+                </h2>
+
+                <div className="find-page-button-area">
+
+                    <div className="find-page-top-buttons">
+
+                        <button
+                            type="button"
+                            className="find-page-button"
+                            onClick={() => navigate('/findId')}
+                        >
+                            아이디 찾기
+                        </button>
+
+                        <button
+                            type="button"
+                            className="find-page-button"
+                            onClick={() => navigate('/findPass')}
+                        >
+                            비밀번호 찾기
+                        </button>
+
+                    </div>
+
                     <button
-                        className="join-btn-join"
-                        onClick={() => navigate('/findId')}
+                        type="button"
+                        className="find-page-button find-page-back-button"
+                        onClick={() => navigate('/MemberLogin')}
                     >
-                        아이디 찾기
+                        로그인으로 돌아가기
                     </button>
-                    <button
-                        className="join-btn-zip_num"
-                        onClick={() => navigate('/findPass')}
-                    >
-                        비밀번호 찾기
-                    </button>
+
                 </div>
 
-                {/* 로그인으로 돌아가기 버튼 (아래쪽에 길쭉하게 분리) */}
-                <button
-                    className="join-btn-full"
-                    onClick={() => navigate('/MemberLogin')}
-                >
-                    로그인으로 돌아가기
-                </button>
             </div>
-            <hr />
+
         </div>
     );
 }
