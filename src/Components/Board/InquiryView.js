@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+
 import './Inquiry.css';
 
 function InquiryView() {
@@ -24,10 +25,10 @@ function InquiryView() {
             </div>
             <div className="inquiry-container">
                 <h2>{post.title}</h2>
-                <div style={{borderBottom:'1px solid #eee', paddingBottom:'10px', marginBottom:'20px'}}>
+                <div style={{ borderBottom: '1px solid #eee', paddingBottom: '10px', marginBottom: '20px' }}>
                     작성자: {post.userid} | 작성일: {post.indate?.substring(0, 10)}
                 </div>
-                <div style={{minHeight:'300px'}}>{post.content}</div>
+                <div style={{ minHeight: '300px' }}>{post.content}</div>
             </div>
             <div className="inquiry-view-buttons">
                 <button className="inquiry-cancel-btn" onClick={() => navigate('/InquiryList')}>목록으로</button>
