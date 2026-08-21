@@ -1,365 +1,944 @@
-/* ================================
+
+
+/* =========================================================
+   게시글 상세 페이지
+   Feel Together / Warm Beige Theme
+
+   Font
+   Noto Sans KR : 기본 폰트
+   Jua          : 페이지 제목
+
+   Main Theme
+   #fffaf7
+   #fffdfb
+   #faf5f0
+   #b68b78
+   #9f7563
+========================================================= */
+
+
+/* =========================================================
    전체 페이지
-================================ */
+========================================================= */
 
 .board-view-page {
     width: 100%;
+
     min-height: 100vh;
-    background-color: #f7f8fa;
+
     padding: 60px 0 100px;
+
     box-sizing: border-box;
+
+    background: #fffdfb;
+
+    color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* ================================
+
+/* =========================================================
    페이지 헤더
-================================ */
+========================================================= */
 
 .board-view-header {
     width: 900px;
+
     margin: 0 auto 30px;
+
     display: flex;
+
     align-items: center;
 }
 
+
+/* 제목 */
+
 .board-view-header h1 {
     margin: 0;
-    font-size: 28px;
-    font-weight: 700;
-    color: #222;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
 }
 
-/* 뒤로가기 */
+
+/* =========================================================
+   뒤로가기
+========================================================= */
 
 .board-back-btn {
     width: 40px;
     height: 40px;
+
     margin-right: 10px;
+
+    padding: 0;
+
     border: none;
-    background: none;
-    font-size: 30px;
-    color: #555;
+
+    border-radius: 50%;
+
+    background: #faf5f0;
+
+    color: #9f7563;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 25px;
+
+    line-height: 1;
+
     cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .board-back-btn:hover {
-    color: #222;
+    background: #f0e0d6;
+
+    color: #8e6656;
+
+    transform: translateX(-2px);
 }
 
-/* ================================
+
+/* =========================================================
    전체 컨테이너
-================================ */
+========================================================= */
 
 .board-view-container {
     width: 900px;
+
     margin: 0 auto;
+
+    box-sizing: border-box;
 }
 
-/* ================================
+
+/* =========================================================
    게시글
-================================ */
+========================================================= */
 
 .board-view-post {
     padding: 35px;
-    background-color: white;
-    border-radius: 12px;
+
     box-sizing: border-box;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 35px rgba(80, 65, 55, 0.06);
 }
 
-/* ================================
+
+/* =========================================================
    카테고리
-================================ */
+========================================================= */
 
 .board-view-category {
     display: inline-block;
-    padding: 6px 14px;
+
+    padding: 7px 15px;
+
     margin-bottom: 15px;
-    border-radius: 20px;
-    background-color: #eef2ff;
-    color: #4f7cff;
-    font-size: 13px;
-    font-weight: 600;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 999px;
+
+    background: #faf5f0;
+
+    color: #9f7563;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.1px;
 }
 
-/* ================================
+
+/* =========================================================
    제목
-================================ */
+========================================================= */
 
 .board-view-title {
     margin: 0 0 20px;
+
+    color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 25px;
+
     font-weight: 700;
-    color: #222;
+
+    line-height: 1.45;
+
+    letter-spacing: -0.5px;
+
     word-break: break-word;
 }
 
-/* ================================
+
+/* =========================================================
    작성자 정보
-================================ */
+========================================================= */
 
 .board-view-info {
     display: flex;
+
     align-items: center;
+
     gap: 20px;
+
     padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    color: #888;
+
+    border-bottom: 1px solid #f0e5df;
+
+    color: #9a918b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 13px;
 }
 
+
 .board-view-info strong {
-    color: #555;
+    color: #817971;
+
+    font-weight: 700;
 }
 
-/* ================================
+
+/* =========================================================
    게시글 내용
-================================ */
+========================================================= */
 
 .board-view-content {
     min-height: 350px;
+
     padding: 30px 5px;
+
     box-sizing: border-box;
-    color: #444;
+
+    color: #625b55;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 15px;
+
     line-height: 1.8;
+
+    letter-spacing: -0.2px;
+
     white-space: pre-wrap;
+
     word-break: break-word;
 }
 
-/* ================================
-   게시글 버튼
-================================ */
+
+/* =========================================================
+   게시글 반응
+========================================================= */
+
+.board-view-reactions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+
+.board-view-reactions button {
+    padding: 9px 15px;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 999px;
+
+    background: #fffdfb;
+
+    color: #9f7563;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.board-view-reactions button:hover {
+    border-color: #d9bfb2;
+
+    background: #faf5f0;
+
+    color: #8e6656;
+
+    transform: translateY(-1px);
+}
+
+
+.board-view-reactions button.is-liked {
+    border-color: #e5aab5;
+
+    background: #fff2f4;
+
+    color: #c66d7a;
+
+    box-shadow:
+        0 5px 12px rgba(198, 109, 122, 0.10);
+}
+
+
+/* =========================================================
+   게시글 버튼 영역
+========================================================= */
 
 .board-view-buttons {
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
+
+    justify-content: space-between;
+
     padding-top: 20px;
-    border-top: 1px solid #eee;
+
+    border-top: 1px solid #f0e5df;
 }
 
-/* 목록 */
+
+/* =========================================================
+   목록 버튼
+========================================================= */
 
 .board-list-btn {
     width: 90px;
     height: 42px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background-color: white;
-    color: #555;
-    font-size: 14px;
+
+    padding: 0;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 999px;
+
+    background: #fffdfb;
+
+    color: #8e7669;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
     cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .board-list-btn:hover {
-    background-color: #f5f5f5;
+    background: #faf5f0;
+
+    border-color: #d9bfb2;
+
+    color: #9f7563;
+
+    transform: translateY(-1px);
 }
 
-/* 수정 / 삭제 */
+
+/* =========================================================
+   수정 / 삭제 버튼
+========================================================= */
 
 .board-owner-buttons {
     display: flex;
+
     gap: 8px;
 }
 
-.board-update-btn, .board-delete-btn {
+
+.board-update-btn,
+.board-delete-btn {
     width: 70px;
     height: 42px;
-    border-radius: 6px;
-    font-size: 14px;
+
+    padding: 0;
+
+    border-radius: 999px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
     cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 /* 수정 */
 
 .board-update-btn {
-    border: 1px solid #ddd;
-    background-color: white;
-    color: #555;
+    border: 1px solid #eadbd3;
+
+    background: #fffdfb;
+
+    color: #8e7669;
 }
 
+
 .board-update-btn:hover {
-    background-color: #f5f5f5;
+    border-color: #d9bfb2;
+
+    background: #faf5f0;
+
+    color: #9f7563;
+
+    transform: translateY(-1px);
 }
+
 
 /* 삭제 */
 
 .board-delete-btn {
     border: none;
-    background-color: #555;
-    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9f7563,
+            #8e6656
+        );
+
+    color: #fff;
+
+    box-shadow:
+        0 6px 14px rgba(159, 117, 99, 0.16);
 }
+
 
 .board-delete-btn:hover {
-    background-color: #333;
+    background:
+        linear-gradient(
+            135deg,
+            #8e6656,
+            #795446
+        );
+
+    box-shadow:
+        0 9px 18px rgba(159, 117, 99, 0.22);
+
+    transform: translateY(-1px);
 }
 
-/* ================================
+
+/* =========================================================
    댓글 영역
-================================ */
+========================================================= */
 
 .board-comment-section {
     margin-top: 20px;
+
     padding: 30px 35px;
-    background-color: white;
-    border-radius: 12px;
+
     box-sizing: border-box;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 35px rgba(80, 65, 55, 0.06);
 }
 
-/* 댓글 제목 */
+
+/* =========================================================
+   댓글 제목
+========================================================= */
 
 .board-comment-title {
     padding-bottom: 20px;
-    border-bottom: 2px solid #333;
+
+    border-bottom: 2px solid #eadbd3;
+
+    color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 17px;
-    font-weight: 600;
-    color: #333;
+
+    font-weight: 700;
 }
+
 
 .board-comment-title strong {
     margin-left: 5px;
-    color: #4f7cff;
+
+    color: #b68b78;
+
+    font-weight: 800;
 }
 
-/* ================================
+
+/* =========================================================
    댓글 목록
-================================ */
+========================================================= */
 
 .board-comment {
     padding: 20px 5px;
-    border-bottom: 1px solid #eee;
+
+    border-bottom: 1px solid #f1e8e3;
 }
 
-/* 댓글 작성자 / 날짜 */
+
+/* =========================================================
+   댓글 작성자 / 날짜
+========================================================= */
 
 .board-comment-info {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
+
     margin-bottom: 10px;
 }
 
+
 .board-comment-info strong {
+    color: #5c554f;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 14px;
-    color: #333;
+
+    font-weight: 700;
 }
+
 
 .board-comment-info span {
+    color: #9a918b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 12px;
-    color: #999;
 }
 
-/* 댓글 내용 */
+
+/* =========================================================
+   댓글 내용
+========================================================= */
 
 .board-comment-content {
+    color: #625b55;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 14px;
-    line-height: 1.6;
-    color: #555;
+
+    line-height: 1.7;
+
     white-space: pre-wrap;
+
     word-break: break-word;
 }
 
-/* 댓글 없음 */
+
+/* =========================================================
+   댓글 없음
+========================================================= */
 
 .board-no-comment {
     padding: 50px 0;
-    text-align: center;
-    color: #999;
+
+    color: #aaa19b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 14px;
+
+    text-align: center;
 }
 
-/* ================================
+
+/* =========================================================
    댓글 작성
-================================ */
+========================================================= */
 
 .board-comment-form {
     display: flex;
+
     gap: 10px;
+
     margin-top: 20px;
 }
 
+
+/* 댓글 입력 */
+
 .board-comment-form textarea {
     flex: 1;
+
     height: 80px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 15px;
+
+    background: #fffdfb;
+
+    color: #5c554f;
+
     box-sizing: border-box;
+
     resize: none;
-    font-family: inherit;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 14px;
+
+    line-height: 1.6;
+
     outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .board-comment-form textarea:focus {
-    border-color: #4f7cff;
+    border-color: #b68b78;
+
+    background: #fffaf7;
+
+    box-shadow:
+        0 0 0 3px rgba(182, 139, 120, 0.08);
 }
+
 
 .board-comment-form textarea::placeholder {
-    color: #aaa;
+    color: #b3aca6;
 }
 
-/* 댓글 등록 */
+
+/* =========================================================
+   댓글 등록
+========================================================= */
 
 .board-comment-form button {
     width: 100px;
+
     border: none;
-    border-radius: 6px;
-    background-color: #4f7cff;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
     cursor: pointer;
+
+    box-shadow:
+        0 7px 16px rgba(182, 139, 120, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .board-comment-form button:hover {
-    background-color: #3d68df;
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
+
+    box-shadow:
+        0 10px 21px rgba(159, 117, 99, 0.23);
+
+    transform: translateY(-2px);
 }
 
-/* ================================
+
+.board-comment-form button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, 0.17);
+}
+
+
+/* =========================================================
    반응형
-================================ */
+========================================================= */
 
 @media (max-width: 950px) {
-    .board-view-header, .board-view-container { width: calc(100% - 40px); }
+
+    .board-view-header,
+    .board-view-container {
+        width: calc(100% - 40px);
+    }
+
 }
 
+
+/* =========================================================
+   모바일
+========================================================= */
+
 @media (max-width: 600px) {
-    .board-view-page { padding-top: 30px; }
-    
-    .board-view-header h1 { font-size: 24px; }
-    
-    .board-view-post { padding: 25px 20px; }
-    
-    .board-view-title { font-size: 21px; }
-    
+
+    .board-view-page {
+        padding:
+            30px 0
+            70px;
+    }
+
+
+    .board-view-header {
+        margin-bottom: 22px;
+    }
+
+
+    .board-view-header h1 {
+        font-size: 28px;
+    }
+
+
+    .board-back-btn {
+        width: 36px;
+        height: 36px;
+
+        margin-right: 8px;
+
+        font-size: 22px;
+    }
+
+
+    /* 게시글 */
+
+    .board-view-post {
+        padding:
+            25px 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .board-view-category {
+        padding: 6px 13px;
+
+        margin-bottom: 13px;
+
+        font-size: 11px;
+    }
+
+
+    .board-view-title {
+        margin-bottom: 18px;
+
+        font-size: 21px;
+
+        line-height: 1.45;
+    }
+
+
     .board-view-info {
         flex-wrap: wrap;
+
         gap: 8px 15px;
+
+        padding-bottom: 18px;
+
+        font-size: 12px;
     }
-    
+
+
     .board-view-content {
         min-height: 300px;
-        padding: 25px 0;
+
+        padding:
+            25px 0;
+
+        font-size: 14px;
+
+        line-height: 1.75;
     }
-    
+
+
+    /* 반응 */
+
+    .board-view-reactions {
+        gap: 7px;
+
+        margin-top: 18px;
+    }
+
+
+    .board-view-reactions button {
+        padding: 8px 12px;
+
+        font-size: 12px;
+    }
+
+
+    /* 버튼 */
+
+    .board-view-buttons {
+        padding-top: 18px;
+    }
+
+
+    .board-list-btn {
+        width: 82px;
+        height: 40px;
+
+        font-size: 12px;
+    }
+
+
+    .board-owner-buttons {
+        gap: 6px;
+    }
+
+
+    .board-update-btn,
+    .board-delete-btn {
+        width: 65px;
+        height: 40px;
+
+        font-size: 12px;
+    }
+
+
+    /* 댓글 */
+
     .board-comment-section {
-        padding: 25px 20px;
+        padding:
+            25px 20px;
+
+        border-radius: 20px;
     }
-    
+
+
+    .board-comment-title {
+        padding-bottom: 17px;
+
+        font-size: 16px;
+    }
+
+
+    .board-comment {
+        padding:
+            18px 3px;
+    }
+
+
+    .board-comment-content {
+        font-size: 13px;
+    }
+
+
+    /* 댓글 작성 */
+
     .board-comment-form {
         flex-direction: column;
+
+        gap: 8px;
     }
-    
+
+
+    .board-comment-form textarea {
+        height: 90px;
+
+        border-radius: 14px;
+
+        font-size: 13px;
+    }
+
+
     .board-comment-form button {
         width: 100%;
+
         height: 42px;
+
+        font-size: 12px;
     }
+
 }
-.board-view-page { background: #fffdfd; color: #39304f; }
-.board-view-post { border-color: #e9e0f2; border-radius: 24px; box-shadow: 0 12px 35px rgba(100, 80, 120, .06); }
-.board-view-category { background: #f1eafd; color: #7561a8; }
-.board-view-reactions { display: flex; gap: 10px; margin-top: 24px; }
-.board-view-reactions button { padding: 9px 14px; border: 1px solid #ded3ea; border-radius: 999px; background: #fff; color: #7561a8; cursor: pointer; }
-.board-view-reactions button.is-liked { border-color: #efb9c2; background: #fff2f4; color: #d75d72; }

@@ -1,3 +1,20 @@
+//NoticeList.css
+/* =========================================================
+   공지사항 페이지 전체
+   Feel Together / Warm Beige Theme
+
+   Font
+   Noto Sans KR : 기본 폰트
+   Jua          : 제목 폰트
+
+   Main Theme
+   #fffaf7
+   #fffdfb
+   #faf5f0
+   #b68b78
+   #9f7563
+========================================================= */
+
 .notice-list-page {
     width: 100%;
     min-height: 100vh;
@@ -7,161 +24,249 @@
     box-sizing: border-box;
 
     background-color: #fffdfb;
+
     color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 
-/* =========================
+/* =========================================================
    Header
-========================= */
+========================================================= */
 
 .notice-header {
     width: 1100px;
 
     margin: 0 auto 40px;
+
+    text-align: left;
 }
+
+
+/* 제목 */
 
 .notice-header h1 {
     margin: 0 0 10px;
 
-    font-size: 32px;
-    font-weight: 700;
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 34px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
 
     letter-spacing: -1px;
-
-    color: #4f4944;
 }
 
-.notice-header p {
-    margin: 0;
 
-    color: #918981;
+/* 제목 밑 장식 */
+
+.notice-header h1::after {
+    content: '';
+
+    display: block;
+
+    width: 38px;
+    height: 3px;
+
+    margin: 14px 0 0;
+
+    border-radius: 999px;
+
+    background: #b68b78;
+}
+
+
+/* 설명 */
+
+.notice-header p {
+    margin: 16px 0 0;
+
+    color: #9a918b;
+
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 15px;
-    line-height: 1.7;
+
+    line-height: 1.6;
 
     letter-spacing: -0.3px;
 }
 
 
-/* =========================
+/* =========================================================
    Container
-========================= */
+========================================================= */
 
 .notice-container {
     width: 1100px;
 
     margin: 0 auto;
+
+    box-sizing: border-box;
 }
 
 
-/* =========================
-   Top
-========================= */
+/* =========================================================
+   상단 영역
+========================================================= */
 
 .notice-top {
     display: flex;
 
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
 
     margin-bottom: 18px;
 }
 
 .notice-top span {
-    font-size: 14px;
+    color: #9a918b;
 
-    color: #817971;
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
 }
 
 .notice-top strong {
     margin-left: 5px;
 
     color: #b68b78;
-    font-weight: 700;
+
+    font-weight: 800;
 }
 
 
-/* =========================
+/* =========================================================
    공지 작성 버튼
-========================= */
+   고민 게시판 / 문의사항 버튼과 동일한 Pill 스타일
+========================================================= */
 
 .notice-write-btn {
-    padding: 10px 20px;
+    padding: 11px 18px;
 
-    border: 1px solid #b68b78;
-    border-radius: 10px;
+    border: none;
+    border-radius: 999px;
 
-    background-color: #b68b78;
-    color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.2px;
 
     cursor: pointer;
 
-    font-size: 14px;
-    font-weight: 600;
+    box-shadow:
+        0 8px 18px rgba(182, 139, 120, 0.20);
+
+    box-sizing: border-box;
 
     transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
+
 
 .notice-write-btn:hover {
-    background-color: #a77d6c;
-    border-color: #a77d6c;
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
 
-    transform: translateY(-1px);
+    box-shadow:
+        0 11px 25px rgba(159, 117, 99, 0.24);
+
+    transform: translateY(-2px);
 }
 
 
-/* =========================
+.notice-write-btn:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, 0.18);
+}
+
+
+/* =========================================================
    Table
-========================= */
+========================================================= */
 
 .notice-table {
     width: 100%;
 
     overflow: hidden;
 
-    border-top: 1px solid #dcd3cb;
-    border-bottom: 1px solid #e9e2db;
+    border: 1px solid #f0e5df;
 
-    border-radius: 12px;
+    border-radius: 18px;
 
-    background-color: #fffdfb;
+    background: #fffdfb;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 10px 28px rgba(80, 65, 55, 0.045);
 }
 
 
-/* =========================
+/* =========================================================
    Table Header
-========================= */
+========================================================= */
 
 .notice-table-header {
     display: flex;
 
     align-items: center;
 
-    height: 52px;
+    height: 54px;
 
-    border-bottom: 1px solid #e9e2db;
+    border-bottom: 1px solid #f0e5df;
 
-    background-color: #f8f5f1;
+    background:
+        linear-gradient(
+            135deg,
+            #faf5f0,
+            #fffaf7
+        );
 
-    color: #625b55;
+    color: #6f6963;
 
-    font-weight: 700;
-
-    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
 
+    font-weight: 700;
+
     letter-spacing: -0.2px;
+
+    text-align: center;
 }
 
 
-/* =========================
+/* =========================================================
    게시글 Row
-========================= */
+========================================================= */
 
 .notice-row {
     display: flex;
@@ -170,38 +275,49 @@
 
     min-height: 58px;
 
-    border-bottom: 1px solid #eee8e1;
+    border-bottom: 1px solid #f1e8e3;
 
-    background-color: #fffdfb;
+    background: #fffdfb;
+
+    color: #5c554f;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
 
     cursor: pointer;
 
     transition:
         background-color 0.2s ease,
-        padding 0.2s ease;
+        color 0.2s ease;
 }
+
 
 .notice-row:last-child {
     border-bottom: none;
 }
 
+
 .notice-row:hover {
-    background-color: #faf6f2;
+    background: #fff8f4;
+
+    color: #9f7563;
 }
 
 
-/* =========================
+/* =========================================================
    고정 공지
-========================= */
+========================================================= */
 
 .notice-row.notice-fixed {
-    background-color: #fdf5f1;
+    background: #fdf5f1;
 
     border-bottom: 1px solid #eee0d8;
 }
 
+
 .notice-row.notice-fixed:hover {
-    background-color: #f9eee8;
+    background: #f9eee8;
 }
 
 
@@ -221,9 +337,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    번호
-========================= */
+========================================================= */
 
 .notice-number {
     width: 65px;
@@ -232,228 +348,309 @@
 
     text-align: center;
 
-    color: #aaa29b;
+    color: #9a918b;
+
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
 }
 
 
-/* =========================
+/* =========================================================
    제목
-========================= */
+========================================================= */
 
 .notice-title {
     flex: 1;
 
-    padding: 0 20px;
+    min-width: 0;
 
-    white-space: nowrap;
+    padding: 0 20px;
 
     overflow: hidden;
 
-    text-overflow: ellipsis;
+    color: #514943;
 
-    text-align: center;
-
-    color: #5f5852;
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 14px;
 
     letter-spacing: -0.2px;
+
+    text-align: left;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
 
 
-/* =========================
+/* 제목 Hover */
+
+.notice-row:hover .notice-title {
+    color: #9f7563;
+}
+
+
+/* =========================================================
    작성일
-========================= */
+========================================================= */
 
 .notice-date {
     width: 130px;
 
     flex-shrink: 0;
 
+    color: #9a918b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 12px;
+
     text-align: center;
-
-    color: #918981;
-
-    font-size: 13px;
 }
 
 
-/* =========================
+/* =========================================================
    조회수
-========================= */
+========================================================= */
 
 .notice-view {
     width: 80px;
 
     flex-shrink: 0;
 
-    text-align: center;
-
     color: #aaa29b;
+
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
-}
-
-
-/* =========================
-   Empty
-========================= */
-
-.notice-empty {
-    padding: 90px 0;
 
     text-align: center;
-
-    color: #aaa29b;
-
-    font-size: 14px;
-
-    background-color: #fffdfb;
 }
 
 
-/* =========================
+/* =========================================================
+   Empty
+========================================================= */
+
+.notice-empty {
+    display: flex;
+
+    min-height: 180px;
+
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    color: #aaa19b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
    Search
-========================= */
+========================================================= */
 
 .notice-search {
     display: flex;
 
-    justify-content: center;
     align-items: center;
-
-    margin-top: 35px;
+    justify-content: center;
 
     gap: 6px;
+
+    margin-top: 35px;
 }
+
+
+/* =========================================================
+   Search Select
+========================================================= */
 
 .notice-search select {
     width: 105px;
     height: 40px;
 
-    padding: 0 10px;
+    padding: 0 14px;
 
-    border: 1px solid #e2dad3;
+    border: 1px solid #eadbd3;
 
-    border-radius: 8px;
+    border-radius: 999px;
 
-    background-color: #fffdfb;
+    background: #fffdfb;
 
-    color: #6f6963;
+    color: #9a8277;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
 
     cursor: pointer;
 
     outline: none;
 
-    font-size: 13px;
+    box-sizing: border-box;
 
     transition:
         border-color 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
         box-shadow 0.2s ease;
 }
 
+
 .notice-search select:focus {
-    border-color: #c9a99b;
+    border-color: #b68b78;
+
+    background: #fffaf7;
+
+    color: #9f7563;
 
     box-shadow:
         0 0 0 3px rgba(182, 139, 120, 0.08);
 }
 
+
+/* =========================================================
+   Search Input
+========================================================= */
 
 .notice-search input {
     width: 350px;
     height: 40px;
 
-    padding: 0 14px;
+    padding: 0 16px;
 
-    box-sizing: border-box;
+    border: 1px solid #eadbd3;
 
-    border: 1px solid #e2dad3;
+    border-radius: 999px;
 
-    border-radius: 8px;
-
-    background-color: #fffdfb;
+    background: #fffdfb;
 
     color: #5f5852;
 
-    outline: none;
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
 
+    outline: none;
+
+    box-sizing: border-box;
+
     transition:
         border-color 0.2s ease,
+        background-color 0.2s ease,
         box-shadow 0.2s ease;
 }
+
 
 .notice-search input::placeholder {
     color: #b3aca6;
 }
 
+
 .notice-search input:focus {
-    border-color: #c9a99b;
+    border-color: #b68b78;
+
+    background: #fffaf7;
 
     box-shadow:
         0 0 0 3px rgba(182, 139, 120, 0.08);
 }
 
 
-/* =========================
+/* =========================================================
    Search Button
-========================= */
+========================================================= */
 
 .notice-search button {
-    width: 70px;
+    min-width: 70px;
     height: 40px;
 
-    border: 1px solid #b68b78;
+    padding: 0 17px;
 
-    border-radius: 8px;
+    border: none;
 
-    background-color: #b68b78;
+    border-radius: 999px;
 
-    color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
 
     cursor: pointer;
 
-    font-size: 13px;
-    font-weight: 600;
+    box-shadow:
+        0 6px 15px rgba(182, 139, 120, 0.16);
+
+    box-sizing: border-box;
 
     transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
+
 
 .notice-search button:hover {
-    background-color: #a77d6c;
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
 
-    border-color: #a77d6c;
+    box-shadow:
+        0 9px 20px rgba(159, 117, 99, 0.22);
 
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 
-/* =========================
+.notice-search button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 4px 10px rgba(159, 117, 99, 0.16);
+}
+
+
+/* =========================================================
    Pagination
-========================= */
+========================================================= */
 
 .notice-pagination {
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    gap: 7px;
 
     margin-top: 35px;
-
-    gap: 5px;
 }
 
 
-/* =========================
-   페이지 버튼
-========================= */
+/* 페이지 버튼 */
 
 .notice-pagination .notice-page,
 .notice-pagination .notice-page-arrow {
@@ -462,43 +659,47 @@
 
     padding: 0;
 
-    border: 1px solid #e2dad3;
+    border: 1px solid #eadbd3;
 
-    border-radius: 8px;
+    border-radius: 50%;
 
-    background-color: #fffdfb;
+    background: #fffdfb;
 
-    color: #918981;
+    color: #9a8277;
+
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
 
     cursor: pointer;
 
+    box-sizing: border-box;
+
     transition:
         background-color 0.2s ease,
         border-color 0.2s ease,
-        color 0.2s ease;
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-/* =========================
-   현재 페이지
-========================= */
+/* 현재 페이지 */
 
 .notice-pagination .notice-page.active {
-    background-color: #b68b78;
-
-    color: #ffffff;
-
     border-color: #b68b78;
 
-    font-weight: 600;
+    background: #b68b78;
+
+    color: #fff;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 12px rgba(182, 139, 120, 0.18);
 }
 
 
-/* =========================
-   페이지 Hover
-========================= */
+/* 페이지 Hover */
 
 .notice-pagination
 .notice-page:hover:not(.active),
@@ -506,47 +707,30 @@
 .notice-pagination
 .notice-page-arrow:hover {
 
-    background-color: #f7eee9;
+    border-color: #d9bfb2;
 
-    border-color: #d5b8aa;
+    background: #faf5f0;
 
-    color: #a77d6c;
+    color: #9f7563;
+
+    transform: translateY(-1px);
 }
 
 
-/* =========================
-   이전 / 다음
-========================= */
+/* 비활성 버튼 */
 
-.notice-pagination .notice-page-arrow {
-    color: #8f8881;
-}
+.notice-pagination button:disabled {
+    cursor: default;
 
-.notice-pagination .notice-page-arrow:hover {
-    background-color: #f7eee9;
+    opacity: 0.35;
 
-    border-color: #d5b8aa;
-
-    color: #a77d6c;
+    transform: none;
 }
 
 
-/* =========================
-   고정 공지 강조
-========================= */
-
-.notice-row.notice-fixed {
-    background-color: #fdf5f1;
-}
-
-.notice-row.notice-fixed:hover {
-    background-color: #f9eee8;
-}
-
-
-/* =========================
+/* =========================================================
    Responsive
-========================= */
+========================================================= */
 
 @media (max-width: 1150px) {
 
@@ -558,105 +742,202 @@
 }
 
 
+/* =========================================================
+   Tablet / Mobile
+========================================================= */
+
 @media (max-width: 700px) {
 
     .notice-list-page {
-        padding: 40px 0;
+        padding: 40px 0 70px;
     }
+
 
     .notice-header,
     .notice-container {
         width: calc(100% - 40px);
     }
 
-    .notice-header h1 {
-        font-size: 27px;
+
+    .notice-header {
+        margin-bottom: 30px;
     }
 
-    .notice-header p {
-        font-size: 14px;
+
+    .notice-header h1 {
+        font-size: 29px;
     }
+
+
+    .notice-header p {
+        font-size: 13px;
+    }
+
 
     .notice-top {
         gap: 15px;
     }
 
+
     .notice-write-btn {
-        padding: 9px 14px;
-        font-size: 13px;
+        padding: 10px 15px;
+
+        font-size: 12px;
     }
+
 
     .notice-date {
         width: 90px;
     }
+
 
     .notice-view {
         width: 60px;
     }
 
+
     .notice-number {
         width: 45px;
     }
 
+
     .notice-title {
         padding: 0 10px;
+
         text-align: left;
     }
+
 
     .notice-search {
         flex-wrap: wrap;
     }
 
+
     .notice-search input {
         width: 250px;
+    }
+
+
+    .notice-search button {
+        min-width: 65px;
+
+        padding: 0 15px;
+
+        font-size: 12px;
     }
 
 }
 
 
+/* =========================================================
+   Small Mobile
+========================================================= */
+
 @media (max-width: 500px) {
 
     .notice-header,
     .notice-container {
-        width: calc(100% - 30px);
+        width: calc(100% - 20px);
     }
+
 
     .notice-list-page {
-        padding: 30px 0;
+        padding: 30px 0 60px;
     }
 
-    .notice-table-header {
-        height: 46px;
+
+    .notice-header h1 {
+        font-size: 27px;
+    }
+
+
+    .notice-header p {
         font-size: 12px;
     }
 
-    .notice-row {
-        min-height: 52px;
+
+    .notice-table {
+        border-radius: 15px;
     }
+
+
+    .notice-table-header {
+        height: 48px;
+
+        font-size: 12px;
+    }
+
+
+    .notice-row {
+        min-height: 53px;
+
+        font-size: 12px;
+    }
+
 
     .notice-number {
         width: 40px;
     }
 
+
     .notice-date {
         width: 75px;
+
         font-size: 11px;
     }
+
 
     .notice-view {
         display: none;
     }
 
+
     .notice-title {
+        padding: 0 8px;
+
         font-size: 13px;
     }
+
+
+    .notice-search {
+        gap: 5px;
+
+        margin-top: 28px;
+    }
+
 
     .notice-search input {
         width: 200px;
     }
 
+
     .notice-search select {
         width: 90px;
+
+        font-size: 12px;
+    }
+
+
+    .notice-search button {
+        min-width: 60px;
+
+        padding: 0 14px;
+
+        font-size: 12px;
+    }
+
+
+    .notice-pagination {
+        gap: 5px;
+
+        margin-top: 28px;
+    }
+
+
+    .notice-pagination .notice-page,
+    .notice-pagination .notice-page-arrow {
+        width: 34px;
+        height: 34px;
     }
 
 }

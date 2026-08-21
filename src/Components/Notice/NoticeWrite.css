@@ -1,24 +1,40 @@
-/* ================================
+/* =========================================================
+   공지사항 작성 페이지
+   Feel Together / Warm Beige Theme
+
+   Main Theme
+   #fffaf7
+   #fffdfb
+   #faf5f0
+   #b68b78
+   #9f7563
+========================================================= */
+
+
+/* =========================================================
    전체 페이지
-================================ */
+========================================================= */
 
 .notice-write-page {
     width: 100%;
-    min-height: 100vh;
 
-    background-color: #fffdfb;
+    min-height: 100vh;
 
     padding: 60px 0 100px;
 
     box-sizing: border-box;
 
+    background: #fffdfb;
+
     color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 
-/* ================================
+/* =========================================================
    Header
-================================ */
+========================================================= */
 
 .notice-write-header {
     width: 900px;
@@ -26,31 +42,46 @@
     margin: 0 auto 35px;
 }
 
+
+/* 제목 */
+
 .notice-write-header h1 {
     margin: 0 0 10px;
 
-    font-size: 32px;
-    font-weight: 700;
-
     color: #4f4944;
 
-    letter-spacing: -0.8px;
+    font-family: 'Jua', sans-serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
 }
+
+
+/* 설명 */
 
 .notice-write-header p {
     margin: 0;
 
-    font-size: 15px;
+    color: #9a918b;
 
-    color: #918981;
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.6;
 
     letter-spacing: -0.2px;
 }
 
 
-/* ================================
+/* =========================================================
    작성 컨테이너
-================================ */
+========================================================= */
 
 .notice-write-container {
     width: 900px;
@@ -59,22 +90,22 @@
 
     padding: 38px;
 
-    background-color: #fffdfb;
-
-    border: 1px solid #eee7e0;
-
-    border-radius: 18px;
-
     box-sizing: border-box;
 
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 24px;
+
     box-shadow:
-        0 8px 30px rgba(92, 73, 61, 0.06);
+        0 12px 35px rgba(80, 65, 55, 0.06);
 }
 
 
-/* ================================
-   상단 고정
-================================ */
+/* =========================================================
+   상단 고정 옵션
+========================================================= */
 
 .notice-write-option {
     display: flex;
@@ -85,13 +116,13 @@
     margin-bottom: 30px;
     padding-bottom: 25px;
 
-    border-bottom: 1px solid #eee7e0;
+    border-bottom: 1px solid #f0e5df;
 }
 
 
-/* ================================
+/* =========================================================
    고정 설명
-================================ */
+========================================================= */
 
 .notice-fixed-info {
     display: flex;
@@ -101,27 +132,34 @@
     gap: 6px;
 }
 
-.notice-fixed-title {
-    font-size: 15px;
-    font-weight: 600;
 
+.notice-fixed-title {
     color: #625b55;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 700;
 
     letter-spacing: -0.2px;
 }
 
+
 .notice-fixed-description {
-    font-size: 13px;
+    color: #aaa19b;
 
-    color: #aaa29b;
+    font-family: 'Noto Sans KR', sans-serif;
 
-    line-height: 1.5;
+    font-size: 12px;
+
+    line-height: 1.6;
 }
 
 
-/* ================================
+/* =========================================================
    고정 토글
-================================ */
+========================================================= */
 
 .notice-fixed-toggle {
     display: flex;
@@ -130,11 +168,13 @@
 
     gap: 8px;
 
-    cursor: pointer;
-
-    font-size: 14px;
-
     color: #817971;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
 
     user-select: none;
 }
@@ -147,22 +187,23 @@
 }
 
 
-/* ================================
+/* =========================================================
    토글
-================================ */
+========================================================= */
 
 .notice-toggle {
     position: relative;
 
-    width: 42px;
-    height: 24px;
+    width: 44px;
+    height: 25px;
 
-    border-radius: 20px;
+    border-radius: 999px;
 
-    background-color: #ded8d3;
+    background: #ded5ce;
 
     transition:
-        background-color 0.2s ease;
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
@@ -173,46 +214,58 @@
 
     position: absolute;
 
-    width: 20px;
-    height: 20px;
-
-    left: 2px;
     top: 2px;
+    left: 2px;
+
+    width: 21px;
+    height: 21px;
 
     border-radius: 50%;
 
-    background-color: #ffffff;
+    background: #fff;
 
     box-shadow:
-        0 1px 4px rgba(92, 73, 61, 0.15);
+        0 2px 5px rgba(80, 65, 55, 0.15);
 
     transition:
         transform 0.2s ease;
 }
 
 
-/* ================================
-   ON
-================================ */
+/* =========================================================
+   Toggle ON
+========================================================= */
 
 .notice-fixed-toggle input:checked + .notice-toggle {
-    background-color: #b68b78;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    box-shadow:
+        0 4px 10px rgba(182, 139, 120, 0.18);
 }
 
+
 .notice-fixed-toggle input:checked + .notice-toggle::before {
-    transform: translateX(18px);
+    transform: translateX(19px);
 }
+
 
 .notice-toggle-text {
     min-width: 28px;
 
     color: #817971;
+
+    font-weight: 700;
 }
 
 
-/* ================================
+/* =========================================================
    입력 영역
-================================ */
+========================================================= */
 
 .notice-write-field {
     position: relative;
@@ -220,23 +273,27 @@
     margin-bottom: 30px;
 }
 
+
 .notice-write-field label {
     display: block;
 
     margin-bottom: 10px;
 
-    font-size: 15px;
-    font-weight: 600;
-
     color: #625b55;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
 
     letter-spacing: -0.2px;
 }
 
 
-/* ================================
-   제목
-================================ */
+/* =========================================================
+   제목 입력
+========================================================= */
 
 .notice-write-field input {
     width: 100%;
@@ -244,17 +301,19 @@
 
     padding: 0 15px;
 
-    border: 1px solid #ded5ce;
-    border-radius: 9px;
-
-    background-color: #fffdfb;
-
     box-sizing: border-box;
 
-    font-family: inherit;
-    font-size: 15px;
+    border: 1px solid #eadbd3;
+
+    border-radius: 13px;
+
+    background: #fffdfb;
 
     color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
 
     outline: none;
 
@@ -264,27 +323,30 @@
         box-shadow 0.2s ease;
 }
 
-.notice-write-field input:focus {
-    border-color: #c9a99b;
 
-    background-color: #ffffff;
+.notice-write-field input:focus {
+    border-color: #b68b78;
+
+    background: #fffaf7;
 
     box-shadow:
         0 0 0 3px rgba(182, 139, 120, 0.08);
 }
 
+
 .notice-write-field input::placeholder {
-    color: #aaa29b;
+    color: #b3aaa4;
 }
 
 
-/* ================================
+/* =========================================================
    내용
-================================ */
+========================================================= */
 
 .notice-content-field {
     margin-bottom: 40px;
 }
+
 
 .notice-write-field textarea {
     width: 100%;
@@ -292,23 +354,25 @@
 
     padding: 15px;
 
-    border: 1px solid #ded5ce;
-    border-radius: 9px;
-
-    background-color: #fffdfb;
-
     box-sizing: border-box;
 
-    resize: vertical;
+    border: 1px solid #eadbd3;
 
-    font-family: inherit;
+    border-radius: 15px;
 
-    font-size: 15px;
-    line-height: 1.8;
+    background: #fffdfb;
 
     color: #4f4944;
 
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
     outline: none;
+
+    resize: vertical;
 
     transition:
         border-color 0.2s ease,
@@ -316,68 +380,80 @@
         box-shadow 0.2s ease;
 }
 
-.notice-write-field textarea:focus {
-    border-color: #c9a99b;
 
-    background-color: #ffffff;
+.notice-write-field textarea:focus {
+    border-color: #b68b78;
+
+    background: #fffaf7;
 
     box-shadow:
         0 0 0 3px rgba(182, 139, 120, 0.08);
 }
 
+
 .notice-write-field textarea::placeholder {
-    color: #aaa29b;
+    color: #b3aaa4;
 }
 
 
-/* ================================
+/* =========================================================
    글자 수
-================================ */
+========================================================= */
 
 .notice-write-count {
     margin-top: 7px;
 
+    color: #aaa19b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 11px;
+
     text-align: right;
-
-    font-size: 12px;
-
-    color: #aaa29b;
 }
 
 
-/* ================================
-   버튼
-================================ */
+/* =========================================================
+   버튼 영역
+========================================================= */
 
 .notice-write-buttons {
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    gap: 10px;
+    gap: 9px;
 }
 
 
-/* ================================
-   취소
-================================ */
+/* =========================================================
+   취소 버튼
+========================================================= */
 
 .notice-cancel-btn {
     width: 120px;
-    height: 46px;
+    height: 44px;
 
-    border: 1px solid #ded5ce;
-    border-radius: 9px;
+    padding: 0;
 
-    background-color: #fffdfb;
+    border: 1px solid #eadbd3;
 
-    color: #6f6963;
+    border-radius: 999px;
 
-    font-size: 14px;
-    font-weight: 500;
+    background: #fffdfb;
+
+    color: #8e7669;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
 
     cursor: pointer;
+
+    box-sizing: border-box;
 
     transition:
         background-color 0.2s ease,
@@ -386,111 +462,173 @@
         transform 0.2s ease;
 }
 
+
 .notice-cancel-btn:hover {
-    background-color: #f7eee9;
+    border-color: #d9bfb2;
 
-    border-color: #d5b8aa;
+    background: #faf5f0;
 
-    color: #a77d6c;
+    color: #9f7563;
 
     transform: translateY(-1px);
 }
 
 
-/* ================================
-   등록
-================================ */
+/* =========================================================
+   등록 버튼
+========================================================= */
 
 .notice-submit-btn {
     width: 140px;
-    height: 46px;
+    height: 44px;
 
-    border: 1px solid #b68b78;
-    border-radius: 9px;
+    padding: 0;
 
-    background-color: #b68b78;
+    border: none;
 
-    color: #ffffff;
+    border-radius: 999px;
 
-    font-size: 14px;
-    font-weight: 600;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
 
     cursor: pointer;
 
+    box-sizing: border-box;
+
+    box-shadow:
+        0 8px 18px rgba(182, 139, 120, 0.20);
+
     transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
+        background 0.2s ease,
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
+
 .notice-submit-btn:hover {
-    background-color: #a77d6c;
-
-    border-color: #a77d6c;
-
-    transform: translateY(-1px);
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
 
     box-shadow:
-        0 4px 10px rgba(167, 125, 108, 0.18);
+        0 11px 25px rgba(159, 117, 99, 0.24);
+
+    transform: translateY(-2px);
 }
 
 
-/* ================================
+.notice-submit-btn:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, 0.18);
+}
+
+
+/* =========================================================
    접근 권한 없음
-================================ */
+========================================================= */
 
 .notice-no-access {
-    text-align: center;
-
     padding: 80px 35px;
+
+    text-align: center;
 }
+
 
 .notice-no-access h2 {
     margin: 0 0 12px;
 
-    font-size: 24px;
-
     color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 26px;
+
+    font-weight: 400;
 }
+
 
 .notice-no-access p {
     margin: 0 0 25px;
 
-    color: #918981;
+    color: #9a918b;
+
+    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 14px;
 }
+
+
+/* 접근 권한 버튼 */
 
 .notice-no-access button {
     padding: 11px 20px;
 
-    border: 1px solid #b68b78;
-    border-radius: 9px;
+    border: none;
 
-    background-color: #b68b78;
+    border-radius: 999px;
 
-    color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
 
     cursor: pointer;
 
-    font-size: 14px;
+    box-shadow:
+        0 7px 16px rgba(182, 139, 120, 0.18);
 
     transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .notice-no-access button:hover {
-    background-color: #a77d6c;
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
 
-    transform: translateY(-1px);
+    box-shadow:
+        0 10px 21px rgba(159, 117, 99, 0.23);
+
+    transform: translateY(-2px);
 }
 
 
-/* ================================
+/* =========================================================
    반응형
-================================ */
+========================================================= */
 
 @media (max-width: 950px) {
 
@@ -502,41 +640,134 @@
 }
 
 
+/* =========================================================
+   모바일
+========================================================= */
+
 @media (max-width: 600px) {
 
     .notice-write-page {
-        padding-top: 30px;
-        padding-bottom: 70px;
+        padding:
+            30px 0 70px;
     }
+
+
+    .notice-write-header {
+        margin-bottom: 25px;
+    }
+
 
     .notice-write-header h1 {
-        font-size: 26px;
+        font-size: 28px;
     }
+
+
+    .notice-write-header p {
+        font-size: 13px;
+    }
+
 
     .notice-write-container {
-        padding: 25px 20px;
+        padding:
+            25px 20px;
 
-        border-radius: 15px;
+        border-radius: 20px;
     }
+
+
+    /* 고정 옵션 */
 
     .notice-write-option {
         align-items: flex-start;
 
         flex-direction: column;
 
-        gap: 20px;
+        gap: 18px;
+
+        margin-bottom: 25px;
+
+        padding-bottom: 20px;
     }
+
+
+    .notice-fixed-title {
+        font-size: 14px;
+    }
+
+
+    .notice-fixed-description {
+        font-size: 11px;
+    }
+
+
+    /* 입력 */
+
+    .notice-write-field {
+        margin-bottom: 25px;
+    }
+
+
+    .notice-write-field label {
+        font-size: 13px;
+    }
+
+
+    .notice-write-field input {
+        height: 46px;
+
+        border-radius: 12px;
+
+        font-size: 13px;
+    }
+
 
     .notice-write-field textarea {
         height: 300px;
+
+        border-radius: 13px;
+
+        font-size: 13px;
     }
+
+
+    /* 버튼 */
+
+    .notice-write-buttons {
+        gap: 7px;
+    }
+
 
     .notice-cancel-btn {
         width: 100px;
+        height: 42px;
+
+        font-size: 12px;
     }
+
 
     .notice-submit-btn {
         width: 120px;
+        height: 42px;
+
+        font-size: 12px;
+    }
+
+
+    /* 접근 권한 */
+
+    .notice-no-access {
+        padding:
+            60px 20px;
+    }
+
+
+    .notice-no-access h2 {
+        font-size: 23px;
+    }
+
+
+    .notice-no-access p {
+        font-size: 13px;
     }
 
 }

@@ -35,6 +35,16 @@ const emotionInfo = {
     }
 };
 
+const formatDiaryDate = value => {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return value;
+    }
+
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+};
+
 
 /* =========================
    감정일기 목록
@@ -482,11 +492,12 @@ function EmotionCalendar({
                     </span>
 
 
-                    {emotion && (
+                    {(emotion || data?.emoji) && (
 
                         <span className="emotion-emoji">
 
                             {
+                                data?.emoji ||
                                 emotionInfo[
                                     emotion
                                 ]?.emoji ||
@@ -1016,15 +1027,19 @@ function Diary() {
                          * 여기서 통일
                          */
 
-                        const date =
+                        const rawDate =
                             diary.diaryDate ||
                             diary.diary_date ||
                             diary.date;
 
 
-                        if (!date) {
+                        if (!rawDate) {
                             return;
                         }
+
+
+                        const date =
+                            formatDiaryDate(rawDate);
 
 
                         const emotion =
@@ -1063,6 +1078,10 @@ function Diary() {
 
                             summary:
                                 diary.summary ||
+                                "",
+
+                            emoji:
+                                diary.emoji ||
                                 "",
 
                             isShared:

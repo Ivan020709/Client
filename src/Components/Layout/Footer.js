@@ -28,16 +28,16 @@ const Footer = () => {
                         <div className="footer-menu-title">서비스</div>
                         <a href="/SelectAi">대화하기</a>
                         <a href="/diary">감정일기</a>
-                        <a href="/calendar">감정 캘린더</a>
-                        <a href="/board">공감 게시판</a>
+                        <a href="/EmotionCalendar">감정 캘린더</a>
+                        <a href="/BoardList">고민 게시판</a>
                     </div>
 
                     {/* 안내 */}
                     <div className="footer-menu">
                         <div className="footer-menu-title">이용안내</div>
-                        <a href="/notice">공지사항</a>
-                        <a href="/terms">이용약관</a>
-                        <a href="/privacy">개인정보처리방침</a>
+                        <a href="/Hellow">인사말</a>
+                        <a href="/Map">위치정보</a>
+                        <a href="/NoticeList">공지사항</a>
                     </div>
 
                     {/* 메시지 */}

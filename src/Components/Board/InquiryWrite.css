@@ -1,6 +1,6 @@
 /* =========================================================
-   InquiryWrite 전체 페이지
-   InquiryWrite 전용 스타일
+   InquiryWrite
+   Feel Together / Warm Beige Theme
 ========================================================= */
 
 .inquiry-write-page {
@@ -25,20 +25,14 @@
 .inquiry-write-header {
     width: 100%;
 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 
     box-sizing: border-box;
 }
-
-
-/* =========================================================
-   제목
-========================================================= */
 
 .inquiry-write-heading {
     margin: 0;
@@ -48,7 +42,7 @@
 
     font-family: 'Jua', sans-serif;
 
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 400;
 
     line-height: 1.2;
@@ -66,7 +60,7 @@
 .inquiry-write-form {
     width: 100%;
 
-    padding: 30px 32px;
+    padding: 34px 36px;
 
     box-sizing: border-box;
 
@@ -104,13 +98,13 @@
 
     width: 90px;
 
-    color: #665950;
+    color: #625b55;
 
     font-size: 14px;
 
     font-weight: 700;
 
-    letter-spacing: -.3px;
+    letter-spacing: -0.3px;
 
     box-sizing: border-box;
 }
@@ -133,7 +127,6 @@
     box-sizing: border-box;
 
     border: 1px solid #e7d8cf;
-
     border-radius: 10px;
 
     background: #fffaf7;
@@ -152,27 +145,17 @@
         box-shadow .2s ease;
 }
 
-
-/* =========================================================
-   제목 Placeholder
-========================================================= */
-
 .inquiry-write-title-input::placeholder {
     color: #b5a8a0;
 }
 
-
-/* =========================================================
-   제목 Focus
-========================================================= */
-
 .inquiry-write-title-input:focus {
-    border-color: #c9977d;
+    border-color: #c9a99b;
 
     background: #fffdfb;
 
     box-shadow:
-        0 0 0 3px rgba(201, 151, 125, 0.12);
+        0 0 0 3px rgba(182, 139, 120, 0.08);
 }
 
 
@@ -183,7 +166,7 @@
 .inquiry-write-content-area {
     width: 100%;
 
-    margin-top: 20px;
+    margin-top: 22px;
 
     display: flex;
     align-items: flex-start;
@@ -220,7 +203,6 @@
     box-sizing: border-box;
 
     border: 1px solid #e7d8cf;
-
     border-radius: 10px;
 
     background: #fffaf7;
@@ -241,27 +223,17 @@
         box-shadow .2s ease;
 }
 
-
-/* =========================================================
-   내용 Placeholder
-========================================================= */
-
 .inquiry-write-content-input::placeholder {
     color: #b5a8a0;
 }
 
-
-/* =========================================================
-   내용 Focus
-========================================================= */
-
 .inquiry-write-content-input:focus {
-    border-color: #c9977d;
+    border-color: #c9a99b;
 
     background: #fffdfb;
 
     box-shadow:
-        0 0 0 3px rgba(201, 151, 125, 0.12);
+        0 0 0 3px rgba(182, 139, 120, 0.08);
 }
 
 
@@ -272,12 +244,11 @@
 .inquiry-write-actions {
     width: 100%;
 
-    margin-top: 25px;
+    margin-top: 28px;
 
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     gap: 10px;
@@ -292,19 +263,19 @@
 
 .inquiry-write-list-btn,
 .inquiry-write-submit-btn {
-    width: 140px;
+    height: 46px;
 
-    height: 48px;
+    padding: 0 20px;
 
-    padding: 0;
-
-    border-radius: 10px;
+    border-radius: 999px;
 
     font-family: 'Noto Sans KR', sans-serif;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    font-weight: 700;
+    font-weight: 800;
+
+    letter-spacing: -0.2px;
 
     cursor: pointer;
 
@@ -324,11 +295,13 @@
 ========================================================= */
 
 .inquiry-write-list-btn {
+    min-width: 120px;
+
     border: 1px solid #eadbd3;
 
     background: #fffdfb;
 
-    color: #8e766a;
+    color: #8e7669;
 }
 
 .inquiry-write-list-btn:hover {
@@ -350,27 +323,35 @@
 ========================================================= */
 
 .inquiry-write-submit-btn {
-    border: 1px solid #d5b4a4;
+    min-width: 120px;
 
-    background: #e9d2c5;
+    border: none;
 
-    color: #624c42;
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
 
     box-shadow:
-        0 3px 8px rgba(100, 75, 60, 0.05);
+        0 8px 18px rgba(182, 139, 120, 0.20);
 }
 
 .inquiry-write-submit-btn:hover {
-    background: #dfc3b3;
-
-    border-color: #cba796;
-
-    color: #5b463d;
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
 
     transform: translateY(-2px);
 
     box-shadow:
-        0 6px 15px rgba(100, 75, 60, 0.10);
+        0 11px 25px rgba(159, 117, 99, 0.24);
 }
 
 
@@ -383,7 +364,7 @@
     transform: translateY(0);
 
     box-shadow:
-        0 2px 6px rgba(100, 75, 60, 0.06);
+        0 4px 10px rgba(159, 117, 99, 0.12);
 }
 
 
@@ -401,12 +382,19 @@
 
 
     .inquiry-write-heading {
-        font-size: 28px;
+        font-size: 30px;
+    }
+
+
+    .inquiry-write-header {
+        margin-bottom: 25px;
     }
 
 
     .inquiry-write-form {
         padding: 25px 20px;
+
+        border-radius: 17px;
     }
 
 
@@ -416,7 +404,6 @@
         display: block;
     }
 
-
     .inquiry-write-title-area .inquiry-write-label {
         display: block;
 
@@ -424,7 +411,6 @@
 
         margin-bottom: 8px;
     }
-
 
     .inquiry-write-title-input {
         width: 100%;
@@ -439,7 +425,6 @@
         margin-top: 20px;
     }
 
-
     .inquiry-write-content-area .inquiry-write-label {
         display: block;
 
@@ -449,7 +434,6 @@
 
         margin-bottom: 8px;
     }
-
 
     .inquiry-write-content-input {
         width: 100%;
@@ -464,16 +448,17 @@
         gap: 8px;
     }
 
-
     .inquiry-write-list-btn,
     .inquiry-write-submit-btn {
         width: 50%;
+        min-width: 0;
 
-        height: 46px;
+        height: 44px;
 
-        font-size: 13px;
+        padding: 0 10px;
+
+        font-size: 12px;
     }
-
 }
 
 
@@ -489,12 +474,14 @@
 
 
     .inquiry-write-heading {
-        font-size: 25px;
+        font-size: 27px;
     }
 
 
     .inquiry-write-form {
         padding: 22px 16px;
+
+        border-radius: 15px;
     }
 
 
@@ -505,9 +492,8 @@
 
     .inquiry-write-list-btn,
     .inquiry-write-submit-btn {
-        height: 44px;
+        height: 42px;
 
         font-size: 12px;
     }
-
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 
 import './Hellow.css';
+import { useNavigate } from 'react-router-dom';
 
 function Hellow() {
+    const navigate = useNavigate();
     return (
         <div className="hello-page">
             <div className="hello-container">
@@ -24,19 +26,19 @@ function Hellow() {
                 </p>
 
                 <div className="hello-growth">
-                    <div className="growth-item">
+                    <div className="growth-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/SelectAi')}>
                         <span>💬</span>
-                        <strong style={{ cursor: 'pointer' }}>대화</strong>
+                        <strong >대화</strong>
                         <small>"오늘 속상했던 일, 털어놓고 푹 자는 거 어때?"</small>
                     </div>
 
-                    <div className="growth-item">
+                    <div className="growth-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/Diary')}>
                         <span>📔</span>
                         <strong>감정 일기</strong>{/* 대화를 통한 경험치상승 비슷한 페이지로 이동 */}
                         <small>"나를 제일 잘 아는 방법, 하루 한 줄 감정일기로 시작해 봐."</small>
                     </div>
 
-                    <div className="growth-item">
+                    <div className="growth-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/EmotionCalendar')}>
                         <span>📅</span>
                         <strong>캘린더</strong>
                         <small>"지나온 날들의 너의 기분을 한 눈에 확인 할 수 있어"</small>

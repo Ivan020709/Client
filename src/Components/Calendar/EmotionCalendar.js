@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -12,6 +13,29 @@ const emotionInfo = {
     sad: { emoji: "😔", name: "우울" },
     anxious: { emoji: "😰", name: "불안" },
     angry: { emoji: "😡", name: "화남" }
+};
+
+const moodMap = {
+    행복: "happy",
+    기쁨: "happy",
+    편안: "calm",
+    평온: "calm",
+    우울: "sad",
+    슬픔: "sad",
+    불안: "anxious",
+    걱정: "anxious",
+    화남: "angry",
+    분노: "angry"
+};
+
+const formatDiaryDate = value => {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return value;
+    }
+
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 };
 
 /* =========================
@@ -37,6 +61,66 @@ function EmotionCalendar() {
         "익명";
 
     const [emotionData, setEmotionData] = useState({});
+
+    useEffect(() => {
+
+        if (!loginUser?.userid) {
+            return;
+        }
+
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        const startDate =
+            `${year}-${String(month + 1).padStart(2, "0")}-01`;
+
+        const lastDay =
+            new Date(year, month + 1, 0).getDate();
+
+        const endDate =
+            `${year}-${String(month + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+
+        axios.get(
+            `${DIARY_API}/calendar/${loginUser.userid}`,
+            {
+                params: {
+                    startDate: startDate,
+                    endDate: endDate
+                }
+            }
+        )
+            .then((result) => {
+
+                const diaryList = result.data.diaries || [];
+                const calendarData = {};
+
+                diaryList.forEach((diary) => {
+
+                    let emotion = diary.mood;
+
+                    if (!emotionInfo[emotion]) {
+                        emotion = moodMap[diary.mood];
+                    }
+
+                    const diaryDate = formatDiaryDate(diary.diaryDate);
+
+                    calendarData[diaryDate] = {
+                        emotion: emotion,
+                        comment: diary.content || diary.summary,
+                        userid: diary.userId,
+                        date: diaryDate,
+                        emoji: diary.emoji
+                    };
+                });
+
+                setEmotionData(calendarData);
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("감정달력을 불러오지 못했습니다.");
+            });
+
+    }, [loginUser?.userid, currentDate]);
 
     const changeMonth = value => {
 
@@ -182,9 +266,9 @@ function EmotionCalendar() {
                         {day}
                     </span>
 
-                    {emotion && (
+                    {(emotion || data?.emoji) && (
                         <span className="emotion-emoji">
-                            {emotionInfo[emotion]?.emoji}
+                            {data?.emoji || emotionInfo[emotion]?.emoji}
                         </span>
                     )}
 
