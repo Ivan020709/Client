@@ -9,28 +9,58 @@ function AdminActivityLog() {
     useEffect(() => {
 
         axios.get('/api/admin/getAdminActivityLog')
-            .than((result) => {
+            .then((result) => {
+
+                console.log("조회 성공");
+                console.log("result:", result);
+                console.log("result.data:", result.data);
+                console.log("배열인가?", Array.isArray(result.data));
+
+                setActivityList(result.data);
 
             })
             .catch((err) => {
-                console.error(err)
-            })
+
+                console.error("조회 실패:", err);
+
+            });
 
     }, []);
 
 
-    // 활동 종류별 스타일
-    const getActivityActionClass = (action) => {
+    // 날짜 형식 변경
+    const formatDate = (date) => {
 
-        if (action === '게시글 삭제') {
+        if (!date) {
+            return '';
+        }
+
+        const d = new Date(date);
+
+        return d.toLocaleString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+    };
+
+
+    // 활동 종류별 스타일
+    const getActivityActionClass = (activity) => {
+
+        if (activity === '게시글 삭제') {
             return 'admin-activity-delete';
         }
 
-        if (action === '에러 확인') {
+        if (activity === '에러 확인') {
             return 'admin-activity-error';
         }
 
-        if (action === '신고 처리 완료') {
+        if (activity === '신고 처리 완료') {
             return 'admin-activity-report';
         }
 
@@ -122,45 +152,50 @@ function AdminActivityLog() {
 
                         <div
                             className="admin-activity-board-row"
-                            key={activity.lognum}
+                            key={activity.id}
                         >
 
+                            {/* 번호 */}
                             <div>
-                                {activity.lognum}
+                                {activity.id}
                             </div>
 
 
+                            {/* 관리자 */}
                             <div className="admin-activity-admin">
 
                                 <strong>
-                                    {activity.adminName}
+                                    {activity.adminname}
                                 </strong>
 
                                 <span>
-                                    {activity.adminId}
+                                    {activity.adminid}
                                 </span>
 
                             </div>
 
 
+                            {/* 활동 */}
                             <div>
 
                                 <span
                                     className={`admin-activity-action ${getActivityActionClass(
-                                        activity.action
+                                        activity.activity
                                     )}`}
                                 >
-                                    {activity.action}
+                                    {activity.activity}
                                 </span>
 
                             </div>
 
 
+                            {/* 대상 */}
                             <div>
                                 {activity.target}
                             </div>
 
 
+                            {/* HTTP */}
                             <div>
 
                                 <span
@@ -174,11 +209,13 @@ function AdminActivityLog() {
                             </div>
 
 
+                            {/* API */}
                             <div className="admin-activity-api">
                                 {activity.api}
                             </div>
 
 
+                            {/* 결과 */}
                             <div>
 
                                 {activity.result === 'SUCCESS' ? (
@@ -198,8 +235,9 @@ function AdminActivityLog() {
                             </div>
 
 
+                            {/* 활동일시 */}
                             <div className="admin-activity-date">
-                                {activity.indate}
+                                {formatDate(activity.indate)}
                             </div>
 
                         </div>

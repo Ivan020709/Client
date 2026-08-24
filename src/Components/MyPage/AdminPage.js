@@ -4,6 +4,7 @@ import './AdminPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AdminActivityLog from './AdminActivityLog';
+import { useSelector } from 'react-redux';
 
 function AdminPage() {
 
@@ -13,6 +14,7 @@ function AdminPage() {
     const [paging, setPaging] = useState({})
     const [pages, setPages] = useState(1)
     const navigate = useNavigate();
+    const loginUser = useSelector(state => state.user);
 
     const ROWS_PER_PAGE = 10;
 
@@ -63,7 +65,9 @@ function AdminPage() {
         }
         axios.delete('/api/admin/deleteReport', {
             params: {
-                reportnum: selectedReport.reportnum
+                reportnum: selectedReport.reportnum,
+                adminid: loginUser.userid,
+                adminname: loginUser.name
             }
         })
             .then(() => {

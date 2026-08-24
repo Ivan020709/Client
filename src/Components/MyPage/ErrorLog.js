@@ -8,7 +8,7 @@ function ErrorLog() {
 
     // 현재 선택한 로그
     const [selectedLog, setSelectedLog] = useState(null);
-
+    const [state, setState] = useState()
 
     useEffect(() => {
 
@@ -40,6 +40,40 @@ function ErrorLog() {
         setSelectedLog(log);
 
     };
+
+    function CheckError(errornum) {
+
+    axios.get('/api/admin/CheckError', {
+        params: {
+            errornum
+        }
+
+    })
+        .then(() => {
+
+            console.log('오류 해결 완료:', errornum);
+
+            setErrorLogs(prevLogs =>
+                prevLogs.map(log =>
+                    log.errornum === errornum
+                        ? { ...log, state: 'Y' }
+                        : log
+                )
+            );
+
+            setSelectedLog(prev =>
+                prev
+                    ? { ...prev, state: 'Y' }
+                    : prev
+            );
+
+        })
+        .catch((err) => {
+
+            console.error('에러 확인 실패:', err);
+
+        });
+    }
 
 
     return (
@@ -150,6 +184,10 @@ function ErrorLog() {
                                 className={`error-log-line ${
                                     selectedLog?.errornum === log.errornum
                                         ? 'selected'
+                                        : ''
+                                } ${
+                                    log.state === 'Y'
+                                        ? 'resolved'
                                         : ''
                                 }`}
                                 onClick={() => handleLogClick(log)}
@@ -394,6 +432,21 @@ function ErrorLog() {
                                     </div>
 
                                 </div>
+
+                                {/* =========================
+                                    오류 해결 완료
+                                ========================= */}
+                                {selectedLog.state !== 'Y' && (
+                                    <div className="preview-action">
+                                        <button
+                                            type="button"
+                                            className="error-complete-btn"
+                                            onClick={() => CheckError(selectedLog.errornum)}
+                                        >
+                                            ✓ 오류 해결 완료
+                                        </button>
+                                    </div>
+                                )}
 
                             </div>
 

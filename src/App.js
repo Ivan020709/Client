@@ -22,7 +22,6 @@ import Find from './Components/Member/Find/Find';
 import FindId from './Components/Member/Find/FindId';
 import FindPass from './Components/Member/Find/FindPass';
 
-import DiaryList from './Components/Diary/DiaryList';
 import Diary from './Components/Calendar/Diary';
 import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
 import MyPage from "./Components/MyPage/MyPage";
@@ -81,9 +80,6 @@ function App() {
                     <Route path='/findId' element={<FindId />} />
                     <Route path='/findPass' element={<FindPass />} />
                     <Route path='/updatePwd' element={<UpdatePwd />} />
-
-                    {/* 감정 일기 */}
-                    <Route path='/diaryList' element={<DiaryList />} />
 
                     {/* 공지사항 */}
                     <Route path="/noticeList" element={<NoticeList />} />
