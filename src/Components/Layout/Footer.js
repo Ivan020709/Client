@@ -13,7 +13,7 @@ const Footer = () => {
 
                     {/* 로고 / 사이트 소개 */}
                     <div className="footer-brand">
-                        <div className="footer-logo">
+                        <div className="footer-logo" onClick={()=>navigate('/role')}>
                             필<span>로그</span>
                         </div>
 

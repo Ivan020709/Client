@@ -1,0 +1,527 @@
+/* =========================================================
+   관리자 활동 로그 전체
+========================================================= */
+
+.admin-activity-layout {
+    display: flex;
+
+    min-height: calc(100vh - 80px);
+
+    background: #f7f7fb;
+}
+
+
+.admin-activity-page {
+    width: 100%;
+
+    max-width: 1400px;
+
+    min-height: 917px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   사이드바
+========================================================= */
+
+.admin-activity-sidebar {
+    width: 290px;
+
+    min-width: 210px;
+
+    height: 300px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e7e4ec;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 35px 20px;
+
+    box-sizing: border-box;
+}
+
+
+.admin-activity-sidebar-title {
+    padding: 0 10px 30px;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #302b3d;
+}
+
+
+.admin-activity-sidebar-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.admin-activity-sidebar-item,
+.admin-activity-sidebar-error {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 14px 15px;
+
+    border-radius: 8px;
+
+    text-align: left;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    color: #625d69;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.admin-activity-sidebar-item:hover {
+    background: #f4f0fb;
+}
+
+
+.admin-activity-sidebar-item.active {
+    background: #f0eafb;
+
+    color: #7962ae;
+
+    font-weight: 700;
+}
+
+
+.admin-activity-sidebar-error {
+    color: #d45757;
+}
+
+
+.admin-activity-sidebar-error:hover {
+    background: #fff2f2;
+}
+
+
+/* =========================================================
+   메인
+========================================================= */
+
+.admin-activity-content {
+    flex: 1;
+
+    padding: 40px 30px 40px 25px;
+
+    box-sizing: border-box;
+}
+
+
+.admin-activity-wrapper {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 25px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   활동 로그
+========================================================= */
+
+.admin-activity-log {
+    width: 100%;
+}
+
+
+/* =========================================================
+   헤더
+========================================================= */
+
+.admin-activity-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 25px;
+}
+
+
+.admin-activity-title {
+    margin: 0 0 8px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #302b3d;
+}
+
+
+.admin-activity-description {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #99929f;
+}
+
+
+.admin-activity-count {
+    font-size: 14px;
+
+    color: #8b8492;
+}
+
+
+.admin-activity-count strong {
+    color: #7962ae;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   게시판
+========================================================= */
+
+.admin-activity-board {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e4ed;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   게시판 헤더 / 행
+========================================================= */
+
+.admin-activity-board-header,
+.admin-activity-board-row {
+    display: grid;
+
+    grid-template-columns:
+        60px 110px 130px 120px 80px minmax(180px, 1fr) 70px 160px;
+
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+.admin-activity-board-header {
+    min-height: 50px;
+
+    padding: 0 15px;
+
+    background: #faf9fc;
+
+    border-bottom: 1px solid #e8e4ed;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #655f6d;
+}
+
+
+.admin-activity-board-row {
+    min-height: 65px;
+
+    padding: 0 15px;
+
+    border-bottom: 1px solid #f0edf3;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: #4f4a56;
+
+    transition: 0.15s;
+}
+
+
+.admin-activity-board-row:last-child {
+    border-bottom: none;
+}
+
+
+.admin-activity-board-row:hover {
+    background: #fcfbfe;
+}
+
+
+/* =========================================================
+   관리자
+========================================================= */
+
+.admin-activity-admin {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.admin-activity-admin strong {
+    font-size: 13px;
+
+    color: #333;
+}
+
+
+.admin-activity-admin span {
+    font-size: 11px;
+
+    color: #999;
+}
+
+
+/* =========================================================
+   활동
+========================================================= */
+
+.admin-activity-action {
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-width: 85px;
+
+    padding: 6px 10px;
+
+    border-radius: 5px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.admin-activity-delete {
+    background: #fff0f0;
+
+    color: #d94a4a;
+}
+
+
+.admin-activity-error {
+    background: #fff8e8;
+
+    color: #c88a00;
+}
+
+
+.admin-activity-report {
+    background: #eef5ff;
+
+    color: #3976c8;
+}
+
+
+/* =========================================================
+   HTTP Method
+========================================================= */
+
+.admin-activity-method {
+    display: inline-block;
+
+    padding: 5px 7px;
+
+    border-radius: 4px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.admin-method-delete {
+    background: #fff0f0;
+
+    color: #d94a4a;
+}
+
+
+.admin-method-patch {
+    background: #fff8e8;
+
+    color: #c88a00;
+}
+
+
+.admin-method-post {
+    background: #eef5ff;
+
+    color: #3976c8;
+}
+
+
+.admin-method-get {
+    background: #eef9f0;
+
+    color: #3d8b50;
+}
+
+
+/* =========================================================
+   API
+========================================================= */
+
+.admin-activity-api {
+    text-align: left;
+
+    padding: 0 10px;
+
+    font-family: monospace;
+
+    font-size: 11px;
+
+    color: #777;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   결과
+========================================================= */
+
+.admin-activity-success {
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 4px;
+
+    background: #edf8ef;
+
+    color: #39814b;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.admin-activity-fail {
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 4px;
+
+    background: #fff0f0;
+
+    color: #d94a4a;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   날짜
+========================================================= */
+
+.admin-activity-date {
+    font-size: 11px;
+
+    color: #888;
+}
+
+
+/* =========================================================
+   데이터 없음
+========================================================= */
+
+.admin-activity-empty {
+    padding: 80px 20px;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   반응형
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .admin-activity-board {
+        overflow-x: auto;
+    }
+
+    .admin-activity-board-header,
+    .admin-activity-board-row {
+        min-width: 950px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .admin-activity-sidebar {
+        width: 180px;
+
+        min-width: 180px;
+    }
+
+    .admin-activity-sidebar-title {
+        font-size: 18px;
+    }
+
+    .admin-activity-content {
+        padding: 25px 15px;
+    }
+
+}

@@ -1,6 +1,6 @@
 /* =========================================================
    InquiryView 전체 페이지
-   InquiryView 전용 스타일
+   Feel Together / Warm Beige Theme
 ========================================================= */
 
 .inquiry-view-page {
@@ -13,6 +13,7 @@
     box-sizing: border-box;
 
     font-family: 'Noto Sans KR', sans-serif;
+
     color: #4f4944;
 }
 
@@ -33,6 +34,7 @@
     color: #9a918b;
 
     font-family: 'Noto Sans KR', sans-serif;
+
     font-size: 14px;
 }
 
@@ -51,6 +53,7 @@
     margin-bottom: 25px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -59,7 +62,7 @@
 
 
 /* =========================================================
-   상단 목록으로 버튼
+   상단 목록 버튼
 ========================================================= */
 
 .inquiry-view-back {
@@ -76,7 +79,8 @@
     padding: 0 18px;
 
     border: 1px solid #eadbd3;
-    border-radius: 10px;
+
+    border-radius: 999px;
 
     background: #fffdfb;
 
@@ -85,6 +89,7 @@
     font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
+
     font-weight: 600;
 
     cursor: pointer;
@@ -98,6 +103,7 @@
         transform .2s ease,
         box-shadow .2s ease;
 }
+
 
 .inquiry-view-back:hover {
     background: #faf5f0;
@@ -129,6 +135,7 @@
     font-family: 'Jua', sans-serif;
 
     font-size: 32px;
+
     font-weight: 400;
 
     line-height: 1.2;
@@ -190,6 +197,7 @@
     color: #4f4944;
 
     font-size: 21px;
+
     font-weight: 700;
 
     line-height: 1.5;
@@ -212,6 +220,7 @@
     padding: 0 32px;
 
     display: flex;
+
     align-items: center;
 
     gap: 22px;
@@ -232,6 +241,15 @@
 
 .inquiry-view-writer {
     white-space: nowrap;
+}
+
+
+/* 작성자 강조 */
+
+.inquiry-view-writer strong {
+    color: #81766f;
+
+    font-weight: 700;
 }
 
 
@@ -281,6 +299,7 @@
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     box-sizing: border-box;
@@ -298,11 +317,12 @@
 
     padding: 0 20px;
 
-    border-radius: 10px;
+    border-radius: 999px;
 
     font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 13px;
+
     font-weight: 600;
 
     cursor: pointer;
@@ -319,7 +339,7 @@
 
 
 /* =========================================================
-   하단 목록으로
+   목록으로
 ========================================================= */
 
 .inquiry-view-list-btn {
@@ -331,6 +351,7 @@
 
     color: #8e766a;
 }
+
 
 .inquiry-view-list-btn:hover {
     background: #faf5f0;
@@ -362,7 +383,7 @@
 
 
 /* =========================================================
-   수정 버튼
+   수정
 ========================================================= */
 
 .inquiry-view-edit-btn {
@@ -374,6 +395,7 @@
 
     color: #8e6656;
 }
+
 
 .inquiry-view-edit-btn:hover {
     background: #ead8ce;
@@ -390,7 +412,7 @@
 
 
 /* =========================================================
-   삭제 버튼
+   삭제
 ========================================================= */
 
 .inquiry-view-delete-btn {
@@ -402,6 +424,7 @@
 
     color: #a56f5d;
 }
+
 
 .inquiry-view-delete-btn:hover {
     background: #f8e2da;
@@ -426,6 +449,577 @@
 .inquiry-view-edit-btn:active,
 .inquiry-view-delete-btn:active {
     transform: translateY(0);
+}
+
+
+/* =========================================================
+   댓글 영역
+========================================================= */
+
+.inquiry-comment-section {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 30px 32px;
+
+    box-sizing: border-box;
+
+    background: #fffdfb;
+
+    border: 1px solid #f0e5df;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 28px rgba(80, 65, 55, 0.05);
+}
+
+
+/* =========================================================
+   댓글 제목
+========================================================= */
+
+.inquiry-comment-title {
+    padding-bottom: 18px;
+
+    border-bottom: 2px solid #eadbd3;
+
+    color: #4f4944;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.inquiry-comment-title strong {
+    margin-left: 5px;
+
+    color: #b68b78;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   댓글 목록
+========================================================= */
+
+.inquiry-comment-list {
+    width: 100%;
+}
+
+
+/* =========================================================
+   댓글 하나
+========================================================= */
+
+.inquiry-comment {
+    width: 100%;
+
+    padding: 20px 5px;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #f1e8e3;
+}
+
+
+/* =========================================================
+   댓글 상단
+   닉네임 + 날짜 / 수정 + 삭제
+========================================================= */
+
+.inquiry-comment-header {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   댓글 사용자 영역
+========================================================= */
+
+.inquiry-comment-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   댓글 아바타
+========================================================= */
+
+.inquiry-comment-avatar {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3e6df,
+            #ead8ce
+        );
+
+    color: #8e6656;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   댓글 닉네임
+========================================================= */
+
+.inquiry-comment-user strong {
+    color: #5c554f;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   댓글 날짜
+========================================================= */
+
+.inquiry-comment-date {
+    color: #aaa19b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   수정 / 삭제 버튼 영역
+   ★ 댓글 맨 오른쪽
+========================================================= */
+
+.inquiry-comment-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   수정 / 삭제 공통
+========================================================= */
+
+.inquiry-comment-actions button {
+    height: 28px;
+
+    padding: 0 9px;
+
+    border-radius: 7px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+
+/* =========================================================
+   댓글 수정 버튼
+========================================================= */
+
+.inquiry-comment-edit-btn {
+    border: 1px solid #eadbd3;
+
+    background: #fffdfb;
+
+    color: #8e766a;
+}
+
+
+.inquiry-comment-edit-btn:hover {
+    border-color: #d9bfb2;
+
+    background: #faf5f0;
+
+    color: #9f7563;
+}
+
+
+/* =========================================================
+   댓글 삭제 버튼
+========================================================= */
+
+.inquiry-comment-delete-btn {
+    border: 1px solid #ead8ce;
+
+    background: #fff7f3;
+
+    color: #a56f5d;
+}
+
+
+.inquiry-comment-delete-btn:hover {
+    border-color: #d3aa9c;
+
+    background: #f8e8e1;
+
+    color: #915947;
+}
+
+
+/* =========================================================
+   댓글 내용
+========================================================= */
+
+.inquiry-comment-content {
+    padding-left: 39px;
+
+    color: #625b55;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   댓글 없음
+========================================================= */
+
+.inquiry-no-comment {
+    padding: 50px 0;
+
+    color: #aaa19b;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   댓글 작성 폼
+========================================================= */
+
+.inquiry-comment-form {
+    width: 100%;
+
+    display: flex;
+
+    align-items: stretch;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   댓글 입력창
+========================================================= */
+
+.inquiry-comment-form textarea {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 80px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 14px;
+
+    background: #fffdfb;
+
+    color: #5c554f;
+
+    box-sizing: border-box;
+
+    resize: none;
+
+    outline: none;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.inquiry-comment-form textarea:focus {
+    border-color: #b68b78;
+
+    background: #fffaf7;
+
+    box-shadow:
+        0 0 0 3px rgba(182, 139, 120, 0.08);
+}
+
+
+.inquiry-comment-form textarea::placeholder {
+    color: #b3aca6;
+}
+
+
+/* =========================================================
+   댓글 등록 버튼
+========================================================= */
+
+.inquiry-comment-form button {
+    width: 100px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b68b78,
+            #9f7563
+        );
+
+    color: #fff;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 16px rgba(182, 139, 120, 0.18);
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.inquiry-comment-form button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #a77c69,
+            #8e6656
+        );
+
+    box-shadow:
+        0 10px 21px rgba(159, 117, 99, 0.23);
+
+    transform: translateY(-2px);
+}
+
+
+.inquiry-comment-form button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(159, 117, 99, 0.17);
+}
+
+
+/* =========================================================
+   댓글 수정 영역
+========================================================= */
+
+.inquiry-comment-edit-area {
+    width: 100%;
+
+    padding-left: 39px;
+
+    box-sizing: border-box;
+}
+
+
+/* 수정 textarea */
+
+.inquiry-comment-edit-area textarea {
+    width: 100%;
+
+    height: 75px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d9bfb2;
+
+    border-radius: 12px;
+
+    background: #fffaf7;
+
+    color: #5c554f;
+
+    box-sizing: border-box;
+
+    resize: none;
+
+    outline: none;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+.inquiry-comment-edit-area textarea:focus {
+    border-color: #b68b78;
+
+    box-shadow:
+        0 0 0 3px rgba(182, 139, 120, 0.08);
+}
+
+
+/* =========================================================
+   수정 저장 / 취소
+========================================================= */
+
+.inquiry-comment-edit-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 6px;
+
+    margin-top: 8px;
+}
+
+
+/* 공통 */
+
+.inquiry-comment-edit-actions button {
+    height: 30px;
+
+    padding: 0 12px;
+
+    border-radius: 8px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+
+/* 저장 */
+
+.inquiry-comment-save-btn {
+    border: none;
+
+    background: #b68b78;
+
+    color: #fff;
+}
+
+
+.inquiry-comment-save-btn:hover {
+    background: #9f7563;
+}
+
+
+/* 취소 */
+
+.inquiry-comment-cancel-btn {
+    border: 1px solid #eadbd3;
+
+    background: #fffdfb;
+
+    color: #8e766a;
+}
+
+
+.inquiry-comment-cancel-btn:hover {
+    background: #faf5f0;
+
+    border-color: #d9bfb2;
+
+    color: #9f7563;
 }
 
 
@@ -455,7 +1049,7 @@
     }
 
 
-    /* 상단 목록 버튼 */
+    /* 상단 목록 */
 
     .inquiry-view-back {
         left: 0;
@@ -471,6 +1065,7 @@
         font-size: 12px;
     }
 
+
     .inquiry-view-back:hover {
         transform: translateY(-2px);
     }
@@ -483,7 +1078,7 @@
     }
 
 
-    /* 카드 제목 */
+    /* 문의 제목 */
 
     .inquiry-view-title-area {
         padding: 23px 20px 17px;
@@ -523,7 +1118,7 @@
     }
 
 
-    /* 버튼 */
+    /* 하단 버튼 */
 
     .inquiry-view-actions {
         margin-top: 15px;
@@ -549,6 +1144,125 @@
     .inquiry-view-edit-btn,
     .inquiry-view-delete-btn {
         min-width: 65px;
+    }
+
+
+    /* =====================================================
+       댓글
+    ===================================================== */
+
+    .inquiry-comment-section {
+        margin-top: 15px;
+
+        padding: 25px 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .inquiry-comment-title {
+        padding-bottom: 17px;
+
+        font-size: 16px;
+    }
+
+
+    .inquiry-comment {
+        padding: 18px 3px;
+    }
+
+
+    .inquiry-comment-header {
+        align-items: flex-start;
+
+        gap: 8px;
+    }
+
+
+    .inquiry-comment-user {
+        flex-wrap: wrap;
+
+        gap: 6px 8px;
+    }
+
+
+    .inquiry-comment-avatar {
+        width: 28px;
+        height: 28px;
+
+        font-size: 11px;
+    }
+
+
+    .inquiry-comment-user strong {
+        font-size: 13px;
+    }
+
+
+    .inquiry-comment-date {
+        font-size: 10px;
+    }
+
+
+    .inquiry-comment-actions {
+        gap: 3px;
+    }
+
+
+    .inquiry-comment-actions button {
+        height: 26px;
+
+        padding: 0 7px;
+
+        font-size: 10px;
+    }
+
+
+    .inquiry-comment-content {
+        padding-left: 36px;
+
+        font-size: 13px;
+    }
+
+
+    /* 댓글 작성 */
+
+    .inquiry-comment-form {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .inquiry-comment-form textarea {
+        height: 90px;
+
+        border-radius: 13px;
+
+        font-size: 13px;
+    }
+
+
+    .inquiry-comment-form button {
+        width: 100%;
+
+        height: 42px;
+
+        font-size: 12px;
+    }
+
+
+    /* 댓글 수정 */
+
+    .inquiry-comment-edit-area {
+        padding-left: 36px;
+    }
+
+
+    .inquiry-comment-edit-area textarea {
+        height: 85px;
+
+        font-size: 12px;
     }
 
 }
@@ -601,6 +1315,39 @@
     .inquiry-view-edit-btn,
     .inquiry-view-delete-btn {
         padding: 0 12px;
+    }
+
+
+    /* =====================================================
+       댓글
+    ===================================================== */
+
+    .inquiry-comment-section {
+        padding: 22px 17px;
+    }
+
+
+    .inquiry-comment-header {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .inquiry-comment-actions {
+        justify-content: flex-end;
+    }
+
+
+    .inquiry-comment-content {
+        padding-left: 0;
+
+        margin-top: 5px;
+    }
+
+
+    .inquiry-comment-edit-area {
+        padding-left: 0;
     }
 
 }

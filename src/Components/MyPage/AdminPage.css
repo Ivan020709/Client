@@ -13,6 +13,7 @@
 
     box-sizing: border-box;
 }
+
 .admin-layout {
     display: flex;
 
@@ -59,8 +60,13 @@
     gap: 4px;
 }
 
+/* =========================================
+   사이드바 메뉴
+========================================= */
+
 .admin-sidebar-item,
-.admin-sidebar-error {
+.admin-sidebar-error,
+.admin-sidebar-adminLog {
     width: 100%;
 
     border: none;
@@ -76,11 +82,18 @@
     font-size: 15px;
     font-weight: 500;
 
-    color: #625d69;
-
     cursor: pointer;
 
     transition: 0.2s;
+}
+
+
+/* =========================================
+   신고함 - 보라색
+========================================= */
+
+.admin-sidebar-item {
+    color: #7962ae;
 }
 
 .admin-sidebar-item:hover {
@@ -94,6 +107,11 @@
 
     font-weight: 700;
 }
+
+
+/* =========================================
+   에러 로그 - 빨간색
+========================================= */
 
 .admin-sidebar-error {
     color: #d45757;
@@ -111,6 +129,26 @@
     font-weight: 700;
 }
 
+
+/* =========================================
+   관리자 활동 로그 - 민트색
+========================================= */
+
+.admin-sidebar-adminLog {
+    color: #4f958b;
+}
+
+.admin-sidebar-adminLog:hover {
+    background: #eef7f5;
+}
+
+.admin-sidebar-adminLog.active {
+    background: #e5f2ef;
+
+    color: #4f958b;
+
+    font-weight: 700;
+}
 
 /* =========================================
    메인
@@ -202,13 +240,7 @@
     display: grid;
 
     grid-template-columns:
-        70px
-        135px
-        120px
-        minmax(260px, 1fr)
-        110px
-        110px
-        100px;
+        70px 135px 120px minmax(260px, 1fr) 110px 110px 100px;
 
     align-items: center;
 }
@@ -305,6 +337,7 @@
 
     color: #35a16f;
 }
+
 /* =================================
    신고 게시판
 ================================= */
@@ -323,13 +356,7 @@
     display: grid;
 
     grid-template-columns:
-        70px
-        140px
-        120px
-        minmax(220px, 1fr)
-        120px
-        110px
-        100px;
+        70px 140px 120px minmax(220px, 1fr) 120px 110px 100px;
 
     align-items: center;
 
@@ -369,13 +396,7 @@
     display: grid;
 
     grid-template-columns:
-        70px
-        140px
-        120px
-        minmax(220px, 1fr)
-        120px
-        110px
-        100px;
+        70px 140px 120px minmax(220px, 1fr) 120px 110px 100px;
 
     align-items: center;
 
@@ -874,6 +895,3 @@
     }
 
 }
-
-
-

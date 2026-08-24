@@ -25,7 +25,7 @@ function SubMenu() {
                     {openMenu === 0 && <div className="sub_dropdown">
                         <div onClick={() => navigate('/SelectAi')}>대화신청</div>
                         <div onClick={() => navigate('/Diary')}>감정 일기</div>
-                        <div>일기 공유</div>
+                        <div onClick={() => navigate('/SharedDiary')}>일기 공유</div>
                     </div>}
                 </div>
                 <div className="sub_menu_item" onMouseEnter={() => handleEnter(1)} onMouseLeave={handleLeave}>

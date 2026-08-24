@@ -40,10 +40,14 @@ import UpdateInquiry from './Components/Board/UpdateInquiry'
 
 import AdminPage from './Components/MyPage/AdminPage'
 import ErrorLog from './Components/MyPage/ErrorLog'
+import AdminActivityLog from './Components/MyPage/AdminActivityLog'
 
 import UpdatePwd from './Components/Member/Find/UpdatePwd';
 
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
+import Role from './Components/Admin/Role';
+import SharedDiary from './Components/Calendar/SharedDiary';
+
 
 function App() {
     return (
@@ -70,6 +74,7 @@ function App() {
                     {/* 관리자 */}
                     <Route path='/adminPage' element={<AdminPage />} />
                     <Route path='/errorLog' element={<ErrorLog />} />
+                    <Route path='/adminActivityLog' element={<AdminActivityLog />} />
 
                     {/* 아이디 비밀번호 찾기 */}
                     <Route path='/find' element={<Find />} />
@@ -97,6 +102,7 @@ function App() {
                         {/* 다이어리 */}
                         <Route path='/Diary' element={<Diary />} />
                         <Route path='/emotionCalendar' element={<EmotionCalendar />} />
+                        <Route path='/SharedDiary' element={<SharedDiary />} />
 
                         {/* 마이페이지 */}
                         <Route path='/myPage' element={<MyPage />} />
@@ -110,6 +116,8 @@ function App() {
                         <Route path="/inquiryView/:inquirynum" element={<InquiryView />} />
                         <Route path="/inquiryWrite" element={<InquiryWrite />} />
                         <Route path="/updateInquiry/:inquirynum" element={<UpdateInquiry />} />
+
+                        <Route path="/role" element={<Role />} />
 
                     </Route>
 

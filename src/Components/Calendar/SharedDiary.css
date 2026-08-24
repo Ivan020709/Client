@@ -1,0 +1,945 @@
+/* =========================================================
+   Shared Diary
+========================================================= */
+
+.shared-diary {
+
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 60px auto 100px;
+    padding: 0 25px;
+
+    box-sizing: border-box;
+
+    color: #514942;
+
+    font-family:
+        'Noto Sans KR',
+        sans-serif;
+}
+
+
+/* =========================================================
+   헤더
+========================================================= */
+
+.shared-diary-header {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+
+.shared-diary-title-icon {
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff4ed;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(95, 72, 58, 0.08);
+}
+
+
+.shared-diary-header h1 {
+
+    margin: 0;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 38px;
+    font-weight: 400;
+
+    color: #4f4944;
+
+    letter-spacing: -1px;
+}
+
+
+.shared-diary-header p {
+
+    margin: 10px 0 12px;
+
+    color: #918781;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+.shared-diary-count {
+
+    display: inline-block;
+
+    color: #a27d6b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   목록
+========================================================= */
+
+.shared-diary-board {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   카드
+========================================================= */
+
+.shared-diary-card {
+
+    position: relative;
+
+    min-height: 310px;
+
+    padding: 25px 24px 20px;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+    box-shadow:
+        0 8px 20px
+        rgba(80, 65, 55, 0.08);
+}
+
+
+.shared-diary-card:hover {
+
+    transform:
+        translateY(-7px)
+        rotate(0deg);
+
+    box-shadow:
+        0 16px 32px
+        rgba(80, 65, 55, 0.14);
+}
+
+
+/* 카드 색상 */
+
+.shared-diary-card.card-0 {
+
+    background: #fff4d9;
+
+    transform: rotate(-1deg);
+}
+
+
+.shared-diary-card.card-1 {
+
+    background: #ffe9e4;
+
+    transform: rotate(1deg);
+}
+
+
+.shared-diary-card.card-2 {
+
+    background: #eaf4e5;
+
+    transform: rotate(-0.5deg);
+}
+
+
+.shared-diary-card.card-3 {
+
+    background: #e9f0fa;
+
+    transform: rotate(1deg);
+}
+
+
+.shared-diary-card.card-4 {
+
+    background: #f5eafa;
+
+    transform: rotate(-1deg);
+}
+
+
+/* =========================================================
+   카드 상단
+========================================================= */
+
+.shared-card-top {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.shared-card-date {
+
+    color: #887a70;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+.shared-card-emotion {
+
+    font-size: 27px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   사용자
+========================================================= */
+
+.shared-card-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 10px;
+}
+
+
+.shared-card-avatar {
+
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .65);
+
+    color: #8a6c5e;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.shared-card-user strong {
+
+    color: #62564f;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   감정 이름
+========================================================= */
+
+.shared-card-emotion-name {
+
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, .55);
+
+    color: #896f63;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   내용
+========================================================= */
+
+.shared-card-content {
+
+    min-height: 120px;
+
+    color: #665c56;
+
+    font-size: 14px;
+
+    line-height: 1.85;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   카드 하단
+========================================================= */
+
+.shared-card-bottom {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid
+        rgba(110, 90, 75, .12);
+
+    color: #9b8174;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   로딩
+========================================================= */
+
+.shared-diary-loading {
+
+    min-height: 400px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #968b84;
+
+    text-align: center;
+}
+
+
+.loading-icon {
+
+    margin-bottom: 15px;
+
+    font-size: 40px;
+}
+
+
+.shared-diary-loading p {
+
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   빈 화면
+========================================================= */
+
+.shared-diary-empty {
+
+    width: 100%;
+
+    min-height: 350px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        #f0e5df;
+
+    border-radius: 20px;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80, 65, 55, .04);
+
+    text-align: center;
+}
+
+
+.empty-icon {
+
+    margin-bottom: 15px;
+
+    font-size: 45px;
+}
+
+
+.shared-diary-empty h3 {
+
+    margin: 0 0 8px;
+
+    color: #5c544f;
+
+    font-size: 17px;
+}
+
+
+.shared-diary-empty p {
+
+    margin: 0;
+
+    color: #9a918b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   상세 모달
+========================================================= */
+
+.shared-diary-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(55, 45, 40, .42);
+
+    backdrop-filter:
+        blur(4px);
+}
+
+
+.shared-diary-modal {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 650px;
+
+    max-height: 90vh;
+
+    padding: 38px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    border-radius: 24px;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 25px 70px
+        rgba(50, 40, 35, .22);
+
+    animation:
+        sharedModalIn .25s ease;
+}
+
+
+@keyframes sharedModalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   모달 닫기
+========================================================= */
+
+.shared-modal-close {
+
+    position: absolute;
+
+    top: 17px;
+    right: 19px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f8f0eb;
+
+    color: #806f65;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.shared-modal-close:hover {
+
+    background: #eedfd7;
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   모달 감정
+========================================================= */
+
+.shared-modal-emotion-icon {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff3eb;
+
+    font-size: 38px;
+}
+
+
+/* =========================================================
+   모달 헤더
+========================================================= */
+
+.shared-modal-header {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 22px;
+
+    border-bottom:
+        1px solid #f0e5df;
+}
+
+
+.shared-modal-header h2 {
+
+    margin: 0 0 7px;
+
+    color: #4f4944;
+
+    font-family: 'Jua', sans-serif;
+
+    font-size: 23px;
+
+    font-weight: 400;
+}
+
+
+.shared-modal-header span {
+
+    color: #978c85;
+
+    font-size: 12px;
+}
+
+
+.shared-modal-emotion {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+    padding: 10px 15px;
+
+    border-radius: 12px;
+
+    background: #fff7f2;
+}
+
+
+.shared-modal-emotion span {
+
+    font-size: 25px;
+}
+
+
+.shared-modal-emotion small {
+
+    color: #987667;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   AI 요약
+========================================================= */
+
+.shared-diary-summary {
+
+    margin-top: 22px;
+
+    padding: 20px;
+
+    border:
+        1px solid #eadfd8;
+
+    border-radius: 15px;
+
+    background: #faf5f1;
+}
+
+
+.shared-diary-summary h3 {
+
+    margin: 0 0 10px;
+
+    color: #80675b;
+
+    font-size: 14px;
+}
+
+
+.shared-diary-summary p {
+
+    margin: 0;
+
+    color: #6c625c;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================================================
+   일기 내용
+========================================================= */
+
+.shared-modal-content {
+
+    margin-top: 25px;
+}
+
+
+.shared-modal-content h3 {
+
+    margin: 0 0 13px;
+
+    color: #5a514b;
+
+    font-size: 15px;
+}
+
+
+.shared-modal-content p {
+
+    margin: 0;
+
+    padding: 20px;
+
+    min-height: 130px;
+
+    box-sizing: border-box;
+
+    border-radius: 14px;
+
+    background: #fffaf7;
+
+    color: #625a54;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   모달 하단
+========================================================= */
+
+.shared-modal-footer {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid #f0e5df;
+}
+
+
+.shared-modal-footer span {
+
+    color: #a1877a;
+
+    font-size: 11px;
+}
+
+
+.shared-modal-footer button {
+
+    height: 40px;
+
+    padding: 0 20px;
+
+    border:
+        1px solid #eadbd3;
+
+    border-radius: 10px;
+
+    background: #fffdfb;
+
+    color: #8e766a;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+
+.shared-modal-footer button:hover {
+
+    background: #faf1ec;
+
+    border-color: #d9bfb2;
+}
+
+
+/* =========================================================
+   모바일
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .shared-diary {
+
+        margin-top: 40px;
+
+        padding:
+            0 18px;
+    }
+
+
+    .shared-diary-board {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .shared-diary {
+
+        margin:
+            30px auto 60px;
+
+        padding:
+            0 15px;
+    }
+
+
+    .shared-diary-header {
+
+        margin-bottom: 30px;
+    }
+
+
+    .shared-diary-header h1 {
+
+        font-size: 32px;
+    }
+
+
+    .shared-diary-board {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 20px;
+    }
+
+
+    .shared-diary-card {
+
+        min-height: 280px;
+
+        padding:
+            22px 20px 18px;
+    }
+
+
+    .shared-diary-modal-overlay {
+
+        padding: 15px;
+    }
+
+
+    .shared-diary-modal {
+
+        max-height: 92vh;
+
+        padding:
+            30px 22px 22px;
+
+        border-radius: 20px;
+    }
+
+
+    .shared-modal-header {
+
+        align-items: flex-start;
+    }
+
+
+    .shared-modal-header h2 {
+
+        font-size: 20px;
+    }
+
+
+    .shared-modal-emotion {
+
+        flex-shrink: 0;
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .shared-diary-header h1 {
+
+        font-size: 29px;
+    }
+
+
+    .shared-diary-card {
+
+        min-height: 270px;
+    }
+
+
+    .shared-modal-header {
+
+        flex-direction: column;
+    }
+
+
+    .shared-modal-emotion {
+
+        flex-direction: row;
+
+        align-self: flex-start;
+    }
+
+}

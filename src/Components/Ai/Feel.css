@@ -851,15 +851,26 @@
 
 
 /* =========================================================
-   18. 새로운 대화
+   18. 결과 버튼 영역
+========================================================= */
+
+.talk-ai-result-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   AI 대화 종료 이후 새로운 대화 시작하기 버튼
 ========================================================= */
 
 .talk-ai-new-conversation-button {
-    width: 100%;
+    flex: 1;
 
-    padding: 14px;
-
-    margin-top: 5px;
+    padding: 14px 18px;
 
     border: 1px solid #ddcec4;
 
@@ -869,11 +880,20 @@
 
     color: #766960;
 
+    font-family: inherit;
+
     font-size: 14px;
+
+    font-weight: 500;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
@@ -883,21 +903,24 @@
     border-color: #cdb1a2;
 
     color: #6b5b53;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(120, 90, 70, 0.08);
 }
 
 
 /* =========================================================
-   19. 공유하기
+  AI 대화 종료 이후 공유하기 버튼
 ========================================================= */
 
 .talk-ai-share-button {
-    width: 100%;
+    flex: 1;
 
-    padding: 14px;
+    padding: 14px 18px;
 
-    margin-top: 10px;
-
-    border: none;
+    border: 1px solid #b68b78;
 
     border-radius: 14px;
 
@@ -908,7 +931,9 @@
             #b68b78
         );
 
-    color: #fff;
+    color: #ffffff;
+
+    font-family: inherit;
 
     font-size: 14px;
 
@@ -921,16 +946,28 @@
 
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
 }
 
 
 .talk-ai-share-button:hover {
     transform: translateY(-1px);
 
+    filter: brightness(1.03);
+
     box-shadow:
         0 8px 18px rgba(150, 110, 90, 0.20);
 }
+
+
+.talk-ai-share-button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 4px 10px rgba(150, 110, 90, 0.14);
+}
+
 
 
 /* =========================================================

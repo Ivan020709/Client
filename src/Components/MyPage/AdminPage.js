@@ -3,6 +3,7 @@ import ErrorLog from './ErrorLog';
 import './AdminPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import AdminActivityLog from './AdminActivityLog';
 
 function AdminPage() {
 
@@ -16,13 +17,13 @@ function AdminPage() {
     const ROWS_PER_PAGE = 10;
 
     const totalPages = Math.ceil(
-    (paging?.totalCount ?? 0) / ROWS_PER_PAGE
+        (paging?.totalCount ?? 0) / ROWS_PER_PAGE
     );
 
     const startPage = Math.floor((pages - 1) / 5) * 5 + 1;
     const endPage = Math.min(startPage + 4, totalPages);
 
-        
+
 
     // 신고 목록
     useEffect(() => {
@@ -40,7 +41,7 @@ function AdminPage() {
             });
     }, [pages]);
 
-  
+
     // 페이지 이동
     const handlePage = (pageNumber) => {
 
@@ -52,7 +53,7 @@ function AdminPage() {
     };
 
 
-    function deleteReport(){
+    function deleteReport() {
         const result = window.confirm(
             '신고된 게시물을 삭제하시겠습니까?'
         );
@@ -60,7 +61,7 @@ function AdminPage() {
         if (!result) {
             return;
         }
-         axios.delete('/api/admin/deleteReport', {
+        axios.delete('/api/admin/deleteReport', {
             params: {
                 reportnum: selectedReport.reportnum
             }
@@ -74,7 +75,7 @@ function AdminPage() {
                 alert('삭제에 실패했습니다.');
             });
     }
-    
+
 
 
 
@@ -115,6 +116,15 @@ function AdminPage() {
                             onClick={() => setMenu('error')}
                         >
                             에러 로그
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`admin-sidebar-adminLog ${menu === 'activity' ? 'active' : ''
+                                }`}
+                            onClick={() => setMenu('activity')}
+                        >
+                            관리자 활동 로그
                         </button>
 
                     </div>
@@ -214,7 +224,7 @@ function AdminPage() {
                                                     {report.indate.substring(0, 10)}
                                                 </div>
 
-                                                
+
 
                                             </div>
 
@@ -368,6 +378,10 @@ function AdminPage() {
                     ========================= */}
                         {menu === 'error' && (
                             <ErrorLog />
+                        )}
+
+                        {menu === 'activity' && (
+                            <AdminActivityLog />
                         )}
 
                     </div>

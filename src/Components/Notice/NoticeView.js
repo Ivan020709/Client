@@ -8,7 +8,7 @@ import './NoticeView.css';
 function NoticeView() {
 
     const navigate = useNavigate();
-    const { boardnum } = useParams();
+    const { noticenum } = useParams();
 
     // 현재 로그인한 사용자
     const loginUser = useSelector(state => state.user);
@@ -28,7 +28,7 @@ function NoticeView() {
     // 공지사항 조회
     useEffect(() => {
 
-        axios.get(`/api/notice/getNotice/${boardnum}`)
+        axios.get(`/api/notice/getNotice/${noticenum}`)
             .then((result) => {
 
                 setNotice(result.data.notice);
@@ -44,7 +44,7 @@ function NoticeView() {
 
             });
 
-    }, [boardnum, navigate]);
+    }, [noticenum, navigate]);
 
 
     // 목록
@@ -61,7 +61,7 @@ function NoticeView() {
             return;
         }
 
-        navigate(`/updateNotice/${boardnum}`);
+        navigate(`/updateNotice/${noticenum}`);
     };
 
 
@@ -79,7 +79,7 @@ function NoticeView() {
         }
 
 
-        axios.delete(`/api/notice/deleteNotice/${boardnum}`)
+        axios.delete(`/api/notice/deleteNotice/${noticenum}`)
             .then(() => {
 
                 alert('공지사항이 삭제되었습니다.');
@@ -146,9 +146,8 @@ function NoticeView() {
 
                 {/* 공지사항 */}
                 <div
-                    className={`notice-view-post ${
-                        isFixed ? 'notice-view-fixed' : ''
-                    }`}
+                    className={`notice-view-post ${isFixed ? 'notice-view-fixed' : ''
+                        }`}
                 >
 
                     {/* 고정 공지 표시 */}

@@ -683,12 +683,12 @@ function Feel() {
                         </div>
 
 
-                        <button
-                            onClick={newConversation}
-                            className="talk-ai-new-conversation-button"
-                        >
-                            새로운 대화 시작하기
-                        </button>
+                        <div className="talk-ai-result-buttons">
+                            <button onClick={newConversation} className="talk-ai-new-conversation-button">
+                                새로운 대화 시작하기
+                            </button>
+                            <button className="talk-ai-share-button">공유하기</button>
+                        </div>
 
                     </div>
 

@@ -57,7 +57,7 @@ function Header() {
                         ) : (
                             <div>
                                 <div
-                                    onClick={() => navigate('/mypage/member')}
+                                    onClick={() => navigate('/myPage')}
                                 >
                                     {loginUser.name}
                                 </div>
