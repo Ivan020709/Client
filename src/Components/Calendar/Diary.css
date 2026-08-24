@@ -215,10 +215,8 @@
     box-sizing: border-box;
 
     background:
-        linear-gradient(
-            rgba(255,255,255,.15),
-            rgba(255,255,255,.15)
-        ),
+        linear-gradient(rgba(255, 255, 255, .15),
+            rgba(255, 255, 255, .15)),
         #dfcfc0;
 }
 
@@ -255,10 +253,7 @@
     transform: translateX(-50%) rotate(-10deg);
     font-size: 25px;
     filter:
-        drop-shadow(
-            1px 3px 2px
-            rgba(70, 50, 38, .25)
-        );
+        drop-shadow(1px 3px 2px rgba(70, 50, 38, .25));
 }
 
 
@@ -276,8 +271,7 @@
     background: #fff1a8;
 
     box-shadow:
-        3px 6px 10px
-        rgba(70, 50, 38, .16);
+        3px 6px 10px rgba(70, 50, 38, .16);
 
     transition: .25s ease;
 }
@@ -299,10 +293,7 @@
         0 0 25px 25px;
 
     border-color:
-        transparent
-        transparent
-        #e4cf80
-        transparent;
+        transparent transparent #e4cf80 transparent;
 }
 
 
@@ -343,8 +334,7 @@
     padding-bottom: 12px;
 
     border-bottom:
-        1px dashed
-        rgba(100, 75, 55, .22);
+        1px dashed rgba(100, 75, 55, .22);
 }
 
 .memo-date {
@@ -399,8 +389,7 @@
     padding-top: 10px;
 
     border-top:
-        1px dashed
-        rgba(100, 75, 55, .18);
+        1px dashed rgba(100, 75, 55, .18);
 }
 
 .memo-writer {
@@ -445,8 +434,7 @@
 
 .diary-memo-wrap:hover .diary-memo {
     box-shadow:
-        6px 12px 20px
-        rgba(70, 50, 38, .22);
+        6px 12px 20px rgba(70, 50, 38, .22);
 }
 
 
@@ -540,8 +528,7 @@
     background: #fffaf5;
 
     box-shadow:
-        0 20px 60px
-        rgba(54, 40, 31, .25);
+        0 20px 60px rgba(54, 40, 31, .25);
 
     animation:
         modalOpen .25s ease;
@@ -553,15 +540,13 @@
     from {
         opacity: 0;
         transform:
-            translateY(15px)
-            scale(.97);
+            translateY(15px) scale(.97);
     }
 
     to {
         opacity: 1;
         transform:
-            translateY(0)
-            scale(1);
+            translateY(0) scale(1);
     }
 
 }
@@ -744,8 +729,7 @@
     background: #fffdfb;
 
     box-shadow:
-        0 3px 12px
-        rgba(90, 68, 52, .04);
+        0 3px 12px rgba(90, 68, 52, .04);
 }
 
 .calendar-title {
@@ -941,8 +925,7 @@
     background: #fffdfb;
 
     box-shadow:
-        0 3px 12px
-        rgba(90, 68, 52, .04);
+        0 3px 12px rgba(90, 68, 52, .04);
 }
 
 .diary-box h3 {
@@ -953,8 +936,7 @@
     font-size: 18px;
 }
 
-.emotion-select p,
-.comment-area > p {
+.comment-area>p {
     margin: 0 0 12px;
 
     color: #554941;
@@ -1007,9 +989,19 @@
 }
 
 .emotion-buttons button.emotion-active {
-    border: 2px solid #947a69;
+    border: 2px solid #8d7768;
+    background: #e3cdbc;
+    color: #4f4036;
+    box-shadow: 0 3px 8px rgba(100, 75, 55, .15);
+}
 
-    background: #f7ece4;
+.emotion-buttons button.emotion-active span {
+    transform: scale(1.12);
+}
+
+.emotion-buttons button.emotion-active small {
+    color: #4f4036;
+    font-weight: 700;
 }
 
 .emotion-buttons button:disabled {
@@ -1051,8 +1043,7 @@
     border-color: #b89578;
 
     box-shadow:
-        0 0 0 3px
-        rgba(184,149,120,.12);
+        0 0 0 3px rgba(184, 149, 120, .12);
 }
 
 .comment-area textarea:read-only {

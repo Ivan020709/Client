@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import "./G.css";
 
@@ -9,6 +10,7 @@ import aiImage2 from "../../Img/그그2.png";
 
 
 function G() {
+    const loginUser = useSelector(state => state.user);
 
     const character = "그";
 
@@ -215,6 +217,7 @@ function G() {
             const response = await axios.post(
                 "/api/ai/analyze",
                 {
+                    userid: loginUser.userid,
                     session_id: sessionId,
                     character: character,
                     history: messages
@@ -508,9 +511,9 @@ function G() {
                         }
                         className={
                             loading ||
-                            analyzing ||
-                            !message.trim() ||
-                            analysis !== null
+                                analyzing ||
+                                !message.trim() ||
+                                analysis !== null
                                 ? "g-send-button g-send-button-disabled"
                                 : "g-send-button"
                         }
@@ -536,7 +539,7 @@ function G() {
                         }
                         className={
                             analyzing ||
-                            messages.length === 0
+                                messages.length === 0
                                 ? "g-finish-button g-finish-button-disabled"
                                 : "g-finish-button"
                         }

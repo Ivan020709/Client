@@ -27,7 +27,6 @@ import SaveKakaoInfo from "./Components/Member/SaveKakaoInfo";
 import MyPage from "./Components/MyPage/MyPage";
 import Feelog from './Components/Intro/Feelog';
 
-import EmotionCalendar from "./Components/Calendar/EmotionCalendar";
 import NoticeList from "./Components/Notice/NoticeList";
 import NoticeWrite from "./Components/Notice/NoticeWrite";
 import NoticeView from "./Components/Notice/NoticeView";
@@ -97,7 +96,6 @@ function App() {
 
                         {/* 다이어리 */}
                         <Route path='/Diary' element={<Diary />} />
-                        <Route path='/emotionCalendar' element={<EmotionCalendar />} />
                         <Route path='/SharedDiary' element={<SharedDiary />} />
 
                         {/* 마이페이지 */}

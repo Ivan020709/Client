@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 
 import "./Diary.css";
 
 
-/* =========================
+/* =========================================================
+   API
+========================================================= */
+
+const DIARY_API = "/api/diary";
+
+
+/* =========================================================
    감정 정보
-========================= */
+========================================================= */
 
 const emotionInfo = {
     happy: {
@@ -35,20 +43,56 @@ const emotionInfo = {
     }
 };
 
-const formatDiaryDate = value => {
+
+/* =========================================================
+   한글 감정 → 영어 감정
+========================================================= */
+
+const moodMap = {
+    행복: "happy",
+    기쁨: "happy",
+
+    편안: "calm",
+    평온: "calm",
+
+    우울: "sad",
+    슬픔: "sad",
+
+    불안: "anxious",
+    걱정: "anxious",
+
+    화남: "angry",
+    분노: "angry"
+};
+
+
+/* =========================================================
+   날짜 포맷
+========================================================= */
+
+const formatDiaryDate = (value) => {
+
+    if (!value) {
+        return "";
+    }
+
     const date = new Date(value);
 
     if (Number.isNaN(date.getTime())) {
         return value;
     }
 
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    return `${date.getFullYear()}-${String(
+        date.getMonth() + 1
+    ).padStart(2, "0")}-${String(
+        date.getDate()
+    ).padStart(2, "0")}`;
 };
 
 
-/* =========================
+/* =========================================================
    감정일기 목록
-========================= */
+========================================================= */
 
 function EmotionDiary({
     diaryList,
@@ -139,9 +183,9 @@ function EmotionDiary({
             )}
 
 
-            {/* =========================
+            {/* =================================================
                일기 상세 모달
-            ========================= */}
+            ================================================= */}
 
             {selectedDiary && (
 
@@ -200,13 +244,11 @@ function EmotionDiary({
                             <div className="diary-modal-emotion">
 
                                 <span>
-
                                     {
                                         emotionInfo[
                                             selectedDiary.emotion
                                         ]?.emoji || "🙂"
                                     }
-
                                 </span>
 
                                 <small>
@@ -226,9 +268,7 @@ function EmotionDiary({
                         </div>
 
 
-                        {/* =========================
-                           AI 요약
-                        ========================= */}
+                        {/* AI 요약 */}
 
                         {selectedDiary.summary && (
 
@@ -247,9 +287,7 @@ function EmotionDiary({
                         )}
 
 
-                        {/* =========================
-                           일기 내용
-                        ========================= */}
+                        {/* 일기 내용 */}
 
                         <div className="diary-modal-content">
 
@@ -280,9 +318,9 @@ function EmotionDiary({
 }
 
 
-/* =========================
-   게시판 메모지
-========================= */
+/* =========================================================
+   게시판 메모
+========================================================= */
 
 function DiaryMemo({
     diary,
@@ -293,11 +331,6 @@ function DiaryMemo({
     const emotion =
         emotionInfo[diary.emotion] || {};
 
-
-    /*
-     * 목록에서는 AI 요약을 우선 표시
-     * summary가 없으면 content 표시
-     */
 
     const text =
         diary.summary ||
@@ -373,24 +406,38 @@ function DiaryMemo({
 }
 
 
-/* =========================
+/* =========================================================
    감정 달력
-========================= */
+========================================================= */
 
 function EmotionCalendar({
+
     currentDate,
+
     changeMonth,
+
     selectedDate,
+
     selectDate,
+
     selectedEmotion,
+
     setSelectedEmotion,
+
     comment,
+
     setComment,
+
     saveDiary,
-    emotionData,
+
+    calendarData,
+
     emotionCount,
+
     isEditing,
+
     setIsEditing
+
 }) {
 
     const year =
@@ -399,6 +446,10 @@ function EmotionCalendar({
     const month =
         currentDate.getMonth();
 
+
+    /* =====================================================
+       달력 날짜 계산
+    ===================================================== */
 
     const firstDay =
         new Date(
@@ -416,9 +467,9 @@ function EmotionCalendar({
         ).getDate();
 
 
-    /* =========================
+    /* =====================================================
        달력 생성
-    ========================= */
+    ===================================================== */
 
     const renderCalendar = () => {
 
@@ -462,7 +513,7 @@ function EmotionCalendar({
 
 
             const data =
-                emotionData[dateKey];
+                calendarData[dateKey];
 
 
             const emotion =
@@ -528,9 +579,13 @@ function EmotionCalendar({
     };
 
 
+    /* =====================================================
+       선택한 날짜 데이터
+    ===================================================== */
+
     const selectedData =
         selectedDate
-            ? emotionData[selectedDate]
+            ? calendarData[selectedDate]
             : null;
 
 
@@ -561,9 +616,9 @@ function EmotionCalendar({
 
             <div className="emotion-calendar-layout">
 
-                {/* =========================
+                {/* =================================================
                    달력
-                ========================= */}
+                ================================================= */}
 
                 <div className="calendar-box">
 
@@ -618,9 +673,9 @@ function EmotionCalendar({
                 </div>
 
 
-                {/* =========================
+                {/* =================================================
                    이번 달 감정
-                ========================= */}
+                ================================================= */}
 
                 <div className="emotion-summary">
 
@@ -629,78 +684,101 @@ function EmotionCalendar({
                     </h3>
 
 
-                    <div className="emotion-item">
+                    {Object.keys(emotionCount)
+                        .filter(
+                            emotion =>
+                                emotionCount[
+                                emotion
+                                ] > 0
+                        )
+                        .length === 0 ? (
 
-                        <span>
-                            😊 행복
-                        </span>
+                        <div className="emotion-summary-empty">
 
-                        <strong>
-                            {emotionCount.happy}일
-                        </strong>
+                            <span>
+                                📝
+                            </span>
 
-                    </div>
+                            <p>
+                                이번 달에 기록된<br />
+                                감정이 없습니다.
+                            </p>
 
+                        </div>
 
-                    <div className="emotion-item">
+                    ) : (
 
-                        <span>
-                            😌 편안
-                        </span>
+                        <div className="emotion-summary-list">
 
-                        <strong>
-                            {emotionCount.calm}일
-                        </strong>
+                            {Object.keys(emotionCount)
+                                .filter(
+                                    emotion =>
+                                        emotionCount[
+                                        emotion
+                                        ] > 0
+                                )
+                                .map(
+                                    emotion => (
 
-                    </div>
+                                        <div
+                                            className="emotion-item"
+                                            key={emotion}
+                                        >
 
+                                            <div className="emotion-item-info">
 
-                    <div className="emotion-item">
+                                                <span className="emotion-item-emoji">
 
-                        <span>
-                            😔 우울
-                        </span>
+                                                    {
+                                                        emotionInfo[
+                                                            emotion
+                                                        ]?.emoji
+                                                    }
 
-                        <strong>
-                            {emotionCount.sad}일
-                        </strong>
-
-                    </div>
-
-
-                    <div className="emotion-item">
-
-                        <span>
-                            😰 불안
-                        </span>
-
-                        <strong>
-                            {emotionCount.anxious}일
-                        </strong>
-
-                    </div>
+                                                </span>
 
 
-                    <div className="emotion-item">
+                                                <span className="emotion-item-name">
 
-                        <span>
-                            😡 화남
-                        </span>
+                                                    {
+                                                        emotionInfo[
+                                                            emotion
+                                                        ]?.name
+                                                    }
 
-                        <strong>
-                            {emotionCount.angry}일
-                        </strong>
+                                                </span>
 
-                    </div>
+                                            </div>
+
+
+                                            <strong>
+
+                                                {
+                                                    emotionCount[
+                                                    emotion
+                                                    ]
+                                                }
+                                                일
+
+                                            </strong>
+
+                                        </div>
+
+                                    )
+                                )}
+
+                        </div>
+
+                    )}
 
                 </div>
 
             </div>
 
 
-            {/* =========================
-               날짜 기록
-            ========================= */}
+            {/* =================================================
+               선택 날짜 기록
+            ================================================= */}
 
             {selectedDate && (
 
@@ -711,9 +789,7 @@ function EmotionCalendar({
                     </h3>
 
 
-                    {/* =========================
-                       감정 선택
-                    ========================= */}
+                    {/* 감정 */}
 
                     <div className="emotion-select">
 
@@ -724,55 +800,36 @@ function EmotionCalendar({
 
                         <div className="emotion-buttons">
 
-                            {Object.entries(
-                                emotionInfo
-                            ).map(
-                                ([key, value]) => (
+                            {selectedEmotion &&
+                                emotionInfo[selectedEmotion] && (
 
                                     <button
-                                        key={key}
                                         type="button"
-
+                                        className="emotion-active"
                                         disabled={
                                             hasSavedDiary &&
                                             !isEditing
                                         }
-
-                                        className={
-                                            selectedEmotion ===
-                                                key
-                                                ? "emotion-active"
-                                                : ""
-                                        }
-
-                                        onClick={() =>
-                                            setSelectedEmotion(
-                                                key
-                                            )
-                                        }
                                     >
 
                                         <span>
-                                            {value.emoji}
+                                            {emotionInfo[selectedEmotion].emoji}
                                         </span>
 
                                         <small>
-                                            {value.name}
+                                            {emotionInfo[selectedEmotion].name}
                                         </small>
 
                                     </button>
 
-                                )
-                            )}
+                                )}
 
                         </div>
 
                     </div>
 
 
-                    {/* =========================
-                       내용
-                    ========================= */}
+                    {/* 한줄평 */}
 
                     <div className="comment-area">
 
@@ -801,46 +858,10 @@ function EmotionCalendar({
                         />
 
 
-                        <div className="comment-bottom">
-
-                            <span>
-                                {comment.length}/255
-                            </span>
-
-
-                            {hasSavedDiary &&
-                                !isEditing ? (
-
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        setIsEditing(
-                                            true
-                                        )
-                                    }
-                                >
-                                    수정
-                                </button>
-
-                            ) : (
-
-                                <button
-                                    type="button"
-                                    onClick={saveDiary}
-                                >
-                                    저장
-                                </button>
-
-                            )}
-
-                        </div>
-
                     </div>
 
 
-                    {/* =========================
-                       AI 요약
-                    ========================= */}
+                    {/* AI 요약 */}
 
                     {selectedData?.summary && (
 
@@ -867,9 +888,9 @@ function EmotionCalendar({
 }
 
 
-/* =========================
+/* =========================================================
    Diary
-========================= */
+========================================================= */
 
 function Diary() {
 
@@ -877,13 +898,25 @@ function Diary() {
         useSelector(state => state.user);
 
 
+    /* =====================================================
+       화면 메뉴
+    ===================================================== */
+
     const [menu, setMenu] =
         useState("diary");
 
 
+    /* =====================================================
+       현재 달
+    ===================================================== */
+
     const [currentDate, setCurrentDate] =
         useState(new Date());
 
+
+    /* =====================================================
+       선택 날짜
+    ===================================================== */
 
     const [selectedDate, setSelectedDate] =
         useState(null);
@@ -897,15 +930,42 @@ function Diary() {
         useState("");
 
 
-    const [selectedDiary, setSelectedDiary] =
-        useState(null);
-
-
     const [isEditing, setIsEditing] =
         useState(false);
 
 
-    const [emotionData, setEmotionData] =
+    /* =====================================================
+       일기 상세 모달
+    ===================================================== */
+
+    const [selectedDiary, setSelectedDiary] =
+        useState(null);
+
+
+    /* =====================================================
+       전체 내 일기
+
+       감정 달력과 분리
+    ===================================================== */
+
+    const [myDiaryList, setMyDiaryList] =
+        useState([]);
+
+
+    /* =====================================================
+       현재 월 달력 데이터
+
+       예:
+
+       {
+           "2026-08-01": {
+               emotion: "happy",
+               comment: "좋은 하루였다"
+           }
+       }
+    ===================================================== */
+
+    const [calendarData, setCalendarData] =
         useState({});
 
 
@@ -919,9 +979,11 @@ function Diary() {
         "나";
 
 
-    /* =========================
-       내 감정일기 조회
-    ========================= */
+    /* =========================================================
+       1. 내 감정일기 전체 조회
+       
+       감정일기 메뉴에서 사용
+    ========================================================= */
 
     useEffect(() => {
 
@@ -930,47 +992,32 @@ function Diary() {
         }
 
 
-        const fetchDiary = async () => {
+        const fetchMyDiary = async () => {
 
             try {
 
                 const response =
-                    await fetch(
-                        `api/diary/mine/${userId}`
+                    await axios.get(
+                        `${DIARY_API}/mine/${userId}`
                     );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "감정일기 조회 실패"
-                    );
-
-                }
-
-
-                const result =
-                    await response.json();
 
 
                 console.log(
-                    "감정일기 조회 결과:",
-                    result
+                    "내 감정일기 조회 결과:",
+                    response.data
                 );
 
-
-                /*
-                 * EmotionDiaryService의
-                 * 반환 형태에 대응
-                 */
 
                 let diaryList = [];
 
 
+                const result =
+                    response.data;
+
+
                 if (Array.isArray(result)) {
 
-                    diaryList =
-                        result;
+                    diaryList = result;
 
                 } else if (
                     Array.isArray(
@@ -1000,6 +1047,15 @@ function Diary() {
                         result.data;
 
                 } else if (
+                    Array.isArray(
+                        result.diaries
+                    )
+                ) {
+
+                    diaryList =
+                        result.diaries;
+
+                } else if (
                     result.diary
                 ) {
 
@@ -1010,104 +1066,110 @@ function Diary() {
                 }
 
 
-                const diaryMap = {};
+                const normalizedList =
+                    diaryList
+                        .filter(Boolean)
+                        .map(diary => {
+
+                            const rawDate =
+                                diary.diaryDate ||
+                                diary.diary_date ||
+                                diary.date;
 
 
-                diaryList.forEach(
-                    diary => {
-
-                        if (!diary) {
-                            return;
-                        }
+                            const date =
+                                formatDiaryDate(
+                                    rawDate
+                                );
 
 
-                        /*
-                         * 서버 DB 컬럼명과
-                         * 프론트에서 사용하는 이름을
-                         * 여기서 통일
-                         */
-
-                        const rawDate =
-                            diary.diaryDate ||
-                            diary.diary_date ||
-                            diary.date;
+                            let emotion =
+                                diary.mood ||
+                                diary.emotion ||
+                                "";
 
 
-                        if (!rawDate) {
-                            return;
-                        }
+                            if (
+                                !emotionInfo[
+                                emotion
+                                ]
+                            ) {
+
+                                emotion =
+                                    moodMap[
+                                    emotion
+                                    ] || "";
+
+                            }
 
 
-                        const date =
-                            formatDiaryDate(rawDate);
+                            return {
+
+                                diaryId:
+                                    diary.id ||
+                                    diary.diaryId,
+
+                                userid:
+                                    diary.userId ||
+                                    diary.user_id ||
+                                    userId,
+
+                                nickname:
+                                    diary.nickname ||
+                                    nickname,
+
+                                date,
+
+                                emotion,
+
+                                comment:
+                                    diary.content ||
+                                    diary.comment ||
+                                    "",
+
+                                summary:
+                                    diary.summary ||
+                                    "",
+
+                                emoji:
+                                    diary.emoji ||
+                                    "",
+
+                                isShared:
+                                    diary.isShared ??
+                                    diary.is_shared ??
+                                    false,
+
+                                sessionId:
+                                    diary.sessionId ||
+                                    diary.session_id ||
+                                    null
+
+                            };
+
+                        })
+                        .filter(
+                            diary =>
+                                diary.date
+                        );
 
 
-                        const emotion =
-                            diary.mood ||
-                            diary.emotion ||
-                            "";
-
-
-                        const content =
-                            diary.content ||
-                            diary.comment ||
-                            "";
-
-
-                        diaryMap[date] = {
-
-                            diaryId:
-                                diary.id ||
-                                diary.diaryId,
-
-                            userid:
-                                diary.userId ||
-                                diary.user_id ||
-                                userId,
-
-                            nickname:
-                                diary.nickname ||
-                                nickname,
-
-                            date,
-
-                            emotion,
-
-                            comment:
-                                content,
-
-                            summary:
-                                diary.summary ||
-                                "",
-
-                            emoji:
-                                diary.emoji ||
-                                "",
-
-                            isShared:
-                                diary.isShared ??
-                                diary.is_shared ??
-                                false,
-
-                            sessionId:
-                                diary.sessionId ||
-                                diary.session_id ||
-                                null
-
-                        };
-
-                    }
+                normalizedList.sort(
+                    (a, b) =>
+                        new Date(b.date) -
+                        new Date(a.date)
                 );
 
 
-                setEmotionData(
-                    diaryMap
+                setMyDiaryList(
+                    normalizedList
                 );
+
 
             } catch (error) {
 
                 console.error(
-                    "감정일기 조회 오류:",
+                    "내 감정일기 조회 오류:",
                     error
                 );
 
@@ -1116,7 +1178,7 @@ function Diary() {
         };
 
 
-        fetchDiary();
+        fetchMyDiary();
 
     }, [
         userId,
@@ -1124,11 +1186,250 @@ function Diary() {
     ]);
 
 
-    /* =========================
-       월 변경
-    ========================= */
+    /* =========================================================
+       2. 해당 월 감정일기 조회
+       
+       ★ 여기 추가된 핵심 부분
+       
+       현재 보고 있는 달이 바뀔 때마다 실행됨
+    ========================================================= */
 
-    const changeMonth = value => {
+    useEffect(() => {
+
+        if (!userId) {
+            return;
+        }
+
+
+        const fetchCalendarDiary =
+            async () => {
+
+                try {
+
+                    const year =
+                        currentDate.getFullYear();
+
+                    const month =
+                        currentDate.getMonth();
+
+
+                    /* -----------------------------------------
+                       해당 월 시작일
+                    ----------------------------------------- */
+
+                    const startDate =
+                        `${year}-${String(
+                            month + 1
+                        ).padStart(
+                            2,
+                            "0"
+                        )}-01`;
+
+
+                    /* -----------------------------------------
+                       해당 월 마지막 날짜
+                    ----------------------------------------- */
+
+                    const lastDay =
+                        new Date(
+                            year,
+                            month + 1,
+                            0
+                        ).getDate();
+
+
+                    const endDate =
+                        `${year}-${String(
+                            month + 1
+                        ).padStart(
+                            2,
+                            "0"
+                        )}-${String(
+                            lastDay
+                        ).padStart(
+                            2,
+                            "0"
+                        )}`;
+
+
+                    console.log(
+                        "달력 조회:",
+                        startDate,
+                        "~",
+                        endDate
+                    );
+
+
+                    /* -----------------------------------------
+                       해당 월 데이터 요청
+                    ----------------------------------------- */
+
+                    const response =
+                        await axios.get(
+                            `${DIARY_API}/calendar/${userId}`,
+                            {
+                                params: {
+                                    startDate,
+                                    endDate
+                                }
+                            }
+                        );
+
+
+                    console.log(
+                        "해당 월 감정 달력 조회 결과:",
+                        response.data
+                    );
+
+
+                    const diaryList =
+                        response.data?.diaries ||
+                        [];
+
+
+                    const newCalendarData =
+                        {};
+
+
+                    /* -----------------------------------------
+                       서버 데이터 → 달력 데이터 변환
+                    ----------------------------------------- */
+
+                    diaryList.forEach(
+                        diary => {
+
+                            if (!diary) {
+                                return;
+                            }
+
+
+                            const date =
+                                formatDiaryDate(
+                                    diary.diaryDate ||
+                                    diary.diary_date ||
+                                    diary.date
+                                );
+
+
+                            if (!date) {
+                                return;
+                            }
+
+
+                            let emotion =
+                                diary.mood ||
+                                diary.emotion ||
+                                "";
+
+
+                            /*
+                             * 영어 감정이면 그대로 사용
+                             *
+                             * happy
+                             * calm
+                             * sad
+                             * anxious
+                             * angry
+                             */
+
+                            if (
+                                !emotionInfo[
+                                emotion
+                                ]
+                            ) {
+
+                                emotion =
+                                    moodMap[
+                                    emotion
+                                    ] || "";
+
+                            }
+
+
+                            newCalendarData[
+                                date
+                            ] = {
+
+                                diaryId:
+                                    diary.id ||
+                                    diary.diaryId,
+
+                                userid:
+                                    diary.userId ||
+                                    diary.user_id ||
+                                    userId,
+
+                                nickname:
+                                    diary.nickname ||
+                                    nickname,
+
+                                date,
+
+                                emotion,
+
+                                comment:
+                                    diary.content ||
+                                    diary.comment ||
+                                    "",
+
+                                summary:
+                                    diary.summary ||
+                                    "",
+
+                                emoji:
+                                    diary.emoji ||
+                                    "",
+
+                                isShared:
+                                    diary.isShared ??
+                                    diary.is_shared ??
+                                    false,
+
+                                sessionId:
+                                    diary.sessionId ||
+                                    diary.session_id ||
+                                    null
+
+                            };
+
+                        }
+                    );
+
+
+                    setCalendarData(
+                        newCalendarData
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "감정 달력 조회 실패:",
+                        error
+                    );
+
+
+                    setCalendarData({});
+
+                }
+
+            };
+
+
+        fetchCalendarDiary();
+
+    }, [
+        userId,
+        currentDate,
+        nickname
+    ]);
+
+
+    /* =========================================================
+       월 변경
+    ========================================================= */
+
+    const changeMonth = (value) => {
 
         const year =
             currentDate.getFullYear();
@@ -1154,11 +1455,11 @@ function Diary() {
     };
 
 
-    /* =========================
+    /* =========================================================
        날짜 선택
-    ========================= */
+    ========================================================= */
 
-    const selectDate = day => {
+    const selectDate = (day) => {
 
         const year =
             currentDate.getFullYear();
@@ -1170,13 +1471,21 @@ function Diary() {
         const dateKey =
             `${year}-${String(
                 month + 1
-            ).padStart(2, "0")}-${String(
+            ).padStart(
+                2,
+                "0"
+            )}-${String(
                 day
-            ).padStart(2, "0")}`;
+            ).padStart(
+                2,
+                "0"
+            )}`;
 
 
         const data =
-            emotionData[dateKey] || {};
+            calendarData[
+            dateKey
+            ] || {};
 
 
         setSelectedDate(
@@ -1204,9 +1513,9 @@ function Diary() {
     };
 
 
-    /* =========================
+    /* =========================================================
        일기 저장
-    ========================= */
+    ========================================================= */
 
     const saveDiary = async () => {
 
@@ -1249,15 +1558,10 @@ function Diary() {
         try {
 
             const existingDiary =
-                emotionData[
+                calendarData[
                 selectedDate
                 ];
 
-
-            /*
-             * 현재 서버의 EmotionDiary
-             * 엔티티가 받는 필드 기준
-             */
 
             const diaryData = {
 
@@ -1293,91 +1597,79 @@ function Diary() {
 
 
             console.log(
-                "일기 저장 요청:",
+                "감정일기 저장 요청:",
                 diaryData
             );
 
 
             const response =
-                await fetch(
-                    "http://localhost:8080/diary",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                diaryData
-                            )
-                    }
+                await axios.post(
+                    DIARY_API,
+                    diaryData
                 );
 
 
-            if (!response.ok) {
+            console.log(
+                "감정일기 저장 결과:",
+                response.data
+            );
 
-                throw new Error(
-                    "감정일기 저장 실패"
+
+            const savedDiary =
+                response.data?.diary ||
+                response.data;
+
+
+            const savedDate =
+                formatDiaryDate(
+                    savedDiary?.diaryDate ||
+                    savedDiary?.diary_date ||
+                    savedDiary?.date ||
+                    selectedDate
                 );
+
+
+            let savedEmotion =
+                savedDiary?.mood ||
+                savedDiary?.emotion ||
+                selectedEmotion;
+
+
+            if (
+                !emotionInfo[
+                savedEmotion
+                ]
+            ) {
+
+                savedEmotion =
+                    moodMap[
+                    savedEmotion
+                    ] || selectedEmotion;
 
             }
 
 
-            const result =
-                await response.json();
-
-
-            console.log(
-                "일기 저장 결과:",
-                result
-            );
-
-
-            /*
-             * 서버가 저장한 데이터
-             */
-
-            const savedDiary =
-                result.diary ||
-                result;
-
-
-            const savedDate =
-                savedDiary.diaryDate ||
-                savedDiary.diary_date ||
-                savedDiary.date ||
-                selectedDate;
-
-
-            const savedEmotion =
-                savedDiary.mood ||
-                savedDiary.emotion ||
-                selectedEmotion;
-
-
             const savedContent =
-                savedDiary.content ||
-                savedDiary.comment ||
+                savedDiary?.content ||
+                savedDiary?.comment ||
                 comment.trim();
 
 
             const newDiary = {
 
                 diaryId:
-                    savedDiary.id ||
-                    savedDiary.diaryId ||
-                    existingDiary?.diaryId,
+                    savedDiary?.id ||
+                    savedDiary?.diaryId ||
+                    existingDiary?.diaryId ||
+                    null,
 
                 userid:
-                    savedDiary.userId ||
-                    savedDiary.user_id ||
+                    savedDiary?.userId ||
+                    savedDiary?.user_id ||
                     userId,
 
                 nickname:
-                    savedDiary.nickname ||
+                    savedDiary?.nickname ||
                     nickname,
 
                 date:
@@ -1390,33 +1682,68 @@ function Diary() {
                     savedContent,
 
                 summary:
-                    savedDiary.summary ||
+                    savedDiary?.summary ||
                     existingDiary?.summary ||
                     "",
 
+                emoji:
+                    savedDiary?.emoji ||
+                    "",
+
                 isShared:
-                    savedDiary.isShared ??
-                    savedDiary.is_shared ??
+                    savedDiary?.isShared ??
+                    savedDiary?.is_shared ??
                     existingDiary?.isShared ??
                     false,
 
                 sessionId:
-                    savedDiary.sessionId ||
-                    savedDiary.session_id ||
+                    savedDiary?.sessionId ||
+                    savedDiary?.session_id ||
                     existingDiary?.sessionId ||
                     null
 
             };
 
 
-            setEmotionData(prev => ({
+            /* -----------------------------------------
+               달력 데이터 즉시 반영
+            ----------------------------------------- */
 
-                ...prev,
+            setCalendarData(
+                prev => ({
+                    ...prev,
+                    [savedDate]:
+                        newDiary
+                })
+            );
 
-                [savedDate]:
-                    newDiary
 
-            }));
+            /* -----------------------------------------
+               내 일기 목록에도 즉시 반영
+            ----------------------------------------- */
+
+            setMyDiaryList(
+                prev => {
+
+                    const filtered =
+                        prev.filter(
+                            diary =>
+                                diary.date !==
+                                savedDate
+                        );
+
+
+                    return [
+                        newDiary,
+                        ...filtered
+                    ].sort(
+                        (a, b) =>
+                            new Date(b.date) -
+                            new Date(a.date)
+                    );
+
+                }
+            );
 
 
             setIsEditing(false);
@@ -1425,6 +1752,7 @@ function Diary() {
             alert(
                 "감정일기가 저장되었습니다."
             );
+
 
         } catch (error) {
 
@@ -1443,65 +1771,9 @@ function Diary() {
     };
 
 
-    /* =========================
-       내 일기 목록
-    ========================= */
-
-    const myDiaryList =
-        Object.entries(
-            emotionData
-        )
-
-            .filter(
-                ([date, data]) =>
-                    data?.comment ||
-                    data?.summary
-            )
-
-            .map(
-                ([date, data]) => ({
-
-                    diaryId:
-                        data.diaryId,
-
-                    date,
-
-                    userid:
-                        data.userid ||
-                        userId,
-
-                    nickname:
-                        data.nickname ||
-                        nickname,
-
-                    emotion:
-                        data.emotion,
-
-                    comment:
-                        data.comment,
-
-                    summary:
-                        data.summary,
-
-                    isShared:
-                        data.isShared,
-
-                    sessionId:
-                        data.sessionId
-
-                })
-            )
-
-            .sort(
-                (a, b) =>
-                    new Date(b.date) -
-                    new Date(a.date)
-            );
-
-
-    /* =========================
-       현재 월 감정
-    ========================= */
+    /* =========================================================
+       현재 월
+    ========================================================= */
 
     const year =
         currentDate.getFullYear();
@@ -1510,18 +1782,12 @@ function Diary() {
         currentDate.getMonth();
 
 
-    const currentMonthData =
-        Object.entries(
-            emotionData
-        ).filter(
-            ([date]) =>
-                date.startsWith(
-                    `${year}-${String(
-                        month + 1
-                    ).padStart(2, "0")}`
-                )
-        );
-
+    /* =========================================================
+       현재 월 감정 개수
+       
+       calendarData 자체가 현재 월 데이터이므로
+       별도 날짜 필터링 필요 없음
+    ========================================================= */
 
     const emotionCount = {
 
@@ -1538,8 +1804,10 @@ function Diary() {
     };
 
 
-    currentMonthData.forEach(
-        ([date, data]) => {
+    Object.values(
+        calendarData
+    ).forEach(
+        data => {
 
             const emotion =
                 data?.emotion;
@@ -1562,13 +1830,17 @@ function Diary() {
     );
 
 
-    /* =========================
+    /* =========================================================
        화면
-    ========================= */
+    ========================================================= */
 
     return (
 
         <div className="diary">
+
+            {/* =================================================
+               헤더
+            ================================================= */}
 
             <div className="diary-header">
 
@@ -1586,9 +1858,9 @@ function Diary() {
 
             <div className="diary-container">
 
-                {/* =========================
+                {/* =================================================
                    사이드바
-                ========================= */}
+                ================================================= */}
 
                 <aside className="diary-sidebar">
 
@@ -1626,9 +1898,7 @@ function Diary() {
                                     : ""
                             }
                             onClick={() =>
-                                setMenu(
-                                    "diary"
-                                )
+                                setMenu("diary")
                             }
                         >
 
@@ -1649,9 +1919,7 @@ function Diary() {
                                     : ""
                             }
                             onClick={() =>
-                                setMenu(
-                                    "emotion"
-                                )
+                                setMenu("emotion")
                             }
                         >
 
@@ -1668,15 +1936,16 @@ function Diary() {
                 </aside>
 
 
-                {/* =========================
+                {/* =================================================
                    메인
-                ========================= */}
+                ================================================= */}
 
                 <main className="diary-content">
 
                     {menu === "diary" && (
 
                         <EmotionDiary
+
                             diaryList={
                                 myDiaryList
                             }
@@ -1688,6 +1957,7 @@ function Diary() {
                             selectedDiary={
                                 selectedDiary
                             }
+
                         />
 
                     )}
@@ -1696,6 +1966,7 @@ function Diary() {
                     {menu === "emotion" && (
 
                         <EmotionCalendar
+
                             currentDate={
                                 currentDate
                             }
@@ -1732,8 +2003,8 @@ function Diary() {
                                 saveDiary
                             }
 
-                            emotionData={
-                                emotionData
+                            calendarData={
+                                calendarData
                             }
 
                             emotionCount={
