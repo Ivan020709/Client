@@ -38,6 +38,114 @@ const emotionInfo = {
 
 
 /* =========================
+   한글 감정 → 영어 감정
+========================= */
+
+const moodMap = {
+
+    행복: "happy",
+    기쁨: "happy",
+
+    편안: "calm",
+    평온: "calm",
+
+    우울: "sad",
+    슬픔: "sad",
+
+    불안: "anxious",
+    걱정: "anxious",
+
+    화남: "angry",
+    분노: "angry"
+
+};
+
+
+/* =========================
+   감정 정보 가져오기
+========================= */
+
+const getEmotionInfo = (
+    emotion,
+    emoji
+) => {
+
+    let normalizedEmotion =
+        emotion || "";
+
+
+    /* -------------------------
+       한글 감정이면 영어로 변환
+    ------------------------- */
+
+    if (
+        !emotionInfo[
+        normalizedEmotion
+        ]
+    ) {
+
+        normalizedEmotion =
+            moodMap[
+            normalizedEmotion
+            ] || "";
+
+    }
+
+
+    /* -------------------------
+       감정이 존재하는 경우
+       
+       ★ 서버 emoji가 있으면
+       서버 emoji를 우선 사용
+    ------------------------- */
+
+    if (
+        emotionInfo[
+        normalizedEmotion
+        ]
+    ) {
+
+        return {
+
+            emotion:
+                normalizedEmotion,
+
+            emoji:
+                emoji ||
+                emotionInfo[
+                    normalizedEmotion
+                ].emoji,
+
+            name:
+                emotionInfo[
+                    normalizedEmotion
+                ].name
+
+        };
+
+    }
+
+
+    /* -------------------------
+       감정을 찾지 못한 경우
+    ------------------------- */
+
+    return {
+
+        emotion: "",
+
+        emoji:
+            emoji || "🙂",
+
+        name:
+            "기록"
+
+    };
+
+};
+
+
+/* =========================
    날짜 포맷
 ========================= */
 
@@ -48,11 +156,18 @@ const formatDiaryDate = value => {
     }
 
 
-    const date = new Date(value);
+    const date =
+        new Date(value);
 
 
-    if (Number.isNaN(date.getTime())) {
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
         return value;
+
     }
 
 
@@ -92,17 +207,27 @@ function SharedDiary() {
     ========================= */
 
     useEffect(() => {
+
         if (!selectedDiary) {
             return;
         }
 
-        // 모달이 열린 동안 배경 body만 고정하고 모달 내부 스크롤은 유지합니다.
-        const previousOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+
+        const previousOverflow =
+            document.body.style.overflow;
+
+
+        document.body.style.overflow =
+            "hidden";
+
 
         return () => {
-            document.body.style.overflow = previousOverflow;
+
+            document.body.style.overflow =
+                previousOverflow;
+
         };
+
     }, [selectedDiary]);
 
 
@@ -112,177 +237,247 @@ function SharedDiary() {
 
     useEffect(() => {
 
-        const fetchSharedDiary = async () => {
+        const fetchSharedDiary =
+            async () => {
 
-            try {
+                try {
 
-                setLoading(true);
-                setError(false);
-
-
-                const response =
-                    await fetch(
-                        // setupProxy.js가 /api 요청을 Spring 서버 8070 포트로 보냅니다.
-                        "/api/diary/shared"
-                    );
+                    setLoading(true);
+                    setError(false);
 
 
-                if (!response.ok) {
-
-                    throw new Error(
-                        "공유 일기 조회 실패"
-                    );
-
-                }
-
-
-                const result =
-                    await response.json();
-
-
-                console.log(
-                    "공유 일기 조회 결과:",
-                    result
-                );
-
-
-                let list = [];
-
-
-                if (Array.isArray(result)) {
-
-                    list = result;
-
-                } else if (
-                    // 현재 서버는 목록을 diaries라는 이름으로 반환합니다.
-                    Array.isArray(result.diaries)
-                ) {
-
-                    list = result.diaries;
-
-                } else if (
-                    Array.isArray(result.diaryList)
-                ) {
-
-                    list =
-                        result.diaryList;
-
-                } else if (
-                    Array.isArray(result.diary)
-                ) {
-
-                    list =
-                        result.diary;
-
-                } else if (
-                    Array.isArray(result.data)
-                ) {
-
-                    list =
-                        result.data;
-
-                }
-
-
-                /* =========================
-                   프론트에서 사용할 형태로 통일
-                ========================= */
-
-                const formattedList =
-                    list
-                        .filter(
-                            diary =>
-                                diary &&
-                                (
-                                    diary.isShared ??
-                                    diary.shared ??
-                                    diary.is_shared ??
-                                    false
-                                )
-                        )
-                        .map(diary => {
-
-                            const rawDate =
-                                diary.diaryDate ||
-                                diary.diary_date ||
-                                diary.date;
-
-
-                            return {
-
-                                diaryId:
-                                    diary.id ||
-                                    diary.diaryId,
-
-                                userid:
-                                    diary.userId ||
-                                    diary.user_id,
-
-                                nickname:
-                                    diary.nickname ||
-                                    "익명",
-
-                                date:
-                                    formatDiaryDate(
-                                        rawDate
-                                    ),
-
-                                emotion:
-                                    diary.mood ||
-                                    diary.emotion ||
-                                    "",
-
-                                comment:
-                                    diary.content ||
-                                    diary.comment ||
-                                    "",
-
-                                summary:
-                                    diary.summary ||
-                                    "",
-
-                                isShared:
-                                    diary.isShared ??
-                                    diary.shared ??
-                                    diary.is_shared ??
-                                    false,
-
-                                sessionId:
-                                    diary.sessionId ||
-                                    diary.session_id ||
-                                    null
-
-                            };
-
-                        })
-                        .sort(
-                            (a, b) =>
-                                new Date(b.date) -
-                                new Date(a.date)
+                    const response =
+                        await fetch(
+                            "/api/diary/shared"
                         );
 
 
-                setDiaryList(
-                    formattedList
-                );
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "공유 일기 조회 실패"
+                        );
+
+                    }
 
 
-            } catch (err) {
+                    const result =
+                        await response.json();
 
-                console.error(
-                    "공유 일기 조회 오류:",
-                    err
-                );
 
-                setError(true);
+                    console.log(
+                        "공유 일기 조회 결과:",
+                        result
+                    );
 
-            } finally {
 
-                setLoading(false);
+                    let list = [];
 
-            }
 
-        };
+                    if (
+                        Array.isArray(result)
+                    ) {
+
+                        list = result;
+
+                    } else if (
+                        Array.isArray(
+                            result.diaries
+                        )
+                    ) {
+
+                        list =
+                            result.diaries;
+
+                    } else if (
+                        Array.isArray(
+                            result.diaryList
+                        )
+                    ) {
+
+                        list =
+                            result.diaryList;
+
+                    } else if (
+                        Array.isArray(
+                            result.diary
+                        )
+                    ) {
+
+                        list =
+                            result.diary;
+
+                    } else if (
+                        Array.isArray(
+                            result.data
+                        )
+                    ) {
+
+                        list =
+                            result.data;
+
+                    }
+
+
+                    /* =========================
+                       프론트에서 사용할 형태로 통일
+                    ========================= */
+
+                    const formattedList =
+                        list
+
+                            .filter(
+                                diary =>
+                                    diary &&
+                                    (
+                                        diary.isShared ??
+                                        diary.shared ??
+                                        diary.is_shared ??
+                                        false
+                                    )
+                            )
+
+                            .map(
+                                diary => {
+
+                                    const rawDate =
+                                        diary.diaryDate ||
+                                        diary.diary_date ||
+                                        diary.date;
+
+
+                                    let emotion =
+                                        diary.mood ||
+                                        diary.emotion ||
+                                        "";
+
+
+                                    /*
+                                     * 한글 감정 → 영어 감정
+                                     */
+
+                                    if (
+                                        !emotionInfo[
+                                        emotion
+                                        ]
+                                    ) {
+
+                                        emotion =
+                                            moodMap[
+                                            emotion
+                                            ] || "";
+
+                                    }
+
+
+                                    return {
+
+                                        diaryId:
+                                            diary.id ||
+                                            diary.diaryId,
+
+
+                                        userid:
+                                            diary.userId ||
+                                            diary.user_id,
+
+
+                                        nickname:
+                                            diary.nickname ||
+                                            "익명",
+
+
+                                        date:
+                                            formatDiaryDate(
+                                                rawDate
+                                            ),
+
+
+                                        emotion:
+
+
+                                            emotion,
+
+
+                                        /*
+                                         * ★ 핵심
+                                         *
+                                         * 서버에서 저장된
+                                         * 해당 일기의 이모지
+                                         */
+
+                                        emoji:
+                                            diary.emoji ||
+                                            "",
+
+
+                                        comment:
+                                            diary.content ||
+                                            diary.comment ||
+                                            "",
+
+
+                                        summary:
+                                            diary.summary ||
+                                            "",
+
+
+                                        isShared:
+                                            diary.isShared ??
+                                            diary.shared ??
+                                            diary.is_shared ??
+                                            false,
+
+
+                                        sessionId:
+                                            diary.sessionId ||
+                                            diary.session_id ||
+                                            null
+
+                                    };
+
+                                }
+                            )
+
+                            .sort(
+                                (a, b) =>
+                                    new Date(
+                                        b.date
+                                    ) -
+                                    new Date(
+                                        a.date
+                                    )
+                            );
+
+
+                    console.log(
+                        "이모지 포함 변환된 공유 일기:",
+                        formattedList
+                    );
+
+
+                    setDiaryList(
+                        formattedList
+                    );
+
+
+                } catch (err) {
+
+                    console.error(
+                        "공유 일기 조회 오류:",
+                        err
+                    );
+
+
+                    setError(true);
+
+                } finally {
+
+                    setLoading(false);
+
+                }
+
+            };
 
 
         fetchSharedDiary();
@@ -331,9 +526,11 @@ function SharedDiary() {
             <div className="shared-diary">
 
                 <div className="shared-diary-header">
+
                     <h1>
                         일기 공유
                     </h1>
+
                     <p>
                         다른 사람들의 감정과
                         이야기를 만나보세요.
@@ -436,17 +633,25 @@ function SharedDiary() {
                 <div className="shared-diary-board">
 
                     {diaryList.map(
-                        (diary, index) => (
+                        (
+                            diary,
+                            index
+                        ) => (
 
                             <SharedDiaryCard
+
                                 key={
                                     diary.diaryId ||
                                     `${diary.date}-${index}`
                                 }
 
-                                diary={diary}
+                                diary={
+                                    diary
+                                }
 
-                                index={index}
+                                index={
+                                    index
+                                }
 
                                 onClick={() =>
                                     setSelectedDiary(
@@ -498,20 +703,27 @@ function SharedDiary() {
 ========================================================= */
 
 function SharedDiaryCard({
+
     diary,
+
     index,
+
     onClick
+
 }) {
 
+    /*
+     * ★ 해당 일기의 emoji를 우선 사용
+     *
+     * emoji가 없을 경우에만
+     * 감정의 기본 emoji 사용
+     */
+
     const emotion =
-        emotionInfo[
-            diary.emotion
-        ] || {
-
-            emoji: "🙂",
-            name: "기록"
-
-        };
+        getEmotionInfo(
+            diary.emotion,
+            diary.emoji
+        );
 
 
     /*
@@ -527,15 +739,25 @@ function SharedDiaryCard({
 
     const shortText =
         previewText.length > 110
-            ? `${previewText.slice(0, 110)}...`
+            ? `${previewText.slice(
+                0,
+                110
+            )}...`
             : previewText;
 
 
     return (
 
         <article
-            className={`shared-diary-card card-${index % 5}`}
-            onClick={onClick}
+
+            className={
+                `shared-diary-card card-${index % 5}`
+            }
+
+            onClick={
+                onClick
+            }
+
         >
 
 
@@ -554,7 +776,9 @@ function SharedDiaryCard({
 
                 <span className="shared-card-emotion">
 
-                    {emotion.emoji}
+                    {
+                        emotion.emoji
+                    }
 
                 </span>
 
@@ -579,7 +803,9 @@ function SharedDiaryCard({
 
 
                 <strong>
-                    {diary.nickname}
+                    {
+                        diary.nickname
+                    }
                 </strong>
 
             </div>
@@ -591,7 +817,9 @@ function SharedDiaryCard({
 
             <div className="shared-card-emotion-name">
 
-                {emotion.name}
+                {
+                    emotion.name
+                }
 
             </div>
 
@@ -602,7 +830,9 @@ function SharedDiaryCard({
 
             <div className="shared-card-content">
 
-                {shortText}
+                {
+                    shortText
+                }
 
             </div>
 
@@ -636,33 +866,45 @@ function SharedDiaryCard({
 ========================================================= */
 
 function SharedDiaryModal({
+
     diary,
+
     onClose
+
 }) {
 
+    /*
+     * ★ 해당 일기의 emoji를 우선 사용
+     */
+
     const emotion =
-        emotionInfo[
-            diary.emotion
-        ] || {
-
-            emoji: "🙂",
-            name: "기록"
-
-        };
+        getEmotionInfo(
+            diary.emotion,
+            diary.emoji
+        );
 
 
     return (
 
         <div
+
             className="shared-diary-modal-overlay"
-            onClick={onClose}
+
+            onClick={
+                onClose
+            }
+
         >
 
             <div
+
                 className="shared-diary-modal"
-                onClick={e =>
-                    e.stopPropagation()
+
+                onClick={
+                    e =>
+                        e.stopPropagation()
                 }
+
             >
 
 
@@ -671,11 +913,18 @@ function SharedDiaryModal({
                 ========================= */}
 
                 <button
+
                     type="button"
+
                     className="shared-modal-close"
-                    onClick={onClose}
+
+                    onClick={
+                        onClose
+                    }
+
                 >
                     ×
+
                 </button>
 
 
@@ -685,7 +934,9 @@ function SharedDiaryModal({
 
                 <div className="shared-modal-emotion-icon">
 
-                    {emotion.emoji}
+                    {
+                        emotion.emoji
+                    }
 
                 </div>
 
@@ -699,13 +950,21 @@ function SharedDiaryModal({
                     <div>
 
                         <h2>
-                            {diary.nickname}
+
+                            {
+                                diary.nickname
+                            }
                             님의 감정일기
+
                         </h2>
 
 
                         <span>
-                            {diary.date}
+
+                            {
+                                diary.date
+                            }
+
                         </span>
 
                     </div>
@@ -714,11 +973,20 @@ function SharedDiaryModal({
                     <div className="shared-modal-emotion">
 
                         <span>
-                            {emotion.emoji}
+
+                            {
+                                emotion.emoji
+                            }
+
                         </span>
 
+
                         <small>
-                            {emotion.name}
+
+                            {
+                                emotion.name
+                            }
+
                         </small>
 
                     </div>
@@ -740,7 +1008,11 @@ function SharedDiaryModal({
 
 
                         <p>
-                            {diary.summary}
+
+                            {
+                                diary.summary
+                            }
+
                         </p>
 
                     </div>
@@ -760,10 +1032,12 @@ function SharedDiaryModal({
 
 
                     <p>
+
                         {
                             diary.comment ||
                             "작성된 내용이 없습니다."
                         }
+
                     </p>
 
                 </div>
@@ -781,10 +1055,16 @@ function SharedDiaryModal({
 
 
                     <button
+
                         type="button"
-                        onClick={onClose}
+
+                        onClick={
+                            onClose
+                        }
+
                     >
                         닫기
+
                     </button>
 
                 </div>

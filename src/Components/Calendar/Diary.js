@@ -67,6 +67,94 @@ const moodMap = {
 
 
 /* =========================================================
+   이모지 → 영어 감정
+========================================================= */
+
+const emojiEmotionMap = {
+    "😊": "happy",
+    "😌": "calm",
+    "😔": "sad",
+    "😢": "sad",
+    "😰": "anxious",
+    "😡": "angry"
+};
+
+
+/* =========================================================
+   감정 정보 가져오기
+========================================================= */
+
+const getEmotionInfo = (emotion, emoji) => {
+
+    let normalizedEmotion = emotion || "";
+
+    /* -----------------------------------------
+       1. 영어 감정이면 그대로 사용
+    ----------------------------------------- */
+
+    if (!emotionInfo[normalizedEmotion]) {
+
+        /* -----------------------------------------
+           2. 한글 감정이면 영어로 변환
+        ----------------------------------------- */
+
+        normalizedEmotion =
+            moodMap[normalizedEmotion] || "";
+    }
+
+
+    /* -----------------------------------------
+       3. 감정이 없고 이모지가 있으면
+          이모지로 감정 찾기
+    ----------------------------------------- */
+
+    if (!normalizedEmotion && emoji) {
+
+        normalizedEmotion =
+            emojiEmotionMap[emoji] || "";
+    }
+
+
+    /* -----------------------------------------
+       4. 정상적인 감정을 찾은 경우
+    ----------------------------------------- */
+
+    if (emotionInfo[normalizedEmotion]) {
+
+        return {
+
+            emotion: normalizedEmotion,
+
+            emoji:
+                emoji ||
+                emotionInfo[normalizedEmotion].emoji,
+
+            name:
+                emotionInfo[normalizedEmotion].name
+
+        };
+    }
+
+
+    /* -----------------------------------------
+       5. 그래도 감정을 못 찾은 경우
+    ----------------------------------------- */
+
+    return {
+
+        emotion: "",
+
+        emoji:
+            emoji || "🙂",
+
+        name:
+            "기록"
+
+    };
+};
+
+
+/* =========================================================
    날짜 포맷
 ========================================================= */
 
@@ -100,30 +188,36 @@ function EmotionDiary({
     selectedDiary
 }) {
 
-    /* =========================
-           상세 모달 배경 스크롤 잠금
-        ========================= */
-
     useEffect(() => {
+
         if (!selectedDiary) {
             return;
         }
 
-        // 모달을 열기 전 body의 값을 기억했다가 닫을 때 되돌립니다.
-        const previousOverflow = document.body.style.overflow;
+        const previousOverflow =
+            document.body.style.overflow;
+
         document.body.style.overflow = "hidden";
 
         return () => {
-            document.body.style.overflow = previousOverflow;
+
+            document.body.style.overflow =
+                previousOverflow;
+
         };
+
     }, [selectedDiary]);
 
+
     return (
+
         <div className="diary-section">
 
             <div className="section-header">
 
-                <h2>감정일기</h2>
+                <h2>
+                    감정일기
+                </h2>
 
                 <p>
                     나의 하루와 감정을
@@ -137,7 +231,9 @@ function EmotionDiary({
 
                 <div className="empty-diary">
 
-                    <div>📖</div>
+                    <div>
+                        📖
+                    </div>
 
                     <p>
                         작성한 감정일기가 없습니다.
@@ -173,6 +269,7 @@ function EmotionDiary({
                             (diary, index) => (
 
                                 <DiaryMemo
+
                                     key={
                                         diary.diaryId ||
                                         diary.id ||
@@ -189,6 +286,7 @@ function EmotionDiary({
                                             diary
                                         )
                                     }
+
                                 />
 
                             )
@@ -232,58 +330,68 @@ function EmotionDiary({
                         </button>
 
 
-                        <div className="diary-modal-icon">
+                        {/* 감정 정보 */}
+                        {(() => {
 
-                            {
-                                emotionInfo[
-                                    selectedDiary.emotion
-                                ]?.emoji || "📖"
-                            }
+                            const emotion =
+                                getEmotionInfo(
+                                    selectedDiary.emotion,
+                                    selectedDiary.emoji
+                                );
 
-                        </div>
+                            return (
 
+                                <>
+                                    <div className="diary-modal-icon">
 
-                        <div className="diary-modal-header">
+                                        {emotion.emoji}
 
-                            <div>
-
-                                <h3>
-                                    {selectedDiary.nickname ||
-                                        "나"}님의 감정일기
-                                </h3>
-
-                                <span>
-                                    {selectedDiary.date}
-                                </span>
-
-                            </div>
+                                    </div>
 
 
-                            <div className="diary-modal-emotion">
+                                    <div className="diary-modal-header">
 
-                                <span>
-                                    {
-                                        emotionInfo[
-                                            selectedDiary.emotion
-                                        ]?.emoji || "🙂"
-                                    }
-                                </span>
+                                        <div>
 
-                                <small>
+                                            <h3>
+                                                {
+                                                    selectedDiary.nickname ||
+                                                    "나"
+                                                }님의 감정일기
+                                            </h3>
 
-                                    {
-                                        emotionInfo[
-                                            selectedDiary.emotion
-                                        ]?.name ||
-                                        selectedDiary.emotion ||
-                                        "기록"
-                                    }
+                                            <span>
+                                                {
+                                                    selectedDiary.date
+                                                }
+                                            </span>
 
-                                </small>
+                                        </div>
 
-                            </div>
 
-                        </div>
+                                        <div className="diary-modal-emotion">
+
+                                            <span>
+                                                {
+                                                    emotion.emoji
+                                                }
+                                            </span>
+
+                                            <small>
+                                                {
+                                                    emotion.name
+                                                }
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </>
+
+                            );
+
+                        })()}
 
 
                         {/* AI 요약 */}
@@ -297,7 +405,9 @@ function EmotionDiary({
                                 </h4>
 
                                 <p>
-                                    {selectedDiary.summary}
+                                    {
+                                        selectedDiary.summary
+                                    }
                                 </p>
 
                             </div>
@@ -309,8 +419,10 @@ function EmotionDiary({
 
                         <div className="diary-modal-content">
 
-                            {selectedDiary.comment ||
-                                "작성된 내용이 없습니다."}
+                            {
+                                selectedDiary.comment ||
+                                "작성된 내용이 없습니다."
+                            }
 
                         </div>
 
@@ -332,6 +444,7 @@ function EmotionDiary({
             )}
 
         </div>
+
     );
 }
 
@@ -347,7 +460,10 @@ function DiaryMemo({
 }) {
 
     const emotion =
-        emotionInfo[diary.emotion] || {};
+        getEmotionInfo(
+            diary.emotion,
+            diary.emoji
+        );
 
 
     const text =
@@ -385,7 +501,7 @@ function DiaryMemo({
 
                     <span className="memo-emotion">
 
-                        {emotion.emoji || "🙂"}
+                        {emotion.emoji}
 
                     </span>
 
@@ -395,8 +511,10 @@ function DiaryMemo({
                 <div className="memo-content">
 
                     <p>
-                        {previewText ||
-                            "작성된 내용이 없습니다."}
+                        {
+                            previewText ||
+                            "작성된 내용이 없습니다."
+                        }
                     </p>
 
                 </div>
@@ -406,7 +524,10 @@ function DiaryMemo({
 
                     <span className="memo-writer">
 
-                        {diary.nickname || "나"}
+                        {
+                            diary.nickname ||
+                            "나"
+                        }
 
                     </span>
 
@@ -420,6 +541,7 @@ function DiaryMemo({
             </div>
 
         </div>
+
     );
 }
 
@@ -453,7 +575,6 @@ function EmotionCalendar({
     emotionCount,
 
     isEditing,
-
     setIsEditing
 
 }) {
@@ -534,8 +655,15 @@ function EmotionCalendar({
                 calendarData[dateKey];
 
 
+            const emotionInfoData =
+                getEmotionInfo(
+                    data?.emotion,
+                    data?.emoji
+                );
+
+
             const emotion =
-                data?.emotion;
+                emotionInfoData.emotion;
 
 
             const isSelected =
@@ -545,19 +673,27 @@ function EmotionCalendar({
             days.push(
 
                 <div
+
                     key={day}
-                    className={`calendar-day ${emotion || ""
+
+                    className={
+                        `calendar-day ${emotion || ""
                         } ${isSelected
                             ? "selected"
                             : ""
-                        }`}
+                        }`
+                    }
+
                     onClick={() =>
                         selectDate(day)
                     }
+
                 >
 
                     <span className="day-number">
+
                         {day}
+
                     </span>
 
 
@@ -567,9 +703,7 @@ function EmotionCalendar({
 
                             {
                                 data?.emoji ||
-                                emotionInfo[
-                                    emotion
-                                ]?.emoji ||
+                                emotionInfoData.emoji ||
                                 "🙂"
                             }
 
@@ -581,7 +715,9 @@ function EmotionCalendar({
                     {data?.comment && (
 
                         <span className="comment-mark">
+
                             📝
+
                         </span>
 
                     )}
@@ -594,6 +730,7 @@ function EmotionCalendar({
 
 
         return days;
+
     };
 
 
@@ -605,6 +742,23 @@ function EmotionCalendar({
         selectedDate
             ? calendarData[selectedDate]
             : null;
+
+
+    /*
+     * ★ 핵심
+     *
+     * selectedEmotion + selectedData.emoji 둘 다 사용
+     *
+     * 감정이 없어도 이모지가 있으면
+     * 이모지 → 감정으로 변환
+     */
+
+    const selectedEmotionInfo =
+        getEmotionInfo(
+            selectedEmotion ||
+            selectedData?.emotion,
+            selectedData?.emoji
+        );
 
 
     const hasSavedDiary =
@@ -746,18 +900,28 @@ function EmotionCalendar({
                                             <div className="emotion-item-info">
 
                                                 <span className="emotion-item-emoji">
-
                                                     {
-                                                        emotionInfo[
-                                                            emotion
-                                                        ]?.emoji
-                                                    }
+                                                        Object.values(calendarData).find(data => {
+                                                            let dataEmotion =
+                                                                data?.emotion ||
+                                                                data?.mood ||
+                                                                "";
 
+                                                            if (!emotionInfo[dataEmotion]) {
+                                                                dataEmotion =
+                                                                    moodMap[dataEmotion] || "";
+                                                            }
+
+                                                            return dataEmotion === emotion;
+                                                        })?.emoji ||
+                                                        emotionInfo[emotion]?.emoji ||
+                                                        "🙂"
+                                                    }
                                                 </span>
 
 
                                                 <span className="emotion-item-name">
-
+                                                    &nbsp;
                                                     {
                                                         emotionInfo[
                                                             emotion
@@ -807,7 +971,9 @@ function EmotionCalendar({
                     </h3>
 
 
-                    {/* 감정 */}
+                    {/* =================================================
+                       감정
+                    ================================================= */}
 
                     <div className="emotion-select">
 
@@ -818,36 +984,50 @@ function EmotionCalendar({
 
                         <div className="emotion-buttons">
 
-                            {selectedEmotion &&
-                                emotionInfo[selectedEmotion] && (
+                            {selectedEmotionInfo.emotion && (
 
-                                    <button
-                                        type="button"
-                                        className="emotion-active"
-                                        disabled={
-                                            hasSavedDiary &&
-                                            !isEditing
+                                <button
+
+                                    type="button"
+
+                                    className="emotion-active"
+
+                                    disabled={
+                                        hasSavedDiary &&
+                                        !isEditing
+                                    }
+
+                                >
+
+                                    <span>
+
+                                        {
+                                            selectedEmotionInfo.emoji
                                         }
-                                    >
 
-                                        <span>
-                                            {emotionInfo[selectedEmotion].emoji}
-                                        </span>
+                                    </span>
 
-                                        <small>
-                                            {emotionInfo[selectedEmotion].name}
-                                        </small>
 
-                                    </button>
+                                    <small>
 
-                                )}
+                                        {
+                                            selectedEmotionInfo.name
+                                        }
+
+                                    </small>
+
+                                </button>
+
+                            )}
 
                         </div>
 
                     </div>
 
 
-                    {/* 한줄평 */}
+                    {/* =================================================
+                       한줄평
+                    ================================================= */}
 
                     <div className="comment-area">
 
@@ -857,6 +1037,7 @@ function EmotionCalendar({
 
 
                         <textarea
+
                             value={comment}
 
                             onChange={e =>
@@ -873,13 +1054,15 @@ function EmotionCalendar({
                                 hasSavedDiary &&
                                 !isEditing
                             }
-                        />
 
+                        />
 
                     </div>
 
 
-                    {/* AI 요약 */}
+                    {/* =================================================
+                       AI 요약
+                    ================================================= */}
 
                     {selectedData?.summary && (
 
@@ -890,7 +1073,9 @@ function EmotionCalendar({
                             </h4>
 
                             <p>
-                                {selectedData.summary}
+                                {
+                                    selectedData.summary
+                                }
                             </p>
 
                         </div>
@@ -902,6 +1087,7 @@ function EmotionCalendar({
             )}
 
         </div>
+
     );
 }
 
@@ -962,8 +1148,6 @@ function Diary() {
 
     /* =====================================================
        전체 내 일기
-
-       감정 달력과 분리
     ===================================================== */
 
     const [myDiaryList, setMyDiaryList] =
@@ -972,15 +1156,6 @@ function Diary() {
 
     /* =====================================================
        현재 월 달력 데이터
-
-       예:
-
-       {
-           "2026-08-01": {
-               emotion: "happy",
-               comment: "좋은 하루였다"
-           }
-       }
     ===================================================== */
 
     const [calendarData, setCalendarData] =
@@ -999,8 +1174,6 @@ function Diary() {
 
     /* =========================================================
        1. 내 감정일기 전체 조회
-       
-       감정일기 메뉴에서 사용
     ========================================================= */
 
     useEffect(() => {
@@ -1038,36 +1211,28 @@ function Diary() {
                     diaryList = result;
 
                 } else if (
-                    Array.isArray(
-                        result.diary
-                    )
+                    Array.isArray(result.diary)
                 ) {
 
                     diaryList =
                         result.diary;
 
                 } else if (
-                    Array.isArray(
-                        result.list
-                    )
+                    Array.isArray(result.list)
                 ) {
 
                     diaryList =
                         result.list;
 
                 } else if (
-                    Array.isArray(
-                        result.data
-                    )
+                    Array.isArray(result.data)
                 ) {
 
                     diaryList =
                         result.data;
 
                 } else if (
-                    Array.isArray(
-                        result.diaries
-                    )
+                    Array.isArray(result.diaries)
                 ) {
 
                     diaryList =
@@ -1116,6 +1281,24 @@ function Diary() {
                                 emotion =
                                     moodMap[
                                     emotion
+                                    ] || "";
+
+                            }
+
+
+                            /*
+                             * 이모지만 있는 데이터도
+                             * 감정을 찾아준다.
+                             */
+
+                            if (
+                                !emotion &&
+                                diary.emoji
+                            ) {
+
+                                emotion =
+                                    emojiEmotionMap[
+                                    diary.emoji
                                     ] || "";
 
                             }
@@ -1206,10 +1389,6 @@ function Diary() {
 
     /* =========================================================
        2. 해당 월 감정일기 조회
-       
-       ★ 여기 추가된 핵심 부분
-       
-       현재 보고 있는 달이 바뀔 때마다 실행됨
     ========================================================= */
 
     useEffect(() => {
@@ -1231,10 +1410,6 @@ function Diary() {
                         currentDate.getMonth();
 
 
-                    /* -----------------------------------------
-                       해당 월 시작일
-                    ----------------------------------------- */
-
                     const startDate =
                         `${year}-${String(
                             month + 1
@@ -1243,10 +1418,6 @@ function Diary() {
                             "0"
                         )}-01`;
 
-
-                    /* -----------------------------------------
-                       해당 월 마지막 날짜
-                    ----------------------------------------- */
 
                     const lastDay =
                         new Date(
@@ -1278,10 +1449,6 @@ function Diary() {
                     );
 
 
-                    /* -----------------------------------------
-                       해당 월 데이터 요청
-                    ----------------------------------------- */
-
                     const response =
                         await axios.get(
                             `${DIARY_API}/calendar/${userId}`,
@@ -1308,10 +1475,6 @@ function Diary() {
                     const newCalendarData =
                         {};
 
-
-                    /* -----------------------------------------
-                       서버 데이터 → 달력 데이터 변환
-                    ----------------------------------------- */
 
                     diaryList.forEach(
                         diary => {
@@ -1340,16 +1503,6 @@ function Diary() {
                                 "";
 
 
-                            /*
-                             * 영어 감정이면 그대로 사용
-                             *
-                             * happy
-                             * calm
-                             * sad
-                             * anxious
-                             * angry
-                             */
-
                             if (
                                 !emotionInfo[
                                 emotion
@@ -1359,6 +1512,24 @@ function Diary() {
                                 emotion =
                                     moodMap[
                                     emotion
+                                    ] || "";
+
+                            }
+
+
+                            /*
+                             * 이모지만 있는 경우
+                             * 이모지로 감정 찾기
+                             */
+
+                            if (
+                                !emotion &&
+                                diary.emoji
+                            ) {
+
+                                emotion =
+                                    emojiEmotionMap[
+                                    diary.emoji
                                     ] || "";
 
                             }
@@ -1466,8 +1637,11 @@ function Diary() {
 
 
         setSelectedDate(null);
+
         setSelectedEmotion("");
+
         setComment("");
+
         setIsEditing(false);
 
     };
@@ -1511,8 +1685,31 @@ function Diary() {
         );
 
 
+        /*
+         * ★ 핵심 수정
+         *
+         * data.emotion이 없어도
+         * data.emoji를 보고 감정을 찾아서
+         * selectedEmotion에 넣는다.
+         */
+
+        const emotionData =
+            getEmotionInfo(
+                data.emotion,
+                data.emoji
+            );
+
+
+        console.log(
+            "선택 날짜 감정:",
+            dateKey,
+            data,
+            emotionData
+        );
+
+
         setSelectedEmotion(
-            data.emotion || ""
+            emotionData.emotion
         );
 
 
@@ -1667,6 +1864,14 @@ function Diary() {
             }
 
 
+            const savedEmoji =
+                savedDiary?.emoji ||
+                emotionInfo[
+                    savedEmotion
+                ]?.emoji ||
+                "";
+
+
             const savedContent =
                 savedDiary?.content ||
                 savedDiary?.comment ||
@@ -1704,9 +1909,13 @@ function Diary() {
                     existingDiary?.summary ||
                     "",
 
+                /*
+                 * 저장 결과에 emoji가 없더라도
+                 * 감정에 맞는 이모지를 자동으로 넣는다.
+                 */
+
                 emoji:
-                    savedDiary?.emoji ||
-                    "",
+                    savedEmoji,
 
                 isShared:
                     savedDiary?.isShared ??
@@ -1729,9 +1938,12 @@ function Diary() {
 
             setCalendarData(
                 prev => ({
+
                     ...prev,
+
                     [savedDate]:
                         newDiary
+
                 })
             );
 
@@ -1752,8 +1964,11 @@ function Diary() {
 
 
                     return [
+
                         newDiary,
+
                         ...filtered
+
                     ].sort(
                         (a, b) =>
                             new Date(b.date) -
@@ -1800,11 +2015,36 @@ function Diary() {
         currentDate.getMonth();
 
 
+    console.log(
+        "현재 달 calendarData:",
+        calendarData
+    );
+
+
+    console.log(
+        "현재 달 감정값:",
+        Object.values(calendarData).map(
+            data => ({
+
+                date:
+                    data?.date,
+
+                emotion:
+                    data?.emotion,
+
+                mood:
+                    data?.mood,
+
+                emoji:
+                    data?.emoji
+
+            })
+        )
+    );
+
+
     /* =========================================================
-       현재 월 감정 개수
-       
-       calendarData 자체가 현재 월 데이터이므로
-       별도 날짜 필터링 필요 없음
+       감정 카운트
     ========================================================= */
 
     const emotionCount = {
@@ -1822,20 +2062,32 @@ function Diary() {
     };
 
 
-    Object.values(
-        calendarData
-    ).forEach(
+    Object.values(calendarData).forEach(
         data => {
 
+            if (!data) {
+                return;
+            }
+
+
+            const emotionData =
+                getEmotionInfo(
+                    data.emotion ||
+                    data.mood,
+                    data.emoji
+                );
+
+
             const emotion =
-                data?.emotion;
+                emotionData.emotion;
 
 
             if (
                 emotion &&
-                emotionCount[
-                emotion
-                ] !== undefined
+                Object.prototype.hasOwnProperty.call(
+                    emotionCount,
+                    emotion
+                )
             ) {
 
                 emotionCount[
@@ -1909,15 +2161,19 @@ function Diary() {
                     <div className="sidebar-menu">
 
                         <button
+
                             type="button"
+
                             className={
                                 menu === "diary"
                                     ? "active"
                                     : ""
                             }
+
                             onClick={() =>
                                 setMenu("diary")
                             }
+
                         >
 
                             <span>
@@ -1930,15 +2186,19 @@ function Diary() {
 
 
                         <button
+
                             type="button"
+
                             className={
                                 menu === "emotion"
                                     ? "active"
                                     : ""
                             }
+
                             onClick={() =>
                                 setMenu("emotion")
                             }
+
                         >
 
                             <span>
@@ -2046,7 +2306,9 @@ function Diary() {
             </div>
 
         </div>
+
     );
+
 }
 
 

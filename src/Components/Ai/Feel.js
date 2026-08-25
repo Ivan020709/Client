@@ -118,17 +118,11 @@ function Feel() {
     // =====================================================
 
     const getTodayKey = () => {
-        /*
-         * 로그인한 사용자별로 저장
-         *
-         * 예:
-         * feelCompleted_123
-         */
 
         const userid =
             loginUser?.userid || "guest";
 
-        return `feelCompleted_${userid}`;
+        return `dailyCounselingCompleted_${userid}`;
 
     };
 
@@ -617,21 +611,6 @@ function Feel() {
 
                     </div>
 
-
-                    <button
-                        onClick={newConversation}
-                        disabled={
-                            todayCompleted
-                        }
-                        className={
-                            todayCompleted
-                                ? "talk-ai-new-button talk-ai-new-button-disabled"
-                                : "talk-ai-new-button"
-                        }
-                    >
-                        새 대화
-                    </button>
-
                 </div>
 
 
@@ -1076,17 +1055,6 @@ function Feel() {
                         ================================================= */}
 
                         <div className="talk-ai-result-buttons">
-
-                            <button
-                                onClick={newConversation}
-                                disabled={
-                                    todayCompleted
-                                }
-                                className="talk-ai-new-conversation-button"
-                            >
-                                새로운 대화 시작하기
-                            </button>
-
 
                             {/* 방금 저장된 감정일기를 공개 상태로 변경합니다. */}
                             <button

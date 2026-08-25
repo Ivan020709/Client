@@ -49,6 +49,46 @@ function G() {
 
     });
 
+    const shareDiary = () => {
+
+        // 대화 종료 후 서버에서 받은 일기 번호가 있어야
+        // 어떤 감정일기를 공유할지 서버에 알려줄 수 있습니다.
+        if (!analysis || !analysis.diaryId) {
+            alert("공유할 감정일기를 찾을 수 없습니다.");
+            return;
+        }
+
+        // 다른 사용자의 일기를 변경하지 않도록 로그인 회원 번호도 확인합니다.
+        if (!loginUser || !loginUser.userid) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
+        // RequestBody 없이 주소의 일기 번호와 params 값만 서버에 전달합니다.
+        // shared가 true이면 공개 일기로 변경됩니다.
+        axios.post(
+            `/api/diary/${analysis.diaryId}/share`,
+            null,
+            {
+                params: {
+                    userId: loginUser.userid,
+                    shared: true
+                }
+            }
+        )
+            .then((result) => {
+                if (result.data.msg === "OK") {
+                    alert("감정일기가 공유되었습니다.");
+                } else {
+                    alert("감정일기 공유에 실패했습니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("감정일기 공유 오류:", error);
+                alert("감정일기 공유 중 오류가 발생했습니다.");
+            });
+    };
+
 
     // =====================================================
     // 오늘 날짜
@@ -87,19 +127,10 @@ function G() {
 
     const getTodayKey = () => {
 
-        /*
-         * 로그인 사용자별로 저장
-         *
-         * 예:
-         *
-         * gCompleted_1
-         * gCompleted_2
-         * gCompleted_3
-         */
-
         const userid =
             loginUser?.userid || "guest";
-        return `gCompleted_${userid}`;
+
+        return `dailyCounselingCompleted_${userid}`;
 
     };
 
@@ -661,33 +692,6 @@ function G() {
 
                     </div>
 
-
-                    <button
-
-                        onClick={
-                            newConversation
-                        }
-
-                        disabled={
-                            todayCompleted
-                        }
-
-                        className={
-
-                            todayCompleted
-
-                                ? "g-new-button g-new-button-disabled"
-
-                                : "g-new-button"
-
-                        }
-
-                    >
-
-                        새 대화
-
-                    </button>
-
                 </div>
 
 
@@ -1227,26 +1231,8 @@ function G() {
                         <div className="talk-ai-result-buttons">
 
                             <button
-
-                                onClick={
-                                    newConversation
-                                }
-
-                                disabled={
-                                    todayCompleted
-                                }
-
-                                className="talk-ai-new-conversation-button"
-
-                            >
-
-                                새로운 대화 시작하기
-
-                            </button>
-
-
-                            <button
                                 className="talk-ai-share-button"
+                                onClick={shareDiary}
                             >
 
                                 공유하기

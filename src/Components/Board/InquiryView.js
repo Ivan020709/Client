@@ -10,45 +10,67 @@ function InquiryView() {
     const navigate = useNavigate();
     const { inquirynum } = useParams();
 
+    // =====================================================
     // 로그인 사용자
+    // =====================================================
+
     const loginUser = useSelector(state => state.user);
 
+
+    // =====================================================
     // 문의글
+    // =====================================================
+
     const [post, setPost] = useState(null);
 
-    // 댓글
-    const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState('');
 
-    // 수정 중인 댓글
-    const [editingCommentId, setEditingCommentId] = useState(null);
-    const [editingContent, setEditingContent] = useState('');
+    // =====================================================
+    // 관리자 여부
+    // =====================================================
+
+    const [isAdmin, setIsAdmin] = useState(false);
 
 
     // =====================================================
-    // 문의 댓글 조회
+    // 관리자 답변
     // =====================================================
 
-    const loadComments = () => {
+    const [answer, setAnswer] = useState(null);
 
-        return axios.get(
-            `/api/inquiry/${inquirynum}/comments`
-        )
-            .then((result) => {
 
-                // 서버 이름을 기존 화면에서 사용하던 이름으로 맞춥니다.
-                const list = (result.data.comments || []).map((item) => ({
-                    ...item,
-                    userid: item.userId,
-                    nickname: item.userName,
-                    created_at: item.createdAt
-                        ? item.createdAt.substring(0, 16).replace('T', ' ')
-                        : ''
-                }));
+    // =====================================================
+    // 관리자 답변 입력
+    // =====================================================
 
-                setComments(list);
-            });
-    };
+    const [adminAnswer, setAdminAnswer] = useState('');
+
+
+    // =====================================================
+    // 문의글 작성자 확인
+    //
+    // 백엔드에서 userid / userId / user_id 중
+    // 어떤 이름으로 내려와도 대응
+    // =====================================================
+
+    const writerId =
+        post?.member?.userid ||
+        post?.member?.userId ||
+        post?.member?.user_id ||
+        post?.userid ||
+        post?.userId ||
+        post?.user_id;
+
+
+    const currentUserId =
+        loginUser?.userid ||
+        loginUser?.userId ||
+        loginUser?.user_id;
+
+
+    const isWriter =
+        currentUserId &&
+        writerId &&
+        String(currentUserId) === String(writerId);
 
 
     // =====================================================
@@ -60,15 +82,26 @@ function InquiryView() {
         axios.get(`/api/inquiry/getInquiry/${inquirynum}`)
             .then((result) => {
 
-                setPost(result.data.inquiry);
+                console.log(
+                    '문의글:',
+                    result.data.inquiry
+                );
 
+                setPost(
+                    result.data.inquiry
+                );
 
             })
             .catch((err) => {
 
-                console.error('문의글 조회 실패:', err);
+                console.error(
+                    '문의글 조회 실패:',
+                    err
+                );
 
-                alert('문의글을 불러오지 못했습니다.');
+                alert(
+                    '문의글을 불러오지 못했습니다.'
+                );
 
                 navigate('/InquiryList');
 
@@ -77,158 +110,227 @@ function InquiryView() {
     }, [inquirynum, navigate]);
 
 
-    // 문의 상세 화면에 들어오면 DB에 저장된 댓글을 불러옵니다.
+    // =====================================================
+    // 작성자 확인 디버깅
+    // =====================================================
+
     useEffect(() => {
-        loadComments().catch((err) => {
-            console.error('문의 댓글 조회 실패:', err);
-        });
-    }, [inquirynum]); // eslint-disable-line react-hooks/exhaustive-deps
+
+        if (!post) {
+            return;
+        }
+
+        console.log(
+            '로그인 사용자 ID:',
+            currentUserId
+        );
+
+        console.log(
+            '문의글 작성자 ID:',
+            writerId
+        );
+
+        console.log(
+            '작성자 여부:',
+            isWriter
+        );
+
+    }, [
+        post,
+        currentUserId,
+        writerId,
+        isWriter
+    ]);
 
 
     // =====================================================
-    // 댓글 등록
+    // 관리자 여부 조회
     // =====================================================
 
-    const handleCommentSubmit = (e) => {
+    useEffect(() => {
+
+        if (!loginUser?.email) {
+
+            setIsAdmin(false);
+
+            return;
+        }
+
+
+        axios.get(
+            '/api/admin/getAdmin',
+            {
+                params: {
+                    email: loginUser.email
+                }
+            }
+        )
+            .then((result) => {
+
+                console.log(
+                    '관리자 권한:',
+                    result.data.role
+                );
+
+                setIsAdmin(
+                    result.data.role === 'ADMIN'
+                );
+
+            })
+            .catch((err) => {
+
+                console.error(
+                    'role 조회 실패:',
+                    err
+                );
+
+                setIsAdmin(false);
+
+            });
+
+    }, [loginUser?.email]);
+
+
+    // =====================================================
+    // 관리자 답변 조회
+    // =====================================================
+
+    useEffect(() => {
+
+        if (!inquirynum) {
+            return;
+        }
+
+
+        axios.get(
+            '/api/admin/getAdminAnswer',
+            {
+                params: {
+                    inquiryId: inquirynum
+                }
+            }
+        )
+            .then((result) => {
+
+                console.log(
+                    '관리자 답변:',
+                    result.data.answers
+                );
+
+
+                // 답변 하나만 저장
+                setAnswer(
+                    result.data.answers || null
+                );
+
+            })
+            .catch((err) => {
+
+                console.error(
+                    '관리자 답변 조회 실패:',
+                    err
+                );
+
+                setAnswer(null);
+
+            });
+
+    }, [inquirynum]);
+
+
+    // =====================================================
+    // 관리자 답변 등록
+    // =====================================================
+
+    const handleAdminAnswerSubmit = (e) => {
 
         e.preventDefault();
 
-        // 로그인 확인
-        if (!loginUser?.userid) {
 
-            alert('댓글은 로그인 후 작성할 수 있습니다.');
+        // 관리자 확인
+        if (!isAdmin) {
 
-            navigate('/memberLogin', {
-                state: {
-                    from: `/inquiryView/${inquirynum}`
-                }
-            });
+            alert(
+                '관리자만 답변을 작성할 수 있습니다.'
+            );
 
             return;
         }
 
 
-        // 빈 댓글 확인
-        if (!comment.trim()) {
+        // 빈 답변 확인
+        if (!adminAnswer.trim()) {
 
-            alert('댓글을 입력해주세요.');
+            alert(
+                '답변을 입력해주세요.'
+            );
 
             return;
         }
 
 
-        // 화면에만 임시로 넣지 않고 서버를 통해 DB에 저장합니다.
         axios.post(
-            `/api/inquiry/${inquirynum}/comments`,
-            {
-                content: comment.trim()
-            },
+            '/api/admin/writeAnswer',
+            null,
             {
                 params: {
-                    userId: loginUser.userid
+                    inquirynum: inquirynum,
+                    nickname: loginUser.nickname,
+                    content: adminAnswer.trim()
                 }
             }
         )
             .then(() => {
-                setComment('');
-                return loadComments();
+
+                // 방금 작성한 답변을 화면에 바로 표시
+                const newAnswer = {
+
+                    nickname:
+                        loginUser.nickname,
+
+                    content:
+                        adminAnswer.trim(),
+
+                    indate:
+                        new Date().toISOString()
+
+                };
+
+
+                setAnswer(
+                    newAnswer
+                );
+
+
+                setAdminAnswer('');
+
+
+                // 문의글 상태도 화면에서 바로 변경
+                setPost((prev) => ({
+
+                    ...prev,
+
+                    status: 'Y'
+
+                }));
+
+
+                alert(
+                    '관리자 답변이 등록되었습니다.'
+                );
+
             })
             .catch((err) => {
-                console.error('문의 댓글 등록 실패:', err);
-                alert('댓글 등록 중 오류가 발생했습니다.');
-            });
 
-    };
+                console.error(
+                    '관리자 답변 등록 실패:',
+                    err
+                );
 
+                alert(
+                    '관리자 답변 등록에 실패했습니다.'
+                );
 
-    // =====================================================
-    // 댓글 수정 시작
-    // =====================================================
-
-    const handleCommentEditStart = (item) => {
-
-        setEditingCommentId(item.id);
-
-        setEditingContent(item.content);
-
-    };
-
-
-    // =====================================================
-    // 댓글 수정 취소
-    // =====================================================
-
-    const handleCommentEditCancel = () => {
-
-        setEditingCommentId(null);
-
-        setEditingContent('');
-
-    };
-
-
-    // =====================================================
-    // 댓글 수정 완료
-    // =====================================================
-
-    const handleCommentEdit = (id) => {
-
-        if (!editingContent.trim()) {
-
-            alert('댓글 내용을 입력해주세요.');
-
-            return;
-        }
-
-
-        // PUT 대신 POST 요청으로 댓글을 수정합니다.
-        axios.post(
-            `/api/inquiry/comments/${id}/update`,
-            {
-                content: editingContent.trim()
-            },
-            {
-                params: {
-                    userId: loginUser.userid
-                }
-            }
-        )
-            .then(() => {
-                setEditingCommentId(null);
-                setEditingContent('');
-                return loadComments();
-            })
-            .catch((err) => {
-                console.error('문의 댓글 수정 실패:', err);
-                alert('댓글 수정 중 오류가 발생했습니다.');
-            });
-
-    };
-
-
-    // =====================================================
-    // 댓글 삭제
-    // =====================================================
-
-    const handleCommentDelete = (id) => {
-
-        if (!window.confirm('댓글을 삭제하시겠습니까?')) {
-            return;
-        }
-
-
-        axios.delete(
-            `/api/inquiry/comments/${id}`,
-            {
-                params: {
-                    userId: loginUser.userid
-                }
-            }
-        )
-            .then(() => loadComments())
-            .catch((err) => {
-                console.error('문의 댓글 삭제 실패:', err);
-                alert('댓글 삭제 중 오류가 발생했습니다.');
             });
 
     };
@@ -240,7 +342,23 @@ function InquiryView() {
 
     const handleDelete = () => {
 
-        if (!window.confirm('문의를 삭제하시겠습니까?')) {
+        // 작성자가 아닌 경우
+        if (!isWriter) {
+
+            alert(
+                '작성자만 삭제할 수 있습니다.'
+            );
+
+            return;
+        }
+
+
+        if (
+            !window.confirm(
+                '문의를 삭제하시겠습니까?'
+            )
+        ) {
+
             return;
         }
 
@@ -250,24 +368,35 @@ function InquiryView() {
         )
             .then((result) => {
 
-                if (result.data.msg === 'OK') {
+                if (
+                    result.data.msg === 'OK'
+                ) {
 
-                    alert('문의가 삭제되었습니다.');
+                    alert(
+                        '문의가 삭제되었습니다.'
+                    );
 
                     navigate('/InquiryList');
 
                 } else {
 
-                    alert('문의 삭제에 실패했습니다.');
+                    alert(
+                        '문의 삭제에 실패했습니다.'
+                    );
 
                 }
 
             })
             .catch((err) => {
 
-                console.error('문의 삭제 실패:', err);
+                console.error(
+                    '문의 삭제 실패:',
+                    err
+                );
 
-                alert('문의 삭제 중 오류가 발생했습니다.');
+                alert(
+                    '문의 삭제 중 오류가 발생했습니다.'
+                );
 
             });
 
@@ -285,7 +414,9 @@ function InquiryView() {
             <div className="inquiry-view-page">
 
                 <div className="inquiry-view-loading">
+
                     문의글을 불러오는 중입니다...
+
                 </div>
 
             </div>
@@ -313,14 +444,18 @@ function InquiryView() {
                 <button
                     type="button"
                     className="inquiry-view-back"
-                    onClick={() => navigate('/InquiryList')}
+                    onClick={() =>
+                        navigate('/InquiryList')
+                    }
                 >
                     ← 목록
                 </button>
 
 
                 <h1 className="inquiry-view-heading">
+
                     문의 상세 내용
+
                 </h1>
 
             </div>
@@ -332,49 +467,73 @@ function InquiryView() {
 
             <div className="inquiry-view-card">
 
-
-                {/* 제목 */}
-
                 <div className="inquiry-view-title-area">
 
                     <h2 className="inquiry-view-title">
+
                         {post.title}
+
                     </h2>
 
                 </div>
 
 
-                {/* 작성자 / 날짜 */}
-
                 <div className="inquiry-view-info">
 
                     <span className="inquiry-view-writer">
-                        작성자 : <strong>{post.member?.nickname || "알 수 없는 사용자"}</strong>
+
+                        작성자 :
+                        <strong>
+                            {post.member?.nickname ||
+                                "알 수 없는 사용자"}
+                        </strong>
+
                     </span>
 
 
                     <span className="inquiry-view-date">
-                        작성일 : {post.indate?.substring(0, 10)}
+
+                        작성일 :
+                        {post.indate?.substring(0, 10)}
+
+                    </span>
+
+
+                    {/* 문의 상태 */}
+
+                    <span
+                        className={
+                            post.status === 'Y'
+                                ? 'inquiry-status-complete'
+                                : 'inquiry-status-waiting'
+                        }
+                    >
+
+                        {post.status === 'Y'
+                            ? '답변 완료'
+                            : '대기중'}
+
                     </span>
 
                 </div>
 
 
-                {/* 내용 */}
-
                 <div className="inquiry-view-content">
+
                     {post.content}
+
                 </div>
 
             </div>
 
 
             {/* =================================================
-                하단 버튼
-            ================================================= */}
+    하단 버튼
+================================================= */}
 
             <div className="inquiry-view-actions">
 
+                {/* 목록 버튼은 항상 표시 */}
                 <button
                     type="button"
                     className="inquiry-view-list-btn"
@@ -384,201 +543,150 @@ function InquiryView() {
                 </button>
 
 
-                <div className="inquiry-view-action-group">
+                {/* =================================================
+        작성자이고 아직 관리자 답변이 없는 경우에만
+        수정 / 삭제 버튼 표시
+    ================================================= */}
 
-                    <button
-                        type="button"
-                        className="inquiry-view-edit-btn"
-                        onClick={() =>
-                            navigate(`/UpdateInquiry/${inquirynum}`)
-                        }
-                    >
-                        수정
-                    </button>
+                {isWriter && !answer && (
+
+                    <div className="inquiry-view-action-group">
+
+                        <button
+                            type="button"
+                            className="inquiry-view-edit-btn"
+                            onClick={() =>
+                                navigate(`/UpdateInquiry/${inquirynum}`)
+                            }
+                        >
+                            수정
+                        </button>
 
 
-                    <button
-                        type="button"
-                        className="inquiry-view-delete-btn"
-                        onClick={handleDelete}
-                    >
-                        삭제
-                    </button>
+                        <button
+                            type="button"
+                            className="inquiry-view-delete-btn"
+                            onClick={handleDelete}
+                        >
+                            삭제
+                        </button>
 
-                </div>
+                    </div>
+
+                )}
 
             </div>
 
-
             {/* =================================================
-                댓글 영역
+                관리자 답변 영역
             ================================================= */}
 
-            <div className="inquiry-comment-section">
+            <div className="inquiry-admin-answer-section">
 
 
-                {/* 댓글 제목 */}
+                {/* 답변 제목 */}
 
-                <div className="inquiry-comment-title">
+                <div className="inquiry-admin-answer-title">
 
-                    댓글 <strong>{comments.length}</strong>
+                    관리자 답변
 
                 </div>
 
 
                 {/* =================================================
-                    댓글 목록
+                    답변이 있는 경우
                 ================================================= */}
 
-                <div className="inquiry-comment-list">
+                {answer ? (
 
-                    {comments.length > 0 ? (
+                    <div className="inquiry-admin-answer">
 
-                        comments.map((item) => (
+                        <div className="inquiry-admin-answer-header">
 
-                            <div
-                                className="inquiry-comment"
-                                key={item.id}
-                            >
+                            <div className="inquiry-admin-answer-user">
 
-                                {/* 댓글 상단 정보 */}
+                                <span className="inquiry-admin-answer-avatar">
 
-                                <div className="inquiry-comment-header">
+                                    {
+                                        answer.nickname?.charAt(0) ||
+                                        'A'
+                                    }
 
-                                    <div className="inquiry-comment-user">
-
-                                        <span className="inquiry-comment-avatar">
-                                            {item.nickname?.charAt(0)}
-                                        </span>
-
-                                        <strong>
-                                            {item.nickname}
-                                        </strong>
-
-                                        <span className="inquiry-comment-date">
-                                            {item.created_at}
-                                        </span>
-
-                                    </div>
+                                </span>
 
 
-                                    {/* 수정 / 삭제 */}
-                                    {Number(loginUser?.userid) === Number(item.userid) && (
-                                        <div className="inquiry-comment-actions">
+                                <strong>
 
-                                            <button
-                                                type="button"
-                                                className="inquiry-comment-edit-btn"
-                                                onClick={() =>
-                                                    handleCommentEditStart(item)
-                                                }
-                                            >
-                                                수정
-                                            </button>
+                                    {answer.nickname}
 
-                                            <button
-                                                type="button"
-                                                className="inquiry-comment-delete-btn"
-                                                onClick={() =>
-                                                    handleCommentDelete(item.id)
-                                                }
-                                            >
-                                                삭제
-                                            </button>
-
-                                        </div>
-                                    )}
-
-                                </div>
+                                </strong>
 
 
-                                {/* =================================================
-                                    댓글 수정 중
-                                ================================================= */}
+                                <span className="inquiry-admin-answer-date">
 
-                                {editingCommentId === item.id ? (
+                                    {answer.indate?.substring(0, 10)}
 
-                                    <div className="inquiry-comment-edit-area">
-
-                                        <textarea
-                                            value={editingContent}
-                                            onChange={(e) =>
-                                                setEditingContent(e.target.value)
-                                            }
-                                        />
-
-                                        <div className="inquiry-comment-edit-actions">
-
-                                            <button
-                                                type="button"
-                                                className="inquiry-comment-save-btn"
-                                                onClick={() =>
-                                                    handleCommentEdit(item.id)
-                                                }
-                                            >
-                                                저장
-                                            </button>
-
-                                            <button
-                                                type="button"
-                                                className="inquiry-comment-cancel-btn"
-                                                onClick={handleCommentEditCancel}
-                                            >
-                                                취소
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                ) : (
-
-                                    /* 댓글 내용 */
-
-                                    <div className="inquiry-comment-content">
-                                        {item.content}
-                                    </div>
-
-                                )}
+                                </span>
 
                             </div>
 
-                        ))
-
-                    ) : (
-
-                        <div className="inquiry-no-comment">
-                            아직 댓글이 없습니다.
                         </div>
 
-                    )}
 
-                </div>
+                        {/* 답변 내용 */}
+
+                        <div className="inquiry-admin-answer-content">
+
+                            {answer.content}
+
+                        </div>
+
+                    </div>
+
+                ) : (
+
+                    <div className="inquiry-admin-no-answer">
+
+                        아직 관리자 답변이 없습니다.
+
+                    </div>
+
+                )}
 
 
                 {/* =================================================
-                    댓글 작성
+                    관리자만 답변 작성
                 ================================================= */}
 
-                <form
-                    className="inquiry-comment-form"
-                    onSubmit={handleCommentSubmit}
-                >
+                {isAdmin && !answer && (
 
-                    <textarea
-                        value={comment}
-                        onChange={(e) =>
-                            setComment(e.target.value)
+                    <form
+                        className="inquiry-admin-answer-form"
+                        onSubmit={
+                            handleAdminAnswerSubmit
                         }
-                        placeholder="댓글을 입력해주세요."
-                    />
+                    >
+
+                        <textarea
+                            value={adminAnswer}
+                            onChange={(e) =>
+                                setAdminAnswer(
+                                    e.target.value
+                                )
+                            }
+                            placeholder="문의에 대한 답변을 입력해주세요."
+                        />
 
 
-                    <button type="submit">
-                        댓글 등록
-                    </button>
+                        <button type="submit">
 
-                </form>
+                            답변 등록
+
+                        </button>
+
+                    </form>
+
+                )}
 
             </div>
 
@@ -587,5 +695,6 @@ function InquiryView() {
     );
 
 }
+
 
 export default InquiryView;

@@ -33,8 +33,6 @@
 
     color: #9a918b;
 
-    font-family: 'Noto Sans KR', sans-serif;
-
     font-size: 14px;
 }
 
@@ -69,14 +67,23 @@
     position: absolute;
 
     left: 0;
-
     top: 50%;
 
     transform: translateY(-50%);
 
+    z-index: 10;
+
+    width: auto;
+    min-width: 80px;
+
     height: 40px;
 
+    margin: 0;
     padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: 1px solid #eadbd3;
 
@@ -91,6 +98,10 @@
     font-size: 13px;
 
     font-weight: 600;
+
+    line-height: 1;
+
+    white-space: nowrap;
 
     cursor: pointer;
 
@@ -112,12 +123,17 @@
 
     color: #9f7563;
 
-    transform:
-        translateY(-50%)
-        translateY(-2px);
+    transform: translateY(calc(-50% - 2px));
 
     box-shadow:
         0 5px 14px rgba(80, 65, 55, 0.08);
+}
+
+
+.inquiry-view-back:active {
+    transform: translateY(-50%);
+
+    box-shadow: none;
 }
 
 
@@ -127,7 +143,6 @@
 
 .inquiry-view-heading {
     margin: 0;
-
     padding: 0;
 
     color: #4f4944;
@@ -169,7 +184,7 @@
 
 
 /* =========================================================
-   문의 제목 영역
+   문의 제목
 ========================================================= */
 
 .inquiry-view-title-area {
@@ -185,13 +200,8 @@
 }
 
 
-/* =========================================================
-   문의 제목
-========================================================= */
-
 .inquiry-view-title {
     margin: 0;
-
     padding: 0;
 
     color: #4f4944;
@@ -209,7 +219,7 @@
 
 
 /* =========================================================
-   작성자 / 날짜
+   작성자 / 날짜 / 상태
 ========================================================= */
 
 .inquiry-view-info {
@@ -237,26 +247,71 @@
 }
 
 
-/* 작성자 */
-
 .inquiry-view-writer {
     white-space: nowrap;
 }
 
 
-/* 작성자 강조 */
-
 .inquiry-view-writer strong {
+    margin-left: 4px;
+
     color: #81766f;
 
     font-weight: 700;
 }
 
 
-/* 날짜 */
-
 .inquiry-view-date {
     white-space: nowrap;
+}
+
+
+/* =========================================================
+   문의 상태
+========================================================= */
+
+.inquiry-status-complete,
+.inquiry-status-waiting {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 65px;
+
+    height: 26px;
+
+    padding: 0 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-sizing: border-box;
+}
+
+
+/* 답변 완료 */
+
+.inquiry-status-complete {
+    background: #f1e5de;
+
+    color: #9a6f5d;
+
+    border: 1px solid #e4cec2;
+}
+
+
+/* 대기중 */
+
+.inquiry-status-waiting {
+    background: #f8f2ee;
+
+    color: #a69a93;
+
+    border: 1px solid #e9ded8;
 }
 
 
@@ -294,6 +349,8 @@
 .inquiry-view-actions {
     width: 100%;
 
+    min-height: 45px;
+
     margin-top: 20px;
 
     display: flex;
@@ -325,9 +382,18 @@
 
     font-weight: 600;
 
+    line-height: 1;
+
     cursor: pointer;
 
     box-sizing: border-box;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    white-space: nowrap;
 
     transition:
         background .2s ease,
@@ -368,7 +434,7 @@
 
 
 /* =========================================================
-   오른쪽 버튼 그룹
+   수정 / 삭제 버튼 그룹
 ========================================================= */
 
 .inquiry-view-action-group {
@@ -376,9 +442,11 @@
 
     align-items: center;
 
+    justify-content: flex-end;
+
     gap: 8px;
 
-    box-sizing: border-box;
+    margin-left: auto;
 }
 
 
@@ -444,7 +512,11 @@
    버튼 클릭
 ========================================================= */
 
-.inquiry-view-back:active,
+.inquiry-view-back:active {
+    transform: translateY(-50%);
+}
+
+
 .inquiry-view-list-btn:active,
 .inquiry-view-edit-btn:active,
 .inquiry-view-delete-btn:active {
@@ -453,10 +525,10 @@
 
 
 /* =========================================================
-   댓글 영역
+   관리자 답변 영역
 ========================================================= */
 
-.inquiry-comment-section {
+.inquiry-admin-answer-section {
     width: 100%;
 
     margin-top: 20px;
@@ -477,17 +549,15 @@
 
 
 /* =========================================================
-   댓글 제목
+   관리자 답변 제목
 ========================================================= */
 
-.inquiry-comment-title {
+.inquiry-admin-answer-title {
     padding-bottom: 18px;
 
     border-bottom: 2px solid #eadbd3;
 
     color: #4f4944;
-
-    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 17px;
 
@@ -495,32 +565,14 @@
 }
 
 
-.inquiry-comment-title strong {
-    margin-left: 5px;
-
-    color: #b68b78;
-
-    font-weight: 800;
-}
-
-
 /* =========================================================
-   댓글 목록
+   관리자 답변 하나
 ========================================================= */
 
-.inquiry-comment-list {
-    width: 100%;
-}
-
-
-/* =========================================================
-   댓글 하나
-========================================================= */
-
-.inquiry-comment {
+.inquiry-admin-answer {
     width: 100%;
 
-    padding: 20px 5px;
+    padding: 22px 5px;
 
     box-sizing: border-box;
 
@@ -529,49 +581,42 @@
 
 
 /* =========================================================
-   댓글 상단
-   닉네임 + 날짜 / 수정 + 삭제
+   관리자 답변 헤더
 ========================================================= */
 
-.inquiry-comment-header {
+.inquiry-admin-answer-header {
     width: 100%;
 
     display: flex;
 
     align-items: center;
 
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   댓글 사용자 영역
+   관리자 정보
 ========================================================= */
 
-.inquiry-comment-user {
+.inquiry-admin-answer-user {
     display: flex;
 
     align-items: center;
 
     gap: 9px;
-
-    min-width: 0;
 }
 
 
 /* =========================================================
-   댓글 아바타
+   관리자 아바타
 ========================================================= */
 
-.inquiry-comment-avatar {
-    width: 30px;
-    height: 30px;
+.inquiry-admin-answer-avatar {
+    width: 32px;
+    height: 32px;
 
     flex-shrink: 0;
 
@@ -583,156 +628,59 @@
     border-radius: 50%;
 
     background:
-        linear-gradient(
-            135deg,
-            #f3e6df,
-            #ead8ce
-        );
+        linear-gradient(135deg,
+            #b68b78,
+            #9f7563);
 
-    color: #8e6656;
-
-    font-family: 'Noto Sans KR', sans-serif;
+    color: #fff;
 
     font-size: 12px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 4px 10px rgba(159, 117, 99, 0.15);
+}
+
+
+/* =========================================================
+   관리자 이름
+========================================================= */
+
+.inquiry-admin-answer-user strong {
+    color: #8e6656;
+
+    font-size: 14px;
 
     font-weight: 800;
 }
 
 
 /* =========================================================
-   댓글 닉네임
+   관리자 답변 날짜
 ========================================================= */
 
-.inquiry-comment-user strong {
-    color: #5c554f;
+.inquiry-admin-answer-date {
+    color: #aaa09a;
 
-    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
 
-    font-size: 14px;
-
-    font-weight: 700;
-
-    white-space: nowrap;
+    font-weight: 400;
 }
 
 
 /* =========================================================
-   댓글 날짜
+   답변 내용
 ========================================================= */
 
-.inquiry-comment-date {
-    color: #aaa19b;
-
-    font-family: 'Noto Sans KR', sans-serif;
-
-    font-size: 11px;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   수정 / 삭제 버튼 영역
-   ★ 댓글 맨 오른쪽
-========================================================= */
-
-.inquiry-comment-actions {
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   수정 / 삭제 공통
-========================================================= */
-
-.inquiry-comment-actions button {
-    height: 28px;
-
-    padding: 0 9px;
-
-    border-radius: 7px;
-
-    font-family: 'Noto Sans KR', sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    box-sizing: border-box;
-
-    transition:
-        background-color .2s ease,
-        border-color .2s ease,
-        color .2s ease;
-}
-
-
-/* =========================================================
-   댓글 수정 버튼
-========================================================= */
-
-.inquiry-comment-edit-btn {
-    border: 1px solid #eadbd3;
-
-    background: #fffdfb;
-
-    color: #8e766a;
-}
-
-
-.inquiry-comment-edit-btn:hover {
-    border-color: #d9bfb2;
-
-    background: #faf5f0;
-
-    color: #9f7563;
-}
-
-
-/* =========================================================
-   댓글 삭제 버튼
-========================================================= */
-
-.inquiry-comment-delete-btn {
-    border: 1px solid #ead8ce;
-
-    background: #fff7f3;
-
-    color: #a56f5d;
-}
-
-
-.inquiry-comment-delete-btn:hover {
-    border-color: #d3aa9c;
-
-    background: #f8e8e1;
-
-    color: #915947;
-}
-
-
-/* =========================================================
-   댓글 내용
-========================================================= */
-
-.inquiry-comment-content {
-    padding-left: 39px;
+.inquiry-admin-answer-content {
+    padding-left: 41px;
 
     color: #625b55;
 
-    font-family: 'Noto Sans KR', sans-serif;
-
     font-size: 14px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 
     white-space: pre-wrap;
 
@@ -741,15 +689,13 @@
 
 
 /* =========================================================
-   댓글 없음
+   답변 없음
 ========================================================= */
 
-.inquiry-no-comment {
+.inquiry-admin-no-answer {
     padding: 50px 0;
 
     color: #aaa19b;
-
-    font-family: 'Noto Sans KR', sans-serif;
 
     font-size: 14px;
 
@@ -758,10 +704,10 @@
 
 
 /* =========================================================
-   댓글 작성 폼
+   관리자 답변 작성 폼
 ========================================================= */
 
-.inquiry-comment-form {
+.inquiry-admin-answer-form {
     width: 100%;
 
     display: flex;
@@ -772,22 +718,24 @@
 
     margin-top: 20px;
 
+    padding-top: 20px;
+
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   댓글 입력창
+   답변 입력창
 ========================================================= */
 
-.inquiry-comment-form textarea {
+.inquiry-admin-answer-form textarea {
     flex: 1;
 
     min-width: 0;
 
-    height: 80px;
+    height: 85px;
 
-    padding: 12px 14px;
+    padding: 13px 15px;
 
     border: 1px solid #eadbd3;
 
@@ -816,7 +764,7 @@
 }
 
 
-.inquiry-comment-form textarea:focus {
+.inquiry-admin-answer-form textarea:focus {
     border-color: #b68b78;
 
     background: #fffaf7;
@@ -826,16 +774,16 @@
 }
 
 
-.inquiry-comment-form textarea::placeholder {
+.inquiry-admin-answer-form textarea::placeholder {
     color: #b3aca6;
 }
 
 
 /* =========================================================
-   댓글 등록 버튼
+   답변 등록 버튼
 ========================================================= */
 
-.inquiry-comment-form button {
+.inquiry-admin-answer-form button {
     width: 100px;
 
     flex-shrink: 0;
@@ -845,11 +793,9 @@
     border-radius: 999px;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #b68b78,
-            #9f7563
-        );
+            #9f7563);
 
     color: #fff;
 
@@ -871,13 +817,11 @@
 }
 
 
-.inquiry-comment-form button:hover {
+.inquiry-admin-answer-form button:hover {
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #a77c69,
-            #8e6656
-        );
+            #8e6656);
 
     box-shadow:
         0 10px 21px rgba(159, 117, 99, 0.23);
@@ -886,140 +830,11 @@
 }
 
 
-.inquiry-comment-form button:active {
+.inquiry-admin-answer-form button:active {
     transform: translateY(0);
 
     box-shadow:
         0 5px 12px rgba(159, 117, 99, 0.17);
-}
-
-
-/* =========================================================
-   댓글 수정 영역
-========================================================= */
-
-.inquiry-comment-edit-area {
-    width: 100%;
-
-    padding-left: 39px;
-
-    box-sizing: border-box;
-}
-
-
-/* 수정 textarea */
-
-.inquiry-comment-edit-area textarea {
-    width: 100%;
-
-    height: 75px;
-
-    padding: 12px 14px;
-
-    border: 1px solid #d9bfb2;
-
-    border-radius: 12px;
-
-    background: #fffaf7;
-
-    color: #5c554f;
-
-    box-sizing: border-box;
-
-    resize: none;
-
-    outline: none;
-
-    font-family: 'Noto Sans KR', sans-serif;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-}
-
-
-.inquiry-comment-edit-area textarea:focus {
-    border-color: #b68b78;
-
-    box-shadow:
-        0 0 0 3px rgba(182, 139, 120, 0.08);
-}
-
-
-/* =========================================================
-   수정 저장 / 취소
-========================================================= */
-
-.inquiry-comment-edit-actions {
-    display: flex;
-
-    justify-content: flex-end;
-
-    gap: 6px;
-
-    margin-top: 8px;
-}
-
-
-/* 공통 */
-
-.inquiry-comment-edit-actions button {
-    height: 30px;
-
-    padding: 0 12px;
-
-    border-radius: 8px;
-
-    font-family: 'Noto Sans KR', sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-sizing: border-box;
-
-    transition:
-        background-color .2s ease,
-        border-color .2s ease,
-        color .2s ease;
-}
-
-
-/* 저장 */
-
-.inquiry-comment-save-btn {
-    border: none;
-
-    background: #b68b78;
-
-    color: #fff;
-}
-
-
-.inquiry-comment-save-btn:hover {
-    background: #9f7563;
-}
-
-
-/* 취소 */
-
-.inquiry-comment-cancel-btn {
-    border: 1px solid #eadbd3;
-
-    background: #fffdfb;
-
-    color: #8e766a;
-}
-
-
-.inquiry-comment-cancel-btn:hover {
-    background: #faf5f0;
-
-    border-color: #d9bfb2;
-
-    color: #9f7563;
 }
 
 
@@ -1038,7 +853,9 @@
     }
 
 
-    /* 헤더 */
+    /* =====================================================
+       헤더
+    ===================================================== */
 
     .inquiry-view-header {
         min-height: auto;
@@ -1049,7 +866,7 @@
     }
 
 
-    /* 상단 목록 */
+    /* 상단 목록 버튼 */
 
     .inquiry-view-back {
         left: 0;
@@ -1058,7 +875,11 @@
 
         transform: none;
 
+        z-index: 10;
+
         height: 38px;
+
+        min-width: 75px;
 
         padding: 0 15px;
 
@@ -1071,14 +892,23 @@
     }
 
 
-    /* 제목 */
+    .inquiry-view-back:active {
+        transform: translateY(0);
+    }
+
+
+    /* =====================================================
+       제목
+    ===================================================== */
 
     .inquiry-view-heading {
         font-size: 28px;
     }
 
 
-    /* 문의 제목 */
+    /* =====================================================
+       문의 제목
+    ===================================================== */
 
     .inquiry-view-title-area {
         padding: 23px 20px 17px;
@@ -1090,7 +920,9 @@
     }
 
 
-    /* 작성자 / 날짜 */
+    /* =====================================================
+       작성자 / 날짜 / 상태
+    ===================================================== */
 
     .inquiry-view-info {
         min-height: auto;
@@ -1105,7 +937,9 @@
     }
 
 
-    /* 내용 */
+    /* =====================================================
+       내용
+    ===================================================== */
 
     .inquiry-view-content {
         min-height: 280px;
@@ -1118,10 +952,16 @@
     }
 
 
-    /* 하단 버튼 */
+    /* =====================================================
+       하단 버튼
+    ===================================================== */
 
     .inquiry-view-actions {
+        width: 100%;
+
         margin-top: 15px;
+
+        gap: 10px;
     }
 
 
@@ -1147,11 +987,18 @@
     }
 
 
+    .inquiry-view-action-group {
+        gap: 7px;
+
+        margin-left: auto;
+    }
+
+
     /* =====================================================
-       댓글
+       관리자 답변
     ===================================================== */
 
-    .inquiry-comment-section {
+    .inquiry-admin-answer-section {
         margin-top: 15px;
 
         padding: 25px 20px;
@@ -1160,33 +1007,19 @@
     }
 
 
-    .inquiry-comment-title {
+    .inquiry-admin-answer-title {
         padding-bottom: 17px;
 
         font-size: 16px;
     }
 
 
-    .inquiry-comment {
+    .inquiry-admin-answer {
         padding: 18px 3px;
     }
 
 
-    .inquiry-comment-header {
-        align-items: flex-start;
-
-        gap: 8px;
-    }
-
-
-    .inquiry-comment-user {
-        flex-wrap: wrap;
-
-        gap: 6px 8px;
-    }
-
-
-    .inquiry-comment-avatar {
+    .inquiry-admin-answer-avatar {
         width: 28px;
         height: 28px;
 
@@ -1194,47 +1027,51 @@
     }
 
 
-    .inquiry-comment-user strong {
+    .inquiry-admin-answer-user {
+        gap: 8px;
+    }
+
+
+    .inquiry-admin-answer-user strong {
         font-size: 13px;
     }
 
 
-    .inquiry-comment-date {
-        font-size: 10px;
+    .inquiry-admin-answer-date {
+        font-size: 11px;
     }
 
 
-    .inquiry-comment-actions {
-        gap: 3px;
-    }
-
-
-    .inquiry-comment-actions button {
-        height: 26px;
-
-        padding: 0 7px;
-
-        font-size: 10px;
-    }
-
-
-    .inquiry-comment-content {
+    .inquiry-admin-answer-content {
         padding-left: 36px;
 
         font-size: 13px;
     }
 
 
-    /* 댓글 작성 */
+    .inquiry-admin-no-answer {
+        padding: 45px 0;
 
-    .inquiry-comment-form {
-        flex-direction: column;
-
-        gap: 8px;
+        font-size: 13px;
     }
 
 
-    .inquiry-comment-form textarea {
+    /* =====================================================
+       관리자 답변 작성
+    ===================================================== */
+
+    .inquiry-admin-answer-form {
+        flex-direction: column;
+
+        gap: 8px;
+
+        margin-top: 18px;
+
+        padding-top: 18px;
+    }
+
+
+    .inquiry-admin-answer-form textarea {
         height: 90px;
 
         border-radius: 13px;
@@ -1243,24 +1080,10 @@
     }
 
 
-    .inquiry-comment-form button {
+    .inquiry-admin-answer-form button {
         width: 100%;
 
         height: 42px;
-
-        font-size: 12px;
-    }
-
-
-    /* 댓글 수정 */
-
-    .inquiry-comment-edit-area {
-        padding-left: 36px;
-    }
-
-
-    .inquiry-comment-edit-area textarea {
-        height: 85px;
 
         font-size: 12px;
     }
@@ -1306,7 +1129,13 @@
     }
 
 
+    /* =====================================================
+       하단 버튼
+    ===================================================== */
+
     .inquiry-view-actions {
+        width: 100%;
+
         gap: 8px;
     }
 
@@ -1318,36 +1147,43 @@
     }
 
 
+    .inquiry-view-list-btn {
+        min-width: 78px;
+    }
+
+
+    .inquiry-view-action-group {
+        gap: 6px;
+
+        margin-left: auto;
+    }
+
+
     /* =====================================================
-       댓글
+       관리자 답변
     ===================================================== */
 
-    .inquiry-comment-section {
+    .inquiry-admin-answer-section {
         padding: 22px 17px;
     }
 
 
-    .inquiry-comment-header {
-        flex-direction: column;
-
-        align-items: stretch;
+    .inquiry-admin-answer {
+        padding: 17px 0;
     }
 
 
-    .inquiry-comment-actions {
-        justify-content: flex-end;
-    }
-
-
-    .inquiry-comment-content {
+    .inquiry-admin-answer-content {
         padding-left: 0;
 
-        margin-top: 5px;
+        margin-top: 7px;
+
+        font-size: 13px;
     }
 
 
-    .inquiry-comment-edit-area {
-        padding-left: 0;
+    .inquiry-admin-answer-form textarea {
+        height: 95px;
     }
 
 }

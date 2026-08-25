@@ -68,11 +68,6 @@ function BoardWrite() {
                             <option value="기타">기타</option>
                         </select>
                     </div>
-                    <label className="private-option">
-                        <input type="checkbox" checked={isPrivate} onChange={(e) => setIsPrivate(e.target.checked)} />
-                        <span className="private-toggle"></span>
-                        <span className="private-text">비공개 글</span>
-                    </label>
                 </div>
                 {/* 제목 */}
                 <div className="board-write-field">
