@@ -16,12 +16,16 @@
     box-sizing: border-box;
 
     background:
-        radial-gradient(circle at top left,
+        radial-gradient(
+            circle at top left,
             rgba(230, 207, 194, 0.25),
-            transparent 35%),
-        radial-gradient(circle at bottom right,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
             rgba(220, 195, 180, 0.20),
-            transparent 35%),
+            transparent 35%
+        ),
         #f8f4ef;
 
     font-family:
@@ -151,9 +155,11 @@
     border-radius: 15px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #fffdfb,
-            #faf5f0);
+            #faf5f0
+        );
 
     color: #817971;
 
@@ -216,9 +222,11 @@
     border-radius: 22px;
 
     background:
-        linear-gradient(180deg,
+        linear-gradient(
+            180deg,
             #fffdfb 0%,
-            #faf7f3 100%);
+            #faf7f3 100%
+        );
 
     scroll-behavior: smooth;
 }
@@ -331,9 +339,11 @@
         18px 18px 5px 18px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #c19a87,
-            #b68b78);
+            #b68b78
+        );
 
     color: #ffffff;
 
@@ -497,9 +507,11 @@
     border-radius: 15px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #c19a87,
-            #b68b78);
+            #b68b78
+        );
 
     color: #fff;
 
@@ -553,9 +565,11 @@
     border-radius: 15px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #c19a87,
-            #b68b78);
+            #b68b78
+        );
 
     color: #fff;
 
@@ -655,9 +669,11 @@
     border-radius: 18px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #fff8f4,
-            #faf5f0);
+            #faf5f0
+        );
 }
 
 
@@ -781,9 +797,11 @@
     border-radius: 20px;
 
     background:
-        linear-gradient(145deg,
+        linear-gradient(
+            145deg,
             #fffdfb,
-            #faf5ef);
+            #faf5ef
+        );
 }
 
 
@@ -907,9 +925,11 @@
     border-radius: 14px;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             #c19a87,
-            #b68b78);
+            #b68b78
+        );
 
     color: #ffffff;
 
@@ -1135,4 +1155,113 @@
     .talk-ai-diary-title {
         font-size: 17px;
     }
+    .talk-ai-daily-complete {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+
+    padding: 18px 20px;
+
+    border: 1px solid #eadbd3;
+
+    border-radius: 18px;
+
+    background: #faf5f0;
+
+    color: #625b55;
+
+    box-sizing: border-box;
+}
+
+
+.talk-ai-daily-complete-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #fffdfb;
+
+    font-size: 21px;
+}
+
+
+.talk-ai-daily-complete strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #9f7563;
+
+    font-size: 14px;
+}
+
+
+.talk-ai-daily-complete p {
+    margin: 0;
+
+    color: #8e7669;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+.talk-ai-new-button-disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none !important;
+}
+
+
+.talk-ai-new-button-disabled:hover {
+    transform: none !important;
+}
+
+
+@media (max-width: 600px) {
+
+    .talk-ai-daily-complete {
+        padding: 15px;
+
+        gap: 11px;
+
+        border-radius: 15px;
+    }
+
+
+    .talk-ai-daily-complete-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 18px;
+    }
+
+
+    .talk-ai-daily-complete strong {
+        font-size: 13px;
+    }
+
+
+    .talk-ai-daily-complete p {
+        font-size: 11px;
+    }
+
+}
+
 }

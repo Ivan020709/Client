@@ -106,7 +106,29 @@ function MyPage() {
                 alert('회원정보를 불러오지 못했습니다.');
             });
 
-    }, [loginUser, navigate]);
+            axios.get('/api/admin/getAdmin', {
+            params: {
+                email: loginUser.email
+            }
+            })
+                .then((result) => {
+
+                    if (result.data.role === 'ADMIN') {
+
+                        //alert('관리자 페이지로 이동합니다.');
+                        navigate('/adminPage');
+
+                    }
+                })
+                .catch((err) => {
+
+                    console.error(err);
+                    alert('role 조회에 실패했습니다.');
+                    navigate('/');
+                });
+
+        }, [loginUser, navigate]);
+
 
     const completeHandler = (data) => {
         setZip_num(data.zonecode);
@@ -241,9 +263,6 @@ function MyPage() {
             savefilename: savefilename
         };
 
-        if (!loginUser.pwd) {
-            member.pwd = pwd;
-        }
 
         axios.post('/api/member/updateMember', member)
             .then(() => {
@@ -525,7 +544,7 @@ function MyPage() {
                                 <input
                                     className="mypage-input"
                                     type="text"
-                                    value={loginUser.zip_num}
+                                    value={zip_num}
                                     readOnly
                                 />
 
@@ -551,7 +570,7 @@ function MyPage() {
                                 <input
                                     className="mypage-input"
                                     type="text"
-                                    value={loginUser.address1}
+                                    value={address1}
                                     readOnly
                                 />
 
@@ -568,7 +587,7 @@ function MyPage() {
                                 <input
                                     className="mypage-input"
                                     type="text"
-                                    value={loginUser.address2}
+                                    value={address2}
                                     onChange={(e) =>
                                         setAddress2(e.target.value)
                                     }
@@ -588,7 +607,7 @@ function MyPage() {
                                 <input
                                     className="mypage-input"
                                     type="text"
-                                    value={loginUser.address3}
+                                    value={address3}
                                     readOnly
                                 />
 

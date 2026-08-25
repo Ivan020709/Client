@@ -88,6 +88,25 @@ function SharedDiary() {
 
 
     /* =========================
+       상세 모달 배경 스크롤 잠금
+    ========================= */
+
+    useEffect(() => {
+        if (!selectedDiary) {
+            return;
+        }
+
+        // 모달이 열린 동안 배경 body만 고정하고 모달 내부 스크롤은 유지합니다.
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [selectedDiary]);
+
+
+    /* =========================
        공유 일기 조회
     ========================= */
 
@@ -103,7 +122,8 @@ function SharedDiary() {
 
                 const response =
                     await fetch(
-                        "http://localhost:8080/diary/shared"
+                        // setupProxy.js가 /api 요청을 Spring 서버 8070 포트로 보냅니다.
+                        "/api/diary/shared"
                     );
 
 
@@ -132,6 +152,13 @@ function SharedDiary() {
                 if (Array.isArray(result)) {
 
                     list = result;
+
+                } else if (
+                    // 현재 서버는 목록을 diaries라는 이름으로 반환합니다.
+                    Array.isArray(result.diaries)
+                ) {
+
+                    list = result.diaries;
 
                 } else if (
                     Array.isArray(result.diaryList)
@@ -168,6 +195,7 @@ function SharedDiary() {
                                 diary &&
                                 (
                                     diary.isShared ??
+                                    diary.shared ??
                                     diary.is_shared ??
                                     false
                                 )
@@ -215,6 +243,7 @@ function SharedDiary() {
 
                                 isShared:
                                     diary.isShared ??
+                                    diary.shared ??
                                     diary.is_shared ??
                                     false,
 

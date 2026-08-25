@@ -71,6 +71,12 @@
 
     box-shadow:
         0 12px 35px rgba(100, 80, 60, 0.08);
+
+    /*
+     * 내부 요소가 커져도
+     * 컨테이너가 불필요하게 가로로 늘어나지 않도록 설정
+     */
+    overflow: hidden;
 }
 
 
@@ -219,9 +225,22 @@
 ========================================================= */
 
 .g-chat-box {
+    width: 100%;
+
     height: 500px;
 
+    /*
+     * 대화가 길어져도 페이지가 아니라
+     * 이 영역 자체에서 스크롤되도록 설정
+     */
     overflow-y: auto;
+    overflow-x: hidden;
+
+    /*
+     * flex/grid 부모 안에서
+     * 내부 스크롤 영역이 제대로 작동하도록 보조
+     */
+    min-height: 0;
 
     padding: 24px;
 
@@ -236,7 +255,17 @@
             #faf7f3 100%
         );
 
+    /*
+     * JS에서 scrollTop을 사용할 때도
+     * 자연스럽게 움직이도록 설정
+     */
     scroll-behavior: smooth;
+
+    /*
+     * 긴 문자열 때문에 페이지 전체가
+     * 가로로 밀리는 현상 방지
+     */
+    overflow-wrap: break-word;
 }
 
 
@@ -258,6 +287,11 @@
     background: #ddcfc5;
 
     border-radius: 10px;
+}
+
+
+.g-chat-box::-webkit-scrollbar-thumb:hover {
+    background: #cdbab0;
 }
 
 
@@ -325,6 +359,8 @@
 
     justify-content: flex-end;
 
+    width: 100%;
+
     margin-bottom: 17px;
 }
 
@@ -352,6 +388,8 @@
 
     white-space: pre-wrap;
 
+    overflow-wrap: break-word;
+
     box-shadow:
         0 4px 10px rgba(150, 110, 90, 0.10);
 }
@@ -367,6 +405,8 @@
     flex-direction: column;
 
     align-items: flex-start;
+
+    width: 100%;
 
     margin-bottom: 18px;
 }
@@ -422,6 +462,8 @@
 
     white-space: pre-wrap;
 
+    overflow-wrap: break-word;
+
     box-shadow:
         0 3px 10px rgba(90, 70, 55, 0.04);
 }
@@ -437,11 +479,15 @@
     gap: 10px;
 
     margin-top: 15px;
+
+    width: 100%;
 }
 
 
 .g-input {
     flex: 1;
+
+    min-width: 0;
 
     min-height: 48px;
 
@@ -490,6 +536,8 @@
 
 .g-send-button {
     width: 80px;
+
+    flex-shrink: 0;
 
     border: none;
 
@@ -764,6 +812,8 @@
     line-height: 1.8;
 
     white-space: pre-wrap;
+
+    overflow-wrap: break-word;
 }
 
 
@@ -808,6 +858,8 @@
     line-height: 2;
 
     white-space: pre-wrap;
+
+    overflow-wrap: break-word;
 }
 
 

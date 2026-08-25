@@ -17,6 +17,7 @@ function NoticeList() {
     const [paging, setPaging] = useState({})
     const [pages, setPages] = useState([])
     const [key, setKey] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const [searchType, setSearchType] = useState('title');
 
@@ -74,11 +75,31 @@ function NoticeList() {
     // }, []);
 
     // 관리자 여부
-    const isAdmin =
-        loginUser?.role === 'admin' &&
-        loginUser?.email === 'admin' &&
-        loginUser?.name === 'admin' &&
-        loginUser?.nickname === 'admin';
+    useEffect(() => {
+
+        // 로그인하지 않은 경우
+        axios.get('/api/admin/getAdmin', {
+            params: {
+                email: loginUser.email
+            }
+        })
+            .then((result) => {
+
+                console.log('관리자 권한:', result.data.role);
+
+                if (result.data.role === 'ADMIN') {
+                    setIsAdmin(true);
+                } else {
+                    setIsAdmin(false);
+                }
+
+            })
+            .catch((err) => {
+                console.error('role 조회 실패:', err);
+                setIsAdmin(false);
+            });
+
+    }, [loginUser?.email]);
 
     // 페이지가 변경될 때마다 공지사항 조회
     // useEffect(() => {

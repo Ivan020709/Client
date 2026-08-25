@@ -9,8 +9,13 @@ import { Cookies } from 'react-cookie';
 import './Join.css';
 
 function Join() {
+
     const loginUser = useSelector(state => state.user);
     const navigate = useNavigate();
+
+    /* =========================================================
+       회원 정보
+    ========================================================= */
 
     const [email, setEmail] = useState('');
     const [reid, setReid] = useState('');
@@ -51,6 +56,11 @@ function Join() {
 
     const cookies = new Cookies();
 
+    /* =========================================================
+       이메일 형식 검사
+    ========================================================= */
+    const emailRegex =
+        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
     /* =========================================================
        주소 검색 Modal
@@ -61,7 +71,6 @@ function Join() {
             backgroundColor: 'rgba(79, 73, 68, 0.45)',
             zIndex: 1000
         },
-
         content: {
             left: '0',
             right: '0',
@@ -88,7 +97,6 @@ function Join() {
         }
     };
 
-
     /* =========================================================
        로그인 상태 확인
     ========================================================= */
@@ -108,27 +116,52 @@ function Join() {
         setZip_num(data.zonecode);
         setAddress1(data.address);
         setAddress3(data.buildingName);
-
         setIsOpen(false);
     };
 
 
     /* =========================================================
+       이메일 입력
+    ========================================================= */
+    function handleEmailChange(e) {
+        const value = e.currentTarget.value;
+        setEmail(value);
+        /*
+         * 이메일을 수정하면
+         * 기존 중복확인 결과를 무효화
+         */
+        setReid('');
+        setIdCheckResult('');
+        setMsgStyle({
+            flex: '1'
+        });
+    }
+
+    /* =========================================================
        이메일 중복 확인
     ========================================================= */
-
     function idCheck() {
-
-        if (!email) {
-            return alert('이메일를 입력하세요.');
+        const checkEmail = email.trim();
+        if (!checkEmail) {
+            return alert(
+                '이메일을 입력하세요.'
+            );
         }
+        /*
+         * 이메일 형식 검사
+         */
 
+        if (!emailRegex.test(checkEmail)) {
+            return alert(
+                '올바른 이메일 형식으로 입력하세요.'
+            );
+        }
         axios.post(
             '/api/member/emailCheck',
             null,
             {
                 params: {
-                    email: email
+                    email: checkEmail
                 }
             }
         )
@@ -146,7 +179,11 @@ function Join() {
                     fontWeight: '700'
                 });
 
-                setReid(email);
+                /*
+                 * 중복확인 완료된 이메일 저장
+                 */
+
+                setReid(checkEmail);
 
             } else {
 
@@ -164,7 +201,33 @@ function Join() {
             }
         })
         .catch((err) => {
+
             console.error(err);
+
+            alert(
+                '이메일 중복 확인 중 오류가 발생했습니다.'
+            );
+        });
+    }
+
+
+    /* =========================================================
+       닉네임 입력
+    ========================================================= */
+
+    function handleNicknameChange(e) {
+
+        const value =
+            e.currentTarget.value;
+
+        setNickname(value);
+
+        setRenickname('');
+
+        setNicknameCheckResult('');
+
+        setNicknameMsgStyle({
+            flex: '1'
         });
     }
 
@@ -175,16 +238,24 @@ function Join() {
 
     function nicknameCheck() {
 
-        if (!nickname.trim()) {
-            return alert('닉네임을 입력하세요.');
+        const checkNickname =
+            nickname.trim();
+
+
+        if (!checkNickname) {
+
+            return alert(
+                '닉네임을 입력하세요.'
+            );
         }
+
 
         axios.post(
             '/api/member/nicknameCheck',
             null,
             {
                 params: {
-                    nickname: nickname
+                    nickname: checkNickname
                 }
             }
         )
@@ -202,7 +273,9 @@ function Join() {
                     fontWeight: '700'
                 });
 
-                setRenickname(nickname);
+                setRenickname(
+                    checkNickname
+                );
 
             } else {
 
@@ -220,7 +293,12 @@ function Join() {
             }
         })
         .catch((err) => {
+
             console.error(err);
+
+            alert(
+                '닉네임 중복 확인 중 오류가 발생했습니다.'
+            );
         });
     }
 
@@ -231,24 +309,35 @@ function Join() {
 
     function fileup(e) {
 
-        const file = e.target.files[0];
+        const file =
+            e.target.files[0];
+
 
         if (!file) {
             return;
         }
 
+
         if (!file.type.startsWith('image/')) {
 
-            alert('이미지 파일만 선택할 수 있습니다.');
+            alert(
+                '이미지 파일만 선택할 수 있습니다.'
+            );
 
             e.target.value = '';
 
             return;
         }
 
-        const formData = new FormData();
 
-        formData.append('image', file);
+        const formData =
+            new FormData();
+
+        formData.append(
+            'image',
+            file
+        );
+
 
         axios.post(
             '/api/member/fileupload',
@@ -286,6 +375,7 @@ function Join() {
                 .replace(/\D/g, '')
                 .slice(0, 11);
 
+
         if (
             value.length > 3 &&
             value.length <= 7
@@ -294,11 +384,14 @@ function Join() {
             value =
                 `${value.slice(0, 3)}-${value.slice(3)}`;
 
-        } else if (value.length > 7) {
+        } else if (
+            value.length > 7
+        ) {
 
             value =
                 `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7)}`;
         }
+
 
         setPhone(value);
     }
@@ -310,104 +403,237 @@ function Join() {
 
     function onSubmit() {
 
-        if (!email) {
-            return alert('아이디를 입력하세요.');
+        const checkEmail =
+            email.trim();
+
+
+        /* -----------------------------------------
+           이메일
+        ----------------------------------------- */
+
+        if (!checkEmail) {
+
+            return alert(
+                '이메일을 입력하세요.'
+            );
         }
 
-        if (reid !== email) {
-            return alert('아이디 중복을 확인해주세요.');
+
+        /*
+         * 이메일 형식 검사
+         */
+
+        if (!emailRegex.test(checkEmail)) {
+
+            return alert(
+                '올바른 이메일 형식으로 입력하세요.'
+            );
         }
+
+
+        /*
+         * 이메일 중복확인 여부
+         */
+
+        if (reid !== checkEmail) {
+
+            return alert(
+                '이메일 중복을 확인해주세요.'
+            );
+        }
+
+
+        /* -----------------------------------------
+           비밀번호
+        ----------------------------------------- */
 
         if (!pwd) {
-            return alert('비밀번호를 입력하세요.');
+
+            return alert(
+                '비밀번호를 입력하세요.'
+            );
         }
+
 
         if (pwd !== pwdChk) {
-            return alert('비밀번호 체크가 일치하지 않습니다.');
+
+            return alert(
+                '비밀번호 체크가 일치하지 않습니다.'
+            );
         }
 
-        if (!name) {
-            return alert('이름을 입력하세요.');
+
+        /* -----------------------------------------
+           이름
+        ----------------------------------------- */
+
+        if (!name.trim()) {
+
+            return alert(
+                '이름을 입력하세요.'
+            );
         }
 
-        if (!nickname) {
-            return alert('닉네임을 입력하세요.');
+
+        /* -----------------------------------------
+           닉네임
+        ----------------------------------------- */
+
+        const checkNickname =
+            nickname.trim();
+
+
+        if (!checkNickname) {
+
+            return alert(
+                '닉네임을 입력하세요.'
+            );
         }
 
-        if (renickname !== nickname) {
-            return alert('닉네임 중복을 확인해주세요.');
+
+        if (renickname !== checkNickname) {
+
+            return alert(
+                '닉네임 중복을 확인해주세요.'
+            );
         }
+
+
+        /* -----------------------------------------
+           생년월일
+        ----------------------------------------- */
 
         if (!year || !month || !day) {
-            return alert('생년월일을 입력하세요.');
+
+            return alert(
+                '생년월일을 입력하세요.'
+            );
         }
+
 
         if (
             isNaN(year) ||
             isNaN(month) ||
             isNaN(day) ||
+
             Number(year) < 1901 ||
             Number(year) > 2026 ||
+
             Number(month) < 1 ||
             Number(month) > 12 ||
+
             Number(day) < 1 ||
             Number(day) > 31
         ) {
-            return alert('올바른 생년월일을 입력하세요.');
+
+            return alert(
+                '올바른 생년월일을 입력하세요.'
+            );
         }
 
 
-        const date = new Date(
-            Number(year),
-            Number(month) - 1,
-            Number(day)
-        );
+        /*
+         * 실제 존재하는 날짜인지 확인
+         */
+
+        const date =
+            new Date(
+                Number(year),
+                Number(month) - 1,
+                Number(day)
+            );
+
 
         if (
             date.getFullYear() !== Number(year) ||
             date.getMonth() !== Number(month) - 1 ||
             date.getDate() !== Number(day)
         ) {
-            return alert('존재하지 않는 날짜입니다.');
+
+            return alert(
+                '존재하지 않는 날짜입니다.'
+            );
         }
+
+
+        /* -----------------------------------------
+           전화번호
+        ----------------------------------------- */
 
         if (!phone) {
-            return alert('번호를 입력하세요.');
+
+            return alert(
+                '번호를 입력하세요.'
+            );
         }
+
+
+        /* -----------------------------------------
+           주소
+        ----------------------------------------- */
 
         if (zip_num === '') {
-            return alert('우편번호를 입력하세요.');
+
+            return alert(
+                '우편번호를 입력하세요.'
+            );
         }
+
 
         if (!address1) {
-            return alert('주소를 입력하세요.');
+
+            return alert(
+                '주소를 입력하세요.'
+            );
         }
 
+
+        /* -----------------------------------------
+           생년월일 생성
+        ----------------------------------------- */
 
         const birth =
             `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
 
+        /* -----------------------------------------
+           회원가입 요청
+        ----------------------------------------- */
+
         axios.post(
             '/api/member/insertMember',
             {
-                email: email,
+                email: checkEmail,
+
                 pwd: pwd,
-                name: name,
-                nickname: nickname,
+
+                name: name.trim(),
+
+                nickname: checkNickname,
+
                 birth: birth,
+
                 phone: phone,
+
                 zip_num: zip_num,
+
                 address1: address1,
+
                 address2: address2,
+
                 address3: address3,
+
                 savefilename: savefilename,
+
                 provider: 'Local'
             }
         )
         .then(() => {
 
-            alert('회원 가입이 완료되었습니다.');
+            alert(
+                '회원 가입이 완료되었습니다.'
+            );
+
 
             cookies.remove(
                 'user',
@@ -416,7 +642,10 @@ function Join() {
                 }
             );
 
-            navigate('/memberLogin');
+
+            navigate(
+                '/memberLogin'
+            );
         })
         .catch((err) => {
 
@@ -437,6 +666,7 @@ function Join() {
 
         <div className="join-wrapper">
 
+
             {/* 제목 */}
 
             <h2 className="join-title">
@@ -451,15 +681,20 @@ function Join() {
                 <div className="profile-preview">
 
                     {imgSrc ? (
+
                         <img
                             src={imgSrc}
                             alt="프로필 미리보기"
                         />
+
                     ) : (
+
                         <span>
                             사진
                         </span>
+
                     )}
+
 
                     <label
                         htmlFor="profile-image"
@@ -469,6 +704,7 @@ function Join() {
                     </label>
 
                 </div>
+
 
                 <input
                     id="profile-image"
@@ -498,22 +734,16 @@ function Join() {
                             이메일
                         </label>
 
+
                         <input
                             className="join-input-id"
-                            type="text"
+                            type="email"
                             value={email}
-                            onChange={(e) => {
-
-                                setEmail(
-                                    e.currentTarget.value
-                                );
-
-                                setReid('');
-
-                                setIdCheckResult('');
-                            }}
+                            onChange={handleEmailChange}
                             placeholder="이메일 형식(예: abc@abc.com)"
+                            autoComplete="email"
                         />
+
 
                         <button
                             type="button"
@@ -545,6 +775,7 @@ function Join() {
                             비밀번호
                         </label>
 
+
                         <input
                             className="join-input-etc"
                             type="password"
@@ -555,6 +786,7 @@ function Join() {
                                 )
                             }
                             placeholder="비밀번호를 입력하세요."
+                            autoComplete="new-password"
                         />
 
                     </div>
@@ -568,6 +800,7 @@ function Join() {
                             비밀번호 체크
                         </label>
 
+
                         <input
                             className="join-input-etc"
                             type="password"
@@ -578,6 +811,7 @@ function Join() {
                                 )
                             }
                             placeholder="비밀번호를 다시 입력하세요."
+                            autoComplete="new-password"
                         />
 
                     </div>
@@ -591,6 +825,7 @@ function Join() {
                             이름
                         </label>
 
+
                         <input
                             className="join-input-etc"
                             type="text"
@@ -601,6 +836,7 @@ function Join() {
                                 )
                             }
                             placeholder="이름을 입력하세요."
+                            autoComplete="name"
                         />
 
                     </div>
@@ -614,22 +850,15 @@ function Join() {
                             닉네임
                         </label>
 
+
                         <input
                             className="join-input-id"
                             type="text"
                             value={nickname}
-                            onChange={(e) => {
-
-                                setNickname(
-                                    e.currentTarget.value
-                                );
-
-                                setRenickname('');
-
-                                setNicknameCheckResult('');
-                            }}
+                            onChange={handleNicknameChange}
                             placeholder="닉네임을 입력하세요."
                         />
+
 
                         <button
                             type="button"
@@ -661,9 +890,11 @@ function Join() {
                             생년월일
                         </label>
 
+
                         <input
                             className="join-input-four"
                             type="text"
+                            inputMode="numeric"
                             placeholder="YYYY"
                             maxLength="4"
                             value={year}
@@ -674,13 +905,16 @@ function Join() {
                             }
                         />
 
+
                         <label className="join-label-birth">
                             년
                         </label>
 
+
                         <input
                             className="join-input-two"
                             type="text"
+                            inputMode="numeric"
                             placeholder="MM"
                             maxLength="2"
                             value={month}
@@ -691,13 +925,16 @@ function Join() {
                             }
                         />
 
+
                         <label className="join-label-birth">
                             월
                         </label>
 
+
                         <input
                             className="join-input-two"
                             type="text"
+                            inputMode="numeric"
                             placeholder="DD"
                             maxLength="2"
                             value={day}
@@ -707,6 +944,7 @@ function Join() {
                                 )
                             }
                         />
+
 
                         <label className="join-label-birth">
                             일
@@ -723,9 +961,11 @@ function Join() {
                             전화번호
                         </label>
 
+
                         <input
                             className="join-input-etc"
                             type="text"
+                            inputMode="numeric"
                             value={phone}
                             onChange={handlePhoneChange}
                             placeholder="010-XXXX-XXXX"
@@ -743,11 +983,13 @@ function Join() {
                         onRequestClose={() =>
                             setIsOpen(false)
                         }
+                        ariaHideApp={false}
                     >
 
                         <DaumPostcode
                             onComplete={completeHandler}
                         />
+
 
                         <button
                             type="button"
@@ -772,12 +1014,14 @@ function Join() {
                                 우편번호
                             </label>
 
+
                             <input
                                 className="join-input"
                                 type="text"
                                 value={zip_num}
                                 readOnly
                             />
+
 
                             <button
                                 type="button"
@@ -804,6 +1048,7 @@ function Join() {
                                 주소1
                             </label>
 
+
                             <input
                                 className="join-input-etc"
                                 type="text"
@@ -825,6 +1070,7 @@ function Join() {
                             <label className="join-label">
                                 주소2
                             </label>
+
 
                             <input
                                 className="join-input-etc"
@@ -852,6 +1098,7 @@ function Join() {
                             <label className="join-label">
                                 주소3
                             </label>
+
 
                             <input
                                 className="join-input-etc"
@@ -888,10 +1135,13 @@ function Join() {
                     확인
                 </button>
 
+
                 <button
                     type="button"
                     className="join-action-btn join-btn-cancel"
-                    onClick={() => navigate('/')}
+                    onClick={() =>
+                        navigate('/')
+                    }
                 >
                     취소
                 </button>

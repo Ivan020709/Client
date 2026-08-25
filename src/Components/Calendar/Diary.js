@@ -100,6 +100,24 @@ function EmotionDiary({
     selectedDiary
 }) {
 
+    /* =========================
+           상세 모달 배경 스크롤 잠금
+        ========================= */
+
+    useEffect(() => {
+        if (!selectedDiary) {
+            return;
+        }
+
+        // 모달을 열기 전 body의 값을 기억했다가 닫을 때 되돌립니다.
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [selectedDiary]);
+
     return (
         <div className="diary-section">
 

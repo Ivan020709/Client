@@ -1,27 +1,40 @@
-import React, { useState } from "react";
+import React, {
+    useEffect,
+    useRef,
+    useState
+} from "react";
+
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import "./Lo.css";
 
 import aiImage1 from "../../Img/로로.png";
 import aiImage2 from "../../Img/로로2.png";
-//import aiImage3 from "../../Img/로로3.png";
+// import aiImage3 from "../../Img/로로3.png";
 
 
 function Lo() {
+
+    // =====================================================
+    // 로그인 사용자
+    // =====================================================
+
+    const loginUser =
+        useSelector(state => state.user);
+
 
     const character = "로";
 
 
     // =====================================================
     // Lo 이미지 랜덤 선택
-    // 페이지에 들어올 때마다 3개 중 하나 선택
     // =====================================================
 
     const aiImages = [
         aiImage1,
         aiImage2,
-       // aiImage3
+        // aiImage3
     ];
 
 
@@ -38,32 +51,180 @@ function Lo() {
 
 
     // =====================================================
+    // 오늘 날짜
+    // =====================================================
+
+    const getToday = () => {
+
+        const today = new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(
+                today.getMonth() + 1
+            ).padStart(2, "0");
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    };
+
+
+    // =====================================================
+    // 오늘 상담 완료 여부 Key
+    // =====================================================
+
+    const getTodayKey = () => {
+        /*
+         * 로그인 사용자별로 저장
+         *
+         * 예:
+         *
+         * loCompleted_1
+         * loCompleted_2
+         * loCompleted_3
+         */
+
+        const userid =
+            loginUser?.userid || "guest";
+
+
+        return `loCompleted_${userid}`;
+
+    };
+
+
+    const [todayCompleted, setTodayCompleted] =
+        useState(false);
+
+
+    // =====================================================
+    // 페이지 진입 시 오늘 상담 여부 확인
+    // =====================================================
+
+    useEffect(() => {
+
+        if (!loginUser?.userid) {
+            return;
+        }
+
+
+        const key =
+            getTodayKey();
+
+
+        const completedDate =
+            localStorage.getItem(key);
+
+
+        /*
+         * 오늘 이미 상담을 종료했다면
+         * 오늘은 다시 상담할 수 없음
+         */
+
+        if (completedDate === getToday()) {
+
+            setTodayCompleted(true);
+
+        } else {
+
+            /*
+             * 날짜가 바뀌었다면
+             * 이전 기록 삭제
+             */
+
+            localStorage.removeItem(key);
+
+            setTodayCompleted(false);
+
+        }
+
+    }, [loginUser]);
+
+
+    // =====================================================
     // 상태
     // =====================================================
 
-    const [message, setMessage] = useState("");
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] =
+        useState("");
 
-    const [loading, setLoading] = useState(false);
-    const [analyzing, setAnalyzing] = useState(false);
 
-    const [analysis, setAnalysis] = useState(null);
+    const [messages, setMessages] =
+        useState([]);
+
+
+    const [loading, setLoading] =
+        useState(false);
+
+
+    const [analyzing, setAnalyzing] =
+        useState(false);
+
+
+    const [analysis, setAnalysis] =
+        useState(null);
+
+
+    // =====================================================
+    // 채팅창 DOM 가져오기
+    // =====================================================
+
+    const chatBoxRef =
+        useRef(null);
+
+
+    // =====================================================
+    // 메시지가 추가되면 채팅창 자동 스크롤
+    // =====================================================
+
+    useEffect(() => {
+
+        const chatBox =
+            chatBoxRef.current;
+
+
+        if (!chatBox) {
+            return;
+        }
+
+
+        chatBox.scrollTo({
+
+            top:
+                chatBox.scrollHeight,
+
+            behavior:
+                "smooth"
+
+        });
+
+    }, [messages, loading]);
 
 
     // =====================================================
     // 세션 ID
     // =====================================================
 
-    const [sessionId] = useState(() => {
+    const [sessionId] =
+        useState(() => {
 
-        return (
-            Date.now().toString() +
-            Math.random()
-                .toString(36)
-                .substring(2)
-        );
+            return (
 
-    });
+                Date.now().toString() +
+
+                Math.random()
+                    .toString(36)
+                    .substring(2)
+
+            );
+
+        });
 
 
     // =====================================================
@@ -72,59 +233,111 @@ function Lo() {
 
     const sendMessage = async () => {
 
+        /*
+         * 오늘 상담을 이미 완료했다면
+         * 메시지 전송 금지
+         */
+
+        if (todayCompleted) {
+
+            alert(
+                "오늘은 이미 상담을 완료했어요.\n내일 다시 로와 이야기해보세요."
+            );
+
+            return;
+
+        }
+
+
         if (!message.trim()) {
             return;
         }
+
 
         if (loading || analyzing) {
             return;
         }
 
 
-        const userText = message.trim();
+        const userText =
+            message.trim();
 
 
         const userMessage = {
-            sender: "USER",
-            content: userText
+
+            sender:
+                "USER",
+
+            content:
+                userText
+
         };
 
 
         setMessages((prev) => [
+
             ...prev,
+
             userMessage
+
         ]);
 
 
         setMessage("");
+
         setLoading(true);
 
 
         try {
 
-            const response = await axios.post(
-                "/api/ai/chat",
-                {
-                    session_id: sessionId,
-                    character: character,
-                    message: userText,
-                    history: messages
-                },
-                {
-                    withCredentials: true
-                }
-            );
+            const response =
+                await axios.post(
+
+                    "/api/ai/chat",
+
+                    {
+
+                        session_id:
+                            sessionId,
+
+                        character:
+                            character,
+
+                        message:
+                            userText,
+
+                        history:
+                            messages
+
+                    },
+
+                    {
+
+                        withCredentials:
+                            true
+
+                    }
+
+                );
 
 
             const aiMessage = {
-                sender: "AI",
-                content: response.data.message
+
+                sender:
+                    "AI",
+
+                content:
+                    response.data.message
+
             };
 
 
             setMessages((prev) => [
+
                 ...prev,
+
                 aiMessage
+
             ]);
 
 
@@ -137,12 +350,19 @@ function Lo() {
 
 
             setMessages((prev) => [
+
                 ...prev,
+
                 {
-                    sender: "AI",
+
+                    sender:
+                        "AI",
+
                     content:
                         "죄송해요. AI 서버와 연결할 수 없습니다."
+
                 }
+
             ]);
 
 
@@ -167,7 +387,9 @@ function Lo() {
                 return;
             }
 
+
             e.preventDefault();
+
 
             sendMessage();
 
@@ -180,120 +402,216 @@ function Lo() {
     // 대화 종료
     // =====================================================
 
-    const finishConversation = async () => {
+    const finishConversation =
+        async () => {
 
-        if (messages.length === 0) {
+            /*
+             * 오늘 이미 상담 완료
+             */
 
-            alert(
-                "먼저 AI와 대화를 해주세요."
-            );
+            if (todayCompleted) {
 
-            return;
-        }
+                alert(
+                    "오늘은 이미 상담을 완료했어요.\n내일 다시 로와 이야기해보세요."
+                );
 
+                return;
 
-        if (loading || analyzing) {
-            return;
-        }
-
-
-        const result = window.confirm(
-            "대화를 종료하고\n요약 → 감정 분석 → 일기 작성을 진행할까요?"
-        );
+            }
 
 
-        if (!result) {
-            return;
-        }
+            if (messages.length === 0) {
+
+                alert(
+                    "먼저 AI와 대화를 해주세요."
+                );
+
+                return;
+
+            }
 
 
-        setAnalyzing(true);
+            if (loading || analyzing) {
+                return;
+            }
 
 
-        try {
+            const result =
+                window.confirm(
 
-            const response = await axios.post(
-                "/api/ai/analyze",
-                {
-                    session_id: sessionId,
-                    character: character,
-                    history: messages
-                },
-                {
-                    withCredentials: true
-                }
-            );
+                    "대화를 종료하고\n요약 → 감정 분석 → 일기 작성을 진행할까요?"
 
-
-            setAnalysis(response.data);
-
-
-            setTimeout(() => {
-
-                const resultElement =
-                    document.getElementById(
-                        "analysis-result"
-                    );
-
-
-                if (resultElement) {
-
-                    resultElement.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                }
-
-            }, 100);
-
-
-        } catch (error) {
-
-            console.error(
-                "대화 분석 오류:",
-                error
-            );
-
-
-            alert(
-                "대화 분석 중 오류가 발생했습니다."
-            );
-
-
-        } finally {
-
-            setAnalyzing(false);
-
-        }
-
-    };
-
-
-    // =====================================================
-    // 새 대화
-    // =====================================================
-
-    const newConversation = () => {
-
-        if (messages.length > 0) {
-
-            const result = window.confirm(
-                "현재 대화를 삭제하고 새 대화를 시작할까요?"
-            );
+                );
 
 
             if (!result) {
                 return;
             }
 
-        }
+
+            setAnalyzing(true);
 
 
-        setMessages([]);
-        setAnalysis(null);
-        setMessage("");
+            try {
 
-    };
+                const response =
+                    await axios.post(
+
+                        "/api/ai/analyze",
+
+                        {
+
+                            /*
+                             * Feel과 동일하게
+                             * userid 전달
+                             */
+
+                            userid:
+                                loginUser.userid,
+
+                            session_id:
+                                sessionId,
+
+                            character:
+                                character,
+
+                            history:
+                                messages
+
+                        },
+
+                        {
+
+                            withCredentials:
+                                true
+
+                        }
+
+                    );
+
+
+                setAnalysis(
+                    response.data
+                );
+
+
+                // =================================================
+                // 오늘 상담 완료 처리
+                // =================================================
+
+                const key =
+                    getTodayKey();
+
+
+                localStorage.setItem(
+
+                    key,
+
+                    getToday()
+
+                );
+
+
+                setTodayCompleted(
+                    true
+                );
+
+
+                // =================================================
+                // 분석 결과 위치로 이동
+                // =================================================
+
+                setTimeout(() => {
+
+                    const resultElement =
+                        document.getElementById(
+                            "analysis-result"
+                        );
+
+
+                    if (resultElement) {
+
+                        resultElement.scrollIntoView({
+
+                            behavior:
+                                "smooth"
+
+                        });
+
+                    }
+
+                }, 100);
+
+
+            } catch (error) {
+
+                console.error(
+                    "대화 분석 오류:",
+                    error
+                );
+
+
+                alert(
+                    "대화 분석 중 오류가 발생했습니다."
+                );
+
+
+            } finally {
+
+                setAnalyzing(false);
+
+            }
+
+        };
+
+
+    // =====================================================
+    // 새 대화
+    // =====================================================
+
+    const newConversation =
+        () => {
+
+            /*
+             * 오늘 상담 완료 상태라면
+             * 새 대화를 시작할 수 없음
+             */
+
+            if (todayCompleted) {
+
+                alert(
+                    "오늘 상담은 이미 완료했어요.\n내일 다시 새로운 대화를 시작할 수 있어요."
+                );
+
+                return;
+
+            }
+
+
+            if (messages.length > 0) {
+
+                const result =
+                    window.confirm(
+
+                        "현재 대화를 삭제하고 새 대화를 시작할까요?"
+
+                    );
+
+
+                if (!result) {
+                    return;
+                }
+
+            }
+
+
+            setMessages([]);
+
+            setAnalysis(null);
+
+            setMessage("");
+
+        };
 
 
     // =====================================================
@@ -319,21 +637,85 @@ function Lo() {
                             로와 고민상담
                         </h1>
 
+
                         <p className="lo-subtitle">
-                            즐겁고 편안하게 이야기를 나눠보세요.
+
+                            {todayCompleted
+
+                                ? "오늘의 상담을 완료했어요."
+
+                                : "즐겁고 편안하게 이야기를 나눠보세요."
+
+                            }
+
                         </p>
 
                     </div>
 
 
                     <button
-                        onClick={newConversation}
-                        className="lo-new-button"
+
+                        onClick={
+                            newConversation
+                        }
+
+                        disabled={
+                            todayCompleted
+                        }
+
+                        className={
+
+                            todayCompleted
+
+                                ? "lo-new-button lo-new-button-disabled"
+
+                                : "lo-new-button"
+
+                        }
+
                     >
                         새 대화
                     </button>
 
                 </div>
+
+
+                {/* =================================================
+                    오늘 상담 완료 안내
+                ================================================= */}
+
+                {todayCompleted && (
+
+                    <div className="lo-daily-complete">
+
+                        <div className="lo-daily-complete-icon">
+                            🌿
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                오늘의 상담을 완료했어요.
+                            </strong>
+
+
+                            <p>
+
+                                오늘 나눈 이야기는
+                                감정 기록으로 저장되었어요.
+
+                                <br />
+
+                                내일 다시 로와 이야기해보세요.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                )}
 
 
                 {/* =================================================
@@ -354,11 +736,15 @@ function Lo() {
 
 
                     <span>
+
                         지금은{" "}
+
                         <strong>
                             로
                         </strong>
+
                         와 대화하고 있어요.
+
                     </span>
 
                 </div>
@@ -368,8 +754,10 @@ function Lo() {
                     채팅
                 ================================================= */}
 
-                <div className="lo-chat-box">
-
+                <div
+                    className="lo-chat-box"
+                    ref={chatBoxRef}
+                >
 
                     {messages.length === 0 && (
 
@@ -381,12 +769,30 @@ function Lo() {
                                 className="lo-empty-image"
                             />
 
+
                             <h3>
-                                로와 이야기를 시작해보세요.
+
+                                {todayCompleted
+
+                                    ? "오늘의 상담을 완료했어요."
+
+                                    : "로와 이야기를 시작해보세요."
+
+                                }
+
                             </h3>
 
+
                             <p>
-                                오늘 어떤 이야기가 있으신가요?
+
+                                {todayCompleted
+
+                                    ? "내일 다시 새로운 이야기를 나눠보세요."
+
+                                    : "오늘 어떤 이야기가 있으신가요?"
+
+                                }
+
                             </p>
 
                         </div>
@@ -395,14 +801,19 @@ function Lo() {
 
 
                     {messages.map(
+
                         (item, index) => (
 
                             <div
                                 key={index}
                                 className={
+
                                     item.sender === "USER"
+
                                         ? "lo-user-wrapper"
+
                                         : "lo-ai-wrapper"
+
                                 }
                             >
 
@@ -427,17 +838,24 @@ function Lo() {
 
                                 <div
                                     className={
+
                                         item.sender === "USER"
+
                                             ? "lo-user-message"
+
                                             : "lo-ai-message"
+
                                     }
                                 >
+
                                     {item.content}
+
                                 </div>
 
                             </div>
 
                         )
+
                     )}
 
 
@@ -459,8 +877,11 @@ function Lo() {
 
                             </div>
 
+
                             <div className="lo-ai-message">
+
                                 생각하고 있어요...
+
                             </div>
 
                         </div>
@@ -477,38 +898,77 @@ function Lo() {
                 <div className="lo-input-area">
 
                     <textarea
-                        value={message}
-                        placeholder="로에게 이야기를 들려주세요."
-                        onChange={(e) =>
-                            setMessage(e.target.value)
+
+                        value={
+                            message
                         }
-                        onKeyDown={handleKeyDown}
+
+                        placeholder={
+
+                            todayCompleted
+
+                                ? "오늘의 상담을 완료했어요. 내일 다시 이야기해보세요."
+
+                                : "로에게 이야기를 들려주세요."
+
+                        }
+
+                        onChange={(e) =>
+                            setMessage(
+                                e.target.value
+                            )
+                        }
+
+                        onKeyDown={
+                            handleKeyDown
+                        }
+
                         className="lo-input"
+
                         disabled={
+
                             loading ||
                             analyzing ||
-                            analysis !== null
+                            analysis !== null ||
+                            todayCompleted
+
                         }
+
                         rows={1}
+
                     />
 
 
                     <button
-                        onClick={sendMessage}
+
+                        onClick={
+                            sendMessage
+                        }
+
                         disabled={
+
                             loading ||
                             analyzing ||
                             !message.trim() ||
-                            analysis !== null
+                            analysis !== null ||
+                            todayCompleted
+
                         }
+
                         className={
+
                             loading ||
-                            analyzing ||
-                            !message.trim() ||
-                            analysis !== null
+                                analyzing ||
+                                !message.trim() ||
+                                analysis !== null ||
+                                todayCompleted
+
                                 ? "lo-send-button lo-send-button-disabled"
+
                                 : "lo-send-button"
+
                         }
+
                     >
                         보내기
                     </button>
@@ -523,23 +983,44 @@ function Lo() {
                 {!analysis && (
 
                     <button
-                        onClick={finishConversation}
+
+                        onClick={
+                            finishConversation
+                        }
+
                         disabled={
+
                             loading ||
                             analyzing ||
-                            messages.length === 0
+                            messages.length === 0 ||
+                            todayCompleted
+
                         }
+
                         className={
+
                             analyzing ||
-                            messages.length === 0
+                                messages.length === 0 ||
+                                todayCompleted
+
                                 ? "lo-finish-button lo-finish-button-disabled"
+
                                 : "lo-finish-button"
+
                         }
+
                     >
 
-                        {analyzing
-                            ? "대화를 분석하고 있어요..."
-                            : "대화 종료하기"
+                        {todayCompleted
+
+                            ? "오늘 상담 완료"
+
+                            : analyzing
+
+                                ? "대화를 분석하고 있어요..."
+
+                                : "대화 종료하기"
+
                         }
 
                     </button>
@@ -571,12 +1052,19 @@ function Lo() {
                         </div>
 
 
-                        {/* 감정 */}
+                        {/* =================================================
+                            감정
+                        ================================================= */}
 
                         <div className="lo-emotion-box">
 
                             <div className="lo-result-emoji">
-                                {analysis.emotion?.emoji || "😐"}
+
+                                {
+                                    analysis.emotion?.emoji ||
+                                    "😐"
+                                }
+
                             </div>
 
 
@@ -586,9 +1074,14 @@ function Lo() {
                                     오늘의 감정
                                 </div>
 
+
                                 <div className="lo-main-emotion">
-                                    {analysis.emotion?.main_emotion ||
-                                        "알 수 없음"}
+
+                                    {
+                                        analysis.emotion?.main_emotion ||
+                                        "알 수 없음"
+                                    }
+
                                 </div>
 
                             </div>
@@ -599,7 +1092,12 @@ function Lo() {
                                 감정 강도{" "}
 
                                 <strong>
-                                    {analysis.emotion?.intensity || 0}/5
+
+                                    {
+                                        analysis.emotion?.intensity ||
+                                        0
+                                    }/5
+
                                 </strong>
 
                             </div>
@@ -607,61 +1105,87 @@ function Lo() {
                         </div>
 
 
-                        {/* 감정 목록 */}
+                        {/* =================================================
+                            감정 목록
+                        ================================================= */}
 
-                        {analysis.emotion?.emotions?.length > 0 && (
+                        {
+                            analysis.emotion?.emotions?.length > 0 && (
 
-                            <div className="lo-emotion-list">
+                                <div className="lo-emotion-list">
 
-                                {analysis.emotion.emotions.map(
-                                    (emotion, index) => (
+                                    {
+                                        analysis.emotion.emotions.map(
 
-                                        <span
-                                            key={index}
-                                            className="lo-emotion-tag"
-                                        >
-                                            {emotion}
-                                        </span>
+                                            (emotion, index) => (
 
-                                    )
-                                )}
+                                                <span
+                                                    key={index}
+                                                    className="lo-emotion-tag"
+                                                >
 
-                            </div>
+                                                    {emotion}
 
-                        )}
+                                                </span>
+
+                                            )
+
+                                        )
+                                    }
+
+                                </div>
+
+                            )
+                        }
 
 
-                        {/* 고민 요약 */}
+                        {/* =================================================
+                            고민 요약
+                        ================================================= */}
 
                         <div className="lo-result-box">
 
                             <div className="lo-result-title">
+
                                 📝 고민 요약
+
                             </div>
 
+
                             <p className="lo-result-text">
+
                                 {analysis.summary}
+
                             </p>
 
                         </div>
 
 
-                        {/* 감정 일기 */}
+                        {/* =================================================
+                            감정 일기
+                        ================================================= */}
 
                         <div className="lo-diary-box">
 
                             <div className="lo-diary-title">
+
                                 📖 오늘의 감정 일기
+
                             </div>
 
+
                             <div className="lo-diary-content">
+
                                 {analysis.diary}
+
                             </div>
 
                         </div>
 
 
-                        {/* 저장 안내 */}
+                        {/* =================================================
+                            저장 안내
+                        ================================================= */}
 
                         <div className="lo-save-notice">
 
@@ -676,14 +1200,38 @@ function Lo() {
                         </div>
 
 
-                        {/* 새로운 대화 */}
+                        {/* =================================================
+                            새로운 대화
+                        ================================================= */}
 
-                        <button
-                            onClick={newConversation}
-                            className="lo-new-conversation-button"
-                        >
-                            새로운 대화 시작하기
-                        </button>
+                        <div className="talk-ai-result-buttons">
+
+                            <button
+
+                                onClick={
+                                    newConversation
+                                }
+
+                                disabled={
+                                    todayCompleted
+                                }
+
+                                className="talk-ai-new-conversation-button"
+
+                            >
+
+                                새로운 대화 시작하기
+
+                            </button>
+
+
+                            <button className="talk-ai-share-button">
+
+                                공유하기
+
+                            </button>
+
+                        </div>
 
                     </div>
 

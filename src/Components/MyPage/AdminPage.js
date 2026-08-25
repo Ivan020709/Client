@@ -26,6 +26,7 @@ function AdminPage() {
     const endPage = Math.min(startPage + 4, totalPages);
 
 
+    
 
     // 신고 목록
     useEffect(() => {
@@ -72,7 +73,7 @@ function AdminPage() {
         })
             .then(() => {
                 alert('삭제되었습니다.');
-                navigate('/adminPage');
+                navigate('/myPage');
             })
             .catch((err) => {
                 console.error(err);

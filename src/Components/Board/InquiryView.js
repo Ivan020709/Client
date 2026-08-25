@@ -26,6 +26,32 @@ function InquiryView() {
 
 
     // =====================================================
+    // 문의 댓글 조회
+    // =====================================================
+
+    const loadComments = () => {
+
+        return axios.get(
+            `/api/inquiry/${inquirynum}/comments`
+        )
+            .then((result) => {
+
+                // 서버 이름을 기존 화면에서 사용하던 이름으로 맞춥니다.
+                const list = (result.data.comments || []).map((item) => ({
+                    ...item,
+                    userid: item.userId,
+                    nickname: item.userName,
+                    created_at: item.createdAt
+                        ? item.createdAt.substring(0, 16).replace('T', ' ')
+                        : ''
+                }));
+
+                setComments(list);
+            });
+    };
+
+
+    // =====================================================
     // 문의글 조회
     // =====================================================
 
@@ -35,6 +61,7 @@ function InquiryView() {
             .then((result) => {
 
                 setPost(result.data.inquiry);
+
 
             })
             .catch((err) => {
@@ -48,6 +75,14 @@ function InquiryView() {
             });
 
     }, [inquirynum, navigate]);
+
+
+    // 문의 상세 화면에 들어오면 DB에 저장된 댓글을 불러옵니다.
+    useEffect(() => {
+        loadComments().catch((err) => {
+            console.error('문의 댓글 조회 실패:', err);
+        });
+    }, [inquirynum]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     // =====================================================
@@ -82,33 +117,26 @@ function InquiryView() {
         }
 
 
-        // 임시 댓글
-        const newComment = {
-
-            id: Date.now(),
-
-            userid: loginUser.userid,
-
-            // Redux에 nickname이 있다면 사용
-            nickname:
-                loginUser.nickname ||
-                loginUser.nickName ||
-                loginUser.userid,
-
-            content: comment.trim(),
-
-            created_at: new Date().toLocaleDateString('ko-KR')
-
-        };
-
-
-        setComments((prev) => [
-            ...prev,
-            newComment
-        ]);
-
-
-        setComment('');
+        // 화면에만 임시로 넣지 않고 서버를 통해 DB에 저장합니다.
+        axios.post(
+            `/api/inquiry/${inquirynum}/comments`,
+            {
+                content: comment.trim()
+            },
+            {
+                params: {
+                    userId: loginUser.userid
+                }
+            }
+        )
+            .then(() => {
+                setComment('');
+                return loadComments();
+            })
+            .catch((err) => {
+                console.error('문의 댓글 등록 실패:', err);
+                alert('댓글 등록 중 오류가 발생했습니다.');
+            });
 
     };
 
@@ -153,27 +181,27 @@ function InquiryView() {
         }
 
 
-        setComments((prev) =>
-            prev.map((item) => {
-
-                if (item.id === id) {
-
-                    return {
-                        ...item,
-                        content: editingContent.trim()
-                    };
-
+        // PUT 대신 POST 요청으로 댓글을 수정합니다.
+        axios.post(
+            `/api/inquiry/comments/${id}/update`,
+            {
+                content: editingContent.trim()
+            },
+            {
+                params: {
+                    userId: loginUser.userid
                 }
-
-                return item;
-
+            }
+        )
+            .then(() => {
+                setEditingCommentId(null);
+                setEditingContent('');
+                return loadComments();
             })
-        );
-
-
-        setEditingCommentId(null);
-
-        setEditingContent('');
+            .catch((err) => {
+                console.error('문의 댓글 수정 실패:', err);
+                alert('댓글 수정 중 오류가 발생했습니다.');
+            });
 
     };
 
@@ -189,9 +217,19 @@ function InquiryView() {
         }
 
 
-        setComments((prev) =>
-            prev.filter((item) => item.id !== id)
-        );
+        axios.delete(
+            `/api/inquiry/comments/${id}`,
+            {
+                params: {
+                    userId: loginUser.userid
+                }
+            }
+        )
+            .then(() => loadComments())
+            .catch((err) => {
+                console.error('문의 댓글 삭제 실패:', err);
+                alert('댓글 삭제 중 오류가 발생했습니다.');
+            });
 
     };
 
@@ -311,7 +349,7 @@ function InquiryView() {
                 <div className="inquiry-view-info">
 
                     <span className="inquiry-view-writer">
-                        작성자 : <strong>{post.userid}</strong>
+                        작성자 : <strong>{post.member?.nickname || "알 수 없는 사용자"}</strong>
                     </span>
 
 

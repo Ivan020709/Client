@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+    useState,
+    useRef,
+    useEffect
+} from "react";
+
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -10,6 +15,7 @@ import aiImage3 from "../../Img/필필1.png";
 
 
 function Feel() {
+
     const loginUser = useSelector(state => state.user);
 
     const character = "필";
@@ -37,34 +43,205 @@ function Feel() {
 
     });
 
+    // =====================================================
+    // 감정일기 공유
+    // =====================================================
+
+    const shareDiary = () => {
+
+        // 대화 종료 후 서버에서 받은 일기 번호가 있어야
+        // 어떤 감정일기를 공유할지 서버에 알려줄 수 있습니다.
+        if (!analysis || !analysis.diaryId) {
+            alert("공유할 감정일기를 찾을 수 없습니다.");
+            return;
+        }
+
+        // 다른 사용자의 일기를 변경하지 않도록 로그인 회원 번호도 확인합니다.
+        if (!loginUser || !loginUser.userid) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
+        // RequestBody 없이 주소의 일기 번호와 params 값만 서버에 전달합니다.
+        // shared가 true이면 공개 일기로 변경됩니다.
+        axios.post(
+            `/api/diary/${analysis.diaryId}/share`,
+            null,
+            {
+                params: {
+                    userId: loginUser.userid,
+                    shared: true
+                }
+            }
+        )
+            .then((result) => {
+                if (result.data.msg === "OK") {
+                    alert("감정일기가 공유되었습니다.");
+                } else {
+                    alert("감정일기 공유에 실패했습니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("감정일기 공유 오류:", error);
+                alert("감정일기 공유 중 오류가 발생했습니다.");
+            });
+    };
+
+
+    // =====================================================
+    // 오늘 날짜
+    // =====================================================
+
+    const getToday = () => {
+
+        const today = new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(
+                today.getMonth() + 1
+            ).padStart(2, "0");
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    };
+
+
+    // =====================================================
+    // 오늘 상담 완료 여부
+    // =====================================================
+
+    const getTodayKey = () => {
+        /*
+         * 로그인한 사용자별로 저장
+         *
+         * 예:
+         * feelCompleted_123
+         */
+
+        const userid =
+            loginUser?.userid || "guest";
+
+        return `feelCompleted_${userid}`;
+
+    };
+
+
+    const [todayCompleted, setTodayCompleted] =
+        useState(false);
+
+
+    // =====================================================
+    // 페이지 진입 시 오늘 상담 여부 확인
+    // =====================================================
+
+    useEffect(() => {
+
+        if (!loginUser?.userid) {
+            return;
+        }
+
+
+        const key =
+            getTodayKey();
+
+        const completedDate =
+            localStorage.getItem(key);
+
+
+        /*
+         * 오늘 이미 상담을 종료했다면
+         * 오늘은 다시 상담할 수 없음
+         */
+
+        if (completedDate === getToday()) {
+
+            setTodayCompleted(true);
+
+        } else {
+
+            /*
+             * 날짜가 바뀌었으면
+             * 이전 기록 삭제
+             */
+
+            localStorage.removeItem(key);
+
+            setTodayCompleted(false);
+
+        }
+
+    }, [loginUser]);
+
 
     // =====================================================
     // 상태
     // =====================================================
 
-    const [message, setMessage] = useState("");
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] =
+        useState("");
 
-    const [loading, setLoading] = useState(false);
-    const [analyzing, setAnalyzing] = useState(false);
+    const [messages, setMessages] =
+        useState([]);
 
-    const [analysis, setAnalysis] = useState(null);
+    const [loading, setLoading] =
+        useState(false);
+
+    const [analyzing, setAnalyzing] =
+        useState(false);
+
+    const [analysis, setAnalysis] =
+        useState(null);
+
+
+    // =====================================================
+    // 채팅창 Ref
+    // =====================================================
+
+    const chatBoxRef =
+        useRef(null);
+
+
+    // =====================================================
+    // 채팅 자동 스크롤
+    // =====================================================
+
+    useEffect(() => {
+
+        const chatBox =
+            chatBoxRef.current;
+
+        if (!chatBox) {
+            return;
+        }
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    }, [messages, loading]);
 
 
     // =====================================================
     // 세션 ID
     // =====================================================
 
-    const [sessionId] = useState(() => {
+    const [sessionId] =
+        useState(() => {
 
-        return (
-            Date.now().toString() +
-            Math.random()
-                .toString(36)
-                .substring(2)
-        );
+            return (
+                Date.now().toString() +
+                Math.random()
+                    .toString(36)
+                    .substring(2)
+            );
 
-    });
+        });
 
 
     // =====================================================
@@ -73,59 +250,103 @@ function Feel() {
 
     const sendMessage = async () => {
 
+        /*
+         * 오늘 상담을 이미 완료했다면
+         * 메시지 전송 금지
+         */
+
+        if (todayCompleted) {
+
+            alert(
+                "오늘은 이미 상담을 완료했어요.\n내일 다시 필과 이야기해보세요."
+            );
+
+            return;
+        }
+
+
         if (!message.trim()) {
             return;
         }
+
 
         if (loading || analyzing) {
             return;
         }
 
 
-        const userText = message.trim();
+        const userText =
+            message.trim();
 
 
         const userMessage = {
+
             sender: "USER",
+
             content: userText
+
         };
 
 
         setMessages((prev) => [
+
             ...prev,
+
             userMessage
+
         ]);
 
 
         setMessage("");
+
         setLoading(true);
 
 
         try {
 
-            const response = await axios.post(
-                "/api/ai/chat",
-                {
-                    session_id: sessionId,
-                    character: character,
-                    message: userText,
-                    history: messages
-                },
-                {
-                    withCredentials: true
-                }
-            );
+            const response =
+                await axios.post(
+
+                    "/api/ai/chat",
+
+                    {
+                        session_id:
+                            sessionId,
+
+                        character:
+                            character,
+
+                        message:
+                            userText,
+
+                        history:
+                            messages
+                    },
+
+                    {
+                        withCredentials:
+                            true
+                    }
+
+                );
 
 
             const aiMessage = {
+
                 sender: "AI",
-                content: response.data.message
+
+                content:
+                    response.data.message
+
             };
 
 
             setMessages((prev) => [
+
                 ...prev,
+
                 aiMessage
+
             ]);
 
 
@@ -138,12 +359,18 @@ function Feel() {
 
 
             setMessages((prev) => [
+
                 ...prev,
+
                 {
+
                     sender: "AI",
+
                     content:
                         "죄송해요. AI 서버와 연결할 수 없습니다."
+
                 }
+
             ]);
 
 
@@ -168,7 +395,9 @@ function Feel() {
                 return;
             }
 
+
             e.preventDefault();
+
 
             sendMessage();
 
@@ -181,121 +410,178 @@ function Feel() {
     // 대화 종료
     // =====================================================
 
-    const finishConversation = async () => {
+    const finishConversation =
+        async () => {
 
-        if (messages.length === 0) {
+            /*
+             * 오늘 이미 상담 완료
+             */
 
-            alert(
-                "먼저 AI와 대화를 해주세요."
-            );
+            if (todayCompleted) {
 
-            return;
-        }
+                alert(
+                    "오늘은 이미 상담을 완료했어요.\n내일 다시 필과 이야기해보세요."
+                );
 
+                return;
 
-        if (loading || analyzing) {
-            return;
-        }
-
-
-        const result = window.confirm(
-            "대화를 종료하고\n요약 → 감정 분석 → 일기 작성을 진행할까요?"
-        );
+            }
 
 
-        if (!result) {
-            return;
-        }
+            if (messages.length === 0) {
+
+                alert(
+                    "먼저 AI와 대화를 해주세요."
+                );
+
+                return;
+
+            }
 
 
-        setAnalyzing(true);
+            if (loading || analyzing) {
+                return;
+            }
 
 
-        try {
-
-            const response = await axios.post(
-                "/api/ai/analyze",
-                {
-                    userid: loginUser.userid,
-                    session_id: sessionId,
-                    character: character,
-                    history: messages
-                },
-                {
-                    withCredentials: true
-                }
-            );
-
-
-            setAnalysis(response.data);
-
-
-            setTimeout(() => {
-
-                const resultElement =
-                    document.getElementById(
-                        "analysis-result"
-                    );
-
-
-                if (resultElement) {
-
-                    resultElement.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                }
-
-            }, 100);
-
-
-        } catch (error) {
-
-            console.error(
-                "대화 분석 오류:",
-                error
-            );
-
-
-            alert(
-                "대화 분석 중 오류가 발생했습니다."
-            );
-
-
-        } finally {
-
-            setAnalyzing(false);
-
-        }
-
-    };
-
-
-    // =====================================================
-    // 새 대화
-    // =====================================================
-
-    const newConversation = () => {
-
-        if (messages.length > 0) {
-
-            const result = window.confirm(
-                "현재 대화를 삭제하고 새 대화를 시작할까요?"
-            );
+            const result =
+                window.confirm(
+                    "대화를 종료하고\n요약 → 감정 분석 → 일기 작성을 진행할까요?"
+                );
 
 
             if (!result) {
                 return;
             }
 
-        }
+
+            setAnalyzing(true);
 
 
-        setMessages([]);
-        setAnalysis(null);
-        setMessage("");
+            try {
 
-    };
+                const response =
+                    await axios.post(
+
+                        "/api/ai/analyze",
+
+                        {
+                            userid:
+                                loginUser.userid,
+
+                            session_id:
+                                sessionId,
+
+                            character:
+                                character,
+
+                            history:
+                                messages
+                        },
+
+                        {
+                            withCredentials:
+                                true
+                        }
+
+                    );
+
+
+                setAnalysis(
+                    response.data
+                );
+
+
+                /*
+                 * =========================================
+                 * 오늘 상담 완료 처리
+                 * =========================================
+                 */
+
+                const key =
+                    getTodayKey();
+
+
+                localStorage.setItem(
+                    key,
+                    getToday()
+                );
+
+
+                setTodayCompleted(
+                    true
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "대화 분석 오류:",
+                    error
+                );
+
+
+                alert(
+                    "대화 분석 중 오류가 발생했습니다."
+                );
+
+
+            } finally {
+
+                setAnalyzing(false);
+
+            }
+
+        };
+
+
+
+
+    // =====================================================
+    // 새 대화
+    // =====================================================
+
+    const newConversation =
+        () => {
+
+            /*
+             * 오늘 상담 완료 상태라면
+             * 새 대화를 시작할 수 없음
+             */
+
+            if (todayCompleted) {
+
+                alert(
+                    "오늘 상담은 이미 완료했어요.\n내일 다시 새로운 대화를 시작할 수 있어요."
+                );
+
+                return;
+
+            }
+
+
+            if (messages.length > 0) {
+
+                const result =
+                    window.confirm(
+                        "현재 대화를 삭제하고 새 대화를 시작할까요?"
+                    );
+
+
+                if (!result) {
+                    return;
+                }
+
+            }
+
+
+            setMessages([]);
+
+            setAnalysis(null);
+
+            setMessage("");
+
+        };
 
 
     // =====================================================
@@ -321,8 +607,12 @@ function Feel() {
                             필과 고민상담
                         </h1>
 
+
                         <p className="talk-ai-subtitle">
-                            당신의 이야기를 편하게 들려주세요.
+                            {todayCompleted
+                                ? "오늘의 상담을 완료했어요."
+                                : "당신의 이야기를 편하게 들려주세요."
+                            }
                         </p>
 
                     </div>
@@ -330,12 +620,53 @@ function Feel() {
 
                     <button
                         onClick={newConversation}
-                        className="talk-ai-new-button"
+                        disabled={
+                            todayCompleted
+                        }
+                        className={
+                            todayCompleted
+                                ? "talk-ai-new-button talk-ai-new-button-disabled"
+                                : "talk-ai-new-button"
+                        }
                     >
                         새 대화
                     </button>
 
                 </div>
+
+
+                {/* =================================================
+                    오늘 상담 완료 안내
+                ================================================= */}
+
+                {todayCompleted && (
+
+                    <div className="talk-ai-daily-complete">
+
+                        <div className="talk-ai-daily-complete-icon">
+                            🌿
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                오늘의 상담을 완료했어요.
+                            </strong>
+
+
+                            <p>
+                                오늘 나눈 이야기는
+                                감정 기록으로 저장되었어요.
+                                <br />
+                                내일 다시 필과 이야기해보세요.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                )}
 
 
                 {/* =================================================
@@ -374,8 +705,10 @@ function Feel() {
                     채팅
                 ================================================= */}
 
-                <div className="talk-ai-chat-box">
-
+                <div
+                    className="talk-ai-chat-box"
+                    ref={chatBoxRef}
+                >
 
                     {messages.length === 0 && (
 
@@ -387,12 +720,24 @@ function Feel() {
                                 className="talk-ai-empty-image"
                             />
 
+
                             <h3>
-                                필과 이야기를 시작해보세요.
+
+                                {todayCompleted
+                                    ? "오늘의 상담을 완료했어요."
+                                    : "필과 이야기를 시작해보세요."
+                                }
+
                             </h3>
 
+
                             <p>
-                                오늘 어떤 고민이 있으신가요?
+
+                                {todayCompleted
+                                    ? "내일 다시 새로운 이야기를 나눠보세요."
+                                    : "오늘 어떤 고민이 있으신가요?"
+                                }
+
                             </p>
 
                         </div>
@@ -438,7 +783,9 @@ function Feel() {
                                             : "talk-ai-ai-message"
                                     }
                                 >
+
                                     {item.content}
+
                                 </div>
 
                             </div>
@@ -465,8 +812,11 @@ function Feel() {
 
                             </div>
 
+
                             <div className="talk-ai-ai-message">
+
                                 생각하고 있어요...
+
                             </div>
 
                         </div>
@@ -484,16 +834,23 @@ function Feel() {
 
                     <textarea
                         value={message}
-                        placeholder="필에게 고민을 이야기해보세요."
+                        placeholder={
+                            todayCompleted
+                                ? "오늘의 상담을 완료했어요. 내일 다시 이야기해보세요."
+                                : "필에게 고민을 이야기해보세요."
+                        }
                         onChange={(e) =>
-                            setMessage(e.target.value)
+                            setMessage(
+                                e.target.value
+                            )
                         }
                         onKeyDown={handleKeyDown}
                         className="talk-ai-input"
                         disabled={
                             loading ||
                             analyzing ||
-                            analysis !== null
+                            analysis !== null ||
+                            todayCompleted
                         }
                         rows={1}
                     />
@@ -505,14 +862,18 @@ function Feel() {
                             loading ||
                             analyzing ||
                             !message.trim() ||
-                            analysis !== null
+                            analysis !== null ||
+                            todayCompleted
                         }
                         className={
                             loading ||
                                 analyzing ||
                                 !message.trim() ||
-                                analysis !== null
+                                analysis !== null ||
+                                todayCompleted
+
                                 ? "talk-ai-send-button talk-ai-send-button-disabled"
+
                                 : "talk-ai-send-button"
                         }
                     >
@@ -533,19 +894,30 @@ function Feel() {
                         disabled={
                             loading ||
                             analyzing ||
-                            messages.length === 0
+                            messages.length === 0 ||
+                            todayCompleted
                         }
                         className={
                             analyzing ||
-                                messages.length === 0
+                                messages.length === 0 ||
+                                todayCompleted
+
                                 ? "talk-ai-finish-button talk-ai-finish-button-disabled"
+
                                 : "talk-ai-finish-button"
                         }
                     >
 
-                        {analyzing
-                            ? "대화를 분석하고 있어요..."
-                            : "대화 종료하기"
+                        {todayCompleted
+
+                            ? "오늘 상담 완료"
+
+                            : analyzing
+
+                                ? "대화를 분석하고 있어요..."
+
+                                : "대화 종료하기"
+
                         }
 
                     </button>
@@ -564,6 +936,7 @@ function Feel() {
                         className="talk-ai-analysis-result"
                     >
 
+
                         <div className="talk-ai-result-header">
 
                             <h2>
@@ -577,7 +950,9 @@ function Feel() {
                         </div>
 
 
-                        {/* 감정 */}
+                        {/* =================================================
+                            감정
+                        ================================================= */}
 
                         <div className="talk-ai-emotion-box">
 
@@ -591,6 +966,7 @@ function Feel() {
                                 <div className="talk-ai-result-label">
                                     오늘의 감정
                                 </div>
+
 
                                 <div className="talk-ai-main-emotion">
 
@@ -616,7 +992,9 @@ function Feel() {
                         </div>
 
 
-                        {/* 감정 목록 */}
+                        {/* =================================================
+                            감정 목록
+                        ================================================= */}
 
                         {analysis.emotion?.emotions?.length > 0 && (
 
@@ -640,13 +1018,16 @@ function Feel() {
                         )}
 
 
-                        {/* 요약 */}
+                        {/* =================================================
+                            고민 요약
+                        ================================================= */}
 
                         <div className="talk-ai-result-box">
 
                             <div className="talk-ai-result-title">
                                 📝 고민 요약
                             </div>
+
 
                             <p className="talk-ai-result-text">
                                 {analysis.summary}
@@ -655,7 +1036,9 @@ function Feel() {
                         </div>
 
 
-                        {/* 일기 */}
+                        {/* =================================================
+                            감정 일기
+                        ================================================= */}
 
                         <div className="talk-ai-diary-box">
 
@@ -663,12 +1046,17 @@ function Feel() {
                                 📖 오늘의 감정 일기
                             </div>
 
+
                             <div className="talk-ai-diary-content">
                                 {analysis.diary}
                             </div>
 
                         </div>
 
+
+                        {/* =================================================
+                            저장 안내
+                        ================================================= */}
 
                         <div className="talk-ai-save-notice">
 
@@ -683,11 +1071,31 @@ function Feel() {
                         </div>
 
 
+                        {/* =================================================
+                            결과 버튼
+                        ================================================= */}
+
                         <div className="talk-ai-result-buttons">
-                            <button onClick={newConversation} className="talk-ai-new-conversation-button">
+
+                            <button
+                                onClick={newConversation}
+                                disabled={
+                                    todayCompleted
+                                }
+                                className="talk-ai-new-conversation-button"
+                            >
                                 새로운 대화 시작하기
                             </button>
-                            <button className="talk-ai-share-button">공유하기</button>
+
+
+                            {/* 방금 저장된 감정일기를 공개 상태로 변경합니다. */}
+                            <button
+                                onClick={shareDiary}
+                                className="talk-ai-share-button"
+                            >
+                                공유하기
+                            </button>
+
                         </div>
 
                     </div>

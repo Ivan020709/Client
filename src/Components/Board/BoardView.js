@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import BoardComment from './BoardComment';
 
 import './BoardView.css';
 
@@ -15,10 +16,6 @@ function BoardView() {
 
     // 게시글
     const [post, setPost] = useState(null);
-
-    // 댓글
-    const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState('');
 
     // 게시글 조회
     useEffect(() => {
@@ -70,36 +67,6 @@ function BoardView() {
                 console.error('게시글 삭제 실패:', err);
                 // alert('게시글 삭제에 실패했습니다.');
             });
-    };
-
-
-    // 댓글 등록
-    const handleCommentSubmit = (e) => {
-
-        e.preventDefault();
-
-        if (!loginUser?.userid) {
-            alert('댓글은 로그인 후 작성할 수 있습니다.');
-            navigate('/memberLogin', {
-                state: {
-                    from: `/boardView/${boardnum}`
-                }
-            });
-            return;
-        }
-
-        if (!comment.trim()) {
-            alert('댓글을 입력해주세요.');
-            return;
-        }
-
-        // 댓글 API 연결 예정
-        console.log('댓글 등록:', {
-            boardnum: boardnum,
-            content: comment
-        });
-
-        setComment('');
     };
 
 
@@ -164,7 +131,8 @@ function BoardView() {
                     <div className="board-view-info">
 
                         <span>
-                            작성자 <strong>{post.userid}</strong>
+                            {/* userid 대신 서버에서 받은 회원 이름을 표시합니다. */}
+                            작성자 <strong>{post.writerName || '알 수 없음'}</strong>
                         </span>
 
                         <span>
@@ -224,76 +192,11 @@ function BoardView() {
                 </div>
 
 
-                {/* 댓글 */}
-                <div className="board-comment-section">
-
-                    <div className="board-comment-title">
-                        댓글 <strong>{comments.length}</strong>
-                    </div>
-
-
-                    {/* 댓글 목록 */}
-                    <div className="board-comment-list">
-
-                        {comments.length > 0 ? (
-
-                            comments.map((item) => (
-
-                                <div
-                                    className="board-comment"
-                                    key={item.id}
-                                >
-
-                                    <div className="board-comment-info">
-
-                                        <strong>
-                                            {item.user_id}
-                                        </strong>
-
-                                        <span>
-                                            {item.created_at}
-                                        </span>
-
-                                    </div>
-
-                                    <div className="board-comment-content">
-                                        {item.content}
-                                    </div>
-
-                                </div>
-
-                            ))
-
-                        ) : (
-
-                            <div className="board-no-comment">
-                                아직 댓글이 없습니다.
-                            </div>
-
-                        )}
-
-                    </div>
-
-
-                    {/* 댓글 작성 */}
-                    <form
-                        className="board-comment-form"
-                        onSubmit={handleCommentSubmit}
-                    >
-
-                        <textarea
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            placeholder="댓글을 입력해주세요."
-                        />
-
-                        <button type="submit">
-                            댓글 등록
-                        </button>
-
-                    </form>
-
-                </div>
+                {/*
+                    서버 API와 이미 연결되어 있는 댓글 컴포넌트를 사용합니다.
+                    조회, 등록, 수정, 삭제 기능이 모두 이 안에 들어 있습니다.
+                */}
+                <BoardComment boardId={Number(boardnum)} />
 
             </div>
 

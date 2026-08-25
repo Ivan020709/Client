@@ -26,7 +26,8 @@ function relativeTime(value) {
 
 function authorName(post) {
     if (post.isprivate && !post.email) return '비공개';
-    return post.email?.split('@')[0] || `마음친구 ${post.userid}`;
+    // 서버에서 받은 회원 이름을 우선 표시합니다.
+    return post.writerName || post.email?.split('@')[0] || `마음친구 ${post.userid}`;
 }
 
 function BoardList() {

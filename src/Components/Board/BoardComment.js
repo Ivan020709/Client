@@ -42,7 +42,8 @@ function BoardComment({ boardId, onCountChange }) {
 
     const update = async (commentId) => {
         if (!editingContent.trim()) return;
-        await axios.put(`/api/board/comments/${commentId}`, { content: editingContent }, {
+        // PUT 대신 POST 주소를 사용하여 댓글을 수정합니다.
+        await axios.post(`/api/board/comments/${commentId}/update`, { content: editingContent }, {
             params: { userId: loginUser.userid }
         });
         setEditingId(null);
@@ -66,7 +67,7 @@ function BoardComment({ boardId, onCountChange }) {
                 {comments.map((item) => {
                     const mine = Number(loginUser?.userid) === Number(item.userId);
                     return <article className="board-comment-item" key={item.id}>
-                        <div className="board-comment-meta"><strong>회원 {item.userId}</strong><span>{item.createdAt?.substring(0, 16).replace('T', ' ')}</span></div>
+                        <div className="board-comment-meta"><strong>{item.userName || '알 수 없음'}</strong><span>{item.createdAt?.substring(0, 16).replace('T', ' ')}</span></div>
                         {editingId === item.id ? <div className="board-comment-edit">
                             <textarea value={editingContent} onChange={(e) => setEditingContent(e.target.value)} />
                             <button type="button" onClick={() => update(item.id)}>저장</button>
