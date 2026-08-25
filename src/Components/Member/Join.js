@@ -165,49 +165,49 @@ function Join() {
                 }
             }
         )
-        .then((result) => {
+            .then((result) => {
 
-            if (result.data.msg === 'OK') {
+                if (result.data.msg === 'OK') {
 
-                setIdCheckResult(
-                    '※ 사용 가능한 이메일입니다.'
+                    setIdCheckResult(
+                        '※ 사용 가능한 이메일입니다.'
+                    );
+
+                    setMsgStyle({
+                        color: '#b68b78',
+                        flex: '1',
+                        fontWeight: '700'
+                    });
+
+                    /*
+                     * 중복확인 완료된 이메일 저장
+                     */
+
+                    setReid(checkEmail);
+
+                } else {
+
+                    setIdCheckResult(
+                        '※ 중복되는 이메일입니다.'
+                    );
+
+                    setMsgStyle({
+                        color: '#c47b70',
+                        flex: '1',
+                        fontWeight: '700'
+                    });
+
+                    setReid('');
+                }
+            })
+            .catch((err) => {
+
+                console.error(err);
+
+                alert(
+                    '이메일 중복 확인 중 오류가 발생했습니다.'
                 );
-
-                setMsgStyle({
-                    color: '#b68b78',
-                    flex: '1',
-                    fontWeight: '700'
-                });
-
-                /*
-                 * 중복확인 완료된 이메일 저장
-                 */
-
-                setReid(checkEmail);
-
-            } else {
-
-                setIdCheckResult(
-                    '※ 중복되는 이메일입니다.'
-                );
-
-                setMsgStyle({
-                    color: '#c47b70',
-                    flex: '1',
-                    fontWeight: '700'
-                });
-
-                setReid('');
-            }
-        })
-        .catch((err) => {
-
-            console.error(err);
-
-            alert(
-                '이메일 중복 확인 중 오류가 발생했습니다.'
-            );
-        });
+            });
     }
 
 
@@ -259,47 +259,47 @@ function Join() {
                 }
             }
         )
-        .then((result) => {
+            .then((result) => {
 
-            if (result.data.msg === 'OK') {
+                if (result.data.msg === 'OK') {
 
-                setNicknameCheckResult(
-                    '※ 사용 가능한 닉네임입니다.'
+                    setNicknameCheckResult(
+                        '※ 사용 가능한 닉네임입니다.'
+                    );
+
+                    setNicknameMsgStyle({
+                        color: '#b68b78',
+                        flex: '1',
+                        fontWeight: '700'
+                    });
+
+                    setRenickname(
+                        checkNickname
+                    );
+
+                } else {
+
+                    setNicknameCheckResult(
+                        '※ 중복되는 닉네임입니다.'
+                    );
+
+                    setNicknameMsgStyle({
+                        color: '#c47b70',
+                        flex: '1',
+                        fontWeight: '700'
+                    });
+
+                    setRenickname('');
+                }
+            })
+            .catch((err) => {
+
+                console.error(err);
+
+                alert(
+                    '닉네임 중복 확인 중 오류가 발생했습니다.'
                 );
-
-                setNicknameMsgStyle({
-                    color: '#b68b78',
-                    flex: '1',
-                    fontWeight: '700'
-                });
-
-                setRenickname(
-                    checkNickname
-                );
-
-            } else {
-
-                setNicknameCheckResult(
-                    '※ 중복되는 닉네임입니다.'
-                );
-
-                setNicknameMsgStyle({
-                    color: '#c47b70',
-                    flex: '1',
-                    fontWeight: '700'
-                });
-
-                setRenickname('');
-            }
-        })
-        .catch((err) => {
-
-            console.error(err);
-
-            alert(
-                '닉네임 중복 확인 중 오류가 발생했습니다.'
-            );
-        });
+            });
     }
 
 
@@ -343,24 +343,24 @@ function Join() {
             '/api/member/fileupload',
             formData
         )
-        .then((result) => {
+            .then((result) => {
 
-            setSavefilename(
-                result.data.savefilename
-            );
+                setSavefilename(
+                    result.data.savefilename
+                );
 
-            setImgSrc(
-                `http://localhost:8070/images/${result.data.savefilename}`
-            );
-        })
-        .catch((err) => {
+                setImgSrc(
+                    `http://localhost:8070/images/${result.data.savefilename}`
+                );
+            })
+            .catch((err) => {
 
-            console.error(err);
+                console.error(err);
 
-            alert(
-                '프로필 사진 업로드 중 오류가 발생했습니다.'
-            );
-        });
+                alert(
+                    '프로필 사진 업로드 중 오류가 발생했습니다.'
+                );
+            });
     }
 
 
@@ -628,33 +628,33 @@ function Join() {
                 provider: 'Local'
             }
         )
-        .then(() => {
+            .then(() => {
 
-            alert(
-                '회원 가입이 완료되었습니다.'
-            );
-
-
-            cookies.remove(
-                'user',
-                {
-                    path: '/'
-                }
-            );
+                alert(
+                    '회원 가입이 완료되었습니다.'
+                );
 
 
-            navigate(
-                '/memberLogin'
-            );
-        })
-        .catch((err) => {
+                cookies.remove(
+                    'user',
+                    {
+                        path: '/'
+                    }
+                );
 
-            console.error(err);
 
-            alert(
-                '회원가입 중 오류가 발생했습니다.'
-            );
-        });
+                navigate(
+                    '/memberLogin'
+                );
+            })
+            .catch((err) => {
+
+                console.error(err);
+
+                alert(
+                    '회원가입 중 오류가 발생했습니다.'
+                );
+            });
     }
 
 

@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { logoutAction } from '../../store/userSlice';
 import { Cookies } from 'react-cookie';
+import jaxios from '../../utils/jwtUtil';
 
 import './MyPage.css';
 
@@ -75,7 +76,7 @@ function MyPage() {
             return;
         }
 
-        axios.get('/api/member/getEmail', {
+        jaxios.get('/api/member/getEmail', {
             params: {
                 email: loginUser.email
             }
@@ -106,28 +107,28 @@ function MyPage() {
                 alert('회원정보를 불러오지 못했습니다.');
             });
 
-            axios.get('/api/admin/getAdmin', {
+        jaxios.get('/api/admin/getAdmin', {
             params: {
                 email: loginUser.email
             }
+        })
+            .then((result) => {
+
+                if (result.data.role === 'ADMIN') {
+
+                    //alert('관리자 페이지로 이동합니다.');
+                    navigate('/adminPage');
+
+                }
             })
-                .then((result) => {
+            .catch((err) => {
 
-                    if (result.data.role === 'ADMIN') {
+                console.error(err);
+                alert('role 조회에 실패했습니다.');
+                navigate('/');
+            });
 
-                        //alert('관리자 페이지로 이동합니다.');
-                        navigate('/adminPage');
-
-                    }
-                })
-                .catch((err) => {
-
-                    console.error(err);
-                    alert('role 조회에 실패했습니다.');
-                    navigate('/');
-                });
-
-        }, [loginUser, navigate]);
+    }, [loginUser, navigate]);
 
 
     const completeHandler = (data) => {
@@ -155,7 +156,7 @@ function MyPage() {
             return;
         }
 
-        axios.post('/api/member/nicknameCheck', null, { params: { nickname } })
+        jaxios.post('/api/member/nicknameCheck', null, { params: { nickname } })
             .then((result) => {
                 if (result.data.msg === 'OK') {
                     setNicknameCheckResult(
@@ -203,7 +204,7 @@ function MyPage() {
         const formData = new FormData();
         formData.append('image', file);
 
-        axios.post('/api/member/fileupload', formData)
+        jaxios.post('/api/member/fileupload', formData)
             .then((result) => {
 
                 setSavefilename(result.data.savefilename);
@@ -264,7 +265,7 @@ function MyPage() {
         };
 
 
-        axios.post('/api/member/updateMember', member)
+        jaxios.post('/api/member/updateMember', member)
             .then(() => {
                 alert('회원정보가 수정되었습니다.');
                 navigate('/');
@@ -281,7 +282,7 @@ function MyPage() {
             return;
         }
 
-        axios.delete('/api/member/deleteMember', { params: { email: loginUser.email } })
+        jaxios.delete('/api/member/deleteMember', { params: { email: loginUser.email } })
             .then(() => {
                 alert('회원탈퇴가 완료되었습니다')
                 navigate('/')
