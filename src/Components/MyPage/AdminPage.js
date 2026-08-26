@@ -26,7 +26,7 @@ function AdminPage() {
     const endPage = Math.min(startPage + 4, totalPages);
 
 
-    
+
 
     // 신고 목록
     useEffect(() => {

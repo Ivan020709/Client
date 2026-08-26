@@ -13,6 +13,8 @@ import aiImage1 from "../../Img/필필.png";
 import aiImage2 from "../../Img/필로그3.png";
 import aiImage3 from "../../Img/필필1.png";
 
+import jaxios from '../../utils/jwtUtil'
+
 
 function Feel() {
 
@@ -64,7 +66,7 @@ function Feel() {
 
         // RequestBody 없이 주소의 일기 번호와 params 값만 서버에 전달합니다.
         // shared가 true이면 공개 일기로 변경됩니다.
-        axios.post(
+        jaxios.post(
             `/api/diary/${analysis.diaryId}/share`,
             null,
             {
@@ -299,7 +301,7 @@ function Feel() {
         try {
 
             const response =
-                await axios.post(
+                await jaxios.post(
 
                     "/api/ai/chat",
 
@@ -455,7 +457,7 @@ function Feel() {
             try {
 
                 const response =
-                    await axios.post(
+                    await jaxios.post(
 
                         "/api/ai/analyze",
 

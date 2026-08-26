@@ -503,57 +503,57 @@ function Join() {
            생년월일
         ----------------------------------------- */
 
-        if (!year || !month || !day) {
+        // if (!year || !month || !day) {
 
-            return alert(
-                '생년월일을 입력하세요.'
-            );
-        }
+        //     return alert(
+        //         '생년월일을 입력하세요.'
+        //     );
+        // }
 
 
-        if (
-            isNaN(year) ||
-            isNaN(month) ||
-            isNaN(day) ||
+        // if (
+        //     isNaN(year) ||
+        //     isNaN(month) ||
+        //     isNaN(day) ||
 
-            Number(year) < 1901 ||
-            Number(year) > 2026 ||
+        //     Number(year) < 1901 ||
+        //     Number(year) > 2026 ||
 
-            Number(month) < 1 ||
-            Number(month) > 12 ||
+        //     Number(month) < 1 ||
+        //     Number(month) > 12 ||
 
-            Number(day) < 1 ||
-            Number(day) > 31
-        ) {
+        //     Number(day) < 1 ||
+        //     Number(day) > 31
+        // ) {
 
-            return alert(
-                '올바른 생년월일을 입력하세요.'
-            );
-        }
+        //     return alert(
+        //         '올바른 생년월일을 입력하세요.'
+        //     );
+        // }
 
 
         /*
          * 실제 존재하는 날짜인지 확인
          */
 
-        const date =
-            new Date(
-                Number(year),
-                Number(month) - 1,
-                Number(day)
-            );
+        // const date =
+        //     new Date(
+        //         Number(year),
+        //         Number(month) - 1,
+        //         Number(day)
+        //     );
 
 
-        if (
-            date.getFullYear() !== Number(year) ||
-            date.getMonth() !== Number(month) - 1 ||
-            date.getDate() !== Number(day)
-        ) {
+        // if (
+        //     date.getFullYear() !== Number(year) ||
+        //     date.getMonth() !== Number(month) - 1 ||
+        //     date.getDate() !== Number(day)
+        // ) {
 
-            return alert(
-                '존재하지 않는 날짜입니다.'
-            );
-        }
+        //     return alert(
+        //         '존재하지 않는 날짜입니다.'
+        //     );
+        // }
 
 
         /* -----------------------------------------
@@ -592,8 +592,8 @@ function Join() {
            생년월일 생성
         ----------------------------------------- */
 
-        const birth =
-            `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        // const birth =
+        //     `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
 
         /* -----------------------------------------
@@ -611,7 +611,7 @@ function Join() {
 
                 nickname: checkNickname,
 
-                birth: birth,
+                // birth: birth,
 
                 phone: phone,
 
@@ -884,7 +884,7 @@ function Join() {
 
                     {/* 생년월일 */}
 
-                    <div className="join-row">
+                    {/* <div className="join-row">
 
                         <label className="join-label">
                             생년월일
@@ -950,7 +950,7 @@ function Join() {
                             일
                         </label>
 
-                    </div>
+                    </div> */}
 
 
                     {/* 전화번호 */}

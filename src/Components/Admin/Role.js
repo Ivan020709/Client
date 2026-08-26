@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Role.css';
 import axios from 'axios';
+import jaxios from '../../utils/jwtUtil'
 
 function Role() {
 
@@ -16,7 +17,7 @@ function Role() {
         console.log('userid:', loginUser.userid);
         console.log('code:', code);
 
-        axios.post(
+        jaxios.post(
             '/api/admin/addRole',
             null,
             {
