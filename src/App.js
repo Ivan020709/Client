@@ -46,7 +46,6 @@ import ProtectedRoute from './Components/Auth/ProtectedRoute';
 import Role from './Components/Admin/Role';
 import SharedDiary from './Components/Calendar/SharedDiary';
 
-
 function App() {
     return (
         <div>
