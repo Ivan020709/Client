@@ -135,6 +135,24 @@ function SaveKakaoInfo() {
             .catch((err) => console.error(err));
     }
 
+    function formatPhoneNumber(value) {
+        // 숫자만 남기기
+        const numbers = value.replace(/\D/g, '');
+
+        // 최대 11자리까지만
+        const phone = numbers.substring(0, 11);
+
+        if (phone.length <= 3) {
+            return phone;
+        }
+
+        if (phone.length <= 7) {
+            return `${phone.slice(0, 3)}-${phone.slice(3)}`;
+        }
+
+        return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7)}`;
+    }
+
     function onSubmit() {
 
         //카카오 가입 시 멤버 수정
@@ -217,8 +235,9 @@ function SaveKakaoInfo() {
                             className="save-kakao-input"
                             type="text"
                             value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
                             placeholder="010-XXXX-XXXX"
+                            maxLength={13}
                         />
 
                     </div>

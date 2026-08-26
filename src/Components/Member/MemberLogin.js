@@ -28,20 +28,40 @@ function MemberLogin() {
 
 
     function onSubmit() {
-        if (!userid) { return alert('아이디를 입력하세요.') }
-        if (!pwd) { return alert('비밀번호를 입력하세요.') }
-        axios.post('/api/member/login', null, { params: { email: userid, pwd } })
-            .then((result) => {
-                if (result.data.msg === 'OK') {
-                    dispatch(loginAction(result.data.loginUser))
-                    cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
-                    navigate(returnPath, { replace: true })
+        if (!userid) {
+            return alert('아이디를 입력하세요.');
+        }
 
-                } else {
-                    setMsg(result.data.msg)
-                }
+        if (!pwd) {
+            return alert('비밀번호를 입력하세요.');
+        }
+
+        axios.post('/api/member/login', null, {
+            params: {
+                userid: userid,
+                pwd: pwd
+            }
+        })
+            .then((result) => {
+
+                console.log('로그인 성공:', result.data);
+
+                // Spring Security SuccessHandler에서
+                // 바로 사용자 정보 + 토큰을 보내고 있음
+                dispatch(loginAction(result.data));
+
+                cookies.set(
+                    'user',
+                    JSON.stringify(result.data),
+                    { path: '/' }
+                );
+
+                navigate(returnPath, { replace: true });
             })
-            .catch((err) => { console.error(err) })
+            .catch((err) => {
+                console.error('로그인 실패:', err);
+                setMsg('아이디 또는 비밀번호가 올바르지 않습니다.');
+            });
     }
 
     return (

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import jaxios from '../../utils/jwtUtil'
 
 import './BoardWrite.css';
 
@@ -35,15 +36,18 @@ function BoardWrite() {
         // 서버로 보낼 데이터
         const boardData = { userid: loginUser.userid, title, content, isprivate: isPrivate, category };
         // console.log('게시글 등록:', boardData);
-        axios.post('/api/board/insertBoard', boardData)
+        jaxios.post('/api/board/insertBoard', boardData)
             .then((result) => {
-                // console.log('게시글 등록 결과:', result.data);
+                console.log('게시글 등록 결과:', result);
+                console.log('응답 데이터:', result.data);
+
                 alert('게시글이 등록되었습니다.');
                 navigate('/boardList');
             })
             .catch((err) => {
                 console.error('게시글 등록 실패:', err);
-                // alert('게시글 등록에 실패했습니다.');
+                console.error('상태 코드:', err.response?.status);
+                console.error('서버 응답:', err.response?.data);
             });
     };
 

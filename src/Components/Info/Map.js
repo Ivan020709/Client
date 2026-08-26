@@ -312,7 +312,7 @@ export default function Map() {
        */
 
       script.src =
-        "https://dapi.kakao.com/v2/maps/sdk.js?appkey=여기에_새로운_자바스크립트_키&autoload=false&libraries=services";
+        "https://dapi.kakao.com/v2/maps/sdk.js?appkey=bc6dfe332f1f1da9441c1886ce6bcbad&autoload=false&libraries=services";
 
       script.async = true;
 

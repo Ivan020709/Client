@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import ReportModal from '../Common/ReportModal';
 import './BoardList.css';
+import jaxios from '../../utils/jwtUtil'
 
 const CATEGORY_ICONS = {
     연애: '💗', 가족: '🏠', 친구관계: '🫂', 진로: '🧭', 학교: '🎒', 기타: '📣'
@@ -46,7 +47,7 @@ function BoardList() {
         setLoading(true);
         setError('');
         try {
-            const result = await axios.get(`/api/board/getBoardList/${pageNumber}`, {
+            const result = await jaxios.get(`/api/board/getBoardList/${pageNumber}`, {
                 params: {
                     sort: sortType,
                     ...(loginUser?.userid ? { userId: loginUser.userid } : {})
@@ -81,7 +82,7 @@ function BoardList() {
 
     const openPost = async (boardnum) => {
         try {
-            await axios.post('/api/board/plusCount', null, { params: { boardnum } });
+            await jaxios.post('/api/board/plusCount', null, { params: { boardnum } });
             navigate(`/boardView/${boardnum}`);
         } catch (openError) {
             console.error(openError);
@@ -92,7 +93,7 @@ function BoardList() {
         event.stopPropagation();
         if (!requireLogin('공감은 로그인 후 이용할 수 있습니다.')) return;
         try {
-            const result = await axios.post('/api/board/toggleLike', null, {
+            const result = await jaxios.post('/api/board/toggleLike', null, {
                 params: { boardId: post.boardnum, userId: loginUser.userid }
             });
             setPosts((current) => current.map((item) => item.boardnum === post.boardnum
