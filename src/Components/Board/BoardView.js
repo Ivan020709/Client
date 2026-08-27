@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import BoardComment from './BoardComment';
+import jaxios from '../../utils/jwtUtil'
 
 import './BoardView.css';
 
@@ -56,7 +57,7 @@ function BoardView() {
             return;
         }
 
-        axios.delete(`/api/board/deleteBoard/${boardnum}`, {
+        jaxios.delete(`/api/board/deleteBoard/${boardnum}`, {
             params: { userId: loginUser.userid }
         })
             .then(() => {

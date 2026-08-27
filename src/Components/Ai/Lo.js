@@ -6,6 +6,7 @@ import React, {
 
 import axios from "axios";
 import { useSelector } from "react-redux";
+import jaxios from '../../utils/jwtUtil'
 
 import "./Lo.css";
 
@@ -66,7 +67,7 @@ function Lo() {
 
         // RequestBody 없이 주소의 일기 번호와 params 값만 서버에 전달합니다.
         // shared가 true이면 공개 일기로 변경됩니다.
-        axios.post(
+        jaxios.post(
             `/api/diary/${analysis.diaryId}/share`,
             null,
             {
@@ -321,7 +322,7 @@ function Lo() {
         try {
 
             const response =
-                await axios.post(
+                await jaxios.post(
 
                     "/api/ai/chat",
 
@@ -485,7 +486,7 @@ function Lo() {
             try {
 
                 const response =
-                    await axios.post(
+                    await jaxios.post(
 
                         "/api/ai/analyze",
 

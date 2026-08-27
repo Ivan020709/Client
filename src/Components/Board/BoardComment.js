@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './BoardComment.css';
+import jaxios from '../../utils/jwtUtil'
 
 function BoardComment({ boardId, onCountChange }) {
     const loginUser = useSelector((state) => state.user);
@@ -13,7 +14,7 @@ function BoardComment({ boardId, onCountChange }) {
     const [editingContent, setEditingContent] = useState('');
 
     const loadComments = async () => {
-        const result = await axios.get(`/api/board/${boardId}/comments`, {
+        const result = await jaxios.get(`/api/board/${boardId}/comments`, {
             params: loginUser?.userid ? { userId: loginUser.userid } : {}
         });
         const next = result.data.comments || [];
@@ -33,7 +34,7 @@ function BoardComment({ boardId, onCountChange }) {
     const create = async (event) => {
         event.preventDefault();
         if (!requireLogin() || !content.trim()) return;
-        await axios.post(`/api/board/${boardId}/comments`, { content }, {
+        await jaxios.post(`/api/board/${boardId}/comments`, { content }, {
             params: { userId: loginUser.userid }
         });
         setContent('');
@@ -43,7 +44,7 @@ function BoardComment({ boardId, onCountChange }) {
     const update = async (commentId) => {
         if (!editingContent.trim()) return;
         // PUT 대신 POST 주소를 사용하여 댓글을 수정합니다.
-        await axios.post(`/api/board/comments/${commentId}/update`, { content: editingContent }, {
+        await jaxios.post(`/api/board/comments/${commentId}/update`, { content: editingContent }, {
             params: { userId: loginUser.userid }
         });
         setEditingId(null);
@@ -53,7 +54,7 @@ function BoardComment({ boardId, onCountChange }) {
 
     const remove = async (commentId) => {
         if (!window.confirm('댓글을 삭제하시겠습니까?')) return;
-        await axios.delete(`/api/board/comments/${commentId}`, {
+        await jaxios.delete(`/api/board/comments/${commentId}`, {
             params: { userId: loginUser.userid }
         });
         await loadComments();

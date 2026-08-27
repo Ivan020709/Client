@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import jaxios from '../../utils/jwtUtil'
 
 import './InquiryView.css';
 
@@ -157,7 +158,7 @@ function InquiryView() {
         }
 
 
-        axios.get(
+        jaxios.get(
             '/api/admin/getAdmin',
             {
                 params: {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import jaxios from '../../utils/jwtUtil'
 
-import './InquiryList.css'; 
+import './InquiryList.css';
 
 function InquiryList() {
     const navigate = useNavigate();

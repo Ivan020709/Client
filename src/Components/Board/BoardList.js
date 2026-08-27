@@ -47,7 +47,7 @@ function BoardList() {
         setLoading(true);
         setError('');
         try {
-            const result = await jaxios.get(`/api/board/getBoardList/${pageNumber}`, {
+            const result = await axios.get(`/api/board/getBoardList/${pageNumber}`, {
                 params: {
                     sort: sortType,
                     ...(loginUser?.userid ? { userId: loginUser.userid } : {})
@@ -82,7 +82,7 @@ function BoardList() {
 
     const openPost = async (boardnum) => {
         try {
-            await jaxios.post('/api/board/plusCount', null, { params: { boardnum } });
+            await axios.post('/api/board/plusCount', null, { params: { boardnum } });
             navigate(`/boardView/${boardnum}`);
         } catch (openError) {
             console.error(openError);
