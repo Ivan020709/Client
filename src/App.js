@@ -81,8 +81,11 @@ function App() {
 
                     {/* 공지사항 */}
                     <Route path="/noticeList" element={<NoticeList />} />
-                    <Route path="/noticeWrite" element={<NoticeWrite />} />
                     <Route path="/noticeView/:noticenum" element={<NoticeView />} />
+
+                    {/* 문의사항 목록과 상세는 비회원도 조회 가능 */}
+                    <Route path="/inquiryList" element={<InquiryList />} />
+                    <Route path="/inquiryView/:inquirynum" element={<InquiryView />} />
 
                     {/* 로그인 사용자만 이용 가능 */}
                     <Route element={<ProtectedRoute />}>
@@ -105,10 +108,11 @@ function App() {
                         <Route path="/updateBoard/:boardnum" element={<UpdateBoard />} />
 
                         {/* 문의 사항 */}
-                        <Route path="/inquiryList" element={<InquiryList />} />
-                        <Route path="/inquiryView/:inquirynum" element={<InquiryView />} />
                         <Route path="/inquiryWrite" element={<InquiryWrite />} />
                         <Route path="/updateInquiry/:inquirynum" element={<UpdateInquiry />} />
+
+                        {/* 공지사항 작성은 로그인 및 관리자 확인 필요 */}
+                        <Route path="/noticeWrite" element={<NoticeWrite />} />
 
                         <Route path="/role" element={<Role />} />
 

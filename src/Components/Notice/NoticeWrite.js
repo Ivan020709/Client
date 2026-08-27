@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 import './NoticeWrite.css';
 
@@ -78,7 +78,7 @@ function NoticeWrite() {
             fixed: isFixed ? 'Y' : 'N'
         };
 
-        await axios.post(
+        await jaxios.post(
             '/api/notice/insertNotice',
             noticeData
         );

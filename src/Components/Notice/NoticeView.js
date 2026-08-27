@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 import './NoticeView.css';
 
@@ -79,7 +80,7 @@ function NoticeView() {
         }
 
 
-        axios.delete(`/api/notice/deleteNotice/${noticenum}`)
+        jaxios.delete(`/api/notice/deleteNotice/${noticenum}`)
             .then(() => {
 
                 alert('공지사항이 삭제되었습니다.');

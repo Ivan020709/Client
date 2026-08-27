@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 import './NoticeList.css';
 
@@ -77,8 +78,13 @@ function NoticeList() {
     // 관리자 여부
     useEffect(() => {
 
-        // 로그인하지 않은 경우
-        axios.get('/api/admin/getAdmin', {
+        // 로그인하지 않은 사용자는 관리자 조회 요청을 보내지 않는다.
+        if (!loginUser?.email) {
+            setIsAdmin(false);
+            return;
+        }
+
+        jaxios.get('/api/admin/getAdmin', {
             params: {
                 email: loginUser.email
             }

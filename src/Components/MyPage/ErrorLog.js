@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 import './ErrorLog.css';
 
 function ErrorLog() {
@@ -12,7 +12,7 @@ function ErrorLog() {
 
     useEffect(() => {
 
-    axios.get('/api/admin/getErrorList')
+    jaxios.get('/api/admin/getErrorList')
             .then((result) => {
 
                 console.log('에러 로그 전체 응답:', result.data);
@@ -43,7 +43,7 @@ function ErrorLog() {
 
     function CheckError(errornum) {
 
-    axios.get('/api/admin/CheckError', {
+    jaxios.get('/api/admin/CheckError', {
         params: {
             errornum
         }

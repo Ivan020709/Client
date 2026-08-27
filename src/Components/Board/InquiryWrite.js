@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 import './InquiryWrite.css';
 
@@ -18,7 +18,7 @@ function InquiryWrite() {
 
         e.preventDefault();
 
-        axios.post('/api/inquiry/insertInquiry', {
+        jaxios.post('/api/inquiry/insertInquiry', {
             title,
             content,
             userid: loginUser.userid

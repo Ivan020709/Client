@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 import './UpdateBoard.css';
 
@@ -76,7 +77,7 @@ function UpdateBoard() {
             isprivate: Boolean(post.isprivate)
         };
 
-        axios.post('/api/board/updateBoard', boardData)
+        jaxios.post('/api/board/updateBoard', boardData)
             .then(() => {
 
                 alert('게시글이 수정되었습니다.');

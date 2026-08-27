@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import jaxios from "../../utils/jwtUtil";
 import { useSelector } from "react-redux";
 
 import "./Diary.css";
@@ -1188,7 +1188,7 @@ function Diary() {
             try {
 
                 const response =
-                    await axios.get(
+                    await jaxios.get(
                         `${DIARY_API}/mine/${userId}`
                     );
 
@@ -1450,7 +1450,7 @@ function Diary() {
 
 
                     const response =
-                        await axios.get(
+                        await jaxios.get(
                             `${DIARY_API}/calendar/${userId}`,
                             {
                                 params: {
@@ -1818,7 +1818,7 @@ function Diary() {
 
 
             const response =
-                await axios.post(
+                await jaxios.post(
                     DIARY_API,
                     diaryData
                 );
