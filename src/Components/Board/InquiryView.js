@@ -281,26 +281,10 @@ function InquiryView() {
                 }
             }
         )
-            .then(() => {
+            .then((result) => {
 
-                // 방금 작성한 답변을 화면에 바로 표시
-                const newAnswer = {
-
-                    nickname:
-                        loginUser.nickname,
-
-                    content:
-                        adminAnswer.trim(),
-
-                    indate:
-                        new Date().toISOString()
-
-                };
-
-
-                setAnswer(
-                    newAnswer
-                );
+                // 서버가 실제로 DB에 저장한 답변을 받아 화면에 표시합니다.
+                setAnswer(result.data.answer);
 
 
                 setAdminAnswer('');
@@ -311,7 +295,7 @@ function InquiryView() {
 
                     ...prev,
 
-                    status: 'Y'
+                    status: '답변완료'
 
                 }));
 
@@ -504,13 +488,13 @@ function InquiryView() {
 
                     <span
                         className={
-                            post.status === 'Y'
+                            post.status === '답변완료'
                                 ? 'inquiry-status-complete'
                                 : 'inquiry-status-waiting'
                         }
                     >
 
-                        {post.status === 'Y'
+                        {post.status === '답변완료'
                             ? '답변 완료'
                             : '대기중'}
 
@@ -625,7 +609,7 @@ function InquiryView() {
 
                                 <span className="inquiry-admin-answer-date">
 
-                                    {answer.indate?.substring(0, 10)}
+                                    {(answer.indate || answer.createdAt)?.substring(0, 10)}
 
                                 </span>
 

@@ -38,7 +38,7 @@ function Hellow() {
                         <small>"나를 제일 잘 아는 방법, 하루 한 줄 감정일기로 시작해 봐."</small>
                     </div>
 
-                    <div className="growth-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/EmotionCalendar')}>
+                    <div className="growth-item" style={{ cursor: 'pointer' }} onClick={() => navigate('/Diary')}>
                         <span>📅</span>
                         <strong>캘린더</strong>
                         <small>"지나온 날들의 너의 기분을 한 눈에 확인 할 수 있어"</small>
