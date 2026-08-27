@@ -14,7 +14,8 @@ function BoardComment({ boardId, onCountChange }) {
     const [editingContent, setEditingContent] = useState('');
 
     const loadComments = async () => {
-        const result = await jaxios.get(`/api/board/${boardId}/comments`, {
+        // 댓글 목록은 비회원도 볼 수 있으므로 토큰이 필요 없는 axios를 사용합니다.
+        const result = await axios.get(`/api/board/${boardId}/comments`, {
             params: loginUser?.userid ? { userId: loginUser.userid } : {}
         });
         const next = result.data.comments || [];
