@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 import './UpdateInquiry.css';
 
@@ -19,7 +19,7 @@ function UpdateInquiry() {
 
     useEffect(() => {
 
-        axios.get(`/api/inquiry/getInquiry/${inquirynum}`)
+        jaxios.get(`/api/inquiry/getInquiry/${inquirynum}`)
             .then((result) => {
 
                 const inquiry = result.data.inquiry;
@@ -60,7 +60,7 @@ function UpdateInquiry() {
         }
 
 
-        axios.post('/api/inquiry/updateInquiry', {
+        jaxios.post('/api/inquiry/updateInquiry', {
             inquirynum,
             title,
             content

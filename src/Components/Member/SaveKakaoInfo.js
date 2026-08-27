@@ -89,8 +89,9 @@ function SaveKakaoInfo() {
                         setAddress3(result.data.loginUser.address3)
                         setZip_num(result.data.loginUser.zip_num)
                     } else {
+                        // 서버에서 발급한 accessToken과 refreshToken까지 함께 저장한다.
                         dispatch(loginAction(result.data.loginUser))
-                        cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
+                        cookies.set('user', result.data.loginUser, { path: '/' })
                         navigate('/')
                     }
                 })
@@ -158,8 +159,9 @@ function SaveKakaoInfo() {
         //카카오 가입 시 멤버 수정
         axios.post('/api/member/updateKakaoMember', { userid, email, nickname, zip_num, address1, address2, address3, phone, editcom: 'Y' })
             .then((result) => {
+                // 신규 카카오 회원도 토큰이 포함된 회원정보를 저장한다.
                 dispatch(loginAction(result.data.loginUser))
-                cookies.set('user', JSON.stringify(result.data.loginUser), { path: '/' })
+                cookies.set('user', result.data.loginUser, { path: '/' })
                 alert('카카오 멤버 가입이 완료되었습니다')
                 navigate('/')
             })

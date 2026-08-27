@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ErrorLog from './ErrorLog';
 import './AdminPage.css';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 import { useNavigate } from 'react-router-dom';
 import AdminActivityLog from './AdminActivityLog';
 import { useSelector } from 'react-redux';
@@ -30,7 +30,7 @@ function AdminPage() {
 
     // 신고 목록
     useEffect(() => {
-        axios.get('/api/admin/getReportList', {
+        jaxios.get('/api/admin/getReportList', {
             params: {
                 page: pages
             }
@@ -64,7 +64,7 @@ function AdminPage() {
         if (!result) {
             return;
         }
-        axios.delete('/api/admin/deleteReport', {
+        jaxios.delete('/api/admin/deleteReport', {
             params: {
                 reportnum: selectedReport.reportnum,
                 adminid: loginUser.userid,

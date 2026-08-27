@@ -270,7 +270,7 @@ function InquiryView() {
         }
 
 
-        axios.post(
+        jaxios.post(
             '/api/admin/writeAnswer',
             null,
             {
@@ -364,7 +364,7 @@ function InquiryView() {
         }
 
 
-        axios.delete(
+        jaxios.delete(
             `/api/inquiry/deleteInquiry/${inquirynum}`
         )
             .then((result) => {

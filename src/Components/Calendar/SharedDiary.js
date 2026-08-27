@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import jaxios from "../../utils/jwtUtil";
 
 import "./SharedDiary.css";
 
@@ -246,23 +247,15 @@ function SharedDiary() {
                     setError(false);
 
 
+                    // 공유 일기 조회도 로그인 토큰이 필요한 요청이다.
                     const response =
-                        await fetch(
+                        await jaxios.get(
                             "/api/diary/shared"
                         );
 
 
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "공유 일기 조회 실패"
-                        );
-
-                    }
-
-
                     const result =
-                        await response.json();
+                        response.data;
 
 
                     console.log(

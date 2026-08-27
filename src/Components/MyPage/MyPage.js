@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import { useSelector, useDispatch } from 'react-redux';
@@ -236,15 +235,12 @@ function MyPage() {
             alert('닉네임 중복확인을 해주세요.');
             return;
         }
-        if (loginUser.provider === 'Local') {
-
-            if (!pwd) {
-                return alert('비밀번호를 입력하세요.');
-            }
-
-            if (pwd !== pwdChk) {
-                return alert('비밀번호 체크가 일치하지 않습니다.');
-            }
+        // 일반 회원이 새 비밀번호를 입력했을 때만 변경 여부를 검사합니다.
+        // 두 칸을 비워두면 서버가 기존 비밀번호를 그대로 유지합니다.
+        if (loginUser.provider === 'Local' && (pwd || pwdChk)) {
+            if (!pwd) return alert('새 비밀번호를 입력하세요.');
+            if (!pwdChk) return alert('비밀번호 확인을 입력하세요.');
+            if (pwd !== pwdChk) return alert('비밀번호 체크가 일치하지 않습니다.');
         }
 
         if (!phone.trim()) {

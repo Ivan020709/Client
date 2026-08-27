@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AdminActivityLog.css';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 
 function AdminActivityLog() {
 
@@ -8,7 +8,7 @@ function AdminActivityLog() {
 
     useEffect(() => {
 
-        axios.get('/api/admin/getAdminActivityLog')
+        jaxios.get('/api/admin/getAdminActivityLog')
             .then((result) => {
 
                 console.log("조회 성공");

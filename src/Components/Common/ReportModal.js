@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import axios from 'axios';
+import jaxios from '../../utils/jwtUtil';
 import './ReportModal.css';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,7 +21,7 @@ function ReportModal({ post, boardnum, onClose }) {
         event.preventDefault();
         setSubmitting(true);
         try {
-            await axios.post(`/api/admin/report`, {boardnum, reporter:loginUser.nickname, criminal, reasontype, content, title });
+            await jaxios.post(`/api/admin/report`, {boardnum, reporter:loginUser.nickname, criminal, reasontype, content, title });
             alert('신고가 접수되었습니다.');
             onClose();
         } catch (error) {
