@@ -5,144 +5,15 @@ import "./SharedDiary.css";
 
 
 /* =========================
-   감정 정보
+   서버가 DB에서 보내준 감정과 이모지를 그대로 사용
 ========================= */
 
-const emotionInfo = {
-
-    happy: {
-        emoji: "😊",
-        name: "행복"
-    },
-
-    calm: {
-        emoji: "😌",
-        name: "편안"
-    },
-
-    sad: {
-        emoji: "😔",
-        name: "우울"
-    },
-
-    anxious: {
-        emoji: "😰",
-        name: "불안"
-    },
-
-    angry: {
-        emoji: "😡",
-        name: "화남"
-    }
-
-};
-
-
-/* =========================
-   한글 감정 → 영어 감정
-========================= */
-
-const moodMap = {
-
-    행복: "happy",
-    기쁨: "happy",
-
-    편안: "calm",
-    평온: "calm",
-
-    우울: "sad",
-    슬픔: "sad",
-
-    불안: "anxious",
-    걱정: "anxious",
-
-    화남: "angry",
-    분노: "angry"
-
-};
-
-
-/* =========================
-   감정 정보 가져오기
-========================= */
-
-const getEmotionInfo = (
-    emotion,
-    emoji
-) => {
-
-    let normalizedEmotion =
-        emotion || "";
-
-
-    /* -------------------------
-       한글 감정이면 영어로 변환
-    ------------------------- */
-
-    if (
-        !emotionInfo[
-        normalizedEmotion
-        ]
-    ) {
-
-        normalizedEmotion =
-            moodMap[
-            normalizedEmotion
-            ] || "";
-
-    }
-
-
-    /* -------------------------
-       감정이 존재하는 경우
-       
-       ★ 서버 emoji가 있으면
-       서버 emoji를 우선 사용
-    ------------------------- */
-
-    if (
-        emotionInfo[
-        normalizedEmotion
-        ]
-    ) {
-
-        return {
-
-            emotion:
-                normalizedEmotion,
-
-            emoji:
-                emoji ||
-                emotionInfo[
-                    normalizedEmotion
-                ].emoji,
-
-            name:
-                emotionInfo[
-                    normalizedEmotion
-                ].name
-
-        };
-
-    }
-
-
-    /* -------------------------
-       감정을 찾지 못한 경우
-    ------------------------- */
-
+const getDiaryEmotion = (emotion, emoji) => {
     return {
-
-        emotion: "",
-
-        emoji:
-            emoji || "🙂",
-
-        name:
-            "기록"
-
+        emotion: emotion || "",
+        emoji: emoji || "🙂",
+        name: emotion || "감정 정보 없음"
     };
-
 };
 
 
@@ -343,24 +214,6 @@ function SharedDiary() {
                                         diary.mood ||
                                         diary.emotion ||
                                         "";
-
-
-                                    /*
-                                     * 한글 감정 → 영어 감정
-                                     */
-
-                                    if (
-                                        !emotionInfo[
-                                        emotion
-                                        ]
-                                    ) {
-
-                                        emotion =
-                                            moodMap[
-                                            emotion
-                                            ] || "";
-
-                                    }
 
 
                                     return {
@@ -713,7 +566,7 @@ function SharedDiaryCard({
      */
 
     const emotion =
-        getEmotionInfo(
+        getDiaryEmotion(
             diary.emotion,
             diary.emoji
         );
@@ -871,7 +724,7 @@ function SharedDiaryModal({
      */
 
     const emotion =
-        getEmotionInfo(
+        getDiaryEmotion(
             diary.emotion,
             diary.emoji
         );

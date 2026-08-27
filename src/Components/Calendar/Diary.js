@@ -13,143 +13,14 @@ const DIARY_API = "/api/diary";
 
 
 /* =========================================================
-   감정 정보
+   서버가 DB에서 보내준 감정과 이모지를 화면에서 사용할 형태로 정리
 ========================================================= */
 
-const emotionInfo = {
-    happy: {
-        emoji: "😊",
-        name: "행복"
-    },
-
-    calm: {
-        emoji: "😌",
-        name: "편안"
-    },
-
-    sad: {
-        emoji: "😔",
-        name: "우울"
-    },
-
-    anxious: {
-        emoji: "😰",
-        name: "불안"
-    },
-
-    angry: {
-        emoji: "😡",
-        name: "화남"
-    }
-};
-
-
-/* =========================================================
-   한글 감정 → 영어 감정
-========================================================= */
-
-const moodMap = {
-    행복: "happy",
-    기쁨: "happy",
-
-    편안: "calm",
-    평온: "calm",
-
-    우울: "sad",
-    슬픔: "sad",
-
-    불안: "anxious",
-    걱정: "anxious",
-
-    화남: "angry",
-    분노: "angry"
-};
-
-
-/* =========================================================
-   이모지 → 영어 감정
-========================================================= */
-
-const emojiEmotionMap = {
-    "😊": "happy",
-    "😌": "calm",
-    "😔": "sad",
-    "😢": "sad",
-    "😰": "anxious",
-    "😡": "angry"
-};
-
-
-/* =========================================================
-   감정 정보 가져오기
-========================================================= */
-
-const getEmotionInfo = (emotion, emoji) => {
-
-    let normalizedEmotion = emotion || "";
-
-    /* -----------------------------------------
-       1. 영어 감정이면 그대로 사용
-    ----------------------------------------- */
-
-    if (!emotionInfo[normalizedEmotion]) {
-
-        /* -----------------------------------------
-           2. 한글 감정이면 영어로 변환
-        ----------------------------------------- */
-
-        normalizedEmotion =
-            moodMap[normalizedEmotion] || "";
-    }
-
-
-    /* -----------------------------------------
-       3. 감정이 없고 이모지가 있으면
-          이모지로 감정 찾기
-    ----------------------------------------- */
-
-    if (!normalizedEmotion && emoji) {
-
-        normalizedEmotion =
-            emojiEmotionMap[emoji] || "";
-    }
-
-
-    /* -----------------------------------------
-       4. 정상적인 감정을 찾은 경우
-    ----------------------------------------- */
-
-    if (emotionInfo[normalizedEmotion]) {
-
-        return {
-
-            emotion: normalizedEmotion,
-
-            emoji:
-                emoji ||
-                emotionInfo[normalizedEmotion].emoji,
-
-            name:
-                emotionInfo[normalizedEmotion].name
-
-        };
-    }
-
-
-    /* -----------------------------------------
-       5. 그래도 감정을 못 찾은 경우
-    ----------------------------------------- */
-
+const getDiaryEmotion = (emotion, emoji) => {
     return {
-
-        emotion: "",
-
-        emoji:
-            emoji || "🙂",
-
-        name:
-            "기록"
-
+        emotion: emotion || "",
+        emoji: emoji || "🙂",
+        name: emotion || "감정 정보 없음"
     };
 };
 
@@ -334,7 +205,7 @@ function EmotionDiary({
                         {(() => {
 
                             const emotion =
-                                getEmotionInfo(
+                                getDiaryEmotion(
                                     selectedDiary.emotion,
                                     selectedDiary.emoji
                                 );
@@ -460,7 +331,7 @@ function DiaryMemo({
 }) {
 
     const emotion =
-        getEmotionInfo(
+        getDiaryEmotion(
             diary.emotion,
             diary.emoji
         );
@@ -655,15 +526,15 @@ function EmotionCalendar({
                 calendarData[dateKey];
 
 
-            const emotionInfoData =
-                getEmotionInfo(
+            const diaryEmotion =
+                getDiaryEmotion(
                     data?.emotion,
                     data?.emoji
                 );
 
 
             const emotion =
-                emotionInfoData.emotion;
+                diaryEmotion.emotion;
 
 
             const isSelected =
@@ -703,7 +574,7 @@ function EmotionCalendar({
 
                             {
                                 data?.emoji ||
-                                emotionInfoData.emoji ||
+                                diaryEmotion.emoji ||
                                 "🙂"
                             }
 
@@ -754,7 +625,7 @@ function EmotionCalendar({
      */
 
     const selectedEmotionInfo =
-        getEmotionInfo(
+        getDiaryEmotion(
             selectedEmotion ||
             selectedData?.emotion,
             selectedData?.emoji
@@ -907,14 +778,8 @@ function EmotionCalendar({
                                                                 data?.mood ||
                                                                 "";
 
-                                                            if (!emotionInfo[dataEmotion]) {
-                                                                dataEmotion =
-                                                                    moodMap[dataEmotion] || "";
-                                                            }
-
                                                             return dataEmotion === emotion;
                                                         })?.emoji ||
-                                                        emotionInfo[emotion]?.emoji ||
                                                         "🙂"
                                                     }
                                                 </span>
@@ -923,9 +788,7 @@ function EmotionCalendar({
                                                 <span className="emotion-item-name">
                                                     &nbsp;
                                                     {
-                                                        emotionInfo[
-                                                            emotion
-                                                        ]?.name
+                                                        emotion
                                                     }
 
                                                 </span>
@@ -1272,38 +1135,6 @@ function Diary() {
                                 "";
 
 
-                            if (
-                                !emotionInfo[
-                                emotion
-                                ]
-                            ) {
-
-                                emotion =
-                                    moodMap[
-                                    emotion
-                                    ] || "";
-
-                            }
-
-
-                            /*
-                             * 이모지만 있는 데이터도
-                             * 감정을 찾아준다.
-                             */
-
-                            if (
-                                !emotion &&
-                                diary.emoji
-                            ) {
-
-                                emotion =
-                                    emojiEmotionMap[
-                                    diary.emoji
-                                    ] || "";
-
-                            }
-
-
                             return {
 
                                 diaryId:
@@ -1503,38 +1334,6 @@ function Diary() {
                                 "";
 
 
-                            if (
-                                !emotionInfo[
-                                emotion
-                                ]
-                            ) {
-
-                                emotion =
-                                    moodMap[
-                                    emotion
-                                    ] || "";
-
-                            }
-
-
-                            /*
-                             * 이모지만 있는 경우
-                             * 이모지로 감정 찾기
-                             */
-
-                            if (
-                                !emotion &&
-                                diary.emoji
-                            ) {
-
-                                emotion =
-                                    emojiEmotionMap[
-                                    diary.emoji
-                                    ] || "";
-
-                            }
-
-
                             newCalendarData[
                                 date
                             ] = {
@@ -1694,7 +1493,7 @@ function Diary() {
          */
 
         const emotionData =
-            getEmotionInfo(
+            getDiaryEmotion(
                 data.emotion,
                 data.emoji
             );
@@ -1850,25 +1649,9 @@ function Diary() {
                 selectedEmotion;
 
 
-            if (
-                !emotionInfo[
-                savedEmotion
-                ]
-            ) {
-
-                savedEmotion =
-                    moodMap[
-                    savedEmotion
-                    ] || selectedEmotion;
-
-            }
-
-
             const savedEmoji =
                 savedDiary?.emoji ||
-                emotionInfo[
-                    savedEmotion
-                ]?.emoji ||
+                existingDiary?.emoji ||
                 "";
 
 
@@ -2047,19 +1830,8 @@ function Diary() {
        감정 카운트
     ========================================================= */
 
-    const emotionCount = {
-
-        happy: 0,
-
-        calm: 0,
-
-        sad: 0,
-
-        anxious: 0,
-
-        angry: 0
-
-    };
+    // 현재 달의 DB 데이터에 들어 있는 감정 종류를 자동으로 집계합니다.
+    const emotionCount = {};
 
 
     Object.values(calendarData).forEach(
@@ -2071,7 +1843,7 @@ function Diary() {
 
 
             const emotionData =
-                getEmotionInfo(
+                getDiaryEmotion(
                     data.emotion ||
                     data.mood,
                     data.emoji
@@ -2082,18 +1854,8 @@ function Diary() {
                 emotionData.emotion;
 
 
-            if (
-                emotion &&
-                Object.prototype.hasOwnProperty.call(
-                    emotionCount,
-                    emotion
-                )
-            ) {
-
-                emotionCount[
-                    emotion
-                ]++;
-
+            if (emotion) {
+                emotionCount[emotion] = (emotionCount[emotion] || 0) + 1;
             }
 
         }
