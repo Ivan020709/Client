@@ -38,7 +38,8 @@ function InquiryList() {
                         <div className="inquiry-row" key={post.inquirynum} onClick={() => navigate(`/InquiryView/${post.inquirynum}`)}>
                             <div className="inquiry-number">{post.inquirynum}</div>
                             <div className="inquiry-title">{post.title}</div>
-                            <div className="inquiry-writer">{post.userid}</div>
+                            {/* 문의글과 함께 조회된 회원의 이름을 표시합니다. */}
+                            <div className="inquiry-writer">{post.member?.name || '알 수 없음'}</div>
                             <div className="inquiry-date">{post.indate?.substring(0, 10)}</div>
                             <div className="inquiry-status">{post.status || '대기중'}</div>
                         </div>
