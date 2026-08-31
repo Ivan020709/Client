@@ -21,6 +21,12 @@ function Join() {
     const [reid, setReid] = useState('');
     const [idCheckResult, setIdCheckResult] = useState('');
 
+    // 이메일로 받은 인증번호를 입력받기 위한 상태값
+    const [usercode, setUsercode] = useState('');
+
+    // 이메일 인증 완료 여부
+    const [emailConfirm, setEmailConfirm] = useState(false);
+
     const [msgStyle, setMsgStyle] = useState({
         flex: '1'
     });
@@ -132,16 +138,61 @@ function Join() {
          */
         setReid('');
         setIdCheckResult('');
+
+        // 이메일이 바뀌면 이전에 입력했던 인증번호도 지웁니다.
+        setUsercode('');
+        setEmailConfirm(false);
         setMsgStyle({
             flex: '1'
         });
     }
 
     /* =========================================================
+       이메일 인증번호 확인
+
+       현재는 화면의 기본 틀만 만든 상태입니다.
+       나중에 이 함수 안에서 서버의 인증번호 확인 API를 호출하면 됩니다.
+    ========================================================= */
+    
+
+    function onConfirm() {
+        if (!usercode) {
+            return alert('인증코드를 입력하세요.');
+        }
+
+        axios.post('/api/member/conFirmCode', null, {
+            params: {
+                email: email.trim(),
+                usercode: usercode
+            }
+        })
+            .then((result) => {
+                if (result.data.msg === 'ok') {
+                    // 인증 성공 상태 저장
+                    setEmailConfirm(true);
+                    alert('인증 완료되었습니다.');
+                } else {
+                    // 인증번호가 틀리면 인증 실패 상태
+                    setEmailConfirm(false);
+                    alert('입력한 코드가 일치하지 않습니다.');
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                setEmailConfirm(false);
+                alert('인증번호 확인 중 오류가 발생했습니다.');
+            });
+    }
+
+    /* =========================================================
        이메일 중복 확인
     ========================================================= */
-    function idCheck() {
+    async function idCheck() {
         const checkEmail = email.trim();
+
+        // 인증번호를 다시 발급하면 이전 인증 결과를 무효화
+        setEmailConfirm(false);
+
         if (!checkEmail) {
             return alert(
                 '이메일을 입력하세요.'
@@ -156,58 +207,64 @@ function Join() {
                 '올바른 이메일 형식으로 입력하세요.'
             );
         }
-        axios.post(
-            '/api/member/emailCheck',
-            null,
-            {
-                params: {
-                    email: checkEmail
+
+        document.getElementById('sendBtn').disabled = true
+        try {
+
+            const result = await axios.post(
+                '/api/member/emailCheck',
+                null,
+                {
+                    params: {
+                        email: checkEmail
+                    }
                 }
-            }
-        )
-            .then((result) => {
+            )
 
-                if (result.data.msg === 'OK') {
+            if (result.data.msg === 'OK') {
 
-                    setIdCheckResult(
-                        '※ 사용 가능한 이메일입니다.'
-                    );
-
-                    setMsgStyle({
-                        color: '#b68b78',
-                        flex: '1',
-                        fontWeight: '700'
-                    });
-
-                    /*
-                     * 중복확인 완료된 이메일 저장
-                     */
-
-                    setReid(checkEmail);
-
-                } else {
-
-                    setIdCheckResult(
-                        '※ 중복되는 이메일입니다.'
-                    );
-
-                    setMsgStyle({
-                        color: '#c47b70',
-                        flex: '1',
-                        fontWeight: '700'
-                    });
-
-                    setReid('');
-                }
-            })
-            .catch((err) => {
-
-                console.error(err);
-
-                alert(
-                    '이메일 중복 확인 중 오류가 발생했습니다.'
+                setIdCheckResult(
+                    '※ 사용 가능한 이메일입니다.'
                 );
-            });
+
+                setMsgStyle({
+                    color: '#b68b78',
+                    flex: '1',
+                    fontWeight: '700'
+                });
+
+                /*
+                    * 중복확인 완료된 이메일 저장
+                    */
+
+                setReid(checkEmail);
+
+                alert('이메일이 전송되었습니다. 해당 이메일 수신내역을 확인하세요')
+
+            } else {
+
+                setIdCheckResult(
+                    '※ 중복되는 이메일입니다.'
+                );
+
+                setMsgStyle({
+                    color: '#c47b70',
+                    flex: '1',
+                    fontWeight: '700'
+                });
+
+                setReid('');
+            }
+        }catch(err){
+
+            console.error(err);
+
+            alert(
+                '이메일 중복 확인 중 오류가 발생했습니다.'
+            );
+        }finally{
+            document.getElementById('sendBtn').disabled = false
+        }
     }
 
 
@@ -442,6 +499,9 @@ function Join() {
             );
         }
 
+        if (!emailConfirm) {
+            return alert('이메일 본인인증을 완료해주세요.');
+        }
 
         /* -----------------------------------------
            비밀번호
@@ -749,6 +809,7 @@ function Join() {
                             type="button"
                             className="join-btn-zip_num"
                             onClick={idCheck}
+                            id='sendBtn'
                         >
                             중복확인
                         </button>
@@ -763,6 +824,33 @@ function Join() {
                         <label style={msgStyle}>
                             {idCheckResult}
                         </label>
+
+                    </div>
+
+
+                    {/* 이메일 인증번호 */}
+
+                    <div>
+
+                        <label>
+                            인증번호
+                        </label>
+
+                        <input
+                            type="text"
+                            value={usercode}
+                            onChange={(e) =>
+                                setUsercode(e.currentTarget.value)
+                            }
+                            placeholder="이메일로 받은 인증번호를 입력하세요."
+                        />
+
+                        <button
+                            type="button"
+                            onClick={onConfirm}
+                        >
+                            확인
+                        </button>
 
                     </div>
 
