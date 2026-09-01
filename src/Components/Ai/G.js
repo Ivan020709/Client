@@ -339,6 +339,9 @@ function G() {
 
                     {
 
+                        // Spring 서버가 로그인 회원의 친밀도를 조회할 때 사용합니다.
+                        userid: loginUser.userid,
+
                         session_id:
                             sessionId,
 
