@@ -68,7 +68,8 @@ function AdminPage() {
             params: {
                 reportnum: selectedReport.reportnum,
                 adminid: loginUser.userid,
-                adminname: loginUser.name
+                adminname: loginUser.name,
+                boardnum: selectedReport.boardnum
             }
         })
             .then(() => {

@@ -277,7 +277,7 @@ function InquiryView() {
                 params: {
                     inquirynum: inquirynum,
                     nickname: loginUser.nickname,
-                    content: adminAnswer.trim()
+                    content: adminAnswer.trim(), 
                 }
             }
         )
@@ -490,13 +490,13 @@ function InquiryView() {
                         className={
                             post.status === '답변완료'
                                 ? 'inquiry-status-complete'
-                                : 'inquiry-status-waiting'
+                                : ''
                         }
                     >
 
                         {post.status === '답변완료'
                             ? '답변 완료'
-                            : '대기중'}
+                            : ''}
 
                     </span>
 
