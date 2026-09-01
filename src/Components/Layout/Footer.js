@@ -28,7 +28,7 @@ const Footer = () => {
                         <div className="footer-menu-title">서비스</div>
                         <a href="/SelectAi">대화하기</a>
                         <a href="/diary">감정일기</a>
-                        <a href="/EmotionCalendar">감정 캘린더</a>
+                        <a href="/SharedDiary">공유일기</a>
                         <a href="/BoardList">고민 게시판</a>
                     </div>
 

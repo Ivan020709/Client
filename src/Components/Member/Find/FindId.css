@@ -1,6 +1,6 @@
+
 /* =========================================================
    FindId 페이지 전체
-   Find 페이지와 동일한 따뜻한 분위기
 ========================================================= */
 
 .find-id-page {
@@ -42,8 +42,6 @@
     letter-spacing: -1px;
 }
 
-
-/* 제목 밑 장식 */
 
 .find-id-title::after {
     content: "";
@@ -97,13 +95,13 @@
 
 
 /* =========================================================
-   한 줄
+   입력 한 줄
 ========================================================= */
 
 .find-id-row {
     width: 100%;
 
-    min-height: 55px;
+    min-height: 48px;
 
     display: flex;
     align-items: center;
@@ -111,8 +109,6 @@
     box-sizing: border-box;
 }
 
-
-/* 두 번째 줄 */
 
 .find-id-row + .find-id-row {
     margin-top: 14px;
@@ -138,12 +134,14 @@
 
 
 /* =========================================================
-   입력창
+   기본 입력창
 ========================================================= */
 
 .find-id-input {
     width: 100%;
     height: 48px;
+
+    min-width: 0;
 
     padding: 0 15px;
 
@@ -170,14 +168,10 @@
 }
 
 
-/* Placeholder */
-
 .find-id-input::placeholder {
     color: #b5a8a0;
 }
 
-
-/* 입력창 클릭 */
 
 .find-id-input:focus {
     border-color: #c9977d;
@@ -190,7 +184,201 @@
 
 
 /* =========================================================
-   버튼 영역
+   전화번호 영역
+========================================================= */
+
+.find-id-phone-area {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* 전화번호 입력 */
+
+.find-id-phone-area .find-id-input {
+    flex: 1;
+
+    width: auto;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   인증번호 받기 버튼
+========================================================= */
+
+.find-id-cert-button {
+    width: 105px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d5b4a4;
+
+    border-radius: 10px;
+
+    background: #f7ebe4;
+
+    color: #765f54;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.find-id-cert-button:hover {
+    background: #e9d2c5;
+
+    border-color: #d5b4a4;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(100, 75, 60, 0.08);
+}
+
+
+.find-id-cert-button:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   인증번호 입력 줄
+========================================================= */
+
+.find-id-verification-row {
+    margin-top: 14px;
+}
+
+
+/* 인증번호 입력 + 버튼 */
+
+.find-id-verification-area {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.find-id-verification-area .find-id-input {
+    flex: 1;
+
+    width: auto;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   인증 확인 버튼
+========================================================= */
+
+.find-id-cert-check-button {
+    width: 105px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d5b4a4;
+
+    border-radius: 10px;
+
+    background: #e9d2c5;
+
+    color: #624c42;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.find-id-cert-check-button:hover:not(:disabled) {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(100, 75, 60, 0.08);
+}
+
+
+.find-id-cert-check-button:active:not(:disabled) {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   인증 완료 상태
+========================================================= */
+
+.find-id-cert-check-button.verified {
+    background: #dcebdc;
+
+    border-color: #b8d4b8;
+
+    color: #5b765b;
+
+    cursor: default;
+}
+
+
+.find-id-cert-check-button:disabled {
+    cursor: default;
+}
+
+
+/* =========================================================
+   하단 버튼 영역
 ========================================================= */
 
 .find-id-button-area {
@@ -211,6 +399,7 @@
 ========================================================= */
 
 .find-id-button {
+    width: 254px;
     height: 50px;
 
     margin: 0;
@@ -248,12 +437,10 @@
 
 
 /* =========================================================
-   아이디 찾기 버튼
+   아이디 찾기
 ========================================================= */
 
 .find-id-search-button {
-    width: 254px;
-
     background: #e9d2c5;
 
     border: 1px solid #d5b4a4;
@@ -265,13 +452,25 @@
 }
 
 
+.find-id-search-button:hover {
+    background: #dfc3b3;
+
+    border-color: #cba796;
+
+    color: #5b463d;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
+}
+
+
 /* =========================================================
-   이전으로 버튼
+   이전으로
 ========================================================= */
 
 .find-id-back-button {
-    width: 254px;
-
     background: #f7ebe4;
 
     border: 1px solid #e5cfc3;
@@ -280,43 +479,19 @@
 }
 
 
-/* =========================================================
-   버튼 Hover
-========================================================= */
-
-.find-id-button:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 15px rgba(100, 75, 60, 0.10);
-}
-
-
-/* 아이디 찾기 Hover */
-
-.find-id-search-button:hover {
-    background: #dfc3b3;
-
-    border-color: #cba796;
-
-    color: #5b463d;
-}
-
-
-/* 이전으로 Hover */
-
 .find-id-back-button:hover {
     background: #e9d2c5;
 
     border-color: #d5b4a4;
 
     color: #624c42;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 75, 60, 0.10);
 }
 
-
-/* =========================================================
-   버튼 Active
-========================================================= */
 
 .find-id-button:active {
     transform: translateY(0);
@@ -325,10 +500,6 @@
         0 2px 6px rgba(100, 75, 60, 0.06);
 }
 
-
-/* =========================================================
-   Focus
-========================================================= */
 
 .find-id-button:focus {
     outline: none;
@@ -368,9 +539,7 @@
 }
 
 
-/* =========================================================
-   결과 안내 문구
-========================================================= */
+/* 결과 안내 */
 
 .find-id-result-message {
     margin: 0;
@@ -383,9 +552,7 @@
 }
 
 
-/* =========================================================
-   찾은 아이디
-========================================================= */
+/* 찾은 아이디 */
 
 .find-id-result-value {
     margin: 10px 0 0;
@@ -400,9 +567,7 @@
 }
 
 
-/* =========================================================
-   로그인으로 가기
-========================================================= */
+/* 로그인으로 가기 */
 
 .find-id-result-button {
     width: 100%;
@@ -438,8 +603,6 @@
 }
 
 
-/* 로그인 버튼 Hover */
-
 .find-id-result-button:hover {
     background: #dfc3b3;
 
@@ -451,8 +614,6 @@
         0 6px 15px rgba(100, 75, 60, 0.10);
 }
 
-
-/* 로그인 버튼 클릭 */
 
 .find-id-result-button:active {
     transform: translateY(0);
@@ -473,4 +634,59 @@
     border: 0;
 
     border-top: 1px solid #f0e5de;
+}
+
+
+/* =========================================================
+   모바일
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .find-id-page {
+        padding: 45px 15px 60px;
+    }
+
+
+    .find-id-form,
+    .find-id-box,
+    .find-id-button-area,
+    .find-id-result,
+    .find-id-divider {
+        width: 100%;
+    }
+
+
+    .find-id-box {
+        padding: 25px 20px;
+    }
+
+
+    .find-id-label {
+        width: 75px;
+    }
+
+
+    .find-id-phone-area,
+    .find-id-verification-area {
+        gap: 6px;
+    }
+
+
+    .find-id-cert-button,
+    .find-id-cert-check-button {
+        width: 92px;
+
+        font-size: 12px;
+    }
+
+
+    .find-id-button-area {
+        gap: 8px;
+    }
+
+
+    .find-id-button {
+        width: calc(50% - 4px);
+    }
 }

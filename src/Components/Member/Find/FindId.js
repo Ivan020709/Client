@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -5,37 +6,44 @@ import axios from 'axios';
 import './FindId.css';
 
 function FindId() {
+
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [foundId, setFoundId] = useState('');
+    const [usernumber, setUserNumber] = useState('');
+
+    // 인증번호 입력란 표시 여부
+    const [verificationSent, setVerificationSent] = useState(false);
 
     const navigate = useNavigate();
 
 
     /* =========================================================
-       전화번호 입력       
+       전화번호 입력
        숫자만 입력 가능
        최대 11자리
        자동으로 - 추가
     ========================================================= */
 
     const handlePhoneChange = (e) => {
-        // 숫자만 남기기
+
         let value = e.target.value.replace(/[^0-9]/g, '');
-        // 최대 11자리
+
         value = value.substring(0, 11);
-        // 하이픈 자동 추가
+
         if (value.length <= 3) {
-            // 010
+
             value = value;
+
         } else if (value.length <= 7) {
-            // 010-1234
+
             value =
                 value.substring(0, 3) +
                 '-' +
                 value.substring(3);
+
         } else {
-            // 010-1234-5678
+
             value =
                 value.substring(0, 3) +
                 '-' +
@@ -45,14 +53,87 @@ function FindId() {
         }
 
         setPhone(value);
+
+        // 전화번호 변경 시 인증 초기화
+        setVerificationSent(false);
+        setUserNumber('');
+        setFoundId('');
     };
 
 
     /* =========================================================
-       아이디 찾기
+       인증번호 발송
     ========================================================= */
 
-    const handleFindId = () => {
+    async function onSMS_Send() {
+
+        if (!name) {
+            return alert('이름을 입력하세요');
+        }
+
+        if (!phone) {
+            return alert('전화번호를 입력하세요');
+        }
+
+        const phoneNumber = phone.replace(/[^0-9]/g, '');
+
+        if (phoneNumber.length !== 11) {
+            return alert('전화번호 11자리를 정확하게 입력하세요');
+        }
+
+        const snsBtn = document.getElementById('snsBtn');
+
+        // 인증번호 받기 버튼 비활성화
+        snsBtn.disabled = true;
+
+        try {
+
+            const result = await axios.post(
+                '/api/sms/sendSMS',
+                null,
+                {
+                    params: {
+                        phone: phoneNumber
+                    }
+                }
+            );
+
+            if (result) {
+
+                alert(
+                    'SMS 전송이 완료되었습니다. 해당 SMS 수신내역을 확인하세요'
+                );
+
+                // 인증번호 입력란 표시
+                setVerificationSent(true);
+            }
+
+        } catch (err) {
+
+            console.error('SMS 전송 실패:', err);
+
+            alert('SMS 전송 중 오류가 발생했습니다.');
+
+            // 전송 실패 시 다시 활성화
+            snsBtn.disabled = false;
+        }
+    }
+
+
+    /* =========================================================
+       아이디 찾기
+       
+       아이디 찾기 버튼을 눌렀을 때
+       1. 이름 확인
+       2. 전화번호 확인
+       3. 인증번호 입력 확인
+       4. 인증번호 검증
+       5. 회원정보 확인
+       6. 이메일 표시
+    ========================================================= */
+
+    function handleFindId() {
+
         if (!name) {
             return alert('이름을 입력하세요.');
         }
@@ -61,60 +142,89 @@ function FindId() {
             return alert('전화번호를 입력하세요.');
         }
 
-
-        // 하이픈을 제외한 실제 숫자 확인
         const phoneNumber = phone.replace(/[^0-9]/g, '');
 
-        // 전화번호 11자리 확인
         if (phoneNumber.length !== 11) {
             return alert('전화번호 11자리를 정확하게 입력하세요.');
         }
 
-
-        axios.post('/api/member/findId', {
-            name: name,
-            phone: phone
-        })
-            .then((result) => {
-
-                if (result.data && result.data.userid) {
-
-                    setFoundId(result.data.userid);
-
-                } else {
-
-                    alert('일치하는 회원 정보를 찾을 수 없습니다.');
-
-                    setFoundId('');
+        if (!verificationSent) {
+            return alert('인증번호를 먼저 받아주세요.');
+        }
+        if (!usernumber) {
+            return alert('인증번호를 입력하세요.');
+        }
+        axios.post(
+            '/api/sms/confirmNumber',
+            null,
+            {
+                params: {
+                    usernumber: usernumber
                 }
+            }
+        )
+        .then((result) => {
 
-            })
-            .catch((err) => {
+            
+            if (result.data.msg === 'ok') {
 
-                console.error(err);
+                
+                axios.post('/api/member/findId', {
 
-                alert('아이디 찾기 중 오류가 발생했습니다.');
+                    name: name,
+                    phone
 
-            });
-    };
+                })
+                .then((result) => {
+
+                    if (result.data && result.data.userid) {
+
+                        setFoundId(result.data.userid);
+                        
+
+                    } else {
+
+                        
+                        alert('일치하는 회원 정보를 찾을 수 없습니다.');
+
+                        setFoundId('');
+                    }
+
+                })
+                .catch((err) => {
+
+                    console.error('아이디 찾기 실패:', err);
+
+                    alert('아이디 찾기 중 오류가 발생했습니다.');
+
+                });
+
+            } else {
+
+        
+                alert('입력한 코드가 일치하지 않습니다');
+
+            }
+
+        })
+        .catch((err) => {
+
+            console.error('인증번호 확인 실패:', err);
+
+            alert('인증번호 확인 중 오류가 발생했습니다.');
+
+        });
+    }
 
 
     return (
+
         <div className="find-id-page">
-
-
-            {/* =================================================
-                제목
-            ================================================= */}
 
             <h2 className="find-id-title">
                 아이디 찾기
             </h2>
 
-
-            {/* =================================================
-                입력 영역
-            ================================================= */}
 
             <div className="find-id-form">
 
@@ -135,7 +245,9 @@ function FindId() {
                             className="find-id-input"
                             type="text"
                             value={name}
-                            onChange={(e) => setName(e.currentTarget.value)}
+                            onChange={(e) =>
+                                setName(e.currentTarget.value)
+                            }
                             placeholder="이름을 입력하세요."
                         />
 
@@ -152,17 +264,68 @@ function FindId() {
                             전화번호
                         </label>
 
-                        <input
-                            className="find-id-input"
-                            type="tel"
-                            value={phone}
-                            onChange={handlePhoneChange}
-                            placeholder="010-XXXX-XXXX"
-                            inputMode="numeric"
-                            maxLength={13}
-                        />
+                        <div className="find-id-phone-area">
+
+                            <input
+                                className="find-id-input"
+                                type="tel"
+                                value={phone}
+                                onChange={handlePhoneChange}
+                                placeholder="010-XXXX-XXXX"
+                                inputMode="numeric"
+                                maxLength={13}
+                            />
+
+                            <button
+                                type="button"
+                                className="find-id-cert-button"
+                                id="snsBtn"
+                                onClick={onSMS_Send}
+                            >
+                                인증번호 받기
+                            </button>
+
+                        </div>
 
                     </div>
+
+
+                    {/* =================================================
+                        인증번호 입력
+                        → 인증번호 받기를 눌렀을 때만 표시
+                    ================================================= */}
+
+                    {verificationSent && (
+
+                        <div className="find-id-row find-id-verification-row">
+
+                            <label className="find-id-label">
+                                인증번호
+                            </label>
+
+                            <div className="find-id-verification-area">
+
+                                <input
+                                    className="find-id-input"
+                                    type="text"
+                                    value={usernumber}
+                                    onChange={(e) =>
+                                        setUserNumber(
+                                            e.target.value
+                                                .replace(/[^0-9]/g, '')
+                                                .substring(0, 6)
+                                        )
+                                    }
+                                    placeholder="인증번호 6자리"
+                                    inputMode="numeric"
+                                    maxLength={6}
+                                />
+
+                            </div>
+
+                        </div>
+
+                    )}
 
                 </div>
 
@@ -197,10 +360,6 @@ function FindId() {
 
             ) : (
 
-                /* =================================================
-                   버튼 영역
-                ================================================= */
-
                 <div className="find-id-button-area">
 
                     <button
@@ -231,3 +390,4 @@ function FindId() {
 }
 
 export default FindId;
+
