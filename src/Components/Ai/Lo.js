@@ -7,6 +7,7 @@ import React, {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import jaxios from '../../utils/jwtUtil'
+import AffinityItemBox from './AffinityItemBox';
 
 import "./Lo.css";
 
@@ -654,6 +655,8 @@ function Lo() {
         <div className="lo-page">
 
             <div className="lo-container">
+
+                <AffinityItemBox />
 
 
                 {/* =================================================

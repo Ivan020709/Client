@@ -14,6 +14,7 @@ import aiImage2 from "../../Img/필로그3.png";
 import aiImage3 from "../../Img/필필1.png";
 
 import jaxios from '../../utils/jwtUtil'
+import AffinityItemBox from './AffinityItemBox';
 
 
 function Feel() {
@@ -589,6 +590,8 @@ function Feel() {
         <div className="talk-ai-page">
 
             <div className="talk-ai-container">
+
+                <AffinityItemBox />
 
 
                 {/* =================================================

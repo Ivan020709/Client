@@ -7,6 +7,7 @@ import React, {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import jaxios from '../../utils/jwtUtil'
+import AffinityItemBox from './AffinityItemBox';
 
 import "./G.css";
 
@@ -664,6 +665,8 @@ function G() {
         <div className="g-page">
 
             <div className="g-container">
+
+                <AffinityItemBox />
 
 
                 {/* =================================================
