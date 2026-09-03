@@ -366,13 +366,20 @@ function G() {
                 );
 
 
+            // 서버에서 대화 경험치 지급이 끝났으므로 친밀도 표시를 갱신합니다.
+            window.dispatchEvent(new Event('affinityUpdated'));
+
             const aiMessage = {
 
                 sender:
                     "AI",
 
                 content:
-                    response.data.message
+                    response.data.message,
+
+                fileUrl: response.data.file_url,
+
+                fileName: response.data.file_name
 
             };
 
@@ -669,7 +676,7 @@ function G() {
 
             <div className="g-container">
 
-                <AffinityItemBox />
+                <AffinityItemBox character={character} />
 
 
                 {/* =================================================
@@ -872,6 +879,17 @@ function G() {
                                 >
 
                                     {item.content}
+
+                                    {item.fileUrl && (
+                                        <div>
+                                            {item.fileName?.toLowerCase().endsWith('.png') && (
+                                                <img src={item.fileUrl} alt={item.fileName} style={{ maxWidth: '280px', display: 'block', marginTop: '10px' }} />
+                                            )}
+                                            <a href={item.fileUrl} target="_blank" rel="noreferrer" download>
+                                                {item.fileName || '생성 파일'} 열기
+                                            </a>
+                                        </div>
+                                    )}
 
                                 </div>
 

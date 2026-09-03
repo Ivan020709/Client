@@ -895,3 +895,22 @@
     }
 
 }
+.admin-member-table {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e7e1dc;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.admin-member-row {
+    display: grid;
+    grid-template-columns: 70px 100px 120px minmax(210px, 1fr) 100px 90px 110px;
+    min-width: 850px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee9e5;
+    align-items: center;
+}
+
+.admin-member-row:last-child { border-bottom: 0; }
+.admin-member-head { font-weight: 700; background: #f8f5f2; }
