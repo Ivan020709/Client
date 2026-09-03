@@ -13,6 +13,7 @@ function AdminPage() {
     const [reportList, setReportList] = useState([]);
     const [paging, setPaging] = useState({})
     const [pages, setPages] = useState(1)
+    const [memberList, setMemberList] = useState([]);
     const navigate = useNavigate();
     const loginUser = useSelector(state => state.user);
 
@@ -43,6 +44,21 @@ function AdminPage() {
                 console.error(err);
             });
     }, [pages]);
+
+    // 회원관리 메뉴를 눌렀을 때만 회원 목록을 요청합니다.
+    // 서버에서는 관리자 이메일의 역할을 다시 검사하고 비밀번호는 보내지 않습니다.
+    useEffect(() => {
+        if (menu !== 'member' || !loginUser?.email) return;
+
+        jaxios.get('/api/admin/members', {
+            params: { adminEmail: loginUser.email }
+        })
+            .then((result) => setMemberList(result.data))
+            .catch((err) => {
+                console.error(err);
+                alert('회원 목록을 불러오지 못했습니다. 관리자 권한을 확인해 주세요.');
+            });
+    }, [menu, loginUser?.email]);
 
 
     // 페이지 이동
@@ -131,6 +147,14 @@ function AdminPage() {
                             onClick={() => setMenu('activity')}
                         >
                             관리자 활동 로그
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`admin-sidebar-item ${menu === 'member' ? 'active' : ''}`}
+                            onClick={() => setMenu('member')}
+                        >
+                            회원 관리
                         </button>
 
                     </div>
@@ -388,6 +412,36 @@ function AdminPage() {
 
                         {menu === 'activity' && (
                             <AdminActivityLog />
+                        )}
+
+                        {menu === 'member' && (
+                            <>
+                                <div className="admin-header">
+                                    <div>
+                                        <h2 className="admin-title">회원 관리</h2>
+                                        <p className="admin-description">가입 회원 정보를 조회합니다. 수정·삭제 기능은 포함하지 않습니다.</p>
+                                    </div>
+                                    <div className="admin-count">총 <strong>{memberList.length}</strong>명</div>
+                                </div>
+
+                                <div className="admin-member-table">
+                                    <div className="admin-member-row admin-member-head">
+                                        <div>번호</div><div>이름</div><div>닉네임</div>
+                                        <div>이메일</div><div>가입 방식</div><div>권한</div><div>가입일</div>
+                                    </div>
+                                    {memberList.map((member) => (
+                                        <div className="admin-member-row" key={member.userid}>
+                                            <div>{member.userid}</div>
+                                            <div>{member.name || '-'}</div>
+                                            <div>{member.nickname || '-'}</div>
+                                            <div>{member.email}</div>
+                                            <div>{member.provider || 'LOCAL'}</div>
+                                            <div>{member.role || 'USER'}</div>
+                                            <div>{member.indate ? String(member.indate).substring(0, 10) : '-'}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
                         )}
 
                     </div>

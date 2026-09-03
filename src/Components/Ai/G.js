@@ -7,6 +7,7 @@ import React, {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import jaxios from '../../utils/jwtUtil'
+import AffinityItemBox from './AffinityItemBox';
 
 import "./G.css";
 
@@ -338,6 +339,9 @@ function G() {
 
                     {
 
+                        // Spring 서버가 로그인 회원의 친밀도를 조회할 때 사용합니다.
+                        userid: loginUser.userid,
+
                         session_id:
                             sessionId,
 
@@ -362,13 +366,20 @@ function G() {
                 );
 
 
+            // 서버에서 대화 경험치 지급이 끝났으므로 친밀도 표시를 갱신합니다.
+            window.dispatchEvent(new Event('affinityUpdated'));
+
             const aiMessage = {
 
                 sender:
                     "AI",
 
                 content:
-                    response.data.message
+                    response.data.message,
+
+                fileUrl: response.data.file_url,
+
+                fileName: response.data.file_name
 
             };
 
@@ -665,6 +676,8 @@ function G() {
 
             <div className="g-container">
 
+                <AffinityItemBox character={character} />
+
 
                 {/* =================================================
                     Header
@@ -866,6 +879,17 @@ function G() {
                                 >
 
                                     {item.content}
+
+                                    {item.fileUrl && (
+                                        <div>
+                                            {item.fileName?.toLowerCase().endsWith('.png') && (
+                                                <img src={item.fileUrl} alt={item.fileName} style={{ maxWidth: '280px', display: 'block', marginTop: '10px' }} />
+                                            )}
+                                            <a href={item.fileUrl} target="_blank" rel="noreferrer" download>
+                                                {item.fileName || '생성 파일'} 열기
+                                            </a>
+                                        </div>
+                                    )}
 
                                 </div>
 

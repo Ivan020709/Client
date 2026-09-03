@@ -314,6 +314,10 @@ function MyPage() {
                         회원정보 수정
                     </Link>
 
+                    <Link to="/paymentHistory" className="mypage-sidebar-item">
+                        결제 내역
+                    </Link>
+
                 </div>
 
                 <div className="mypage-sidebar-bottom">

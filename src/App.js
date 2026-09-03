@@ -45,6 +45,11 @@ import UpdatePwd from './Components/Member/Find/UpdatePwd';
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
 import Role from './Components/Admin/Role';
 import SharedDiary from './Components/Calendar/SharedDiary';
+import ItemShop from './Components/Item/ItemShop';
+import ItemPayment from './Components/Item/ItemPayment';
+import PaymentResult from './Components/Item/PaymentResult';
+import PaymentHistory from './Components/MyPage/PaymentHistory';
+import Ranking from './Components/Ranking/Ranking';
 
 function App() {
     return (
@@ -87,6 +92,10 @@ function App() {
                     <Route path="/inquiryList" element={<InquiryList />} />
                     <Route path="/inquiryView/:inquirynum" element={<InquiryView />} />
 
+                    {/* 아이템 상점과 친밀도 랭킹은 비회원도 구경할 수 있습니다. */}
+                    <Route path="/itemShop" element={<ItemShop />} />
+                    <Route path="/ranking" element={<Ranking />} />
+
                     {/* 로그인 사용자만 이용 가능 */}
                     <Route element={<ProtectedRoute />}>
 
@@ -102,6 +111,11 @@ function App() {
 
                         {/* 마이페이지 */}
                         <Route path='/myPage' element={<MyPage />} />
+                        <Route path='/paymentHistory' element={<PaymentHistory />} />
+
+                        {/* 결제 요청과 결과 확인은 로그인 사용자만 가능합니다. */}
+                        <Route path='/itemPayment/:itemId' element={<ItemPayment />} />
+                        <Route path='/paymentResult' element={<PaymentResult />} />
 
                         {/* 자유 게시판 */}
                         <Route path='/boardWrite' element={<BoardWrite />} />

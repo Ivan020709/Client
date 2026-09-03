@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Cookies } from "react-cookie";
+import jaxios from "../../utils/jwtUtil";
 
 import "./SelectAi.css";
 
@@ -11,6 +13,29 @@ import ai3 from "../../Img/그그.png";
 function SelectAi() {
 
     const navigate = useNavigate();
+    const loginUser = new Cookies().get("user");
+    const [levels, setLevels] = useState({ 필: 1, 로: 1, 그: 1 });
+
+    useEffect(() => {
+        if (!loginUser?.userid) return;
+
+        // AI마다 친밀도가 따로 저장되므로 세 모델의 정보를 각각 조회합니다.
+        Promise.all(
+            ["필", "로", "그"].map(character =>
+                jaxios.get("/api/affinity/myInfo", {
+                    params: { userId: loginUser.userid, character: character }
+                })
+            )
+        )
+            .then(results => {
+                setLevels({
+                    필: results[0].data.level,
+                    로: results[1].data.level,
+                    그: results[2].data.level
+                });
+            })
+            .catch(error => console.error("AI 친밀도 조회 실패:", error));
+    }, [loginUser?.userid]);
 
 
     // =====================================================
@@ -92,6 +117,8 @@ function SelectAi() {
 
                     </div>
 
+                    <div className="ai-affinity-level">친밀도 Lv.{levels.필}</div>
+
                 </div>
 
 
@@ -145,6 +172,8 @@ function SelectAi() {
 
                     </div>
 
+                    <div className="ai-affinity-level">친밀도 Lv.{levels.로}</div>
+
                 </div>
 
 
@@ -196,6 +225,8 @@ function SelectAi() {
                         </div>
 
                     </div>
+
+                    <div className="ai-affinity-level">친밀도 Lv.{levels.그}</div>
 
                 </div>
 
