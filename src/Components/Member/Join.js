@@ -207,370 +207,161 @@ function Join() {
                 '올바른 이메일 형식으로 입력하세요.'
             );
         }
-
         document.getElementById('sendBtn').disabled = true
-        try {
-
-            const result = await axios.post(
-                '/api/member/emailCheck',
-                null,
-                {
-                    params: {
-                        email: checkEmail
-                    }
-                }
-            )
-
+        try { const result = await axios.post('/api/member/emailCheck', null,{params: {email: checkEmail}})
             if (result.data.msg === 'OK') {
+                setIdCheckResult('※ 사용 가능한 이메일입니다.');
+                setMsgStyle({color: '#b68b78',flex: '1',fontWeight: '700'});
 
-                setIdCheckResult(
-                    '※ 사용 가능한 이메일입니다.'
-                );
-
-                setMsgStyle({
-                    color: '#b68b78',
-                    flex: '1',
-                    fontWeight: '700'
-                });
-
-                /*
-                    * 중복확인 완료된 이메일 저장
-                    */
-
+                /*중복확인 완료된 이메일 저장*/
                 setReid(checkEmail);
-
                 alert('이메일이 전송되었습니다. 해당 이메일 수신내역을 확인하세요')
-
             } else {
-
-                setIdCheckResult(
-                    '※ 중복되는 이메일입니다.'
-                );
-
-                setMsgStyle({
-                    color: '#c47b70',
-                    flex: '1',
-                    fontWeight: '700'
-                });
-
+                setIdCheckResult('※ 중복되는 이메일입니다.');
+                setMsgStyle({color: '#c47b70',flex: '1',fontWeight: '700'});
                 setReid('');
             }
         }catch(err){
-
             console.error(err);
-
-            alert(
-                '이메일 중복 확인 중 오류가 발생했습니다.'
-            );
+            alert('이메일 중복 확인 중 오류가 발생했습니다.');
         }finally{
             document.getElementById('sendBtn').disabled = false
         }
     }
-
-
     /* =========================================================
        닉네임 입력
     ========================================================= */
-
     function handleNicknameChange(e) {
-
         const value =
             e.currentTarget.value;
-
         setNickname(value);
-
         setRenickname('');
-
         setNicknameCheckResult('');
-
-        setNicknameMsgStyle({
-            flex: '1'
-        });
+        setNicknameMsgStyle({flex: '1'});
     }
-
-
     /* =========================================================
        닉네임 중복 확인
     ========================================================= */
-
     function nicknameCheck() {
-
-        const checkNickname =
-            nickname.trim();
-
-
+        const checkNickname =nickname.trim();
         if (!checkNickname) {
-
-            return alert(
-                '닉네임을 입력하세요.'
-            );
+            return alert('닉네임을 입력하세요.');
         }
-
-
-        axios.post(
-            '/api/member/nicknameCheck',
-            null,
-            {
-                params: {
-                    nickname: checkNickname
-                }
-            }
+        axios.post('/api/member/nicknameCheck', null,{params: {nickname: checkNickname}}
         )
             .then((result) => {
-
                 if (result.data.msg === 'OK') {
-
-                    setNicknameCheckResult(
-                        '※ 사용 가능한 닉네임입니다.'
-                    );
-
-                    setNicknameMsgStyle({
-                        color: '#b68b78',
-                        flex: '1',
-                        fontWeight: '700'
-                    });
-
-                    setRenickname(
-                        checkNickname
-                    );
-
+                    setNicknameCheckResult('※ 사용 가능한 닉네임입니다.');
+                    setNicknameMsgStyle({color: '#b68b78',flex: '1',fontWeight: '700'});
+                    setRenickname(checkNickname);
                 } else {
-
-                    setNicknameCheckResult(
-                        '※ 중복되는 닉네임입니다.'
-                    );
-
-                    setNicknameMsgStyle({
-                        color: '#c47b70',
-                        flex: '1',
-                        fontWeight: '700'
-                    });
-
+                    setNicknameCheckResult('※ 중복되는 닉네임입니다.');
+                    setNicknameMsgStyle({color: '#c47b70',flex: '1',fontWeight: '700'});
                     setRenickname('');
                 }
             })
             .catch((err) => {
-
                 console.error(err);
-
-                alert(
-                    '닉네임 중복 확인 중 오류가 발생했습니다.'
-                );
+                alert('닉네임 중복 확인 중 오류가 발생했습니다.');
             });
     }
-
-
     /* =========================================================
        프로필 이미지 업로드
     ========================================================= */
-
     function fileup(e) {
-
-        const file =
-            e.target.files[0];
-
-
-        if (!file) {
-            return;
-        }
-
-
+        const file =e.target.files[0];
+        if (!file) {return;}
         if (!file.type.startsWith('image/')) {
-
-            alert(
-                '이미지 파일만 선택할 수 있습니다.'
-            );
-
+            alert('이미지 파일만 선택할 수 있습니다.');
             e.target.value = '';
-
             return;
         }
-
-
-        const formData =
-            new FormData();
-
-        formData.append(
-            'image',
-            file
-        );
-
-
-        axios.post(
-            '/api/member/fileupload',
-            formData
-        )
+        const formData =new FormData();
+        formData.append('image',file);
+        axios.post('/api/member/fileupload',formData)
             .then((result) => {
-
-                setSavefilename(
-                    result.data.savefilename
-                );
-
-                setImgSrc(
-                    `http://localhost:8070/images/${result.data.savefilename}`
-                );
+                setSavefilename( result.data.savefilename);
+                setImgSrc(`http://localhost:8070/images/${result.data.savefilename}`);
             })
             .catch((err) => {
-
                 console.error(err);
-
-                alert(
-                    '프로필 사진 업로드 중 오류가 발생했습니다.'
-                );
+                alert('프로필 사진 업로드 중 오류가 발생했습니다.');
             });
     }
-
-
     /* =========================================================
        전화번호
     ========================================================= */
-
     function handlePhoneChange(e) {
-
-        let value =
-            e.currentTarget.value
+        let value = e.currentTarget.value
                 .replace(/\D/g, '')
                 .slice(0, 11);
-
-
         if (
             value.length > 3 &&
             value.length <= 7
         ) {
-
-            value =
-                `${value.slice(0, 3)}-${value.slice(3)}`;
-
+            value =`${value.slice(0, 3)}-${value.slice(3)}`;
         } else if (
             value.length > 7
         ) {
-
-            value =
-                `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7)}`;
+            value =`${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7)}`;
         }
-
-
         setPhone(value);
     }
-
-
     /* =========================================================
        회원가입
     ========================================================= */
-
     function onSubmit() {
-
-        const checkEmail =
-            email.trim();
-
-
+        const checkEmail = email.trim();
         /* -----------------------------------------
            이메일
         ----------------------------------------- */
-
         if (!checkEmail) {
-
-            return alert(
-                '이메일을 입력하세요.'
-            );
+            return alert( '이메일을 입력하세요.');
         }
-
-
-        /*
-         * 이메일 형식 검사
-         */
-
+        /** 이메일 형식 검사*/
         if (!emailRegex.test(checkEmail)) {
-
-            return alert(
-                '올바른 이메일 형식으로 입력하세요.'
-            );
+            return alert('올바른 이메일 형식으로 입력하세요.');
         }
-
-
-        /*
-         * 이메일 중복확인 여부
-         */
-
+        /*이메일 중복확인 여부*/
         if (reid !== checkEmail) {
-
-            return alert(
-                '이메일 중복을 확인해주세요.'
-            );
+            return alert('이메일 중복을 확인해주세요.');
         }
-
         if (!emailConfirm) {
             return alert('이메일 본인인증을 완료해주세요.');
         }
-
         /* -----------------------------------------
            비밀번호
         ----------------------------------------- */
-
         if (!pwd) {
-
-            return alert(
-                '비밀번호를 입력하세요.'
-            );
+            return alert('비밀번호를 입력하세요.');
         }
-
-
         if (pwd !== pwdChk) {
-
-            return alert(
-                '비밀번호 체크가 일치하지 않습니다.'
-            );
+            return alert('비밀번호 체크가 일치하지 않습니다.');
         }
-
-
         /* -----------------------------------------
            이름
         ----------------------------------------- */
-
         if (!name.trim()) {
-
-            return alert(
-                '이름을 입력하세요.'
-            );
+            return alert( '이름을 입력하세요.');
         }
-
-
         /* -----------------------------------------
            닉네임
         ----------------------------------------- */
-
-        const checkNickname =
-            nickname.trim();
-
-
+        const checkNickname = nickname.trim();
         if (!checkNickname) {
-
-            return alert(
-                '닉네임을 입력하세요.'
-            );
+            return alert('닉네임을 입력하세요.');
         }
-
-
         if (renickname !== checkNickname) {
-
-            return alert(
-                '닉네임 중복을 확인해주세요.'
-            );
+            return alert('닉네임 중복을 확인해주세요.');
         }
-
-
         /* -----------------------------------------
            생년월일
         ----------------------------------------- */
-
         // if (!year || !month || !day) {
-
         //     return alert(
         //         '생년월일을 입력하세요.'
         //     );
         // }
-
-
         // if (
         //     isNaN(year) ||
         //     isNaN(month) ||
@@ -590,8 +381,6 @@ function Join() {
         //         '올바른 생년월일을 입력하세요.'
         //     );
         // }
-
-
         /*
          * 실제 존재하는 날짜인지 확인
          */
@@ -614,158 +403,88 @@ function Join() {
         //         '존재하지 않는 날짜입니다.'
         //     );
         // }
-
-
         /* -----------------------------------------
            전화번호
         ----------------------------------------- */
-
-        if (!phone) {
-
-            return alert(
-                '번호를 입력하세요.'
-            );
-        }
-
-
+        if (!phone) {return alert('번호를 입력하세요.');}
         /* -----------------------------------------
            주소
         ----------------------------------------- */
-
-        if (zip_num === '') {
-
-            return alert(
-                '우편번호를 입력하세요.'
-            );
-        }
-
-
-        if (!address1) {
-
-            return alert(
-                '주소를 입력하세요.'
-            );
-        }
-
+        if (zip_num === '') {return alert('우편번호를 입력하세요.');}
+        if (!address1) {return alert('주소를 입력하세요.');}
 
         /* -----------------------------------------
            생년월일 생성
         ----------------------------------------- */
-
         // const birth =
         //     `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-
 
         /* -----------------------------------------
            회원가입 요청
         ----------------------------------------- */
-
         axios.post(
             '/api/member/insertMember',
             {
                 email: checkEmail,
-
                 pwd: pwd,
-
                 name: name.trim(),
-
                 nickname: checkNickname,
-
                 // birth: birth,
-
                 phone: phone,
-
                 zip_num: zip_num,
-
                 address1: address1,
-
                 address2: address2,
-
                 address3: address3,
-
                 savefilename: savefilename,
-
                 provider: 'Local'
             }
         )
             .then(() => {
-
                 alert(
                     '회원 가입이 완료되었습니다.'
                 );
-
-
                 cookies.remove(
                     'user',
                     {
                         path: '/'
                     }
                 );
-
-
                 navigate(
                     '/memberLogin'
                 );
             })
             .catch((err) => {
-
                 console.error(err);
-
                 alert(
                     '회원가입 중 오류가 발생했습니다.'
                 );
             });
     }
-
-
     /* =========================================================
        화면
     ========================================================= */
-
     return (
-
         <div className="join-wrapper">
-
-
             {/* 제목 */}
-
-            <h2 className="join-title">
-                회원 가입
-            </h2>
-
-
+            <h2 className="join-title">회원 가입</h2>
             {/* 프로필 */}
-
             <div className="profile-area">
-
                 <div className="profile-preview">
-
                     {imgSrc ? (
-
                         <img
                             src={imgSrc}
                             alt="프로필 미리보기"
                         />
-
                     ) : (
-
-                        <span>
-                            사진
-                        </span>
-
+                        <span>사진</span>
                     )}
-
-
                     <label
                         htmlFor="profile-image"
                         className="profile-camera-btn"
                     >
                         📷
                     </label>
-
                 </div>
-
-
                 <input
                     id="profile-image"
                     type="file"
@@ -775,26 +494,13 @@ function Join() {
                         display: 'none'
                     }}
                 />
-
             </div>
-
-
             {/* 회원가입 폼 */}
-
             <div className="join-form">
-
                 <div className="join-box">
-
-
                     {/* 이메일 */}
-
                     <div className="join-row">
-
-                        <label className="join-label">
-                            이메일
-                        </label>
-
-
+                        <label className="join-label">이메일</label>
                         <input
                             className="join-input-id"
                             type="email"
@@ -803,8 +509,6 @@ function Join() {
                             placeholder="이메일 형식(예: abc@abc.com)"
                             autoComplete="email"
                         />
-
-
                         <button
                             type="button"
                             className="join-btn-zip_num"
@@ -813,30 +517,18 @@ function Join() {
                         >
                             중복확인
                         </button>
-
                     </div>
-
-
                     {/* 이메일 메시지 */}
-
                     <div className="join-check-message">
-
                         <label style={msgStyle}>
                             {idCheckResult}
                         </label>
-
                     </div>
-
-
                     {/* 이메일 인증번호 */}
-
-                    <div>
-
-                        <label>
-                            인증번호
-                        </label>
-
+                    <div className="join-row join-code-row">
+                        <label className="join-label">인증번호</label>
                         <input
+                            className="join-input-code"
                             type="text"
                             value={usercode}
                             onChange={(e) =>
@@ -844,26 +536,17 @@ function Join() {
                             }
                             placeholder="이메일로 받은 인증번호를 입력하세요."
                         />
-
                         <button
                             type="button"
+                            className="join-btn-code"
                             onClick={onConfirm}
                         >
                             확인
                         </button>
-
                     </div>
-
-
                     {/* 비밀번호 */}
-
                     <div className="join-row">
-
-                        <label className="join-label">
-                            비밀번호
-                        </label>
-
-
+                        <label className="join-label">비밀번호</label>
                         <input
                             className="join-input-etc"
                             type="password"
@@ -876,19 +559,10 @@ function Join() {
                             placeholder="비밀번호를 입력하세요."
                             autoComplete="new-password"
                         />
-
                     </div>
-
-
                     {/* 비밀번호 확인 */}
-
                     <div className="join-row">
-
-                        <label className="join-label">
-                            비밀번호 체크
-                        </label>
-
-
+                        <label className="join-label">비밀번호 체크</label>
                         <input
                             className="join-input-etc"
                             type="password"
@@ -901,19 +575,10 @@ function Join() {
                             placeholder="비밀번호를 다시 입력하세요."
                             autoComplete="new-password"
                         />
-
                     </div>
-
-
                     {/* 이름 */}
-
                     <div className="join-row">
-
-                        <label className="join-label">
-                            이름
-                        </label>
-
-
+                        <label className="join-label">이름</label>
                         <input
                             className="join-input-etc"
                             type="text"
@@ -926,19 +591,10 @@ function Join() {
                             placeholder="이름을 입력하세요."
                             autoComplete="name"
                         />
-
                     </div>
-
-
                     {/* 닉네임 */}
-
                     <div className="join-row">
-
-                        <label className="join-label">
-                            닉네임
-                        </label>
-
-
+                        <label className="join-label">닉네임</label>
                         <input
                             className="join-input-id"
                             type="text"
@@ -946,8 +602,6 @@ function Join() {
                             onChange={handleNicknameChange}
                             placeholder="닉네임을 입력하세요."
                         />
-
-
                         <button
                             type="button"
                             className="join-btn-zip_num"
@@ -955,30 +609,14 @@ function Join() {
                         >
                             중복확인
                         </button>
-
                     </div>
-
-
                     {/* 닉네임 메시지 */}
-
                     <div className="join-check-message">
-
-                        <label style={nicknameMsgStyle}>
-                            {nicknameCheckResult}
-                        </label>
-
+                        <label style={nicknameMsgStyle}>{nicknameCheckResult}</label>
                     </div>
-
-
                     {/* 생년월일 */}
-
                     {/* <div className="join-row">
-
-                        <label className="join-label">
-                            생년월일
-                        </label>
-
-
+                        <label className="join-label">생년월일</label>
                         <input
                             className="join-input-four"
                             type="text"
@@ -992,13 +630,7 @@ function Join() {
                                 )
                             }
                         />
-
-
-                        <label className="join-label-birth">
-                            년
-                        </label>
-
-
+                        <label className="join-label-birth">년</label>
                         <input
                             className="join-input-two"
                             type="text"
@@ -1012,13 +644,7 @@ function Join() {
                                 )
                             }
                         />
-
-
-                        <label className="join-label-birth">
-                            월
-                        </label>
-
-
+                        <label className="join-label-birth">월</label>
                         <input
                             className="join-input-two"
                             type="text"
@@ -1032,24 +658,11 @@ function Join() {
                                 )
                             }
                         />
-
-
-                        <label className="join-label-birth">
-                            일
-                        </label>
-
+                        <label className="join-label-birth">일</label>
                     </div> */}
-
-
                     {/* 전화번호 */}
-
                     <div className="join-row">
-
-                        <label className="join-label">
-                            전화번호
-                        </label>
-
-
+                        <label className="join-label">전화번호</label>
                         <input
                             className="join-input-etc"
                             type="text"
@@ -1059,12 +672,8 @@ function Join() {
                             placeholder="010-XXXX-XXXX"
                             maxLength="13"
                         />
-
                     </div>
-
-
                     {/* 주소 검색 Modal */}
-
                     <Modal
                         style={modalStyle}
                         isOpen={isOpen}
@@ -1077,8 +686,6 @@ function Join() {
                         <DaumPostcode
                             onComplete={completeHandler}
                         />
-
-
                         <button
                             type="button"
                             className="join-modal-close"
@@ -1088,29 +695,17 @@ function Join() {
                         >
                             CLOSE
                         </button>
-
                     </Modal>
-
-
                     {/* 우편번호 */}
-
                     <div className="join-field">
-
                         <div className="join-row">
-
-                            <label className="join-label">
-                                우편번호
-                            </label>
-
-
+                            <label className="join-label">우편번호</label>
                             <input
                                 className="join-input"
                                 type="text"
                                 value={zip_num}
                                 readOnly
                             />
-
-
                             <button
                                 type="button"
                                 className="join-btn-zip_num"
@@ -1120,46 +715,24 @@ function Join() {
                             >
                                 우편번호검색
                             </button>
-
                         </div>
-
                     </div>
-
-
                     {/* 주소1 */}
-
                     <div className="join-field">
-
                         <div className="join-row">
-
-                            <label className="join-label">
-                                주소1
-                            </label>
-
-
+                            <label className="join-label">주소1</label>
                             <input
                                 className="join-input-etc"
                                 type="text"
                                 value={address1}
                                 readOnly
                             />
-
                         </div>
-
                     </div>
-
-
                     {/* 주소2 */}
-
                     <div className="join-field">
-
                         <div className="join-row">
-
-                            <label className="join-label">
-                                주소2
-                            </label>
-
-
+                            <label className="join-label">주소2</label>
                             <input
                                 className="join-input-etc"
                                 type="text"
@@ -1171,50 +744,26 @@ function Join() {
                                 }
                                 placeholder="상세주소를 입력하세요."
                             />
-
                         </div>
-
                     </div>
-
-
                     {/* 주소3 */}
-
                     <div className="join-field">
-
                         <div className="join-row">
-
-                            <label className="join-label">
-                                주소3
-                            </label>
-
-
+                            <label className="join-label">주소3</label>
                             <input
                                 className="join-input-etc"
                                 type="text"
                                 value={address3}
                                 readOnly
                             />
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
-
             {/* 안내 문구 */}
-
-            <div className="join_msg">
-                ※ 가입 후 아이디 변경 불가
-            </div>
-
-
+            <div className="join_msg">※ 가입 후 아이디 변경 불가</div>
             {/* 버튼 */}
-
             <div className="join-btn-group">
-
                 <button
                     type="button"
                     className="join-action-btn join-btn-join"
@@ -1222,8 +771,6 @@ function Join() {
                 >
                     확인
                 </button>
-
-
                 <button
                     type="button"
                     className="join-action-btn join-btn-cancel"
@@ -1233,12 +780,8 @@ function Join() {
                 >
                     취소
                 </button>
-
             </div>
-
-
             <hr />
-
         </div>
     );
 }
